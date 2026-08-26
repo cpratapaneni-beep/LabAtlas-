@@ -11,7 +11,7 @@ fallbacks are already built.
 
 | Slot | Size | Subject |
 |---|---|---|
-| `opening` | 1400 x 1120 (5:4) | one campus or architecture frame, shown beside the headline |
+| `opening` | 1400 x 1120 (5:4) | one campus or architecture frame, shown beside the headline above the network |
 | `unit.<KEY>` | 320 x 240 (4:3) | the building or institute, one per school row |
 
 The nine unit keys are fixed and must not be renamed:
