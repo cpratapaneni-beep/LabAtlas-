@@ -1,0 +1,461 @@
+/* ========================================================
+   ReactBits Micro-Interaction Design System
+   Fluid, Spring-Physics, High-Fidelity UI Layer
+   Inspired by https://reactbits.dev/c/micro
+   ======================================================== */
+
+:root {
+  --rb-spring-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --rb-smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --rb-glow: rgba(0, 167, 225, 0.25);
+  --rb-accent: #00A7E1;
+}
+
+:root[data-theme="dark"] {
+  --rb-glow: rgba(212, 167, 44, 0.3);
+  --rb-accent: #D4A72C;
+}
+
+/* 1. Custom Magnetic Cursor Dot */
+.rb-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--rb-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0.45;
+  mix-blend-mode: exclusion;
+  transform: translate(-100px, -100px);
+  transition: width 0.2s var(--rb-smooth-ease), height 0.2s var(--rb-smooth-ease), opacity 0.2s, background-color 0.3s;
+  box-shadow: 0 0 16px var(--rb-glow);
+}
+
+.rb-cursor-dot.active {
+  opacity: 0.8;
+  width: 28px;
+  height: 28px;
+  filter: blur(0.5px);
+}
+
+/* 2. Swipe Toast (ReactBits /c/micro/swipe-toast) */
+.rb-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  pointer-events: none;
+  max-width: calc(100vw - 32px);
+}
+
+.rb-swipe-toast {
+  pointer-events: auto;
+  position: relative;
+  width: 360px;
+  max-width: 100%;
+  border-radius: 14px;
+  background: var(--panel);
+  border: 1px solid var(--rule-2);
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  transform: translateY(40px) scale(0.92);
+  opacity: 0;
+  transition: transform 0.4s var(--rb-spring-ease), opacity 0.3s var(--rb-smooth-ease);
+}
+
+.rb-swipe-toast:active {
+  cursor: grabbing;
+}
+
+.rb-swipe-toast.on {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.rb-swipe-toast.exit {
+  transform: translateX(120%) scale(0.9);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 1, 1), opacity 0.26s;
+}
+
+.rb-toast-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px 18px;
+}
+
+.rb-toast-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.rb-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.rb-toast-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+
+.rb-toast-desc {
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.rb-toast-action {
+  all: unset;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  background: var(--iodine);
+  color: var(--on-iodine);
+  flex-shrink: 0;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.rb-toast-action:hover {
+  opacity: 0.92;
+  transform: scale(1.04);
+}
+
+.rb-toast-close {
+  all: unset;
+  cursor: pointer;
+  color: var(--ink4);
+  font-size: 13px;
+  padding: 4px;
+  line-height: 1;
+  margin-left: 2px;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.rb-toast-close:hover {
+  color: var(--ink);
+  transform: scale(1.15);
+}
+
+.rb-toast-fuse {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--iodine);
+  animation: rbToastBurn linear forwards;
+}
+
+@keyframes rbToastBurn {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* 3. Warm Tooltip (ReactBits /c/micro/warm-tooltip) */
+.rb-warm-tooltip {
+  position: absolute;
+  z-index: 999990;
+  display: none;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rule-2);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px) scale(0.95);
+  transition: opacity 0.16s var(--rb-smooth-ease), transform 0.16s var(--rb-spring-ease);
+}
+
+.rb-warm-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.rb-warm-tooltip.bottom {
+  transform: translateY(-4px) scale(0.95);
+}
+
+.rb-warm-tooltip.bottom.visible {
+  transform: translateY(0) scale(1);
+}
+
+.rb-warm-arrow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: var(--panel);
+  border-right: 1px solid var(--rule-2);
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.rb-warm-tooltip.bottom .rb-warm-arrow {
+  bottom: auto;
+  top: -5px;
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid var(--rule-2);
+  border-top: 1px solid var(--rule-2);
+}
+
+/* 4. Squish Switch (ReactBits /c/micro/squish-switch) */
+.rb-squish-seg {
+  position: relative;
+  display: inline-flex;
+  background: var(--sunk);
+  padding: 3px !important;
+  border-radius: 9999px !important;
+  border: 1px solid var(--rule) !important;
+  z-index: 1;
+}
+
+.rb-squish-pill {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  bottom: 3px;
+  background: var(--panel);
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--rule-2);
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform, width;
+}
+
+.rb-squish-seg button {
+  position: relative;
+  z-index: 2;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 9999px !important;
+  padding: 5px 14px !important;
+  font-size: 11px !important;
+  font-weight: 500;
+  color: var(--ink3);
+  transition: color 0.2s ease;
+}
+
+.rb-squish-seg button[aria-pressed="true"] {
+  color: var(--ink) !important;
+}
+
+/* 5. Thought Line AI Research Guide (ReactBits /c/micro/thought-line) */
+.rb-thought-line {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.rb-thought-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: var(--sunk2);
+  border: 1px solid var(--rule-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink2);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.3s var(--rb-spring-ease);
+}
+
+.rb-thought-sparkle {
+  color: var(--iodine);
+  font-size: 13px;
+  display: inline-block;
+  transition: transform 0.4s var(--rb-spring-ease);
+}
+
+.rb-thought-sparkle.spinning {
+  animation: rbSpin 1.4s infinite linear;
+}
+
+@keyframes rbSpin {
+  100% { transform: rotate(360deg); }
+}
+
+.rb-thought-timer {
+  color: var(--ink4);
+  font-size: 10px;
+  padding-left: 6px;
+  border-left: 1px solid var(--rule);
+}
+
+.rb-thought-line.working .rb-thought-pill {
+  border-color: var(--iodine);
+  background: rgba(var(--rgb-amber), 0.08);
+}
+
+/* 6. Card Tilts & Glare Effects (Flip Card / Folder Float inspired) */
+.card, .unit-card, .specimen, .dcard, .note {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.26s ease;
+}
+
+.card:hover, .unit-card:hover, .specimen:hover {
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--rule-2);
+}
+
+.card::after, .unit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--rb-glare-x, 50%) var(--rb-glare-y, 50%), rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::after, .unit-card:hover::after {
+  opacity: 1;
+}
+
+/* 7. Button Spring Feedback & Fluid Waves */
+button.act, button.mini-act, .rail button, .seg button, .chip, .key-toggle {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s var(--rb-spring-ease), background-color 0.18s, color 0.18s, box-shadow 0.18s;
+}
+
+button.act:active, button.mini-act:active, .rail button:active, .seg button:active, .chip:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+.rb-ripple {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.24);
+  transform: translate(-50%, -50%) scale(0);
+  animation: rbRipple 0.55s ease-out forwards;
+  pointer-events: none;
+}
+
+:root[data-theme="light"] .rb-ripple {
+  background: rgba(0, 23, 31, 0.12);
+}
+
+@keyframes rbRipple {
+  to {
+    transform: translate(-50%, -50%) scale(14);
+    opacity: 0;
+  }
+}
+
+/* 8. Bottom Floating Micro-Interaction Dock */
+.rb-micro-dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--rule-2);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink);
+  transition: transform 0.3s var(--rb-spring-ease);
+}
+
+.rb-dock-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rb-dock-brand {
+  font-weight: 600;
+  color: var(--iodine);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rb-dock-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--rule);
+}
+
+.rb-dock-btn {
+  all: unset;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: var(--sunk2);
+  color: var(--ink2);
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.18s var(--rb-spring-ease);
+  border: 1px solid var(--rule-soft);
+}
+
+.rb-dock-btn:hover {
+  background: var(--hover);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.rb-dock-btn:active {
+  transform: scale(0.95);
+}
+
+.rb-dock-link {
+  color: var(--ink3);
+  font-size: 11px;
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.18s ease;
+}
+
+.rb-dock-link:hover {
+  color: var(--iodine);
+  border-bottom: none;
+}
+
+/* Reduced Motion Override */
+body.rb-reduced-spring * {
+  --rb-spring-ease: ease;
+  transition-duration: 0.15s !important;
+}
