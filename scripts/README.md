@@ -12,23 +12,59 @@ badge, no filter, and no claim either way about anybody. A marking that was
 guessed at would be worse than no marking, on a page people use to decide who
 to write to.
 
-## Running it
+## Three ways to get one
+
+### 1. From your own browser — no install (easiest)
+
+The program directories are all on one origin, so a snippet running on any page
+of `biomed.emory.edu` may read every other page of it. No Python, no extension,
+no CORS.
+
+1. Open <https://biomed.emory.edu/about-us/faculty-search.html>
+2. Open the console — F12, or Cmd-Option-J / Ctrl-Shift-J
+3. Paste the whole of `scripts/collect_gdbbs.js` in, press Enter
+4. Run `await GDBBS.all()`
+
+It reads each program's directory, prints what it found per program, and
+downloads `gdbbs.json`. A directory that builds its list in JavaScript is
+rendered in a hidden same-origin frame and read from there, so that case is
+handled too.
+
+If a program still comes back empty, open it yourself, scroll to the bottom so
+every entry has rendered, and run `GDBBS.here('MMG')` — results accumulate
+across pages. Then `GDBBS.save()`.
+
+Load the file into the atlas: **Notes → Load a GDBBS roster → Choose a file**,
+or just drop it anywhere on the page. It is kept in that browser, so it survives
+a reload without anyone rewriting a forty-megabyte file.
+
+### 2. From a machine that can reach the site
 
 ```bash
-# 1. give the script a way to read the web (optional but preferred)
 pip install agent-reach          # or: --agent-reach /path/to/Agent-Reach-main
 
-# 2. read the directories and write the marked copy
 python3 scripts/gdbbs_scrape.py \
     --atlas Emory_Lab_Atlas_v64.html \
     --out   Emory_Lab_Atlas_v65.html
 ```
 
-It prints, per program, how many names it found and which URL they came from,
-then how many of those names it could tie to a record in the atlas. Open
-`gdbbs.json` and read a few entries before trusting a run: if a program's count
-is 0, or the names look like headings rather than people, the directory's markup
-has moved and the parser needs a look.
+This one writes the roster into the HTML itself, which is what you want if the
+file is going to be handed to other people. It prints, per program, how many
+names it found and which URL they came from, then how many of those it could tie
+to a record. Open `gdbbs.json` and read a few entries before trusting a run: if
+a program's count is 0, or the names look like headings rather than people, the
+markup has moved and the parser needs a look.
+
+`gdbbs.json` from either route works in the other — the script will apply a
+collector file with `--from-json`, and the atlas will load a script file.
+
+### 3. Paste a directory page
+
+Nothing installed at all: open a program's faculty directory, select the whole
+page, copy it, and paste it into **Notes → Load a GDBBS roster → A directory
+page, pasted**, picking the program it belongs to. The names and the
+accepting-students wording are read out of it in the page, by the same rules the
+script uses. Ten pastes and you have the set.
 
 ## Options
 
