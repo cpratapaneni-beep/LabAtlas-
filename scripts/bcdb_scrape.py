@@ -116,11 +116,13 @@ def as_name(line: str) -> str | None:
     # a generational suffix is not part of the name the atlas holds, and the
     # atlas strips it on its side too, so it comes off before matching
     line = re.sub(r"[,\s]+(?:Jr|Sr|II|III|IV|V)\.?$", "", line, flags=re.I).strip()
-    m = NAME_REV.match(line)
-    name = f"{m.group(2)} {m.group(1)}" if m else None
+    m = NAME.match(line)
+    name = m.group(1) if m else None
     if not name:
-        m = NAME.match(line)
-        name = m.group(1) if m else None
+        # "Corces, Victor" and "Aaron, Maria M., MD" - a comma the plain form
+        # cannot take, so the halves are the other way round
+        m = NAME_REV.match(line)
+        name = f"{m.group(2)} {m.group(1)}" if m else None
     if not name:
         return None
     parts = re.sub(r"\s+", " ", name).strip().split(" ")
@@ -146,6 +148,15 @@ BLOCK = {"p", "div", "li", "tr", "td", "th", "br", "h1", "h2", "h3", "h4", "h5",
          "section", "article", "header", "footer", "nav", "ul", "ol", "dl", "dt", "dd",
          "table", "figure", "figcaption", "blockquote", "aside", "main", "form", "hr"}
 CARDISH = re.compile(r"(faculty|person|people|profile|card|member|directory|teaser|result|entry|bio)", re.I)
+# Site chrome. Its links are captions - "Request Info", "Privacy Statement" -
+# and two capitalised words in a menu look exactly like a name to a regex, so
+# the whole subtree comes out before anything is read.
+NAVISH = re.compile(r"(^|[\s_-])(nav|menu|breadcrumb|sidebar|side-bar|utility|skip|banner|"
+                    r"masthead|footer|header|subnav|megamenu|toolbar|social|share|cookie|"
+                    r"drawer|offcanvas|search-form|pagination)([\s_-]|$)", re.I)
+NAV_TAGS = {"nav", "header", "footer", "aside"}
+# a class that says "this element is the person's name"
+NAMEISH = re.compile(r"(^|[\s_-])(name|fullname|full-name|title|heading)([\s_-]|$)", re.I)
 
 
 class Node:
@@ -219,22 +230,67 @@ class Tree(HTMLParser):
 # --------------------------------------------------------------------------
 # the three ways a name can be found on one of these pages
 # --------------------------------------------------------------------------
+def strip_chrome(tree: Tree) -> int:
+    """Drop navigation, headers, footers and menus. Returns how many went."""
+    gone = 0
+
+    def walk(node):
+        nonlocal gone
+        keep = []
+        for k in node.kids:
+            if isinstance(k, str):
+                keep.append(k)
+                continue
+            cls = " ".join([k.attrs.get("class", ""), k.attrs.get("id", ""),
+                            k.attrs.get("role", "")])
+            if k.tag in NAV_TAGS or NAVISH.search(cls):
+                gone += 1
+                continue
+            walk(k)
+            keep.append(k)
+        node.kids = keep
+
+    walk(tree.root)
+    return gone
+
+
 def scan_cards(tree: Tree) -> dict[str, bool | None]:
     """Elements that look like a faculty card: heading inside gives the name,
     the card's own text says whether they are taking students."""
     found: dict[str, bool | None] = {}
+    cards = []
     for node in tree.root.find({"div", "li", "article", "section", "tr"}):
         cls = " ".join([node.attrs.get("class", ""), node.attrs.get("id", "")])
-        if not CARDISH.search(cls):
+        if CARDISH.search(cls):
+            cards.append(node)
+    # Only the innermost ones. A list is usually called faculty-something too,
+    # and reading the whole list as a single card takes the first person's name
+    # and the first students wording anywhere under it - which is how one
+    # person's "not accepting" ends up on somebody else.
+    inner = []
+    for node in cards:
+        if any(k is not node for k in node.find({"div", "li", "article", "section", "tr"})
+               if k in cards):
             continue
+        inner.append(node)
+    for node in inner:
         body = node.text()
-        if len(body) > 1200:                       # a container, not a card
+        if len(body) > 1200:                       # still a container, not a card
             continue
         name = None
+        # the name as the card marks it: a heading or link first, then an
+        # element whose class says it is the name
         for h in node.find({"h1", "h2", "h3", "h4", "h5", "h6", "a", "strong", "b"}):
             name = as_name(h.text().strip())
             if name:
                 break
+        if not name:
+            for h in node.find({"span", "div", "p", "td"}):
+                cls = " ".join([h.attrs.get("class", ""), h.attrs.get("id", "")])
+                if NAMEISH.search(cls):
+                    name = as_name(h.text().strip())
+                    if name:
+                        break
         if not name:
             continue
         f = flag_in(body)
@@ -252,6 +308,14 @@ def linked_names(tree: Tree) -> set:
     """
     out = set()
     for n in tree.root.find({"a", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"}):
+        name = as_name(n.text().strip())
+        if name:
+            out.add(name)
+    # plenty of directories put the name in a span or div with a telling class
+    for n in tree.root.find({"span", "div", "p", "td"}):
+        cls = " ".join([n.attrs.get("class", ""), n.attrs.get("id", "")])
+        if not NAMEISH.search(cls):
+            continue
         name = as_name(n.text().strip())
         if name:
             out.add(name)
@@ -297,6 +361,50 @@ def scan_scripts(tree: Tree) -> dict[str, bool | None]:
 
 
 # --------------------------------------------------------------------------
+def diagnose(html: str, tree: Tree) -> None:
+    """When nothing is found, say what the page actually holds.
+
+    A directory that renders its list client-side still has to say where the
+    list comes from. That is usually a URL in a script, or a payload keyed by
+    something obvious, and it is nearly always visible in the delivered HTML.
+    """
+    print("  what the page does contain:")
+
+    # the classes that repeat: the shape of a list, if there is one
+    classes: dict[str, int] = {}
+    for n in tree.root.find({"div", "li", "article", "section", "tr", "span"}):
+        for c in (n.attrs.get("class", "") or "").split():
+            if len(c) > 2:
+                classes[c] = classes.get(c, 0) + 1
+    top = sorted(classes.items(), key=lambda kv: -kv[1])[:8]
+    if top:
+        print("    repeated classes : " + ", ".join(f"{c}x{n}" for c, n in top))
+
+    # anything that looks like it serves data
+    urls = set()
+    for m in re.finditer(r"""['"](/[^'"\s]{4,120}|https?://[^'"\s]{6,160})['"]""", html):
+        u = m.group(1)
+        if re.search(r"(\.json|/api/|/ajax|/rest/|/services/|/feed|/search\?|/query|graphql|"
+                     r"faculty.*\.(js|json)|solr|elastic)", u, re.I):
+            urls.add(u)
+    if urls:
+        print("    data-ish URLs    :")
+        for u in sorted(urls)[:10]:
+            print(f"       {u if u.startswith('http') else BASE + u}")
+    else:
+        print("    data-ish URLs    : none found")
+
+    # scripts are where a client-rendered list usually hides
+    big = sorted((len(x) for x in tree.scripts), reverse=True)[:3]
+    if big:
+        print(f"    inline scripts   : {len(tree.scripts)}, largest {big[0]:,} chars")
+    srcs = [n.attrs.get("src", "") for n in tree.root.find({"script"}) if n.attrs.get("src")]
+    app = [u for u in srcs if re.search(r"(app|main|bundle|faculty|directory|search)", u, re.I)]
+    if app:
+        print("    app scripts      : " + ", ".join(app[:4]))
+    print()
+
+
 def fetch(url: str, timeout: int = 45) -> str:
     req = Request(url, headers={
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -406,15 +514,21 @@ def main() -> int:
 
     tree = Tree()
     tree.feed(html)
+    dropped = strip_chrome(tree)
     linked = linked_names(tree)
     by_card = scan_cards(tree)
-    by_line = scan_lines(tree, linked)
+    # Held to the marked-up names only where there are enough of them to be a
+    # roster. Two or three is a caption, and letting those govern the line scan
+    # is how a page of navigation turns into a page of "faculty".
+    by_line = scan_lines(tree, linked if len(linked) >= 3 else None)
     by_script = scan_scripts(tree)
     print(f"  cards          {len(by_card):>4} names")
     print(f"  page text      {len(by_line):>4} names")
     print(f"  embedded JSON  {len(by_script):>4} names")
-    if linked:
-        print(f"  (held to the {len(linked)} names the page marks up as links or headings)")
+    if dropped:
+        print(f"  ({dropped} navigation, header and footer blocks set aside first)")
+    if len(linked) >= 3:
+        print(f"  (held to the {len(linked)} names the page marks up as its own)")
 
     merged: dict[str, bool | None] = {}
     for src in (by_card, by_line, by_script):          # cards are the most precise
@@ -424,6 +538,7 @@ def main() -> int:
 
     if not merged:
         print("\n  !! No names found.\n")
+        diagnose(html, tree)
         print("  The delivered HTML holds no list, which almost always means the page")
         print("  builds it in JavaScript after loading. Two ways on from here:")
         print(f"    - look in {raw_path} to see what it actually contains")
