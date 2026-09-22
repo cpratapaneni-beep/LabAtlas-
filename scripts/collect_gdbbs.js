@@ -72,29 +72,59 @@ const ROLE = new RegExp('\\b(professor|prof|faculty|lecturer|instructor|director
   'news|events|overview|people|alumni|seminar|apply|giving|login|resources|accepting|rotation|' +
   'publications|profile|email|phone|website|more|back|next|previous)\\b', 'i');
 const W = "[A-Z][A-Za-z'’\\-]{1,}";
-const P = `(?:${W}|[A-Z]\\.?|van|von|de|del|della|da|di|la|le|dos|ter|Mc|Mac)`;
+const P = `(?:${W}|[A-Z]\\.?|van|von|der|den|ten|ter|de|del|della|da|di|dos|du|la|le|op|bin|ibn|al|abu|st|Mc|Mac)`;
 const DEG = "(?:Ph\\.?\\s?D|M\\.?D|D\\.?V\\.?M|D\\.?D\\.?S|Sc\\.?D|M\\.?P\\.?H|M\\.?S|D\\.?Phil|M\\.?B\\.?B\\.?S|R\\.?N|Pharm\\.?D)";
-const NAME = new RegExp(`^(${W}(?:\\s+${P}){1,3})(?:\\s*,?\\s*${DEG}[.\\w\\s,/&-]*)?$`);
-const NAME_REV = new RegExp(`^(${W})\\s*,\\s*(${W}(?:\\s+${P}){0,2})(?:\\s*,?\\s*${DEG}[.\\w\\s,/&-]*)?$`);
+const NAME = new RegExp(`^(${W}(?:\\s+${P}){1,4})(?:\\s*,?\\s*${DEG}[.\\w\\s,/&-]*)?$`);
+const NAME_REV = new RegExp(`^(${W}(?:\\s+${P}){0,2})\\s*,\\s*(${W}(?:\\s+${P}){0,2})(?:\\s*,?\\s*${DEG}[.\\w\\s,/&-]*)?$`);
 const JUNK = ['emory university', 'graduate division', 'faculty search', 'our faculty',
   'program sites', 'contact us', 'about us', 'quick links', 'read more', 'learn more',
   'apply now', 'privacy policy'];
+// Site furniture reads as a name the moment it is title case: "Request Info",
+// "Imposter Syndrome", "Meet Our Community". No surname is made of these words,
+// so a candidate carrying one is not a person. This is the second line of
+// defence; dropping navigation is the first, and that only works where a menu
+// is actually marked up as one.
+const NOTNAME = new RegExp('\\b(about|admissions|alumni|announcements|application|apply|asked|' +
+  'awards|bylaws|calendar|careers|committees|community|contact|curriculum|deadlines|directory|' +
+  'donate|employment|events|faq|fellowships|financial|forms|frequently|funding|governance|' +
+  'guidelines|handbook|highlights|history|home|hours|imposter|incoming|info|information|' +
+  'interface|join|jobs|leadership|learn|links|mission|newsletter|opportunities|orientation|' +
+  'overview|policies|policy|privacy|prospective|questions|read|request|requirements|resources|' +
+  'retreat|seminar|spotlight|statement|stories|support|symposium|syndrome|testimonials|tools|' +
+  'tour|training|values|vision|visit|web|welcome|workshop|our|your|the|this)\\b', 'i');
+// a unit is not a person either
+const FIELD = new RegExp('\\b(genetics|genomics|proteomics|biology|biochemistry|chemistry|' +
+  'medicine|pediatrics|paediatrics|surgery|neurology|neuroscience|pathology|immunology|' +
+  'microbiology|pharmacology|physiology|psychiatry|psychology|radiology|oncology|epidemiology|' +
+  'biostatistics|informatics|engineering|nursing|ophthalmology|dermatology|anesthesiology|' +
+  'urology|orthopaedics|orthopedics|cardiology|physics|mathematics|statistics|sociology|' +
+  'anthropology|economics|ecology|evolution|endocrinology|rheumatology|nephrology|hematology|' +
+  'gastroenterology|obstetrics|gynecology|otolaryngology|radiation)\\b', 'i');
 
 function lineName(line) {
-  line = String(line || '').replace(/^[\s|*\-#>•·]+|[\s|*\-#>•·]+$/g, '');
+  line = String(line || '').replace(/^[\s|*\-#>\u2022\u00b7]+|[\s|*\-#>\u2022\u00b7]+$/g, '');
   if (line.length < 4 || line.length > 70) return null;
   const low = line.toLowerCase();
-  if (JUNK.some(j => low.includes(j)) || ROLE.test(line)) return null;
+  if (JUNK.some(j => low.includes(j)) || ROLE.test(line) || FIELD.test(line)) return null;
   if (/\d/.test(line) || line.includes('@') || low.includes('http')) return null;
+  // a generational suffix is not part of the name, and the atlas strips it too
+  line = line.replace(/[,\s]+(?:Jr|Sr|II|III|IV|V)\.?$/i, '').trim();
+  // the plain form first: "Adam Gracz, PhD" is a name with a degree, not a flip
   let name = null;
-  const rev = NAME_REV.exec(line);
-  if (rev) name = `${rev[2]} ${rev[1]}`;
-  else { const m = NAME.exec(line); if (m) name = m[1]; }
+  const m = NAME.exec(line);
+  if (m) name = m[1];
+  else { const rev = NAME_REV.exec(line); if (rev) name = rev[2] + ' ' + rev[1]; }
   if (!name) return null;
   const parts = name.replace(/\s+/g, ' ').trim().split(' ');
   if (parts.length < 2 || parts[0].replace(/\.$/, '').length < 2 ||
       parts[parts.length - 1].replace(/\.$/, '').length < 2) return null;
-  return parts.join(' ');
+  name = parts.join(' ');
+  // judged on what came out, after any degree has gone
+  if (NOTNAME.test(name)) return null;
+  // an acronym is a unit or a programme, never a person; a lone capital is an initial
+  if (parts.some(function (w) { const t = w.replace(/[.,]/g, ''); return t.length > 1 && t === t.toUpperCase(); }))
+    return null;
+  return name;
 }
 
 function readText(text) {
@@ -201,7 +231,15 @@ function merge(code, found, url) {
 API.here = function (code) {
   code = String(code || '').toUpperCase();
   if (code && !PROGRAMS[code]) console.warn(`"${code}" is not a GDBBS program code; storing the names anyway`);
-  const found = readText(document.body.innerText || '');
+  // the live page, with its chrome taken out the way a fetched one's is
+  const clone = document.body.cloneNode(true);
+  clone.querySelectorAll('nav,header,footer,aside,script,style,noscript,[class*=nav],[class*=menu],'
+    + '[class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[id*=nav],[id*=menu]')
+    .forEach(function (n) { n.remove(); });
+  document.body.appendChild(clone);            // innerText needs a laid-out node
+  clone.style.cssText = 'position:fixed;left:-9999px;top:0';
+  const found = readText(clone.innerText || clone.textContent || '');
+  clone.remove();
   const r = merge(code, found, location.href);
   console.log(`%c${code || 'GDBBS'}%c  ${found.size} names on this page, ${r.accepting} accepting  ` +
     `(${Object.keys(API.roster.people).length} collected so far)`,
