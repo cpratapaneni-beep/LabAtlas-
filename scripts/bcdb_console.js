@@ -36,10 +36,10 @@ function nameOf(s) {
   return n;
 }
 
-// the page without its chrome, so menu items are never read as people
+/* the page without its chrome, so menu items are never read as people */
 const body = document.body.cloneNode(true);
-// chrome, and the search form: a filter menu's options are research topics
-// and membership levels, and every one of them reads as a name in title case
+/* chrome, and the search form: a filter menu's options are research topics */
+/* and membership levels, and every one of them reads as a name in title case */
 body.querySelectorAll('nav,header,footer,aside,script,style,noscript,select,option,datalist,\
 optgroup,label,legend,fieldset,form,[role=navigation],[role=search],[class*=nav],[class*=menu],\
 [class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[class*=filter],[class*=facet],\
@@ -69,9 +69,9 @@ const names = Object.keys(people);
 console.log(`%c${CODE}%c  ${names.length} names, ${names.filter(n => people[n].a).length} accepting students`,
   'font-weight:bold', 'font-weight:normal');
 console.table(names.sort().map(n => ({ name: n, accepting: people[n].a })));
-// A person's name usually carries an initial, a particle or a third part. A
-// page of research topics - "Brain Tumors", "Wound Healing" - carries none, and
-// no word list can tell those from surnames, so this is said rather than acted on.
+/* A person's name usually carries an initial, a particle or a third part. A */
+/* page of research topics - "Brain Tumors", "Wound Healing" - carries none, and */
+/* no word list can tell those from surnames, so this is said rather than acted on. */
 const personish = names.filter(n => /\b[A-Z]\.?\b/.test(n) || n.includes("'") || n.split(' ').length > 2).length;
 if (names.length > 5 && personish === 0)
   console.log('%cNone of these look like people: no initials, no particles, nothing but pairs of ' +

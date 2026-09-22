@@ -35,8 +35,8 @@
 (() => {
 'use strict';
 
-// the origin the directories live on: this one when the snippet is already
-// running there, the canonical host otherwise, or whatever a caller sets
+/* the origin the directories live on: this one when the snippet is already */
+/* running there, the canonical host otherwise, or whatever a caller sets */
 const BASE = window.GDBBS_BASE ||
   (/(^|\.)emory\.edu$/i.test(location.hostname) ? location.origin : 'https://biomed.emory.edu');
 
@@ -79,11 +79,11 @@ const NAME_REV = new RegExp(`^(${W}(?:\\s+${P}){0,2})\\s*,\\s*(${W}(?:\\s+${P}){
 const JUNK = ['emory university', 'graduate division', 'faculty search', 'our faculty',
   'program sites', 'contact us', 'about us', 'quick links', 'read more', 'learn more',
   'apply now', 'privacy policy'];
-// Site furniture reads as a name the moment it is title case: "Request Info",
-// "Imposter Syndrome", "Meet Our Community". No surname is made of these words,
-// so a candidate carrying one is not a person. This is the second line of
-// defence; dropping navigation is the first, and that only works where a menu
-// is actually marked up as one.
+/* Site furniture reads as a name the moment it is title case: "Request Info", */
+/* "Imposter Syndrome", "Meet Our Community". No surname is made of these words, */
+/* so a candidate carrying one is not a person. This is the second line of */
+/* defence; dropping navigation is the first, and that only works where a menu */
+/* is actually marked up as one. */
 const NOTNAME = new RegExp('\\b(all|any|full|member|members|level|levels|select|choose|filter|' +
   'filters|sort|show|clear|reset|submit|about|admissions|alumni|announcements|application|apply|asked|' +
   'awards|bylaws|calendar|careers|committees|community|contact|curriculum|deadlines|directory|' +
@@ -93,7 +93,7 @@ const NOTNAME = new RegExp('\\b(all|any|full|member|members|level|levels|select|
   'overview|policies|policy|privacy|prospective|questions|read|request|requirements|resources|' +
   'retreat|seminar|spotlight|statement|stories|support|symposium|syndrome|testimonials|tools|' +
   'tour|training|values|vision|visit|web|welcome|workshop|our|your|the|this)\\b', 'i');
-// a unit is not a person either
+/* a unit is not a person either */
 const FIELD = new RegExp('\\b(genetics|genomics|proteomics|biology|biochemistry|chemistry|' +
   'medicine|pediatrics|paediatrics|surgery|neurology|neuroscience|pathology|immunology|' +
   'microbiology|pharmacology|physiology|psychiatry|psychology|radiology|oncology|epidemiology|' +
@@ -108,9 +108,9 @@ function lineName(line) {
   const low = line.toLowerCase();
   if (JUNK.some(j => low.includes(j)) || ROLE.test(line) || FIELD.test(line)) return null;
   if (/\d/.test(line) || line.includes('@') || low.includes('http')) return null;
-  // a generational suffix is not part of the name, and the atlas strips it too
+/* a generational suffix is not part of the name, and the atlas strips it too */
   line = line.replace(/[,\s]+(?:Jr|Sr|II|III|IV|V)\.?$/i, '').trim();
-  // the plain form first: "Adam Gracz, PhD" is a name with a degree, not a flip
+/* the plain form first: "Adam Gracz, PhD" is a name with a degree, not a flip */
   let name = null;
   const m = NAME.exec(line);
   if (m) name = m[1];
@@ -120,9 +120,9 @@ function lineName(line) {
   if (parts.length < 2 || parts[0].replace(/\.$/, '').length < 2 ||
       parts[parts.length - 1].replace(/\.$/, '').length < 2) return null;
   name = parts.join(' ');
-  // judged on what came out, after any degree has gone
+/* judged on what came out, after any degree has gone */
   if (NOTNAME.test(name)) return null;
-  // an acronym is a unit or a programme, never a person; a lone capital is an initial
+/* an acronym is a unit or a programme, never a person; a lone capital is an initial */
   if (parts.some(function (w) { const t = w.replace(/[.,]/g, ''); return t.length > 1 && t === t.toUpperCase(); }))
     return null;
   return name;
@@ -232,14 +232,14 @@ function merge(code, found, url) {
 API.here = function (code) {
   code = String(code || '').toUpperCase();
   if (code && !PROGRAMS[code]) console.warn(`"${code}" is not a GDBBS program code; storing the names anyway`);
-  // the live page, with its chrome taken out the way a fetched one's is
+/* the live page, with its chrome taken out the way a fetched one's is */
   const clone = document.body.cloneNode(true);
   clone.querySelectorAll('nav,header,footer,aside,script,style,noscript,select,option,datalist,'
     + 'optgroup,label,legend,fieldset,form,[role=navigation],[role=search],[class*=nav],[class*=menu],'
     + '[class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[class*=filter],'
     + '[class*=facet],[class*=refine],[id*=nav],[id*=menu],[id*=filter]')
     .forEach(function (n) { n.remove(); });
-  document.body.appendChild(clone);            // innerText needs a laid-out node
+  document.body.appendChild(clone); /* innerText needs a laid-out node */
   clone.style.cssText = 'position:fixed;left:-9999px;top:0';
   const found = readText(clone.innerText || clone.textContent || '');
   clone.remove();
@@ -297,12 +297,12 @@ API.all = async function () {
     for (const url of urlsFor(code)) {
       got = await API.page(code, url);
       if (got.n) break;
-      if (got.why !== 'HTTP 404') reached = url;   // the page exists, it was just empty
+      if (got.why !== 'HTTP 404') reached = url; /* the page exists, it was just empty */
     }
-    // A page that came back without names is worth rendering before giving up.
-    // So is one whose names came out of an embedded payload with no
-    // accepting-students wording attached: rendering it recovers the flags,
-    // and merging the two passes is additive.
+/* A page that came back without names is worth rendering before giving up. */
+/* So is one whose names came out of an embedded payload with no */
+/* accepting-students wording attached: rendering it recovers the flags, */
+/* and merging the two passes is additive. */
     if (reached && (!got.n || !got.accepting)) {
       const framed = await API.frame(code, reached);
       if (framed.n && (!got.n || framed.accepting)) got = framed;
@@ -356,7 +356,7 @@ API.reset = function () {
   console.log('Cleared.');
 };
 
-API._read = readText;       // exposed so the parser can be tested on its own
+API._read = readText; /* exposed so the parser can be tested on its own */
 API._readHTML = readHTML;
 
 window.GDBBS = API;
