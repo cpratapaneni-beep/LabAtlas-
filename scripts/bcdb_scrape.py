@@ -459,13 +459,45 @@ def norm(name: str) -> str:
 
 
 def variants(name: str) -> set:
+    """The forms a name is matched on, on both sides of the join.
+
+    The same forms the page computes, so a name this script counts as matched
+    is a name the atlas will actually mark.
+    """
     raw = str(name or "")
     if "," in raw:
         raw = " ".join(reversed(raw.split(",")))
     w = norm(raw).split()
     if len(w) < 2:
         return {w[0]} if w else set()
-    return {" ".join(w), w[0] + " " + w[-1], w[0][0] + " " + w[-1]}
+    out = set()
+
+    def add(ws):
+        if len(ws) < 2:
+            return
+        out.add(" ".join(ws))
+        out.add(ws[0] + " " + ws[-1])
+        out.add(ws[0][0] + " " + ws[-1])
+
+    add(w)
+    # a leading initial is not part of the name anybody is known by: the atlas
+    # holds "Y. Hin Ling" where the roster says "Hin Ling"
+    if len(w[0]) == 1 and len(w) >= 3:
+        add(w[1:])
+    return out
+
+
+def emails_of(rec: dict) -> set:
+    """Every address a record answers to, lowercased."""
+    out = set()
+    for key in ("e", "em"):
+        v = rec.get(key)
+        if v:
+            out.add(str(v).lower().strip())
+    for v in rec.get("email_aliases") or []:
+        if v:
+            out.add(str(v).lower().strip())
+    return out
 
 
 def patch_atlas(atlas: Path, out: Path, roster: dict) -> int:
@@ -477,12 +509,20 @@ def patch_atlas(atlas: Path, out: Path, roster: dict) -> int:
     data.setdefault("gdbbs", {"generated": roster["generated"], "source": roster["source"],
                               "programs": roster["programs"], "people": {}})
     data["gdbbs"]["people"].update(roster["people"])
+    data["gdbbs"].setdefault("programs", {}).update(roster.get("programs") or {})
     data["gdbbs"]["generated"] = roster["generated"]
     out.write_text(src[:i] + json.dumps(data, separators=(",", ":")) + src[j:], encoding="utf-8")
 
-    # counted the way the page counts it: a form two people share is struck out
+    # Counted the way the page counts it: on an email where there is one, then
+    # on the name forms, with any form two people share struck out rather than
+    # resolved by whichever was read first.
+    people = data["gdbbs"]["people"]
+    by_mail = {}
+    for k, rec in people.items():
+        for em in emails_of(rec):
+            by_mail[em] = k
     seen, amb = {}, set()
-    for k in data["gdbbs"]["people"]:
+    for k in people:
         for v in variants(k):
             if v in seen and seen[v] != k:
                 amb.add(v)
@@ -493,13 +533,22 @@ def patch_atlas(atlas: Path, out: Path, roster: dict) -> int:
             mine[v] = mine.get(v, 0) + 1
     claimed = set()
     for pi in data["pis"]:
-        for v in variants(pi.get("n", "")):
-            if v in amb or mine.get(v, 0) > 1:
-                continue
-            if v in seen:
-                claimed.add(seen[v])
+        hit = None
+        for em in emails_of(pi):
+            if em in by_mail:
+                hit = by_mail[em]
                 break
+        if hit is None:
+            for v in variants(pi.get("n", "")):
+                if v in amb or mine.get(v, 0) > 1:
+                    continue
+                if v in seen:
+                    hit = seen[v]
+                    break
+        if hit is not None:
+            claimed.add(hit)
     return len(claimed)
+
 
 
 def main() -> int:
