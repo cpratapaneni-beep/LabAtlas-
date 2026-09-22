@@ -98,6 +98,21 @@ FIELD = re.compile(
     r"pulmonology|endocrinology|rheumatology|nephrology|hematology|haematology|"
     r"gastroenterology|obstetrics|gynecology|gynaecology|otolaryngology|radiation)\b", re.I)
 
+# Site furniture reads as a name the moment it is title case: "Request Info",
+# "Imposter Syndrome", "Meet Our Community". None of these words is a plausible
+# surname, so a candidate carrying any of them is not a person. This is the
+# second line of defence - stripping navigation is the first - because a menu
+# that is not marked up as one still gets read.
+NOTNAME = re.compile(
+    r"\b(about|admissions|alumni|announcements|application|apply|asked|awards|bylaws|calendar|"
+    r"careers|committees|community|contact|curriculum|deadlines|directory|donate|employment|"
+    r"events|faq|fellowships|financial|forms|frequently|funding|governance|guidelines|handbook|"
+    r"highlights|history|home|hours|imposter|incoming|info|information|interface|join|jobs|"
+    r"leadership|learn|links|mission|newsletter|opportunities|orientation|overview|policies|"
+    r"policy|privacy|prospective|questions|read|request|requirements|resources|retreat|seminar|"
+    r"spotlight|statement|stories|support|symposium|syndrome|testimonials|tools|tour|training|"
+    r"values|vision|visit|web|welcome|workshop|our|your|the|this)\b", re.I)
+
 JUNK = ("emory university", "graduate division", "faculty search", "our faculty", "program sites",
         "contact us", "about us", "quick links", "read more", "learn more", "apply now",
         "privacy policy")
@@ -129,7 +144,16 @@ def as_name(line: str) -> str | None:
     # first and last have to be words rather than initials, or it is not a name
     if len(parts) < 2 or len(parts[0].rstrip(".")) < 2 or len(parts[-1].rstrip(".")) < 2:
         return None
-    return " ".join(parts)
+    name = " ".join(parts)
+    # Judged on what came out, not on what went in: a degree has been taken off
+    # by now, so "Aaron, Maria M., MD" is tested as "Maria M. Aaron".
+    if NOTNAME.search(name):
+        return None
+    # an acronym is a programme or a unit, never somebody's name: GDBBS, BCDB,
+    # FAQ. A lone capital is an initial and is allowed through.
+    if any(len(w.strip(".,")) > 1 and w.strip(".,").isupper() for w in parts):
+        return None
+    return name
 
 
 def flag_in(text: str) -> bool | None:
@@ -555,6 +579,17 @@ def main() -> int:
             mark = {True: "accepting", False: "not accepting"}.get(merged[n], "-")
             print(f"    {n:<34} {mark}")
         print()
+
+    # One last look at what is about to be written. A handful of entries with
+    # nothing person-shaped about them, off a page that never mentions students,
+    # is what site furniture looks like when it has slipped through.
+    person_ish = sum(1 for n in merged
+                     if re.search(r"\b[A-Z]\.?\b", n) or "'" in n or "-" in n
+                     or len(n.split()) > 2)
+    if len(merged) < 15 and person_ish == 0 and yes == 0 and no == 0:
+        print("  !! These do not look like people: no initials, no degrees, and the page")
+        print("     never mentions accepting students. Read the list above before loading")
+        print("     it, and check the saved page to see whether the real list is there.\n")
 
     roster = {
         "generated": datetime.date.today().isoformat(),
