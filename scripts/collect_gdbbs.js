@@ -84,7 +84,8 @@ const JUNK = ['emory university', 'graduate division', 'faculty search', 'our fa
 // so a candidate carrying one is not a person. This is the second line of
 // defence; dropping navigation is the first, and that only works where a menu
 // is actually marked up as one.
-const NOTNAME = new RegExp('\\b(about|admissions|alumni|announcements|application|apply|asked|' +
+const NOTNAME = new RegExp('\\b(all|any|full|member|members|level|levels|select|choose|filter|' +
+  'filters|sort|show|clear|reset|submit|about|admissions|alumni|announcements|application|apply|asked|' +
   'awards|bylaws|calendar|careers|committees|community|contact|curriculum|deadlines|directory|' +
   'donate|employment|events|faq|fellowships|financial|forms|frequently|funding|governance|' +
   'guidelines|handbook|highlights|history|home|hours|imposter|incoming|info|information|' +
@@ -233,8 +234,10 @@ API.here = function (code) {
   if (code && !PROGRAMS[code]) console.warn(`"${code}" is not a GDBBS program code; storing the names anyway`);
   // the live page, with its chrome taken out the way a fetched one's is
   const clone = document.body.cloneNode(true);
-  clone.querySelectorAll('nav,header,footer,aside,script,style,noscript,[class*=nav],[class*=menu],'
-    + '[class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[id*=nav],[id*=menu]')
+  clone.querySelectorAll('nav,header,footer,aside,script,style,noscript,select,option,datalist,'
+    + 'optgroup,label,legend,fieldset,form,[role=navigation],[role=search],[class*=nav],[class*=menu],'
+    + '[class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[class*=filter],'
+    + '[class*=facet],[class*=refine],[id*=nav],[id*=menu],[id*=filter]')
     .forEach(function (n) { n.remove(); });
   document.body.appendChild(clone);            // innerText needs a laid-out node
   clone.style.cssText = 'position:fixed;left:-9999px;top:0';

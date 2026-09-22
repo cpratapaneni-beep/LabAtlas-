@@ -104,7 +104,9 @@ FIELD = re.compile(
 # second line of defence - stripping navigation is the first - because a menu
 # that is not marked up as one still gets read.
 NOTNAME = re.compile(
-    r"\b(about|admissions|alumni|announcements|application|apply|asked|awards|bylaws|calendar|"
+    r"\b(all|any|full|member|members|level|levels|select|choose|filter|filters|sort|show|"
+    r"clear|reset|submit|about|admissions|alumni|announcements|application|apply|asked|awards|"
+    r"bylaws|calendar|"
     r"careers|committees|community|contact|curriculum|deadlines|directory|donate|employment|"
     r"events|faq|fellowships|financial|forms|frequently|funding|governance|guidelines|handbook|"
     r"highlights|history|home|hours|imposter|incoming|info|information|interface|join|jobs|"
@@ -175,10 +177,11 @@ CARDISH = re.compile(r"(faculty|person|people|profile|card|member|directory|teas
 # Site chrome. Its links are captions - "Request Info", "Privacy Statement" -
 # and two capitalised words in a menu look exactly like a name to a regex, so
 # the whole subtree comes out before anything is read.
-NAVISH = re.compile(r"(^|[\s_-])(nav|menu|breadcrumb|sidebar|side-bar|utility|skip|banner|"
+NAVISH = re.compile(r"(^|[\s_-])(nav|menu|filter|filters|facet|refine|breadcrumb|sidebar|side-bar|utility|skip|banner|"
                     r"masthead|footer|header|subnav|megamenu|toolbar|social|share|cookie|"
                     r"drawer|offcanvas|search-form|pagination)([\s_-]|$)", re.I)
-NAV_TAGS = {"nav", "header", "footer", "aside"}
+NAV_TAGS = {"nav", "header", "footer", "aside", "select", "option", "datalist",
+            "optgroup", "label", "legend", "fieldset", "form"}
 # a class that says "this element is the person's name"
 NAMEISH = re.compile(r"(^|[\s_-])(name|fullname|full-name|title|heading)([\s_-]|$)", re.I)
 
@@ -604,6 +607,12 @@ def main() -> int:
         out = a.out or a.atlas
         hit = patch_atlas(a.atlas, out, roster)
         print(f"  wrote {out}  -  {hit} of {len(merged)} tied to an investigator in the atlas")
+        # the strongest check available: these are Emory faculty, so most of
+        # them should already be in a file of 7,089 Emory investigators
+        if merged and hit / len(merged) < 0.2:
+            print("  !! Almost none of them match anybody at Emory. That is what a list of")
+            print("     research topics or filter options looks like, not a faculty roster.")
+            print("     Check the names above before you rely on this.")
     else:
         print("  Load it in the atlas:  Notes -> Load a GDBBS roster -> Choose a file")
     print()

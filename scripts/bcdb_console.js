@@ -12,7 +12,7 @@ const CODE = 'BCDB';
 const A = /(accepting\s+(new\s+)?(graduate\s+|rotation\s+)?students|currently\s+accepting|taking\s+(new\s+)?students)/i;
 const R = /(not\s+(currently\s+)?accepting|no\s+longer\s+accepting)/i;
 const ROLE = /\b(professor|prof|faculty|lecturer|instructor|director|chair|dean|fellow|scientist|scholar|adjunct|affiliate|emeritus|emerita|associate|assistant|program|department|division|school|college|center|centre|institute|laboratory|university|hospital|clinic|graduate|students?|research|admissions|contact|search|menu|home|news|events|overview|people|alumni|seminar|apply|giving|login|resources|accepting|rotation|publications|profile|email|phone|website|more|back|next|previous)\b/i;
-const NOT = /\b(about|admissions|alumni|application|apply|asked|awards|calendar|careers|community|contact|curriculum|deadlines|directory|donate|events|faq|financial|forms|frequently|funding|handbook|history|home|hours|imposter|info|information|interface|join|jobs|leadership|learn|links|mission|newsletter|orientation|overview|policies|policy|privacy|questions|read|request|requirements|resources|retreat|seminar|statement|stories|support|symposium|syndrome|tools|tour|training|values|vision|visit|web|welcome|workshop|our|your|the|this)\b/i;
+const NOT = /\b(all|any|full|member|members|level|levels|select|choose|filter|filters|sort|show|clear|reset|submit|about|admissions|alumni|application|apply|asked|awards|calendar|careers|community|contact|curriculum|deadlines|directory|donate|events|faq|financial|forms|frequently|funding|handbook|history|home|hours|imposter|info|information|interface|join|jobs|leadership|learn|links|mission|newsletter|orientation|overview|policies|policy|privacy|questions|read|request|requirements|resources|retreat|seminar|statement|stories|support|symposium|syndrome|tools|tour|training|values|vision|visit|web|welcome|workshop|our|your|the|this)\b/i;
 const FIELD = /\b(genetics|genomics|biology|biochemistry|chemistry|medicine|pediatrics|surgery|neurology|neuroscience|pathology|immunology|microbiology|pharmacology|physiology|psychiatry|psychology|radiology|oncology|epidemiology|biostatistics|informatics|engineering|nursing|ophthalmology|dermatology|cardiology|physics|statistics|ecology|evolution)\b/i;
 const W = "[A-Z][A-Za-z'’\\-]{1,}";
 const P = `(?:${W}|[A-Z]\\.?|van|von|der|den|de|del|della|da|di|dos|du|la|le|Mc|Mac)`;
@@ -38,7 +38,12 @@ function nameOf(s) {
 
 // the page without its chrome, so menu items are never read as people
 const body = document.body.cloneNode(true);
-body.querySelectorAll('nav,header,footer,aside,script,style,noscript,[class*=nav],[class*=menu],[class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[id*=nav],[id*=menu]').forEach(n => n.remove());
+// chrome, and the search form: a filter menu's options are research topics
+// and membership levels, and every one of them reads as a name in title case
+body.querySelectorAll('nav,header,footer,aside,script,style,noscript,select,option,datalist,\
+optgroup,label,legend,fieldset,form,[role=navigation],[role=search],[class*=nav],[class*=menu],\
+[class*=breadcrumb],[class*=sidebar],[class*=footer],[class*=header],[class*=filter],[class*=facet],\
+[class*=refine],[id*=nav],[id*=menu],[id*=filter]').forEach(n => n.remove());
 body.style.cssText = 'position:fixed;left:-9999px;top:0';
 document.body.appendChild(body);
 const text = body.innerText || body.textContent || '';
@@ -64,6 +69,14 @@ const names = Object.keys(people);
 console.log(`%c${CODE}%c  ${names.length} names, ${names.filter(n => people[n].a).length} accepting students`,
   'font-weight:bold', 'font-weight:normal');
 console.table(names.sort().map(n => ({ name: n, accepting: people[n].a })));
+// A person's name usually carries an initial, a particle or a third part. A
+// page of research topics - "Brain Tumors", "Wound Healing" - carries none, and
+// no word list can tell those from surnames, so this is said rather than acted on.
+const personish = names.filter(n => /\b[A-Z]\.?\b/.test(n) || n.includes("'") || n.split(' ').length > 2).length;
+if (names.length > 5 && personish === 0)
+  console.log('%cNone of these look like people: no initials, no particles, nothing but pairs of ' +
+    'capitalised words. That is what a filter menu of research topics looks like. Check the table ' +
+    'above before loading it.', 'color:#c66');
 if (!names.length) {
   console.log('%cNothing found. Scroll to the bottom so every entry has rendered, then paste again.', 'color:#c66');
 } else {
