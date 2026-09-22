@@ -67,10 +67,20 @@
     if (words.length < 2 || words.length > 5) return null;
     if (!words.every(function (w) { return /^[A-Z][A-Z'’.\-]*$/.test(w); })) return null;
     if (words[0].replace(/\./g, '').length < 2) return null;
-    var title = base.toLowerCase().replace(/(^|[\s'’\-])([a-z])/g,
+    var title = base.toLowerCase().replace(/(^|[\s'\u2019\-])([a-z])/g,
       function (m, a, b) { return a + b.toUpperCase(); });
-    return title.replace(/\b([A-Za-z])\b/g, function (m, c) { return c.toUpperCase() + '.'; })
-      .replace(/\.\./g, '.');
+    /* A lone letter standing as its own word is an initial and takes a stop.
+       A letter against an apostrophe is not: L'HERNAULT is L'Hernault, and
+       dotting every single letter made it L.'Hernault. */
+    title = title.replace(/(^|\s)([A-Za-z])(?=\s|$)/g,
+      function (m, a, c) { return a + c.toUpperCase() + '.'; });
+    /* Mc is always a prefix, so McCarty and McKimpson come back right. Mac is
+       not - Macey and Machado are surnames - so it is left alone. */
+    title = title.replace(/\bMc([a-z])/g, function (m, c) { return 'Mc' + c.toUpperCase(); });
+    /* a nobiliary particle stays lower case: van der Berg, not Van Der Berg */
+    title = title.replace(/\b(Van|Von|Der|Den|Del|Della|De|Da|Di|Dos|Du|La|Le|Ter|Ten)\b(?!\.)/g,
+      function (m, w, off) { return off === 0 ? m : m.toLowerCase(); });
+    return title.replace(/\.\./g, '.');
   }
 
   /* show every row before reading, so nobody is stranded on page two */
@@ -152,7 +162,20 @@
                membership: r.p.map(function (c) { return c + ':' + (r.m[c] || '?'); }).join(' ') };
     }));
     var info = document.querySelector('.dataTables_info');
-    if (info) console.log('table said:', info.innerText.trim());
+    if (info) {
+      var said = info.innerText.trim();
+      console.log('table said:', said);
+      var mm = /of\s+([\d,]+)\s+entries/i.exec(said);
+      if (mm && parseInt(mm[1].replace(/,/g, ''), 10) > found) {
+        console.log('%c' + (parseInt(mm[1].replace(/,/g, ''), 10) - found) + ' of the ' + mm[1] +
+          ' rows were not read as people. Say so and I will look at why.', 'color:#c66');
+      }
+    }
+    var noprog = Object.keys(here).filter(function (n) { return !here[n].p.length; });
+    if (noprog.length) {
+      console.log('%cNo membership line found for: ' + noprog.join(', ') +
+        ' \u2014 on the roster, but with no programme against them.', 'color:#c66');
+    }
     var unknown = [];
     Object.keys(here).forEach(function (n) {
       (here[n].unknown || []).forEach(function (u) { if (unknown.indexOf(u) < 0) unknown.push(u); });
