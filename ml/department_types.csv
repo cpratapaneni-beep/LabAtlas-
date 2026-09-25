@@ -1,0 +1,108 @@
+index,institution,unit,members,type,reason
+0,SOM,Ophthalmology,122,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+1,SOM,Radiology & Imaging,349,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+2,SOM,Medicine,1183,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+3,SOM,Neurology,254,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+4,SOM,Pathology & Lab Medicine,242,clinical_lab,pathology and laboratory medicine; diagnostic pathology practice alongside research labs
+5,Winship,Cancer Immunology,69,translational_centre,Winship research program mixing lab scientists and clinical investigators
+6,SOM,Human Genetics,145,genetics,"human genetics; mixes wet genomics, statistical genetics and genetic counselling"
+7,SOM,Biomedical Engineering,107,engineering,"biomedical engineering; mixes bench bioengineering, devices, imaging and computation"
+8,SOM,Cell Biology,59,basic_science,basic biomedical science department; research is overwhelmingly bench work
+9,SOM,Physiology,9,basic_science,basic biomedical science department; research is overwhelmingly bench work
+10,SOM,Family & Preventive Med.,181,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+11,SOM,Surgery,307,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+12,SOM,Psychiatry,512,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+13,SOM,Otolaryngology,63,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+14,SOM,Emergency Medicine,234,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+15,SOM,Neurosurgery,63,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+16,SOM,Pediatrics,939,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+17,SOM,Rehabilitation Medicine,137,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+18,SOM,Radiation Oncology,86,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+19,SOM,Hematology / Oncology,167,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+20,SOM,Microbiology & Immunology,46,basic_science,basic biomedical science department; research is overwhelmingly bench work
+21,CHOA,CCIV,57,translational_centre,Children's research centre for infection and virology; mostly labs with some clinical trialists
+22,Vaccine,Microbiology & Immunology,2,basic_science,basic biomedical science department; research is overwhelmingly bench work
+23,Vaccine,Georgia Research Alliance,4,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+24,Vaccine,Emory Center for AIDS Research,13,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+25,EPC,Emory National Primate Research Center,8,basic_science,Emory National Primate Research Center division; animal and bench research
+26,SOM,Orthopaedics,175,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+27,SOM,Anesthesiology,250,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+28,CHOA,CCTR,143,clinical,Children's clinical service or clinical research centre
+29,Winship,Cancer Prevention & Control,224,population,public health / population science unit
+30,SOM,SOMPI,78,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+31,Winship,Discovery & Developmental Therapeutics,209,translational_centre,Winship research program mixing lab scientists and clinical investigators
+32,SOM,SOM: Medicine: Primary Care,56,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+33,Vaccine,"Affiliate Faculty, Emory Vaccine Center",6,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+34,RSPH,Epidemiology,151,population,public health / population science unit
+35,RSPH,Environmental Health,583,population,"public health unit; the source tags most Rollins faculty with it, so membership says little alone"
+36,RSPH,Global Health,576,population,"public health unit; the source tags most Rollins faculty with it, so membership says little alone"
+37,SOM,Dermatology,73,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+38,Winship,Cell & Molecular Biology,120,basic_science,Winship research program for cell and molecular biology; bench cancer biology
+39,CHOA,CVC,19,translational_centre,Children's research centre for infection and virology; mostly labs with some clinical trialists
+40,Vaccine,Emory Vaccine Center,48,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+41,SOM,Gynecology & Obstetrics,118,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+42,CHOA,Marcus Autism Center,52,behavioural_social,autism centre; behavioural and clinical research
+43,SOM,Biochemistry,36,basic_science,basic biomedical science department; research is overwhelmingly bench work
+44,Vaccine,Biochemistry,2,basic_science,basic biomedical science department; research is overwhelmingly bench work
+45,ECCRI,Cardiology,16,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+46,CHOA,CIAG,61,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+47,CHOA,CCNR,79,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+48,SOM,Urology,47,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+49,SOM,Biomedical Informatics,29,quantitative,"biostatistics, informatics or decision science; computational research"
+50,SOM,Pharmacology & Chemical Biology,51,basic_science,basic biomedical science department; research is overwhelmingly bench work
+51,RSPH,Health Policy & Management,87,population,public health / population science unit
+52,CHOA,GENI,62,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+53,RSPH,"Behavioral, Social, & Health Education Scien…",97,population,public health / population science unit
+54,SOM,SOM: Surgery: Pediatrics,5,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+55,SOM,SOMPI: Pallative Care,4,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+56,SOM,SOM: Peds: General,1,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+57,Nursing,General faculty,199,nursing_education,nursing faculty; clinical education and nursing research
+58,SOM,EVPHA,4,admin,"administrative or education office, not a research unit"
+59,EPC,Microbiology & Immunology,15,basic_science,basic biomedical science department; research is overwhelmingly bench work
+60,CHOA,CF-AIR,99,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+61,SOM,Medical School Administration,2,admin,"administrative or education office, not a research unit"
+62,SOM,Emory National Primate Research Center,2,basic_science,Emory National Primate Research Center division; animal and bench research
+63,RSPH,Biostatistics & Bioinformatics,60,quantitative,"biostatistics, informatics or decision science; computational research"
+64,ECAS,Psychology,26,behavioural_social,Emory College social or behavioural science department
+65,SOM,Ethics Center,1,admin,"administrative or education office, not a research unit"
+66,EPC,Neuropharmacology,10,basic_science,Emory National Primate Research Center division; animal and bench research
+67,SOM,Office of Medical Education & Student Affairs,3,admin,"administrative or education office, not a research unit"
+68,SOM,Leadership,1,admin,"administrative or education office, not a research unit"
+69,CHOA,PTC,27,engineering,"biomedical engineering; mixes bench bioengineering, devices, imaging and computation"
+70,EPC,Behavioral Neuroscience & Psychiatric Disord…,8,basic_science,Emory National Primate Research Center division; animal and bench research
+71,ECAS,Human Health,20,behavioural_social,Emory College social or behavioural science department
+72,Vaccine,Pathology & Lab Medicine,2,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+73,ECAS,Biology,24,basic_science,Emory College natural science department; faculty run experimental labs
+74,Vaccine,of Microbiology & Immunology,1,basic_science,basic biomedical science department; research is overwhelmingly bench work
+75,SOM,EVP Health Affairs,1,admin,"administrative or education office, not a research unit"
+76,SOM,CEPAR,1,admin,"administrative or education office, not a research unit"
+77,CHOA,Georgia Solve Sickle Cell Initiative,5,clinical,Children's clinical service or clinical research centre
+78,ECAS,Chemistry,17,basic_science,Emory College natural science department; faculty run experimental labs
+79,Vaccine,Emory National Primate Research Center,2,basic_science,Emory National Primate Research Center division; animal and bench research
+80,Vaccine,Pediatrics,1,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+81,EPC,Developmental & Cognitive Neuroscience,9,translational_centre,"primate research division spanning behaviour, imaging and neurobiology"
+82,SOM,Academics,1,admin,"administrative or education office, not a research unit"
+83,ECAS,Sociology,10,behavioural_social,Emory College social or behavioural science department
+84,ECCRI,"Cardiology, Epidemiology",2,population,public health / population science unit
+85,Vaccine,Georgia Research Alliance Eminent Scholar in…,1,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+86,SOM,SOMPI: DOP Pediatrics Admin,1,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+87,SOM,Radiology,1,clinical,clinical department; most faculty are practising clinicians and clinical researchers
+88,CHOA,Marcus Center for Cellular Therapy,3,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+89,SOM,Microbiology Immunology,1,basic_science,basic biomedical science department; research is overwhelmingly bench work
+90,SOM,School of Medicine,1,admin,"administrative or education office, not a research unit"
+91,ECAS,Data & Decision Sciences,7,quantitative,"biostatistics, informatics or decision science; computational research"
+92,Vaccine,Global Health & Epidemiology,1,population,public health / population science unit
+93,RSPH,Executive MPH,30,population,public health / population science unit
+94,ECAS,Neuroscience & Behavioral Biology,2,basic_science,Emory College natural science department; faculty run experimental labs
+95,ECAS,Physics (Biophysics),1,basic_science,Emory College natural science department; faculty run experimental labs
+96,ECAS,Environmental Science,5,population,environmental science; field and policy research
+97,Vaccine,NHP,1,basic_science,Emory National Primate Research Center division; animal and bench research
+98,Vaccine,CFAR,1,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+99,EPC,EPC Director / Microbiology & Immunology,1,basic_science,basic biomedical science department; research is overwhelmingly bench work
+100,Vaccine,Pathology Advanced Translational Unit,1,basic_science,Emory Vaccine Center / CFAR research unit; immunology and virology labs
+101,ECCRI,Biostatistics & Bioinformatics,1,quantitative,"biostatistics, informatics or decision science; computational research"
+102,EPC,Animal Resources,6,basic_science,Emory National Primate Research Center division; animal and bench research
+103,EPC,Pathology,2,basic_science,Emory National Primate Research Center division; animal and bench research
+104,CHOA,Aflac,143,clinical,Children's clinical service or clinical research centre
+105,CHOA,HeRO,43,translational_centre,Children's research centre that houses both lab scientists and clinician researchers
+106,CHOA,REACH Center,95,clinical,Children's clinical service or clinical research centre

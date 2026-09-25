@@ -6,7 +6,8 @@
 #   2. check the NIH figures against RePORTER, if the machine can reach it
 #      (nih_reporter_verify.py; skipped with --no-nih)
 #   3. place every investigator on the wet/dry axis with the trained model,
-#      measuring it on the locked test set first (ml/wetdry.py)
+#      measuring it on the locked test set first (ml/wetdry.py), then write
+#      the department-by-department report the page reads (department_report.py)
 #   4. audit the result (audit_atlas.py) - exits non-zero on any error. With
 #      --no-nih the NIH figures stay unverified, so the audit will still list
 #      the grant errors only RePORTER can settle; everything else must be clean.
@@ -26,7 +27,10 @@ if [ "$nonih" != "--no-nih" ]; then
   python3 "$here/scripts/nih_reporter_verify.py" "$step" --patch --out build/nih
   step=build/1_clean_nih.html
 fi
-python3 "$here/ml/wetdry.py" evaluate --data "$step" --split "$here/ml/split.json" --labels "$here/ml/gold_labels.csv" --out build/wetdry_report
-python3 "$here/ml/wetdry.py" predict  --data "$step" --split "$here/ml/split.json" --labels "$here/ml/gold_labels.csv" --out build/predictions.json
-python3 "$here/ml/apply_wetdry.py" "$step" build/predictions.json build/wetdry_report/evaluation.csv -o "$out"
+L="--split $here/ml/split.json --labels $here/ml/gold_labels.csv --extra $here/ml/gold_labels_dept.csv"
+python3 "$here/ml/wetdry.py" evaluate --data "$step" $L --out build/wetdry_report
+python3 "$here/ml/wetdry.py" predict  --data "$step" $L --out build/predictions.json
+python3 "$here/ml/department_report.py" "$step" build/predictions.json build/wetdry_report/test_predictions.csv $L --out build/wetdry_report
+python3 "$here/ml/apply_wetdry.py" "$step" build/predictions.json build/wetdry_report/evaluation.csv \
+  --departments build/wetdry_report/departments.json -o "$out"
 python3 "$here/scripts/audit_atlas.py" "$out" --out build/audit

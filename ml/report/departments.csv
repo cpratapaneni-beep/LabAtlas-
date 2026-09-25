@@ -1,0 +1,108 @@
+index,institution,unit,type,members,wet,hybrid,dry,unclassified,hand_labelled,hand_random,hand_targeted,test_scored,test_agree
+0,SOM,Ophthalmology,clinical,122,14,5,74,29,17,15,2,8,8
+1,SOM,Radiology & Imaging,clinical,349,11,2,247,89,33,27,6,7,7
+2,SOM,Medicine,clinical,1183,95,13,779,296,171,139,32,58,54
+3,SOM,Neurology,clinical,254,22,7,136,89,28,21,7,10,8
+4,SOM,Pathology & Lab Medicine,clinical_lab,242,64,12,122,44,54,25,29,15,14
+5,Winship,Cancer Immunology,translational_centre,69,37,3,29,0,15,8,7,4,1
+6,SOM,Human Genetics,genetics,145,30,5,74,36,33,16,17,8,7
+7,SOM,Biomedical Engineering,engineering,107,55,4,29,19,24,13,11,4,4
+8,SOM,Cell Biology,basic_science,59,51,1,2,5,5,3,2,1,1
+9,SOM,Physiology,basic_science,9,5,0,1,3,1,0,1,0,0
+10,SOM,Family & Preventive Med.,clinical,181,4,2,92,83,20,17,3,9,8
+11,SOM,Surgery,clinical,307,16,1,260,30,47,43,4,18,18
+12,SOM,Psychiatry,clinical,512,26,7,296,183,60,50,10,28,26
+13,SOM,Otolaryngology,clinical,63,2,0,53,8,11,10,1,2,2
+14,SOM,Emergency Medicine,clinical,234,5,0,171,58,25,24,1,8,7
+15,SOM,Neurosurgery,clinical,63,14,1,44,4,14,12,2,8,7
+16,SOM,Pediatrics,clinical,939,102,11,599,227,137,111,26,63,55
+17,SOM,Rehabilitation Medicine,clinical,137,4,1,88,44,19,18,1,10,10
+18,SOM,Radiation Oncology,clinical,86,9,2,74,1,16,9,7,5,5
+19,SOM,Hematology / Oncology,clinical,167,27,7,117,16,26,17,9,6,5
+20,SOM,Microbiology & Immunology,basic_science,46,41,1,1,3,5,4,1,3,3
+21,CHOA,CCIV,translational_centre,57,30,1,16,10,8,5,3,3,2
+22,Vaccine,Microbiology & Immunology,basic_science,2,2,0,0,0,0,0,0,0,0
+23,Vaccine,Georgia Research Alliance,basic_science,4,4,0,0,0,1,1,0,0,0
+24,Vaccine,Emory Center for AIDS Research,basic_science,13,10,0,3,0,6,4,2,1,1
+25,EPC,Emory National Primate Research Center,basic_science,8,8,0,0,0,2,2,0,1,1
+26,SOM,Orthopaedics,clinical,175,16,2,121,36,30,25,5,9,9
+27,SOM,Anesthesiology,clinical,250,9,0,160,81,25,24,1,8,7
+28,CHOA,CCTR,clinical,143,5,5,105,28,23,19,4,10,8
+29,Winship,Cancer Prevention & Control,population,224,1,3,219,1,32,30,2,19,18
+30,SOM,SOMPI,clinical,78,2,1,56,19,12,12,0,8,8
+31,Winship,Discovery & Developmental Therapeutics,translational_centre,209,60,5,143,1,39,26,13,12,9
+32,SOM,SOM: Medicine: Primary Care,clinical,56,2,1,29,24,9,7,2,2,2
+33,Vaccine,"Affiliate Faculty, Emory Vaccine Center",basic_science,6,2,1,3,0,3,1,2,0,0
+34,RSPH,Epidemiology,population,151,1,2,128,20,22,18,4,7,6
+35,RSPH,Environmental Health,population,583,5,8,469,101,78,69,9,31,26
+36,RSPH,Global Health,population,576,5,8,462,101,77,68,9,31,26
+37,SOM,Dermatology,clinical,73,8,2,50,13,9,8,1,2,2
+38,Winship,Cell & Molecular Biology,basic_science,120,86,4,30,0,37,16,21,9,7
+39,CHOA,CVC,translational_centre,19,13,1,0,5,5,4,1,3,2
+40,Vaccine,Emory Vaccine Center,basic_science,48,37,1,8,2,15,8,7,3,3
+41,SOM,Gynecology & Obstetrics,clinical,118,7,0,82,29,19,16,3,3,3
+42,CHOA,Marcus Autism Center,behavioural_social,52,7,0,33,12,6,4,2,2,2
+43,SOM,Biochemistry,basic_science,36,28,0,2,6,9,5,4,3,3
+44,Vaccine,Biochemistry,basic_science,2,2,0,0,0,0,0,0,0,0
+45,ECCRI,Cardiology,clinical,16,0,0,14,2,1,1,0,0,0
+46,CHOA,CIAG,translational_centre,61,21,2,32,6,7,6,1,4,1
+47,CHOA,CCNR,translational_centre,79,30,2,42,5,15,11,4,8,7
+48,SOM,Urology,clinical,47,7,1,37,2,9,8,1,3,3
+49,SOM,Biomedical Informatics,quantitative,29,1,1,23,4,5,2,3,2,2
+50,SOM,Pharmacology & Chemical Biology,basic_science,51,41,0,1,9,4,4,0,2,2
+51,RSPH,Health Policy & Management,population,87,0,1,62,24,7,7,0,3,2
+52,CHOA,GENI,translational_centre,62,22,0,33,7,8,5,3,3,2
+53,RSPH,"Behavioral, Social, & Health Education Scien…",population,97,1,1,84,11,16,15,1,6,6
+54,SOM,SOM: Surgery: Pediatrics,clinical,5,0,0,5,0,1,1,0,0,0
+55,SOM,SOMPI: Pallative Care,clinical,4,0,1,2,1,1,1,0,0,0
+56,SOM,SOM: Peds: General,clinical,1,0,0,1,0,0,0,0,0,0
+57,Nursing,General faculty,nursing_education,199,1,1,169,28,37,33,4,14,13
+58,SOM,EVPHA,admin,4,2,0,2,0,1,0,1,0,0
+59,EPC,Microbiology & Immunology,basic_science,15,14,0,1,0,5,4,1,2,2
+60,CHOA,CF-AIR,translational_centre,99,43,0,35,21,15,10,5,6,4
+61,SOM,Medical School Administration,admin,2,0,0,1,1,0,0,0,0,0
+62,SOM,Emory National Primate Research Center,basic_science,2,2,0,0,0,0,0,0,0,0
+63,RSPH,Biostatistics & Bioinformatics,quantitative,60,0,2,47,11,8,8,0,5,3
+64,ECAS,Psychology,behavioural_social,26,5,1,20,0,7,3,4,1,0
+65,SOM,Ethics Center,admin,1,0,0,1,0,0,0,0,0,0
+66,EPC,Neuropharmacology,basic_science,10,8,0,1,1,3,2,1,1,0
+67,SOM,Office of Medical Education & Student Affairs,admin,3,0,0,3,0,2,2,0,2,2
+68,SOM,Leadership,admin,1,0,0,1,0,0,0,0,0,0
+69,CHOA,PTC,engineering,27,9,1,13,4,9,5,4,4,3
+70,EPC,Behavioral Neuroscience & Psychiatric Disord…,basic_science,8,6,1,0,1,0,0,0,0,0
+71,ECAS,Human Health,behavioural_social,20,4,0,11,5,3,1,2,1,1
+72,Vaccine,Pathology & Lab Medicine,basic_science,2,2,0,0,0,1,1,0,1,1
+73,ECAS,Biology,basic_science,24,17,2,1,4,1,1,0,1,0
+74,Vaccine,of Microbiology & Immunology,basic_science,1,1,0,0,0,0,0,0,0,0
+75,SOM,EVP Health Affairs,admin,1,0,0,0,1,0,0,0,0,0
+76,SOM,CEPAR,admin,1,0,0,1,0,0,0,0,0,0
+77,CHOA,Georgia Solve Sickle Cell Initiative,clinical,5,3,0,0,2,1,0,1,0,0
+78,ECAS,Chemistry,basic_science,17,16,0,0,1,2,2,0,0,0
+79,Vaccine,Emory National Primate Research Center,basic_science,2,2,0,0,0,0,0,0,0,0
+80,Vaccine,Pediatrics,translational_centre,1,1,0,0,0,0,0,0,0,0
+81,EPC,Developmental & Cognitive Neuroscience,translational_centre,9,6,2,1,0,2,0,2,0,0
+82,SOM,Academics,admin,1,1,0,0,0,1,0,1,0,0
+83,ECAS,Sociology,behavioural_social,10,0,0,9,1,1,1,0,0,0
+84,ECCRI,"Cardiology, Epidemiology",population,2,0,0,0,2,0,0,0,0,0
+85,Vaccine,Georgia Research Alliance Eminent Scholar in…,basic_science,1,1,0,0,0,1,1,0,0,0
+86,SOM,SOMPI: DOP Pediatrics Admin,clinical,1,0,0,1,0,1,1,0,0,0
+87,SOM,Radiology,clinical,1,0,0,0,1,0,0,0,0,0
+88,CHOA,Marcus Center for Cellular Therapy,translational_centre,3,2,0,0,1,1,0,1,0,0
+89,SOM,Microbiology Immunology,basic_science,1,1,0,0,0,0,0,0,0,0
+90,SOM,School of Medicine,admin,1,0,0,1,0,0,0,0,0,0
+91,ECAS,Data & Decision Sciences,quantitative,7,0,0,5,2,0,0,0,0,0
+92,Vaccine,Global Health & Epidemiology,population,1,0,0,1,0,0,0,0,0,0
+93,RSPH,Executive MPH,population,30,1,0,22,7,3,3,0,1,1
+94,ECAS,Neuroscience & Behavioral Biology,basic_science,2,1,0,1,0,1,1,0,1,1
+95,ECAS,Physics (Biophysics),basic_science,1,1,0,0,0,1,0,1,0,0
+96,ECAS,Environmental Science,population,5,0,0,3,2,1,1,0,0,0
+97,Vaccine,NHP,basic_science,1,1,0,0,0,1,1,0,1,1
+98,Vaccine,CFAR,basic_science,1,1,0,0,0,1,1,0,1,1
+99,EPC,EPC Director / Microbiology & Immunology,basic_science,1,1,0,0,0,0,0,0,0,0
+100,Vaccine,Pathology Advanced Translational Unit,basic_science,1,1,0,0,0,1,1,0,1,1
+101,ECCRI,Biostatistics & Bioinformatics,quantitative,1,0,0,1,0,0,0,0,0,0
+102,EPC,Animal Resources,basic_science,6,6,0,0,0,0,0,0,0,0
+103,EPC,Pathology,basic_science,2,2,0,0,0,0,0,0,0,0
+104,CHOA,Aflac,clinical,143,30,6,80,27,23,15,8,9,8
+105,CHOA,HeRO,translational_centre,43,13,1,16,13,9,5,4,3,1
+106,CHOA,REACH Center,clinical,95,1,1,77,16,13,10,3,6,6

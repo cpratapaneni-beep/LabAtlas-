@@ -48,15 +48,22 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 
-MODEL_VERSION = 'wd-2026.09'
+MODEL_VERSION = 'wd-2026.09.2'
 SEED = 20260925
 USE_LEX = True
+# Department features (colleagues' scores, hand-typed department mix) were built
+# and tested. They did not help on the random sample and cost 3-4 points on the
+# department-targeted hard cases, so they are off; department typing is used to
+# choose whom to label and to report accuracy by department instead.
+USE_DEPT = False
 # self-training thresholds on P(wet) for unlabelled records, and their weight
 PSEUDO = (0.90, 0.02)
 PSEUDO_WEIGHT = 0.3
 
 # P(wet) bands. Chosen by cross-validation on the training half only (see `cv`).
-BANDS = {'wet': 0.70, 'lean_wet': 0.45, 'lean_dry': 0.30, 'dry': 0.02}
+BANDS = {'wet': 0.70, 'lean_wet': 0.50, 'lean_dry': 0.30, 'dry': 0.05,
+         # a record with no titles is placed only beyond these stricter lines
+         'bare_wet': 0.70, 'bare_dry': 0.02}
 
 STATE = {'none': 0, 'wet': 1, 'dry': 2, 'hybrid': 3, 'lean_wet': 4, 'lean_dry': 5}
 SIDE = {0: None, 1: 'W', 4: 'W', 2: 'D', 5: 'D', 3: 'H'}
@@ -70,11 +77,23 @@ def load_data(path):
         if not m:
             sys.exit('no <script id="atlasdata"> in ' + path)
         txt = m.group(1)
-    return json.loads(txt)
+    D = json.loads(txt)
+    if 'wd' in D and any('l31' not in p for p in D['pis']):
+        # v78 overwrote the keyword score's label; comparing against it would
+        # compare the model with its own earlier output
+        sys.exit(path + ' already carries model labels and no copy of the v3.1 label (l31); '
+                 'use a pre-model atlas or v79 or later')
+    return D
 
 
-def load_gold(labels_path, split_path, D=None):
+def load_gold(labels_path, split_path, D=None, extra_path=None):
     """gold[person_index] = 'W'|'H'|'D'|'U', plus the train/test index sets.
+
+    The random gold set is addressed through split.json. An extra label file
+    (the department-stratified labels, chosen where the model was least sure)
+    names its people by index and only ever adds to the training side: those
+    people were picked by looking at model output, so they can never stand in
+    for a random test sample.
 
     The labels point at people by their position in the data. If the file
     carries names and the data is given, every one is checked, so a re-scraped
@@ -82,15 +101,22 @@ def load_gold(labels_path, split_path, D=None):
     split = json.load(open(split_path))
     order = split['order']
     gold, wrong = {}, []
-    for r in csv.DictReader(open(labels_path, encoding='utf-8')):
-        i = order[int(r['code'][1:])]
-        if D is not None and r.get('name') and (i >= len(D['pis']) or D['pis'][i]['n'] != r['name']):
-            wrong.append(r['code'])
-        gold[i] = r['label']
+    train, test = set(split['train']), set(split['test'])
+    files = [(labels_path, False)] + ([(extra_path, True)] if extra_path else [])
+    for path, extra in files:
+        for r in csv.DictReader(open(path, encoding='utf-8')):
+            i = int(r['index']) if extra else order[int(r['code'][1:])]
+            if D is not None and r.get('name') and (i >= len(D['pis']) or D['pis'][i]['n'] != r['name']):
+                wrong.append(r['code'])
+            if extra:
+                if i in test or i in gold:
+                    sys.exit('extra label %s points at a person already in the gold set' % r['code'])
+                train.add(i)
+            gold[i] = r['label']
     if wrong:
         sys.exit('%d gold labels no longer point at the person they were given to (%s ...); '
                  'the data has changed order since labelling' % (len(wrong), ', '.join(wrong[:5])))
-    return gold, set(split['train']), set(split['test'])
+    return gold, train, test
 
 
 # boilerplate that says nothing about the method of the underlying work
@@ -199,10 +225,25 @@ def _tfidf(min_df=2):
                            token_pattern=r'(?u)\b[a-z][a-z0-9\-]{1,}\b', dtype=np.float32)
 
 
+DEPT_TYPES = ['basic_science', 'translational_centre', 'engineering', 'genetics', 'clinical_lab',
+              'clinical', 'population', 'quantitative', 'behavioural_social', 'nursing_education', 'admin']
+
+
+def load_dept_types(path, D):
+    """unit index -> hand-assigned research character (department_types.csv)."""
+    t = {}
+    for r in csv.DictReader(open(path, encoding='utf-8')):
+        i = int(r['index'])
+        if i < len(D['depts']) and D['depts'][i]['n'] != r['unit']:
+            sys.exit('department_types.csv no longer matches the units in the data (row %d)' % i)
+        t[i] = r['type']
+    return t
+
+
 class Vectors:
     """Fits the vocabularies once on every record's text (no labels involved)."""
 
-    def __init__(self, D):
+    def __init__(self, D, dept_types=None):
         P = D['pis']
         self.titles = [titles_of(p) for p in P]
         self.ctx = [context_text(p, D) for p in P]
@@ -223,6 +264,59 @@ class Vectors:
         self.ngrant = np.array([len(p.get('gn') or []) for p in P], dtype=np.float32)
         self.nbio = np.array([len(bio_of(p)) for p in P], dtype=np.float32)
         self.lex = np.array([lexicon_rates(ts) for ts in self.titles], dtype=np.float32)
+        # departments: each person's units, and the share of them of each hand-typed kind
+        self.units = [list(p.get('d') or []) for p in P]
+        self.nunits = len(D['depts'])
+        self.utype = np.zeros((len(P), len(DEPT_TYPES)), dtype=np.float32)
+        if dept_types:
+            for i, us in enumerate(self.units):
+                for u in us:
+                    t = dept_types.get(u)
+                    if t in DEPT_TYPES:
+                        self.utype[i, DEPT_TYPES.index(t)] += 1.0 / len(us)
+        self._dept_cache = {}
+
+    def dept_context(self, tm):
+        """How bench-like the *other* members of each person's departments read.
+
+        For every unit, the mean title score of its titled members; for each
+        person, that mean with the person's own score taken out, averaged (and
+        maximised) over their units. No labels are involved, only the title
+        model's reading of colleagues, so it carries a department's character
+        into a record that has few titles of its own."""
+        if self._dept_cache.get('tm') is tm:
+            return self._dept_cache['out']
+        n = len(self.by_person)
+        own = np.full(n, np.nan)
+        if self.Xt.shape[0]:
+            pr = tm.predict_proba(self.Xt)[:, 1]
+            sums = np.bincount(self.owner, weights=pr, minlength=n)
+            cnt = np.bincount(self.owner, minlength=n)
+            has = cnt > 0
+            own[has] = sums[has] / cnt[has]
+        usum = np.zeros(self.nunits)
+        ucnt = np.zeros(self.nunits)
+        for i, us in enumerate(self.units):
+            if not np.isnan(own[i]):
+                for u in us:
+                    usum[u] += own[i]
+                    ucnt[u] += 1
+        glob = np.nanmean(own)
+        out = np.zeros((n, 3), dtype=np.float32)
+        for i, us in enumerate(self.units):
+            vals = []
+            for u in us:
+                s_, c_ = usum[u], ucnt[u]
+                if not np.isnan(own[i]):
+                    s_, c_ = s_ - own[i], c_ - 1
+                # shrink small units toward the collection-wide mean
+                vals.append((s_ + 5 * glob) / (c_ + 5))
+            if not vals:
+                vals = [glob]
+            lv = _logit(np.array(vals))
+            out[i] = [lv.mean(), lv.max(), math.log1p(len(us))]
+        self._dept_cache = {'tm': tm, 'out': out}
+        return out
 
 
 def _target(lbl):
@@ -301,6 +395,13 @@ def stack_features(V, tm, cm, people):
              _logit(cp)[:, None], np.log1p(V.ngrant[people])[:, None], V.deg[people]]
     if USE_LEX:
         feats.append(V.lex[people])
+    if USE_DEPT:
+        dc = V.dept_context(tm)[people]
+        tl = _logit(ta[:, 0:1])
+        # the department signal, the hand-typed department mix, and the title
+        # score read relative to the department (a middling bench signal means
+        # more in a clinical unit than in a basic-science one)
+        feats += [dc] if USE_DEPT == 'context' else [dc, V.utype[people], tl * dc[:, 0:1]]
     return np.hstack(feats)
 
 
@@ -395,7 +496,7 @@ class Model:
                 if not enough:
                     out.append((0, p, 'no publications, grants or profile text'))
                     continue
-                if self.bands['dry'] < p < self.bands['wet']:
+                if self.bands.get('bare_dry', self.bands['dry']) < p < self.bands.get('bare_wet', self.bands['wet']):
                     out.append((0, p, 'profile only, and it does not settle the question'))
                     continue
             out.append((band(p, self.bands), p, None))
@@ -474,27 +575,32 @@ def bootstrap_diff(pa, pb, key, n=2000, seed=SEED):
     return float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
 
 
-V31_STATE = lambda p: int(p.get('l') or 0)
+V31_STATE = lambda p: int((p['l31'] if 'l31' in p else p.get('l')) or 0)
 
 
 # ---------------------------------------------------------------- commands
 def cmd_cv(a):
+    """Cross-validate on the random training half. Extra (department-stratified)
+    labels are always in the training folds and never scored, because they were
+    chosen by looking at model output and are not a random sample."""
     D = load_data(a.data)
-    gold, train, _ = load_gold(a.labels, a.split, D)
-    V = Vectors(D)
-    tr = sorted(train)
-    labs = np.array([gold[i] for i in tr])
+    gold, train, test = load_gold(a.labels, a.split, D, a.extra)
+    V = Vectors(D, load_dept_types(a.dept_types, D))
+    rand = sorted(set(json.load(open(a.split))['train']))
+    extra = sorted(train - set(rand))
+    labs = np.array([gold[i] for i in rand])
     res_new, res_old = [], []
     for rep in range(a.repeats):
         skf = StratifiedKFold(5, shuffle=True, random_state=SEED + rep)
-        for f_tr, f_te in skf.split(tr, labs):
-            ptr = [tr[j] for j in f_tr]
-            pte = [tr[j] for j in f_te]
+        for f_tr, f_te in skf.split(rand, labs):
+            ptr = [rand[j] for j in f_tr] + extra
+            pte = [rand[j] for j in f_te]
             m = Model(V, ptr, gold)
             st = m.states(pte)
             res_new += [(gold[i], s[0]) for i, s in zip(pte, st)]
             res_old += [(gold[i], V31_STATE(D['pis'][i])) for i in pte]
-    print('cross-validated on the training half,', a.repeats, 'x 5 folds')
+    print('cross-validated on the random training half, %d x 5 folds, %d extra labels in every training fold'
+          % (a.repeats, len(extra)))
     for name, r in (('v3.1', res_old), ('new', res_new)):
         s = score(r)
         print('  %-5s ' % name + '  '.join('%s=%.3f' % (k, v) for k, v in s.items() if isinstance(v, float)))
@@ -506,8 +612,8 @@ def _fmt(v):
 
 def cmd_evaluate(a):
     D = load_data(a.data)
-    gold, train, test = load_gold(a.labels, a.split, D)
-    V = Vectors(D)
+    gold, train, test = load_gold(a.labels, a.split, D, a.extra)
+    V = Vectors(D, load_dept_types(a.dept_types, D))
     m = Model(V, sorted(train), gold)
     te = sorted(test)
     st = m.states(te)
@@ -577,8 +683,8 @@ def top_terms(V, tm, k=25):
 def cmd_predict(a):
     """Fit on every gold label (train and test) and score all investigators."""
     D = load_data(a.data)
-    gold, train, test = load_gold(a.labels, a.split, D)
-    V = Vectors(D)
+    gold, train, test = load_gold(a.labels, a.split, D, a.extra)
+    V = Vectors(D, load_dept_types(a.dept_types, D))
     m = Model(V, sorted(train | test), gold)
     everyone = list(range(len(D['pis'])))
     st = m.states(everyone)
@@ -628,6 +734,8 @@ def main():
     ap.add_argument('--data', required=True)
     ap.add_argument('--split', required=True)
     ap.add_argument('--labels', required=True)
+    ap.add_argument('--extra', default=None, help='department-stratified labels, added to training only')
+    ap.add_argument('--dept-types', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'department_types.csv'))
     ap.add_argument('--out', default='wetdry_out')
     ap.add_argument('--repeats', type=int, default=3)
     a = ap.parse_args()

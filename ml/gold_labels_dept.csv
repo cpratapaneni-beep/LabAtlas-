@@ -1,0 +1,221 @@
+code,index,name,email,split,dept_type,label,conf,note
+A000,4082,George Painter,grpaint@emory.edu,train_dept,admin,W,1,antiviral nucleoside development in animal infection models
+A001,809,Wright Caughman,scaughm@emory.edu,train_dept,admin,W,2,one old transcription bench paper; administrative post
+A002,5119,David Smith,dfsmith@emory.edu,train_dept,basic_science,U,2,biochemistry listing but papers are veterinary namesakes
+A003,585,Sada Boyd,smboyd4@emory.edu,train_dept,basic_science,U,2,one trachoma paper looks like a namesake
+A004,3507,Donald McCormick,biocdbm@emory.edu,train_dept,basic_science,W,2,nutritional biochemist; vitamin enzymology
+A005,735,John W. Calvert,jcalver@emory.edu,train_dept,basic_science,W,1,bio: cardiac signalling lab
+A006,4525,Matthew Reyna,mareyna@emory.edu,train_dept,basic_science,D,1,biomedical informatics and ML
+A007,6333,Wei Jin,wei.jin@emory.edu,train_dept,basic_science,D,1,computer science ML
+A008,6342,Liang Zhao,liang.zhao@emory.edu,train_dept,basic_science,U,2,wastewater lab postdoc bio but grants and papers are namesakes
+A009,888,Ping Chen,pchen2@emory.edu,train_dept,basic_science,W,1,bio: planar cell polarity lab
+A010,14,Thomas Abelew,tabelew@emory.edu,train_dept,basic_science,H,2,animal neurophysiology plus human biomechanics
+A011,3546,Morgan L. McLemore,mlmclem@emory.edu,train_dept,basic_science,H,2,bio: basic myeloid lab; papers clinical sickle cell
+A012,5855,William Wilcox,wwilco2@emory.edu,train_dept,basic_science,D,1,clinical genetics trials
+A013,2855,Rachel Kinsella,rkinsel@emory.edu,train_dept,basic_science,W,1,bio: bacterial pathogenesis lab
+A014,3416,Vincent C. Marconi,vcmarco@emory.edu,train_dept,basic_science,D,1,HIV clinical epidemiology
+A015,922,Charles Cho,cjcho3@emory.edu,train_dept,basic_science,H,2,GI physician-scientist with ribosome lab
+A016,3573,Aneesh Mehta,ameht01@emory.edu,train_dept,basic_science,D,1,transplant ID clinical
+A017,4560,Carlos del Rio,cdelrio@emory.edu,train_dept,basic_science,D,1,HIV epidemiology and policy
+A018,1382,Srilatha Edupuganti,sedupug@emory.edu,train_dept,basic_science,D,2,vaccine clinical trialist
+A019,536,Henry Blumberg,hblumbe@emory.edu,train_dept,basic_science,D,1,TB epidemiology and training grants
+A020,6460,Adam Ericsen,adam.ericsen@emory.edu,train_dept,basic_science,W,2,primate breeding colony genetics director
+A021,6473,Xiaodong Zhang,xzhang8@emory.edu,train_dept,basic_science,W,2,non-human primate MRI research
+A022,3587,Haider Mejbel,hmejbel@emory.edu,train_dept,basic_science,D,1,surgical pathology case series
+A023,2945,Alyssa M. Krasinskas,akrasin@emory.edu,train_dept,basic_science,D,2,GI pathology practice; one preclinical collaboration
+A024,4240,Deniz Peker,dpeker@emory.edu,train_dept,basic_science,D,1,haematopathology practice
+A025,1190,George Deeb,gdeeb@emory.edu,train_dept,basic_science,D,1,haematopathology practice
+A026,3862,Stewart G. Neill,sgneill@emory.edu,train_dept,basic_science,D,1,neuropathology practice
+A027,3314,Daniel Lubin,djlubin@emory.edu,train_dept,basic_science,D,1,head and neck pathology practice
+A028,4283,Anne Piantadosi,apianta@emory.edu,train_dept,basic_science,W,2,arbovirus virology in ticks and patients
+A029,1954,Brannan Brooks Griffin,bbgriff@emory.edu,train_dept,basic_science,D,1,gynaecologic pathology; policy namesakes
+A030,1191,Kristin K. Deeb,kdeeb2@emory.edu,train_dept,basic_science,D,1,pathology case series
+A031,6096,Wei Zheng,wzhen26@emory.edu,train_dept,basic_science,D,1,molecular epidemiology and genetic risk
+A032,5724,Qun Wang,qwang60@emory.edu,train_dept,basic_science,D,2,one breast pathology paper
+A033,2310,Andrew Lee Hong,ahong30@emory.edu,train_dept,basic_science,H,2,paediatric oncologist with SMARCB1 lab grant
+A034,3974,Esther A. Obeng,eaobeng@emory.edu,train_dept,basic_science,W,2,bio: lab on clonal haematopoiesis; papers clinical
+A035,4337,Christopher C. Porter,ccport2@emory.edu,train_dept,basic_science,D,2,cancer predisposition clinical research
+A036,267,Waitman Aumann,waumann@emory.edu,train_dept,basic_science,H,2,earlier leukaemogenesis bench work plus clinical oncology
+A037,6384,Hayk Harutyunyan,hayk.harutyunyan@emory.edu,train_dept,basic_science,W,2,experimental nano-optics physics lab
+A038,5836,John White,jwhit04@emory.edu,train_dept,basic_science,U,2,physiology listing; one health economics namesake
+A039,6031,David Yu,dsyu@emory.edu,train_dept,basic_science,H,2,radiation oncologist with DNA repair lab
+A040,2780,Mohammad Khan,mkkhan@emory.edu,train_dept,basic_science,U,2,radiation oncologist; papers look like mixed namesakes
+A041,6442,Amanda Freeman,amanda.freeman@emory.edu,train_dept,behavioural_social,W,1,Drosophila neurobiology
+A042,6436,Myra Woodworth-Hobbs,myra.woodworth-hobbs@emory.edu,train_dept,behavioural_social,W,1,muscle cell signalling
+A043,1618,Aiden Ford,alford2@emory.edu,train_dept,behavioural_social,D,2,infant neuroimaging and attention studies
+A044,6387,Hillary R. Rodman,hrodman@emory.edu,train_dept,behavioural_social,W,2,comparative visual neuroscience in gerbils and macaques
+A045,6403,Aubrey Kelly,aubrey.kelly@emory.edu,train_dept,behavioural_social,U,2,one review
+A046,6389,Donna L. Maney,dmaney@emory.edu,train_dept,behavioural_social,H,2,songbird neuroendocrine experiments plus sex/gender research methods
+A047,5352,Fania Szlam,fszlam@emory.edu,train_dept,clinical,W,1,coagulation biochemistry lab
+A048,5743,Catherine Warner,cawarne@emory.edu,train_dept,clinical,U,2,dermatologist; one virology namesake
+A049,2738,Geoffrey Kelly,gskelly@emory.edu,train_dept,clinical,D,2,EM clinical; one namesake
+A050,1111,Nupur Dalal,nndalal@emory.edu,train_dept,clinical,U,2,family medicine; mouse RPE papers look like namesakes
+A051,3186,Kevin Li,ykli@emory.edu,train_dept,clinical,U,2,papers look like mixed namesakes
+A052,2263,Daniel Ho,dbho@emory.edu,train_dept,clinical,U,2,one methylation paper; too little to judge
+A053,245,Desiree Ashong,dashong@emory.edu,train_dept,clinical,U,1,bio is a patient review
+A054,4067,Sharon Owusu-Darko,sowusud@emory.edu,train_dept,clinical,U,1,bio is a patient review
+A055,291,Martina Badell,mbadell@emory.edu,train_dept,clinical,D,2,maternal-fetal medicine clinical and vaccine studies
+A056,4488,Satyanarayan Reddy,skredd3@emory.edu,train_dept,clinical,D,2,oncologist; one review
+A057,885,Georgia Chen,gzchen@emory.edu,train_dept,clinical,W,1,molecular oncology lab with animal models
+A058,5030,Mamoru Shoji,mshoji@emory.edu,train_dept,clinical,W,1,anticancer compound cell studies
+A059,3428,Patrick Marquardt,pmarqua@emory.edu,train_dept,clinical,U,2,one namesake paper
+A060,3668,Adam Mitchell,ajmitc3@emory.edu,train_dept,clinical,H,2,cardiologist; extracellular vesicle lab work plus clinical imaging
+A061,4684,Stephen Russell,struss2@emory.edu,train_dept,clinical,D,2,lung function epidemiology; one single-cell collaboration
+A062,1985,Thomas Guest,tgues01@emory.edu,train_dept,clinical,D,2,clinical cardiologist; one old bench paper
+A063,724,Hui Cai,hcai3@emory.edu,train_dept,clinical,W,1,nephrology physician-scientist running ion channel mouse lab
+A064,3832,Mark Nanes,mnanes@emory.edu,train_dept,clinical,H,2,endocrinologist; earlier vitamin D bone biology lab plus clinical reviews
+A065,1961,Ria Gripaldo,rgripal@emory.edu,train_dept,clinical,D,2,ILD clinician; antibody assay collaborations
+A066,3879,Samuel Newcom,snewc01@emory.edu,train_dept,clinical,W,2,older Hodgkin cell biology lab
+A067,5504,Aaron Trammell,awtramm@emory.edu,train_dept,clinical,W,2,pulmonary hypertension bioenergetics lab
+A068,5353,Jules Tabilona,jtabilo@emory.edu,train_dept,clinical,D,2,one case report
+A069,5357,Kazuki Tadokoro,ktadoko@emory.edu,train_dept,clinical,W,2,one lung stromal cell paper
+A070,4359,Meena Prasad,manand2@emory.edu,train_dept,clinical,H,2,GI clinician with earlier colitis lab work
+A071,531,Mitsi Blount,mabloun@emory.edu,train_dept,clinical,W,1,renal urea transporter lab
+A072,4466,Negah Rassouli,nrasson@emory.edu,train_dept,clinical,U,1,profile only
+A073,1842,Young-Mi Go,ygo@emory.edu,train_dept,clinical,W,1,metabolomics and cadmium toxicology in mice
+A074,6076,Omar Zepeda,ozepeda@emory.edu,train_dept,clinical,D,1,Nicaragua birth cohort epidemiology
+A075,3117,Sangho Lee,slee30@emory.edu,train_dept,clinical,W,1,endothelial reprogramming and vascular regeneration lab
+A076,1100,Mark Czaja,mczaja@emory.edu,train_dept,clinical,W,1,mouse liver autophagy lab
+A077,4767,Jeff Sands,jsands@emory.edu,train_dept,clinical,W,1,bio: urea transporter physiology lab
+A078,5365,Kiyoko Takemiya,ktakemi@emory.edu,train_dept,clinical,W,1,PET probe chemistry with rodent infection models
+A079,1427,Andrew Elson,aelson@emory.edu,train_dept,clinical,U,2,neurologist; structural virology papers may be a namesake
+A080,1440,Charles Epstein,cepstei@emory.edu,train_dept,clinical,D,2,clinical EEG and neuroimaging; one rat study
+A081,2044,Chadwick Hales,cmhales@emory.edu,train_dept,clinical,U,2,bio is a patient review; papers look mixed
+A082,1931,Joanne Green,jgreen@emory.edu,train_dept,clinical,D,1,clinical trials in Parkinson disease
+A083,2737,Conor Kelly,cwkelly@emory.edu,train_dept,clinical,W,2,songbird vocal learning experiments
+A084,2243,Lenora Higginbotham,lhiggi2@emory.edu,train_dept,clinical,D,2,movement-disorders neurologist; proteomics consortium author
+A085,4236,Nigel Pedersen,npeders@emory.edu,train_dept,clinical,D,1,epilepsy surgery and cognition research
+A086,5893,Lahiru Wimalasena,lwimala@emory.edu,train_dept,clinical,U,2,two spinal circuit papers; method unclear
+A087,2355,Tiffany Huang,tlhuang@emory.edu,train_dept,clinical,U,2,strabismus surgeon; medulloblastoma lab papers may be earlier training or a namesake
+A088,1765,Eldon Geisert,egeiser@emory.edu,train_dept,clinical,W,1,retinal ganglion cell mouse lab
+A089,3620,Keith Michael,kmicha2@emory.edu,train_dept,clinical,D,1,spine surgery outcomes; oyster papers are namesakes
+A090,2203,Katrin Henke,khenke@emory.edu,train_dept,clinical,W,1,zebrafish skeletal genetics lab
+A091,2551,Christopher Johnson,ctjohn4@emory.edu,train_dept,clinical,U,2,orthopaedist; tunicate development papers look like a namesake
+A092,912,Samir Chihab,schiha3@emory.edu,train_dept,clinical,W,2,cartilage regeneration in rats and iPSC cells
+A093,4172,Jay Patel,jpate41@emory.edu,train_dept,clinical,W,1,musculoskeletal tissue engineering lab
+A094,5480,Norman Todd Jr.,ntodd@emory.edu,train_dept,clinical,D,2,paediatric ENT clinical research
+A095,1637,Ashwanth Francis,afran29@emory.edu,train_dept,clinical,W,1,HIV capsid structural virology
+A096,4314,Richard Plemper,rplempe@emory.edu,train_dept,clinical,W,1,antiviral virology in cells and hamsters
+A097,3987,Solomon F. Ofori-Acquah,soforia@emory.edu,train_dept,clinical,W,1,sickle cell mouse models
+A098,774,Samuel Fernandez Carriba,sferna2@emory.edu,train_dept,clinical,D,1,clinical psychologist; earlier primate observation studies
+A099,3739,Angelica Morgan,almorg5@emory.edu,train_dept,clinical,W,2,SARS-CoV-2 virology
+A100,3674,Sarah Mitchell,sgmitc2@emory.edu,train_dept,clinical,U,1,profile is a news snippet; no papers
+A101,4605,Beverly Rogers,bbroger@emory.edu,train_dept,clinical,D,2,paediatric pathology and diagnostic test evaluation
+A102,514,Sarah Black,sclifto@emory.edu,train_dept,clinical,D,2,one human neurophysiology paper
+A103,3023,Shenila Lallani,slallan@emory.edu,train_dept,clinical,W,2,one xenograft pharmacology paper
+A104,2067,Dolores Hambardzumyan,dhambar@emory.edu,train_dept,clinical,W,1,glioma tumour biology lab
+A105,1248,Kavita Dhodapkar,kdhodap@emory.edu,train_dept,clinical,H,2,paediatric oncologist with a human immunology lab
+A106,2648,Bum-Yong Kang,bkang6@emory.edu,train_dept,clinical,W,1,bio: lung fibroblast and endothelial biology lab
+A107,2605,Ronald Joyner,rjoyner@emory.edu,train_dept,clinical,W,1,cardiac cellular electrophysiology
+A108,641,Milton Brown,mbrow05@emory.edu,train_dept,clinical,W,1,cardiac patch bioengineering and CF airway cell biology
+A109,3166,Matthew Levy,mdlevy2@emory.edu,train_dept,clinical,U,2,psychologist; hydrogel paper is a namesake
+A110,4315,Paul Plotsky,pplotsky@emory.edu,train_dept,clinical,W,1,rodent stress neuroendocrinology
+A111,496,Elisabeth Binder,ebinder@emory.edu,train_dept,clinical,H,2,psychiatric multi-omics on tissue plus mouse work
+A112,2343,Leonard Howell,lhowell@emory.edu,train_dept,clinical,W,1,non-human primate neuropharmacology and imaging
+A113,3841,Walid Nassif,wnassif@emory.edu,train_dept,clinical,D,2,one clinical review
+A114,4242,Viorica Pencea,vpencea@emory.edu,train_dept,clinical,W,2,rodent and primate neurogenesis papers
+A115,2776,Ishrat Khan,ijkhan@emory.edu,train_dept,clinical,U,2,psychiatrist; materials chemistry papers are namesakes
+A116,4521,Kerry Ressler,kressle@emory.edu,train_dept,clinical,H,2,mouse fear circuits plus human PTSD imaging and trials
+A117,786,Robin Casey,tcasey2@emory.edu,train_dept,clinical,U,2,one biomarker paper
+A118,4923,David Shafer,dshafer@emory.edu,train_dept,clinical,H,2,older molecular assays plus clinical psychology
+A119,5634,Paula Vertino,pvertin@emory.edu,train_dept,clinical,W,1,cancer epigenetics lab
+A120,47,Greeshma Agasthya,gagasth@emory.edu,train_dept,clinical,D,1,computational radiation dosimetry and ML
+A121,6030,Seema Yousuf,syousu2@emory.edu,train_dept,clinical,W,1,progesterone neuroprotection in rodent models
+A122,3193,Runhong Li,rli70@emory.edu,train_dept,clinical,W,2,one PET immune imaging probe paper
+A123,2959,Lisa Krishnamurthy,lkrish2@emory.edu,train_dept,clinical,D,1,MR physics in human stroke rehabilitation
+A124,4510,David Reiter,dareite@emory.edu,train_dept,clinical,D,1,quantitative MRI in human muscle and tendon
+A125,6093,Tianyun Zhao,tzhao31@emory.edu,train_dept,clinical,D,2,imaging analysis papers
+A126,2663,Zoher Kapasi,zkapasi@emory.edu,train_dept,clinical,W,1,exercise immunology in mice
+A127,3966,James O'Keefe,jbokeef@emory.edu,train_dept,clinical,D,1,primary care COVID clinical research
+A128,670,Cheryl Buck-Patterson,cdbuck@emory.edu,train_dept,clinical,U,1,bio is a patient review; no papers
+A129,4234,Thomas Pearson,tpearso@emory.edu,train_dept,clinical,H,2,transplant surgeon; costimulation blockade immunology plus clinical and mentoring
+A130,6063,Joseph Zarge,jzarge@emory.edu,train_dept,clinical,D,2,vascular surgeon; large-animal abstracts as a collaborator
+A131,5654,Jakob Vinten-Johansen,jvinten@emory.edu,train_dept,clinical,W,1,cardiac ischaemia-reperfusion physiology in pig models
+A132,3504,Kem-Maria McCook,kmccoo2@emory.edu,train_dept,clinical,W,2,Fgl2 T-cell immunology
+A133,1900,Gerald Gowitt,ggowitt@emory.edu,train_dept,clinical_lab,D,1,forensic and autopsy pathology
+A134,2476,Jaishree Jagirdar,jjagird@emory.edu,train_dept,clinical_lab,D,2,cardiothoracic pathology practice
+A135,5038,Gabriel Sica,gsica@emory.edu,train_dept,clinical_lab,H,2,lung pathologist on many translational bench studies
+A136,5807,Sharon Weiss,swweiss@emory.edu,train_dept,clinical_lab,D,2,one obituary
+A137,4321,Yesim Gokmen-Polar,ypolar@emory.edu,train_dept,clinical_lab,W,1,breast cancer resistance lab models
+A138,3962,Una O'Doherty,uodoher@emory.edu,train_dept,clinical_lab,W,1,HIV reservoir lab
+A139,1457,Perla del Rio Estrada,pmdelri@emory.edu,train_dept,clinical_lab,W,1,HIV follicular T-cell immunology lab
+A140,201,Aftab Ansari,pathaaa@emory.edu,train_dept,clinical_lab,W,1,SIV and dengue immunology lab
+A141,28,Robert Achram,rachram@emory.edu,train_dept,clinical_lab,D,1,transfusion and HLA laboratory medicine practice
+A142,4776,Ana Santana,acsant2@emory.edu,train_dept,clinical_lab,W,1,HIV and vaccine immunology in mice
+A143,1781,Crystal Gergye,cgergye@emory.edu,train_dept,clinical_lab,W,2,laboratory animal medicine
+A144,6078,Patricia Zerra,pzerra@emory.edu,train_dept,clinical_lab,W,2,transfusion immunology in mouse models
+A145,3975,Rebecca Obeng,robeng@emory.edu,train_dept,clinical_lab,H,2,pathologist with a CD8 T-cell immunology lab
+A146,3762,Mario Mosunjac,mmosun2@emory.edu,train_dept,clinical_lab,D,2,autopsy pathology; older bench studies
+A147,4136,Douglas Parker,dpark02@emory.edu,train_dept,clinical_lab,D,1,dermatopathology practice
+A148,548,Ramireddy Bommireddy,rbommi2@emory.edu,train_dept,clinical_lab,W,1,tumour immunology lab
+A149,422,Guy Benian,pathgb@emory.edu,train_dept,clinical_lab,W,1,C. elegans muscle biology lab
+A150,1399,Jonathan Eisenstat,jeisen7@emory.edu,train_dept,clinical_lab,D,2,one case report
+A151,1134,Lakshmi Dasi,ldasi@emory.edu,train_dept,engineering,H,2,computational valve biomechanics plus bioprinted tissue models
+A152,5408,Johnna Temenoff,jtemeof@emory.edu,train_dept,engineering,W,1,musculoskeletal tissue engineering
+A153,2741,Melissa Lambeth Kemp,mkemp3@emory.edu,train_dept,engineering,W,1,stem cell bioengineering and spatial metabolomics
+A154,3669,Cassie S. Mitchell,csmitch@emory.edu,train_dept,engineering,D,1,biomedical AI
+A155,2987,Sandeep Kumar,skuma3@emory.edu,train_dept,engineering,D,1,computational antibody design
+A156,2214,Christopher Hermann,cdherma@emory.edu,train_dept,engineering,W,1,mouse craniosynostosis models
+A157,3607,Karthik Menon,kmenon6@emory.edu,train_dept,engineering,D,1,computational haemodynamics
+A158,4527,Sarah Rezapourdamanab,srezapo@emory.edu,train_dept,engineering,W,1,3D bioprinting of tissue models
+A159,3119,Seung Lee,slee230@emory.edu,train_dept,engineering,U,2,engineering listing but papers look like nutrition epidemiology namesakes
+A160,6128,Chiara Zurla,czurla@emory.edu,train_dept,engineering,W,1,mRNA delivery bioengineering in animal models
+A161,672,Erin M. Buckley,embuckl@emory.edu,train_dept,engineering,H,2,diffuse optical instrumentation in patients plus mouse TBI
+A162,6172,Andres J. Garcia,andres.garcia@me.gatech.edu,train_dept,engineering,W,1,hydrogel biomaterials and organoids
+A163,6171,Gian Garcia,giangarcia@gatech.edu,train_dept,engineering,D,1,operations research
+A164,3026,Wilbur A. Lam,walam@emory.edu,train_dept,engineering,W,2,microfluidic bioengineering lab plus diagnostics testing
+A165,5658,Satish E. Viswanath,seviswa@emory.edu,train_dept,engineering,D,1,radiomics and pathology AI
+A166,4750,Maureen Sampson,mmcgui9@emory.edu,train_dept,genetics,W,1,neural cell biology and neurotoxicity
+A167,4611,Asheebo Rojas,arajas@emory.edu,train_dept,genetics,W,1,rat epilepsy pharmacology
+A168,675,Amber Buehrle,aleston@emory.edu,train_dept,genetics,D,2,one variant interpretation paper
+A169,1326,Jessica Dronen,jdronen@emory.edu,train_dept,genetics,D,1,EHR risk tools
+A170,2182,Madhuri Hegde,mhegde@emory.edu,train_dept,genetics,H,2,clinical molecular diagnostics assay development
+A171,5086,Smriti Singh,ssin257@emory.edu,train_dept,genetics,W,2,one functional genetics paper
+A172,4387,Chandler Purcell,cstimac@emory.edu,train_dept,genetics,D,1,genetic counselling survey
+A173,2536,Yulin Jin,yjin30@emory.edu,train_dept,genetics,W,1,Drosophila and methylome bench work
+A174,1307,Teresa Douglas,tddougl@emory.edu,train_dept,genetics,D,1,PKU nutrition clinical research
+A175,1146,Laura Mandeville Davids,lmdavid@emory.edu,train_dept,genetics,H,2,clinical genetics cases plus functional variant work
+A176,3788,Kristen Murphey,kferrie@emory.edu,train_dept,genetics,D,2,review and case report
+A177,4343,Bonnie McKinnon Poteet,bmckin3@emory.edu,train_dept,genetics,D,1,genetic counselling qualitative
+A178,1667,Judith Fridovich-Keil,jfridov@emory.edu,train_dept,genetics,H,1,galactosemia rat and fly models plus patient outcomes
+A179,6129,Michael Zwick,mzwick@emory.edu,train_dept,genetics,D,2,genetics research leadership; papers mixed
+A180,198,Arunkanth Ankala,aankala@emory.edu,train_dept,genetics,D,2,clinical molecular diagnostics and variant classification
+A181,244,Jodie Asher,jlasher@emory.edu,train_dept,genetics,W,2,one primate neuroendocrine paper
+A182,6607,Laurie Ray,llray@emory.edu,train_dept,nursing_education,D,1,nurse practitioner educator; bench papers are namesakes
+A183,6524,Aleksandr Fedorov,avfedor@emory.edu,train_dept,nursing_education,U,2,nursing listing; virology papers look like namesakes
+A184,6552,Madelyn Houser,mcrawf4@emory.edu,train_dept,nursing_education,D,1,omics bioinformatics for nursing studies
+A185,6630,Cristy Tower-Gilchrist,cristy.tower-gilchrist@emory.edu,train_dept,nursing_education,W,2,cell trafficking bench papers
+A186,6967,Juan Rodriguez,jlrodr3@emory.edu,train_dept,population,U,2,papers mix breast cancer epidemiology and neonatal mouse brain namesakes
+A187,6212,Brad D. Pearce,bpearce@emory.edu,train_dept,population,H,2,neuroimmunology lab plus stress physiology and epidemiology
+A188,6301,Chang Liu,chang.liu2@emory.edu,train_dept,population,D,2,molecular epidemiology; several namesakes
+A189,7003,James Marshall Smith,jdjames.marshall.smith@emory.edu,train_dept,population,U,2,retired CDC radiation scientist; macaque HIV papers look like namesakes
+A190,7073,Qiang Zhang,qiang.zhang@emory.edu,train_dept,population,D,2,computational toxicology modelling with some lab collaboration
+A191,2574,Jade E. Jones,jejone3@emory.edu,train_dept,population,U,2,bio is a patient review; papers look like namesakes
+A192,1699,Mary Galinski,mgalins@emory.edu,train_dept,population,W,1,malaria parasite lab in primates
+A193,4793,Md Sarker,mhsarke@emory.edu,train_dept,quantitative,D,1,clinical NLP; one namesake
+A194,4388,Ryan Purcell,rhpurce@emory.edu,train_dept,quantitative,W,1,neurogenetics mouse models and neural transcriptomics
+A195,6154,Xuemin Chen,xchen26@emory.edu,train_dept,translational_centre,H,2,functional antibody assays plus vaccine trials
+A196,6198,Matthew Linam,william.matthew.linam@emory.edu,train_dept,translational_centre,D,1,paediatric infection prevention
+A197,6182,Carlos M. Isales,cisales@augusta.edu,train_dept,translational_centre,W,2,two bench papers
+A198,6167,Douglas C. Eaton,deaton@emory.edu,train_dept,translational_centre,W,1,epithelial sodium channel lab
+A199,6349,Craig Hill,chill@emory.edu,train_dept,translational_centre,W,1,inorganic chemistry
+A200,1693,Manila Gaddh,mgaddh@emory.edu,train_dept,translational_centre,D,1,thrombosis clinical research
+A201,5704,Edmund Waller,ewaller@emory.edu,train_dept,translational_centre,H,2,transplant clinician with a VIP immunology lab
+A202,2702,Jonathan Kaufman,jlkaufm@emory.edu,train_dept,translational_centre,D,1,myeloma clinical trials
+A203,2595,Nisha Joseph,njoseph@emory.edu,train_dept,translational_centre,D,1,myeloma clinical
+A204,6020,Young-Sup Yoon,yyoon5@emory.edu,train_dept,translational_centre,W,1,stem cell cardiovascular regeneration lab
+A205,5927,Cherry Wongtrakool,cwongtr@emory.edu,train_dept,translational_centre,H,2,pulmonary clinical cohorts plus airway bench work
+A206,2388,Ahsan Husain,ahusai2@emory.edu,train_dept,translational_centre,W,1,cardiac regeneration in mice
+A207,5211,Shanthi Srinivasan,ssrini2@emory.edu,train_dept,translational_centre,W,1,enteric nervous system lab
+A208,3856,Edjah Nduom,enduom@emory.edu,train_dept,translational_centre,H,2,neurosurgeon with a glioma and organoid lab
+A209,5809,Barbara Weissman,bweissm@emory.edu,train_dept,translational_centre,D,1,child neurology clinical and guidelines
+A210,6103,Longhu Zhou,lzhou8@emory.edu,train_dept,translational_centre,W,1,antiviral nucleoside chemistry
+A211,4620,Rene Romero,rromero@emory.edu,train_dept,translational_centre,D,1,paediatric hepatology clinical
+A212,2894,Lazaros Kochilas,lkochil@emory.edu,train_dept,translational_centre,D,1,registry outcomes research
+A213,4755,Maria Sanchez,mmsanch@emory.edu,train_dept,translational_centre,W,1,primate developmental neuroscience and stress physiology
+A214,6388,Benjamin Wilson,benjamin.wilson@emory.edu,train_dept,translational_centre,D,2,comparative cognition behavioural experiments
+A215,1008,Erin Connolly,ecconno@emory.edu,train_dept,translational_centre,D,1,computational immunology
+A216,4513,Jill Remick,jsremic@emory.edu,train_dept,translational_centre,D,1,radiation oncology clinical
+A217,1588,Candace C. Fleischer,ccfleis@emory.edu,train_dept,translational_centre,D,2,MR spectroscopy methods in humans
+A218,5787,Brent D. Weinberg,bdweinb@emory.edu,train_dept,translational_centre,D,1,neuroradiology clinical
+A219,3835,Vikram M. Narayan,vmnaray@emory.edu,train_dept,translational_centre,D,1,urologic oncology outcomes
