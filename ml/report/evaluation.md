@@ -34,3 +34,16 @@ Scored on the 369 test people whose gold label is wet, hybrid or dry; the 31 the
 | hybrid | 4 | 3 | 3 | 1 |
 | dry | 7 | 3 | 288 | 8 |
 | unclear | 4 | 1 | 5 | 21 |
+
+## Confidence
+
+Every placed record carries a confidence: the chance that the call is on the right side. It was fitted to out-of-fold calls on the random training half only, then checked here. If it is honest, the share of right calls in each level matches the confidence it gave.
+
+| level | test calls | mean confidence | right | 95% CI |
+|---|---|---|---|---|
+| high (90% and up) | 321 | 98.4% | 98.1% (315 of 321) | 96.0%-99.1% |
+| moderate (70-89%) | 22 | 81.9% | 77.3% (17 of 22) | 56.6%-89.9% |
+| low (under 70%) | 14 | 52.3% | 42.9% (6 of 14) | 21.4%-67.4% |
+| all placed | 357 | 95.6% | 94.7% (338 of 357) | |
+
+Brier score 0.037, against 0.050 for a flat confidence equal to the overall hit rate (lower is better). AUC 0.90: how often a right call gets a higher confidence than a wrong one.

@@ -22,6 +22,9 @@ How it decides:
   4. P(wet) is cut into five states: wet, leans wet, hybrid, leans dry, dry.
      A record with no titles, no grants and too little profile text to judge
      is left unclassified instead of guessed at.
+  5. Every placed record gets a confidence: the chance its call is right,
+     learnt from how often out-of-fold calls on hand-labelled people were
+     right (see Confidence). `evaluate` checks it on the locked test set.
 
 Stages 1-2 feed stage 3 with out-of-fold scores, so the stacker never sees a
 score produced by a model that was trained on the same person.
@@ -72,7 +75,8 @@ SIDE = {0: None, 1: 'W', 4: 'W', 2: 'D', 5: 'D', 3: 'H'}
 # ---------------------------------------------------------------- data access
 def load_data(path):
     txt = open(path, encoding='utf-8').read()
-    if path.lower().endswith(('.html', '.htm')):
+    # the atlas HTML, or a bare data part still wrapped in its <script> tag
+    if path.lower().endswith(('.html', '.htm')) or txt.lstrip().startswith('<'):
         m = re.search(r'<script[^>]*id="atlasdata"[^>]*>(.*?)</script>', txt, re.S)
         if not m:
             sys.exit('no <script id="atlasdata"> in ' + path)
@@ -515,6 +519,114 @@ def band(p, b):
     return STATE['hybrid']
 
 
+# ---------------------------------------------------------------- confidence
+# P(wet) says which way a record leans. The confidence says how likely the call
+# on the page is to be right: the chance that a careful reader of the record
+# would put it on the same side. It is fitted to out-of-fold calls on the random
+# gold labels, calls made by a model that had never seen those people, so it
+# reports how often calls like this one turned out right, not how sure the model
+# feels. The department-targeted labels are kept out of it: they were chosen
+# because they are hard, so they would drag every figure down.
+CONF_LEVELS = {'high': 0.90, 'moderate': 0.70}
+# a few hundred checked records cannot support a figure closer to certain
+CONF_CAP = 0.99
+
+
+def _margin(p):
+    """How far P(wet) sits from a coin toss, in log-odds."""
+    q = min(max(p, 1e-4), 1 - 1e-4)
+    return min(abs(math.log(q / (1 - q))), 8.0)
+
+
+def oof_calls(V, gold, scored, always, folds=5):
+    """(gold, state, P) for each of `scored`, from models fitted without them.
+    `always` (the targeted labels) is in every training fold, as in the shipped model."""
+    scored = sorted(scored)
+    labs = [gold[i] for i in scored]
+    calls = []
+    for tr, te in StratifiedKFold(folds, shuffle=True, random_state=SEED).split(scored, labs):
+        m = Model(V, [scored[j] for j in tr] + sorted(always), gold)
+        pe = [scored[j] for j in te]
+        calls += [(gold[i], s, p) for i, (s, p, _) in zip(pe, m.states(pe))]
+    return calls
+
+
+class Confidence:
+    """P(the call is right) for a placed record.
+
+    Wet-side and dry-side calls: a logistic curve on the margin |logit P(wet)|.
+    Chosen by cross-validation on the training half's out-of-fold calls; adding
+    the side, the number of titles, grants or a profile-only flag made it worse
+    (there are only a dozen or so wrong calls to learn from).
+    Hybrid calls: too few to fit a curve, and a hybrid sits in the middle by
+    definition, so it gets the share of hybrid calls that were right."""
+
+    def __init__(self, calls):
+        calls = [(g, s, p) for g, s, p in calls if g in 'WHD' and s]
+        side = [(g, s, p) for g, s, p in calls if SIDE[s] != 'H']
+        hyb = [g for g, s, p in calls if SIDE[s] == 'H']
+        X = np.array([[_margin(p)] for _, _, p in side])
+        y = np.array([SIDE[s] == g for g, s, _ in side], dtype=int)
+        if y.all() or not y.any():
+            sys.exit('confidence: the out-of-fold calls are all right or all wrong; nothing to fit')
+        self.m = LogisticRegression(C=1.0, max_iter=2000).fit(X, y)
+        # Jeffreys-smoothed, so a handful of calls cannot give 0% or 100%
+        self.hybrid = (sum(g == 'H' for g in hyb) + 0.5) / (len(hyb) + 1)
+        self.n_side, self.n_hybrid = len(side), len(hyb)
+        self.n_wrong = int(len(y) - y.sum()) + sum(g != 'H' for g in hyb)
+
+    def __call__(self, calls):
+        """[(state, P)] -> [confidence or None for unclassified]."""
+        calls = list(calls)
+        c = self.m.predict_proba(np.array([[_margin(p)] for _, p in calls]))[:, 1] if calls else []
+        return [None if not s else round(min(self.hybrid if SIDE[s] == 'H' else float(k), CONF_CAP), 2)
+                for (s, _), k in zip(calls, c)]
+
+    def describe(self):
+        return {'levels': CONF_LEVELS, 'cap': CONF_CAP,
+                'curve': [round(float(self.m.intercept_[0]), 4), round(float(self.m.coef_[0][0]), 4)],
+                'hybrid': round(self.hybrid, 4), 'fitted_on': self.n_side + self.n_hybrid,
+                'wrong_in_fit': self.n_wrong}
+
+
+def conf_level(k):
+    return 'high' if k >= CONF_LEVELS['high'] else 'moderate' if k >= CONF_LEVELS['moderate'] else 'low'
+
+
+def wilson(k, n, z=1.96):
+    if not n:
+        return float('nan'), float('nan')
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return c - h, c + h
+
+
+def confidence_report(golds, calls, conf):
+    """How well the confidence held up: per level, is the share of right calls
+    what the confidence said it would be?"""
+    rows = [(SIDE[s] == g, k) for g, (s, _), k in zip(golds, calls, conf) if g in 'WHD' and s]
+    right = np.array([r for r, _ in rows], dtype=float)
+    k = np.array([c for _, c in rows])
+    out = {'n': len(rows), 'right': int(right.sum()), 'mean_confidence': round(float(k.mean()), 4),
+           'brier': round(float(np.mean((k - right) ** 2)), 4),
+           # the same score for a flat confidence equal to the overall hit rate
+           'brier_flat': round(float(np.mean((right.mean() - right) ** 2)), 4), 'levels': {}}
+    try:
+        from sklearn.metrics import roc_auc_score
+        out['auc'] = round(float(roc_auc_score(right, k)), 4) if 0 < right.sum() < len(right) else None
+    except ValueError:
+        out['auc'] = None
+    for lv in ('high', 'moderate', 'low'):
+        sel = [(r, c) for r, c in rows if conf_level(c) == lv]
+        n, r = len(sel), sum(x for x, _ in sel)
+        lo, hi = wilson(r, n)
+        out['levels'][lv] = {'n': n, 'right': int(r), 'mean_confidence': round(sum(c for _, c in sel) / n, 4) if n else None,
+                             'lo': round(lo, 4) if n else None, 'hi': round(hi, 4) if n else None}
+    return out
+
+
 # ------------------------------------------------------------------- scoring
 def score(pairs):
     """pairs: [(gold 'W'|'H'|'D'|'U', predicted state int)]. Returns a dict of metrics."""
@@ -618,6 +730,11 @@ def cmd_evaluate(a):
     te = sorted(test)
     st = m.states(te)
     new = [(gold[i], s[0]) for i, s in zip(te, st)]
+    # the confidence is fitted to out-of-fold calls on the random training half only
+    rand = sorted(json.load(open(a.split))['train'])
+    cf = Confidence(oof_calls(V, gold, rand, train - set(rand)))
+    ck = cf([(s[0], s[1]) for s in st])
+    crep = confidence_report([gold[i] for i in te], [(s[0], s[1]) for s in st], ck)
     old = [(gold[i], V31_STATE(D['pis'][i])) for i in te]
     os.makedirs(a.out, exist_ok=True)
     keys = ['coverage', 'accuracy_all', 'accuracy_when_placed', 'macro_f1', 'f1_W', 'f1_H', 'f1_D',
@@ -658,11 +775,28 @@ def cmd_evaluate(a):
         f.write('\nScored on the %d test people whose gold label is wet, hybrid or dry; the %d the '
                 'labeller could not call are only used for the last row.\n\n' % (sn['n_scored'], sn['n_unclear']))
         f.write('## v3.1\n\n' + conf(old) + '\n\n## New model\n\n' + conf(new) + '\n')
+        f.write('\n## Confidence\n\nEvery placed record carries a confidence: the chance that the call is on the '
+                'right side. It was fitted to out-of-fold calls on the random training half only, then checked '
+                'here. If it is honest, the share of right calls in each level matches the confidence it gave.\n\n'
+                '| level | test calls | mean confidence | right | 95% CI |\n|---|---|---|---|---|\n')
+        for lv, band_ in (('high', '90% and up'), ('moderate', '70-89%'), ('low', 'under 70%')):
+            x = crep['levels'][lv]
+            f.write('| %s (%s) | %d | %s | %s | %s |\n' % (
+                lv, band_, x['n'], _fmt(x['mean_confidence']) if x['n'] else '-',
+                ('%s (%d of %d)' % (_fmt(x['right'] / x['n']), x['right'], x['n'])) if x['n'] else '-',
+                ('%s-%s' % (_fmt(x['lo']), _fmt(x['hi']))) if x['n'] else '-'))
+        f.write('| all placed | %d | %s | %s (%d of %d) | |\n\n' % (
+            crep['n'], _fmt(crep['mean_confidence']), _fmt(crep['right'] / crep['n']), crep['right'], crep['n']))
+        f.write('Brier score %.3f, against %.3f for a flat confidence equal to the overall hit rate (lower is '
+                'better). AUC %s: how often a right call gets a higher confidence than a wrong one.\n'
+                % (crep['brier'], crep['brier_flat'], '%.2f' % crep['auc'] if crep['auc'] is not None else 'n/a'))
+    json.dump(dict(cf.describe(), test=crep), open(os.path.join(a.out, 'confidence.json'), 'w'), indent=1)
     with open(os.path.join(a.out, 'test_predictions.csv'), 'w', newline='') as f:
         w = csv.writer(f)
-        w.writerow(['index', 'name', 'gold', 'v31_state', 'new_state', 'p_wet'])
-        for i, s in zip(te, st):
-            w.writerow([i, D['pis'][i]['n'], gold[i], V31_STATE(D['pis'][i]), s[0], '%.3f' % s[1]])
+        w.writerow(['index', 'name', 'gold', 'v31_state', 'new_state', 'p_wet', 'confidence'])
+        for i, s, k in zip(te, st, ck):
+            w.writerow([i, D['pis'][i]['n'], gold[i], V31_STATE(D['pis'][i]), s[0], '%.3f' % s[1],
+                        '' if k is None else '%.3f' % k])
     print(open(os.path.join(a.out, 'evaluation.md')).read())
 
 
@@ -688,10 +822,15 @@ def cmd_predict(a):
     m = Model(V, sorted(train | test), gold)
     everyone = list(range(len(D['pis'])))
     st = m.states(everyone)
+    # confidence fitted to out-of-fold calls on every random gold label
+    sp = json.load(open(a.split))
+    rand = set(sp['train']) | set(sp['test'])
+    cf = Confidence(oof_calls(V, gold, rand, (train | test) - rand))
+    ck = cf([(s, p) for s, p, _ in st])
     names = np.array(V.tv.get_feature_names_out())
     co = m.tm.coef_[0]
     out = []
-    for i, (s, p, why) in zip(everyone, st):
+    for i, (s, p, why), k in zip(everyone, st, ck):
         # the title that pushed hardest each way, as evidence a reader can check
         ev = {'model': MODEL_VERSION, 'P': round(p, 3), 'n_titles': len(V.by_person[i]),
               'n_grants': int(V.ngrant[i])}
@@ -716,14 +855,16 @@ def cmd_predict(a):
                 ev['dry_terms'] = words(o[:40], -1)
         if why:
             ev['why_unclassified'] = why
-        out.append({'l': s, 'c': round(100 * p, 1), 'ev': ev})
+        out.append({'l': s, 'c': round(100 * p, 1), 'cf': None if k is None else int(round(100 * k)), 'ev': ev})
     wet, dry = top_terms(V, m.tm)
     json.dump({'model': MODEL_VERSION, 'bands': m.bands,
                'trained_on': len([i for i in gold if gold[i] in 'WHD']),
+               'confidence': cf.describe(),
                'top_wet_terms': wet, 'top_dry_terms': dry, 'people': out},
               open(a.out, 'w'), separators=(',', ':'))
     from collections import Counter
     print('states:', Counter(o['l'] for o in out))
+    print('confidence:', Counter(conf_level(o['cf'] / 100) for o in out if o['cf'] is not None), cf.describe())
     print('wet terms:', ', '.join(wet[:15]))
     print('dry terms:', ', '.join(dry[:15]))
 

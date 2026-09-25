@@ -32,5 +32,5 @@ python3 "$here/ml/wetdry.py" evaluate --data "$step" $L --out build/wetdry_repor
 python3 "$here/ml/wetdry.py" predict  --data "$step" $L --out build/predictions.json
 python3 "$here/ml/department_report.py" "$step" build/predictions.json build/wetdry_report/test_predictions.csv $L --out build/wetdry_report
 python3 "$here/ml/apply_wetdry.py" "$step" build/predictions.json build/wetdry_report/evaluation.csv \
-  --departments build/wetdry_report/departments.json -o "$out"
+  --departments build/wetdry_report/departments.json --confidence build/wetdry_report/confidence.json -o "$out"
 python3 "$here/scripts/audit_atlas.py" "$out" --out build/audit

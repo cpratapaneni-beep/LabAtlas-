@@ -10,7 +10,7 @@ trained and tested on records that a person read and labelled.
 
 These are 400 investigators drawn at random and labelled by reading their
 records, with no model output visible. None of them was used to fit or tune
-anything. The table is from `report/evaluation.md` (model wd-2026.09.2, v79):
+anything. The table is from `report/evaluation.md` (model wd-2026.09.2, since v79):
 
 | | v3.1 | new model | difference (95% CI) |
 |---|---|---|---|
@@ -50,6 +50,7 @@ measure well (11 in the test half), and the page says so.
 | `relabel_check.csv` | 60 records re-labelled after all 800 were done, shuffled and under new codes, compared with the first pass: 59/60 agree (Cohen's kappa 0.95), 60/60 on wet vs not-wet |
 | `wetdry.py` | the model: `cv`, `evaluate`, `predict` |
 | `apply_wetdry.py` | writes predictions, the measured accuracy and the department block into an atlas HTML file |
+| `report/confidence.json` | the confidence curve fitted on the training half, and how it held up on the test set |
 | `department_report.py` | the department-by-department report: `report/departments.md`, `.csv`, and the `.json` the page reads |
 | `report/` | the locked-test report, the metrics table with bootstrap intervals, and every test prediction next to its gold label |
 
@@ -83,6 +84,53 @@ measure well (11 in the test half), and the page says so.
 The shipped model is refitted on all 1,020 labels, so it has seen the test half.
 The test figures above are from the version trained on the training half
 only.
+
+## Confidence
+
+Every placed record carries a **confidence** next to its setting: the chance
+that the call is right, meaning a careful reader of the record would put it on
+the same side. It is not P(wet). A record at P(wet) 0.02 is confidently *dry*.
+
+It is learnt, not asserted. The shipped model is refitted five times, each
+time without a fifth of the 800 random gold labels, and the calls it makes on
+the people it left out are compared with their hand labels. A small curve then
+maps each call to how often calls like it were right.
+
+- **Wet- and dry-side calls:** a logistic curve in the margin |logit P(wet)|,
+  that is how far P(wet) sits from a coin toss. Only a margin was used.
+  Adding the side, the number of titles, grants or a profile-only flag made
+  held-out log-loss worse, because there are only a few dozen wrong calls to
+  learn from (cross-validated on the training half).
+- **Hybrid calls:** too few for a curve, and a hybrid sits in the middle by
+  definition, so each one carries the share of hybrid calls that were right
+  (Jeffreys-smoothed): about 39%.
+- **Capped at 99%.** A few hundred checked records cannot support more.
+- **Not fitted on the 220 department-targeted labels.** They were chosen
+  because they are hard, so they would pull every figure down; including them
+  (with a flag) was tried and made the fit worse.
+
+Levels: high from 90%, moderate 70-89%, low below 70%.
+
+Checked on the locked test set, with the curve fitted only to out-of-fold
+calls on the training half (`report/confidence.json`,
+`report/evaluation.md`):
+
+| level | test calls | mean confidence | right | 95% CI |
+|---|---|---|---|---|
+| high | 321 | 98.4% | 98.1% (315 of 321) | 96.0-99.1% |
+| moderate | 22 | 81.9% | 77.3% (17 of 22) | 56.6-89.9% |
+| low | 14 | 52.3% | 42.9% (6 of 14) | 21.4-67.4% |
+
+In every level the promised rate is inside the interval of what happened.
+Brier score 0.037 against 0.050 for a flat figure; AUC 0.90, so a right call
+nearly always gets a higher confidence than a wrong one. This was the third
+time the test half was scored. The confidence was built and chosen on the
+training half first, and nothing was changed after seeing the test.
+
+Across the atlas: 4,961 calls rated high, 282 moderate and 189 low (every
+hybrid is low). The page prints the figure under each mark in lists, in full
+on each profile (with how test calls at that level did), in tooltips and on
+the P(wet) ridge, and the glyph's stain now follows it.
 
 ## Department by department
 
@@ -146,12 +194,12 @@ every profile.
 
 ```sh
 L="--split ml/split.json --labels ml/gold_labels.csv --extra ml/gold_labels_dept.csv"
-python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v79.html $L
-python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v79.html $L --out ml/report
-python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v79.html $L --out predictions.json
-python3 ml/department_report.py Emory_Lab_Atlas_v79.html predictions.json ml/report/test_predictions.csv $L --out ml/report
-python3 ml/apply_wetdry.py Emory_Lab_Atlas_v79.html predictions.json ml/report/evaluation.csv \
-    --departments ml/report/departments.json -o atlas_out.html
+python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v80.html $L
+python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v80.html $L --out ml/report
+python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v80.html $L --out predictions.json
+python3 ml/department_report.py Emory_Lab_Atlas_v80.html predictions.json ml/report/test_predictions.csv $L --out ml/report
+python3 ml/apply_wetdry.py Emory_Lab_Atlas_v80.html predictions.json ml/report/evaluation.csv \
+    --departments ml/report/departments.json --confidence ml/report/confidence.json -o atlas_out.html
 ```
 
 `--extra` adds the department-targeted labels to training. `wetdry.py`
@@ -159,7 +207,7 @@ refuses an extra label that points at a test-half or already-labelled
 person.
 
 Needs `numpy`, `scipy` and `scikit-learn`. Every run is deterministic;
-re-running `predict` on v79 reproduces its stored predictions exactly. The gold
+re-running `predict` on v80 reproduces its stored predictions exactly. The gold
 labels point at records by position. If the data is re-scraped or re-ordered,
 `wetdry.py` notices that the names no longer match and stops rather than pin a
 label on the wrong person.

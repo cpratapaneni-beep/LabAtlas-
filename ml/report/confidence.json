@@ -1,0 +1,45 @@
+{
+ "levels": {
+  "high": 0.9,
+  "moderate": 0.7
+ },
+ "cap": 0.99,
+ "curve": [
+  0.2525,
+  1.3023
+ ],
+ "hybrid": 0.3889,
+ "fitted_on": 368,
+ "wrong_in_fit": 14,
+ "test": {
+  "n": 357,
+  "right": 338,
+  "mean_confidence": 0.9559,
+  "brier": 0.0373,
+  "brier_flat": 0.0504,
+  "levels": {
+   "high": {
+    "n": 321,
+    "right": 315,
+    "mean_confidence": 0.9842,
+    "lo": 0.9598,
+    "hi": 0.9914
+   },
+   "moderate": {
+    "n": 22,
+    "right": 17,
+    "mean_confidence": 0.8186,
+    "lo": 0.5656,
+    "hi": 0.8988
+   },
+   "low": {
+    "n": 14,
+    "right": 6,
+    "mean_confidence": 0.5229,
+    "lo": 0.2138,
+    "hi": 0.6741
+   }
+  },
+  "auc": 0.8987
+ }
+}

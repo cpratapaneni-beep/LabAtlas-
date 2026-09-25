@@ -3,13 +3,14 @@
 Reads the atlas (HTML file, or the JSON inside it), the predictions written by
 `wetdry.py predict` and the locked-test report written by `wetdry.py evaluate`,
 and writes an atlas whose records carry the new state (l), P(wet) as a
-percentage (c) and the evidence (ev). The upstream classifier's original label
+percentage (c), the confidence that the call is right as a percentage (cf)
+and the evidence (ev). The upstream classifier's original label
 stays in l0/c0 untouched, and the keyword score's state (v3.1) is kept in l31. A top-level `wd` block records the model version, its
 bands and the accuracy measured on the locked test set, so the page can quote
 measured numbers instead of stated ones.
 
   python apply_wetdry.py atlas.html predictions.json report/evaluation.csv -o atlas_wd.html \
-      [--departments report/departments.json]
+      [--departments report/departments.json] [--confidence report/confidence.json]
 """
 import argparse
 import csv
@@ -26,6 +27,7 @@ def main():
     ap.add_argument('evaluation')
     ap.add_argument('-o', '--out', required=True)
     ap.add_argument('--departments', help='departments.json from department_report.py')
+    ap.add_argument('--confidence', help='confidence.json from wetdry.py evaluate (how the confidence held up on the test set)')
     a = ap.parse_args()
 
     src = open(a.atlas, encoding='utf-8').read()
@@ -50,6 +52,7 @@ def main():
         p.setdefault('l31', p['l'])
         p['l'] = q['l']
         p['c'] = q['c'] if q['l'] else None
+        p['cf'] = q.get('cf') if q['l'] else None
         p['ev'] = q['ev']
         p['cr'] = p['cr'] if p.get('status') else 'wet/dry model ' + pred['model']
 
@@ -68,6 +71,10 @@ def main():
         'top_wet_terms': pred['top_wet_terms'][:12],
         'top_dry_terms': pred['top_dry_terms'][:12],
     }
+    if 'confidence' in pred:
+        D['wd']['conf'] = dict(pred['confidence'])
+        if a.confidence:
+            D['wd']['conf']['test'] = json.load(open(a.confidence))['test']
     if a.departments:
         dep = json.load(open(a.departments))
         if len(dep['units']) != len(D['depts']):
