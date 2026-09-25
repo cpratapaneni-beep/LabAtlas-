@@ -124,3 +124,16 @@ file is touched.
 A roster is a snapshot, and program pages go stale between admissions cycles.
 The atlas says so on the profile and in the Notes view. Confirm with the
 program or the lab before relying on it.
+
+# Checking and rebuilding the data
+
+| script | what it does |
+|---|---|
+| `audit_atlas.py atlas.html [--out dir]` | checks every record for errors that can be proved from the file alone (grant counts and dollars that disagree, cut-off grant titles, duplicate papers, one PMID under two titles, broken co-author links, fused degrees, shared boilerplate bios, bad emails); exits non-zero on any error and lists the rest for review |
+| `clean_atlas_data.py in.html out.html [--log dir]` | fixes what can be fixed with certainty and logs every change; nothing it does rests on a guess |
+| `nih_reporter_verify.py atlas.html --patch` | re-reads every Emory award from NIH RePORTER, matches the PIs to atlas people and writes `atlas_nih.html` with verified figures and per-award links. It needs internet access to `api.reporter.nih.gov`; `--selftest` runs its checks offline |
+| `build_atlas.sh source.html out.html [--no-nih]` | all of it in order: clean, verify NIH, run the wet/dry model (see `ml/README.md`), audit |
+
+Only RePORTER can settle the NIH grant figures. Until `nih_reporter_verify.py`
+has been run from a machine that can reach it, the audit will keep listing
+those as errors, and the page says the figures are unverified.

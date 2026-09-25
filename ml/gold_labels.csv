@@ -1,0 +1,801 @@
+code,index,name,email,split,label,conf,note
+G000,893,Weirong Chen,wchen56@emory.edu,train,W,1,human B-cell immunology: transcriptomes and cytokines of antibody-secreting cells
+G001,834,Joshua Chan,jchan61@emory.edu,train,D,1,cardiac transplant surgeon; registry and clinical outcomes
+G002,4879,Andrew Scott,ahscott@emory.edu,train,D,2,one cost-analysis paper
+G003,1906,Adam Gracz,agracz@emory.edu,test,W,1,mouse bile duct and intestinal stem cell biology
+G004,1197,Christopher Deibert,cdeiber@emory.edu,test,D,1,neurosurgeon; radiosurgery outcome studies
+G005,2319,Christopher Horn,cmhorn@emory.edu,train,D,2,neurologist; stroke reperfusion trials; one stray sequencing-methods title
+G006,425,Bayley Bennett,bbenne8@emory.edu,test,D,2,one hospital-medicine QI paper
+G007,5962,Blerta Xhemalçe,bxhemal@emory.edu,test,W,1,DNA repair and RNA modification biochemistry; genome editing
+G008,220,Alexandra Arges,aarges@emory.edu,train,D,1,hospitalist; clinical reports and guidelines
+G009,2472,Helaina Jaffe,hlklein@emory.edu,test,D,2,three HIV epidemiology papers
+G010,4201,Ravi Pathak,rpatha3@emory.edu,train,D,1,palliative care reviews and retrospective analyses
+G011,4342,Lauren M. Postlewait,lamclen@emory.edu,test,D,1,breast surgical oncology outcomes and trial analyses
+G012,1062,Sushma Cribbs,skomaku@emory.edu,train,D,2,HIV lung cohorts; a few macrophage lab papers
+G013,845,Shanmuganathan Chandrakasan,schan31@emory.edu,test,H,2,HSCT registries and clinical immunology plus a conditioning/gene-therapy lab with NIH grant
+G014,2818,Baek Kim,bkim31@emory.edu,train,W,1,HIV dNTP biochemistry and virology
+G015,6785,Karen Hacker,karen.hacker@emory.edu,train,D,1,public health policy and social determinants
+G016,5369,Sejal Tamakuwala,stamaku@emory.edu,train,D,1,OB/GYN clinician; clinical and education papers
+G017,3064,Stephen Lauer,slauer@emory.edu,test,D,2,two paediatric leukaemia trial papers
+G018,1768,Andrew Geller,aigelle@emory.edu,train,D,1,CDC medication-harm surveillance epidemiology
+G019,2916,Gagandeep Kooner,gkooner@emory.edu,train,D,2,one paediatric ED QI paper
+G020,6047,Lorenzo Zaffiri,lzaffir@emory.edu,test,D,1,lung transplant physician; registry and clinical outcome studies
+G021,5317,Xiaobo Sun,xsun28@emory.edu,test,D,1,deep learning for single-cell and spatial genomics
+G022,5763,Richard Wawrose,rwawros@emory.edu,train,D,2,two spine outcome and cost papers
+G023,4147,Tristram Parslow,tparslo@emory.edu,train,D,2,pathology surveys; two co-authored macaque studies
+G024,1761,Neo Gebru,nmgebru@emory.edu,test,D,1,behavioural scientist; interventions by text messaging
+G025,4798,Kerrie Satcher,kgsatch@emory.edu,train,D,1,dermatology clinical and histopathology case work
+G026,1960,Karen Grinzaid,kgrinza@emory.edu,train,D,1,genetic counselling and carrier screening programmes
+G027,4027,Kim Ono,keono@emory.edu,train,D,1,paediatric neuropsychology outcomes
+G028,6183,Reuben Paul Jacob,reuben.p.jacob@emory.edu,train,D,1,transfusion and apheresis medicine; clinical lab practice
+G029,5696,Tiffany Walker,twalk25@emory.edu,train,D,2,long COVID clinical and epidemiology; a few immunology collaborations
+G030,4471,Sheila Rauch,srauch2@emory.edu,train,D,1,PTSD psychotherapy trials
+G031,3290,Chrissy Lopez,calope2@emory.edu,test,W,2,two papers both bench: mucosal signatures and liver injury mechanism
+G032,1360,Francine Dykes,fdykes@emory.edu,test,D,1,neonatal outcomes database
+G033,5250,Jennifer Stever,jstever@emory.edu,test,D,1,anesthesiologist-assistant education research
+G034,163,Robert Amajoyi,ramajoy@emory.edu,train,D,2,one colorectal care review
+G035,4756,Martin G. Sanda,msanda@emory.edu,test,D,2,prostate cancer biomarker validation and clinical trials
+G036,5788,Devin Weinberg,dlweinb@emory.edu,train,D,1,transplant anaesthesia case reports and reviews
+G037,197,Kristina Angelo,kangelo@emory.edu,test,D,1,travel medicine GeoSentinel epidemiology
+G038,729,Vince Calhoun,vcalhoun@gsu.edu,train,D,2,one neuroimaging data-fusion methods paper
+G039,2961,Lakshmanan Krishnamurti,lkrishn@emory.edu,test,D,1,sickle cell transplant registries and outcomes
+G040,1538,Charles Ferguson,cfergu4@emory.edu,train,D,2,two surgical education papers
+G041,115,Susana Alfonso,salfons@emory.edu,test,D,1,family medicine clinical and education papers; bio is a patient review
+G042,564,Mark Borodovsky,mborodo@emory.edu,train,D,1,gene-finding algorithms and genome annotation software
+G043,2304,Sherita Holmes,sholme8@emory.edu,train,D,1,paediatric emergency simulation and quality research
+G044,3206,Bo Liang,bliang4@emory.edu,train,W,1,cryo-EM and crystallography of viral polymerases
+G045,335,Julie Barber,jallee@emory.edu,train,D,2,psychosocial dementia trials and a dermatology case
+G046,5373,Amy Tang,aytang@emory.edu,test,D,2,one review; clinical paediatric haematologist
+G047,6929,Ashli Owen-Smith,aowensm@emory.edu,train,D,1,suicide epidemiology and health services from records
+G048,3988,Ighovwerha Ofotokun,iofotok@emory.edu,train,D,2,women's HIV cohort epidemiology; a couple of mouse bone studies
+G049,2359,Becca Huber,bhuber2@emory.edu,test,D,1,cognitive and neuropsychological measurement
+G050,411,Ravi Bellamkonda,rvbella@emory.edu,test,W,1,neural tissue engineering and nanocarrier drug delivery in vivo
+G051,897,Olivia Cheng,ocheng3@emory.edu,test,D,1,breast surgical outcomes from SEER and safety-net data
+G052,339,Stephen Barchick,sbarchi@emory.edu,train,D,1,orthopaedic surgical outcomes
+G053,3616,Joanna Lomas Mevers,jlomasm@emory.edu,test,D,1,applied behaviour analysis in autism
+G054,1730,Betsy Gard,bgard@emory.edu,test,D,1,community mental health programmes
+G055,1741,Laura Garvey,lcgarve@emory.edu,train,U,1,clinical profile only; no research output
+G056,3852,Jessica Nave,jnave@emory.edu,test,D,1,hospital medicine and resuscitation education
+G057,337,Maria (Stefi) Barbian,mcevall@emory.edu,train,U,1,neonatology clinical profile only
+G058,2925,Vamsi Kota,vkota@emory.edu,train,D,1,leukaemia clinical outcomes and trials; clinical genomic assays
+G059,4270,Varun Phadke,vphadke@emory.edu,train,D,1,infectious disease clinician-educator; vaccine trials
+G060,1314,Elizabeth Draganova,edragan@emory.edu,test,W,1,structural biology of herpesvirus capsids and nuclear egress
+G061,4729,Kamran Salari,ksalari@emory.edu,test,D,1,radiation oncologist; treatment planning and outcomes
+G062,4885,Charles Searles Jr,csearle@emory.edu,test,H,2,cardiology cohort metabolomics and epidemiology plus a vascular microRNA lab
+G063,2325,Lucas Felipe Bastos Horta,lfelipe@emory.edu,test,D,2,two retrospective neuroimmunology studies
+G064,1762,Evan Gedzelman,egedzel@emory.edu,test,D,1,epilepsy-in-pregnancy prospective cohort
+G065,3644,Stephen Miller,smill02@emory.edu,test,U,1,sports medicine clinical profile only
+G066,4350,Forrest Powers,frpower@emory.edu,test,U,1,profile text is a patient review; no research output
+G067,5023,Rakesh Shiradkar,rshirad@emory.edu,test,D,1,radiomics and machine learning on MRI
+G068,3107,Hee Won Lee,hlee61@emory.edu,train,W,2,two bench bioengineering papers: nanoparticle antigen delivery and yeast display
+G069,3301,Albert Losken,alosken@emory.edu,train,D,1,plastic surgery outcomes
+G070,622,Bruce Broecker,bbroeck@emory.edu,train,D,1,paediatric urology clinical series
+G071,4032,Dina Onwuka,daonwuk@emory.edu,test,D,2,one case report
+G072,1489,Negar Fani,nfani@emory.edu,test,D,1,human neuroimaging of trauma; consortium mega-analyses
+G073,5061,Guido Silvestri,gsilves@emory.edu,train,W,1,SIV/HIV pathogenesis and vaccines in non-human primates
+G074,2664,Bryan Kapella,bkapell@emory.edu,train,D,1,malaria programme and surveillance research
+G075,3296,Allison LoPilato,anmacdo@emory.edu,train,D,1,child and adolescent psychology
+G076,6500,Jane Chung,jane.chung@emory.edu,test,D,1,nursing informatics; sensing and AI for older adults
+G077,2270,Candace Hobson,cehobso@emory.edu,train,D,1,otology clinical outcomes
+G078,1569,Andrew Fischer,affisch@emory.edu,test,D,1,neuro-ophthalmology clinical studies; stray older lab titles
+G079,3096,Benjamin Lee,blee51@emory.edu,test,D,2,paediatric anaesthesia and palliative care; several namesake lab titles set aside
+G080,3695,Shilpa Mohanan,smoha51@emory.edu,train,D,2,two radiology reporting-system studies
+G081,762,Grant Carlson,gcarlso@emory.edu,test,D,1,breast reconstruction and surgical oncology outcomes
+G082,2749,Ijeoma Kene-Ewulu,ikeneew@emory.edu,test,D,2,one telehealth satisfaction survey
+G083,533,Emily Blum,esblum@emory.edu,train,D,1,paediatric urology clinical studies
+G084,4135,Sunita Park,siyenga@emory.edu,test,D,2,two haematopathology case reports
+G085,5293,Parminder Suchdev,psuchde@emory.edu,train,D,1,global nutrition epidemiology
+G086,6574,Catherine Lucid,catherine.lucid@emory.edu,train,D,2,nursing: patient education in stem cell transplant
+G087,4839,Beth Schissel,bschiss@emory.edu,test,D,2,one visual-analytics study of ED care
+G088,1613,Jairo Fonseca,jafonse@emory.edu,train,W,1,malaria vaccine immunology in mice; infant macaque HIV; leukaemia immune evasion
+G089,1708,James Galt,jgalt@emory.edu,train,D,1,nuclear medicine physics; dosimetry and imaging methods
+G090,190,Gail Anderson,gande01@emory.edu,test,D,2,one clinical review
+G091,2082,Stephanie Hampton,shampt5@emory.edu,test,D,2,one case report
+G092,6303,Carmen Marsit,carmen.j.marsit@emory.edu,test,H,1,molecular epidemiology: placental methylation and omics lab work within birth cohorts
+G093,3568,Amy Mehollin-Ray,ameholl@emory.edu,train,D,1,fetal radiology
+G094,2164,Jeehea Haw,jhaw@emory.edu,train,D,1,endocrinology cohorts and transgender health epidemiology
+G095,6461,Manoj Thapa,mthapa@emory.edu,train,W,1,liver fibrosis and hepacivirus immunology in mice
+G096,3149,Michael Leshen,mleshen@emory.edu,test,D,1,paediatric interventional radiology clinical work
+G097,6506,Katie Cole,ktarbus@emory.edu,train,D,1,nurse anaesthesia simulation education
+G098,602,David Brandon,dcbrand@emory.edu,train,D,1,nuclear medicine clinical dosimetry and guidelines
+G099,5889,Nathaniel Wilson,nrwilso@emory.edu,train,D,1,medical oncologist; health-policy and education papers
+G100,6255,Janice Withycombe,jwithycombe@emory.edu,train,D,1,paediatric oncology nursing; symptom biomarker and survey studies
+G101,4487,Kartik Reddy,kmredd2@emory.edu,test,D,1,paediatric neuroradiology
+G102,4770,Sreedhara Sangadala,ssangad@emory.edu,test,W,1,osteogenesis biology; small molecules in rat and rabbit fusion models
+G103,6271,Lindsay J. Collin,lindsay.jane.collin@emory.edu,test,D,1,cancer epidemiology and bias-analysis methods
+G104,4924,William Shafer,wshafer@emory.edu,train,W,1,gonococcal genetics and antimicrobial resistance mechanisms
+G105,692,Michael Burke,maburk2@emory.edu,train,H,2,heart-failure clinician with an ex vivo heart mapping and GDF15 lab
+G106,6086,Meng Zhang,mzhan26@emory.edu,train,U,2,breast radiologist profile against unrelated namesake genomics papers
+G107,2040,Mohammad Hajiha,mhajiha@emory.edu,train,D,1,urologic oncology outcomes
+G108,7051,Hefei Wen,hefei.wen@emory.edu,train,D,1,behavioural health policy and Medicaid data
+G109,5883,George Wilmot,gwilmot@emory.edu,test,D,1,ataxia natural history and trials
+G110,5062,Jae Sim,jhsim@emory.edu,train,W,2,two renal physiology bench papers
+G111,3973,Hannah Oakland,htoakla@emory.edu,test,D,1,pulmonary hypertension clinical physiology
+G112,2445,Paul Iuvone,miuvone@emory.edu,train,W,1,retinal circadian biology in mice
+G113,5598,Kristine Vanijcharoenkarn,kvanijc@emory.edu,test,D,1,allergy clinical reviews; older lab titles set aside
+G114,4018,Terrah Paul Olson,tpaulol@emory.edu,test,D,1,robotic colorectal surgery performance and outcomes
+G115,6600,Victoria M. Pak,vpak@emory.edu,train,D,1,sleep research with clinical biomarkers and trials
+G116,390,George R. Beck Jr.,gbeck2@emory.edu,test,W,1,bone biology and silica nanoparticles in cells and mice
+G117,1745,Tomas Garzón-Muvdi,tgarzon@emory.edu,train,D,1,skull base neurosurgery outcomes and anatomy
+G118,4434,Sandhya Rajagopal,srajag9@emory.edu,test,D,1,behaviour analysis in autism
+G119,4907,Susie Sennhauser,ssennh2@emory.edu,train,D,1,heart failure clinical reviews
+G120,2284,Benjamin Hoffman,bmhoffm@emory.edu,test,D,2,two neurology reviews
+G121,1467,Abdulwahab Ewaz,aewaz@emory.edu,test,D,1,breast pathology interobserver and diagnostic studies
+G122,621,Harold Brody,hbrody@emory.edu,train,D,1,dermatologic chemical peel clinical work
+G123,4444,Karthik Ramesh,krames4@emory.edu,train,D,1,spectroscopic MRI-guided radiotherapy trials
+G124,4445,Supriya Ramesha,srames5@emory.edu,test,W,1,microglia biology in Alzheimer's mouse models
+G125,1686,Andrew Furman,afurman@emory.edu,test,D,1,psychiatry humanities and education
+G126,4599,Fred (Rusty) Rodriguez III,fhrodri@emory.edu,train,U,1,cardiology clinical profile only
+G127,1217,Edward Dent,eadent@emory.edu,train,D,1,transfusion and clinical lab medicine education
+G128,3174,Brittany Lewis,bmlewis@emory.edu,test,D,2,one imaging review
+G129,7007,Maisha Standifer,maisha.n.standifer@emory.edu,test,D,1,qualitative and legal epidemiology
+G130,6026,Marisa Young,myoun31@emory.edu,test,D,1,obstetric epidemiology and STI in pregnancy
+G131,288,Anika Backster,abackst@emory.edu,train,D,1,emergency medicine equity and education
+G132,5341,John Sweeney,jfsween@emory.edu,test,U,1,surgeon profile only
+G133,180,Kelly Kaysen Ammons,kforre3@emory.edu,train,U,1,rheumatology educator profile only
+G134,977,Reuven Cohen,rcohe24@emory.edu,test,D,1,paediatric pancreatitis registries
+G135,6479,Heather Allstrom,heather.allstrom@emory.edu,train,D,2,nursing education
+G136,2563,Theodore Johnson II,tmjohns@emory.edu,train,D,1,geriatrics trials and health services
+G137,507,Natalie Bishop,nvbisho@emory.edu,test,D,1,PICU machine-learning prediction models
+G138,6344,Shruti Bhatt,shruti.bhatt@emory.edu,test,W,1,AML drug resistance and BH3 profiling
+G139,2094,Abigail Hankin-Wei,ahankin@emory.edu,train,D,1,HIV epidemiology and cost-effectiveness
+G140,5125,Joy L. Smith,jsmit08@emory.edu,train,D,2,one paediatric nutrition deficiency study
+G141,4853,Robert Schnepp,rschnep@emory.edu,train,W,1,neuroblastoma and medulloblastoma tumour biology
+G142,6646,Elizabeth Woods,elizabeth.woods@emory.edu,train,D,1,nursing clinical education
+G143,6740,Paula Edwards,paula.edwards@emory.edu,train,D,1,digital health and survivorship informatics
+G144,1560,Josephine Finazzo,jfinaz2@emory.edu,test,D,2,one radiology reporting study
+G145,5057,Rafael Medina Silva,rmedin6@emory.edu,test,W,1,bio: basic RNA virus research; paper is a namesake
+G146,1998,Jidong Guo,jguo4@emory.edu,test,W,1,rodent social and fear circuit neuroscience
+G147,1788,Paul Ghareeb,pgharee@emory.edu,test,D,1,hand and plastic surgery outcomes
+G148,6624,Shannon Stevenson,shannon.stevenson@emory.edu,train,D,1,nursing education
+G149,3283,Jackson Londeree,jlonder@emory.edu,test,D,1,paediatric nephrology registries and case series
+G150,4683,Maria Russell,mcitare@emory.edu,train,D,1,surgical oncology outcomes
+G151,5054,Juliete Silva,jfran40@emory.edu,test,W,2,transplant immunology T-cell mechanisms
+G152,3934,Gabriela Garcia Nores,gdgarc2@emory.edu,test,D,1,breast reconstruction outcomes
+G153,5267,Katie Stormes,kstorme@emory.edu,train,D,2,one allergy review
+G154,3152,Elizabeth Leslie-Clarkson,ejlesli@emory.edu,train,H,2,orofacial cleft GWAS plus functional and single-cell work
+G155,5849,Thomas Wichmann,twichma@emory.edu,train,W,1,primate basal ganglia electrophysiology
+G156,6446,Michelle Lampl,mlampl@emory.edu,test,D,1,human growth auxology and anthropology
+G157,1950,Meredith Greer,mkgreer@emory.edu,train,D,1,sleep and pulmonary clinical studies
+G158,2456,Brendan Jackson,bjacks6@emory.edu,test,D,1,fungal disease surveillance epidemiology
+G159,3050,Michelle C. LaPlaca,mlaplac@emory.edu,train,W,1,rat TBI models
+G160,3369,Anuj Mahajan,admahaj@emory.edu,train,D,1,vascular surgery outcomes
+G161,3849,Jose Navarrete,jnavarr@emory.edu,train,D,1,dialysis clinical studies
+G162,3479,Nicholas Maurice,nmmauri@emory.edu,train,H,2,earlier Pseudomonas host-cell bench work; now lung screening services research
+G163,2083,Shannon Hamrick,sehamri@emory.edu,train,D,1,neonatal cardiology outcomes
+G164,7070,Courtney Yarbrough,courtney.yarbrough@emory.edu,test,D,1,health policy economics
+G165,4148,William Partin Jr,wpart01@emory.edu,train,U,1,clinician profile only
+G166,3818,Foad Nahai,fnaha02@emory.edu,test,D,1,aesthetic surgery clinical and editorials
+G167,2158,Zakaa Hassan,zahassa@emory.edu,test,D,2,review and case report
+G168,933,Preetam Cholli,pcholli@emory.edu,test,D,1,HIV services and digital health
+G169,6236,Matthew Strickland,mjstric@emory.edu,train,D,1,environmental epidemiology
+G170,926,Erika Choi,echoi63@emory.edu,train,D,2,case report and review
+G171,5451,James Thornton,jhthorn@emory.edu,test,D,2,one clinical outcomes paper
+G172,5912,Laila Woc-Colburn,lwoccol@emory.edu,test,D,1,ID clinical and tropical medicine epidemiology
+G173,6641,Lauren Williamston Kasper,,test,D,1,dialysis health services nursing
+G174,4141,Ruth Parker,rpark01@emory.edu,test,D,2,one essay
+G175,6175,Jennifer Gooch,jgooch@emory.edu,train,W,1,renal and muscle calcineurin signalling in mice
+G176,5005,Andrew Sherrill,amsherr@emory.edu,test,D,1,PTSD therapy and AI
+G177,6135,Carla Ammons,carla.ammons@choa.org,test,D,1,neuropsychology case
+G178,1675,Sobha Fritz,sfritz@emory.edu,test,D,1,paediatric psychology
+G179,6488,Glenna Brewster,glenna.brewster@emory.edu,train,D,1,dementia caregiver sleep interventions
+G180,5486,Anne Tomolo,atomolo@emory.edu,test,D,1,quality improvement and patient safety
+G181,4692,Emily Ryan-Michailidis,eryanmi@emory.edu,train,U,1,rehab clinician profile only
+G182,2643,Usama Kanaan,ukanaan@emory.edu,test,D,1,paediatric pulmonary hypertension clinical
+G183,4529,Amir Rezvan,arezva2@emory.edu,test,W,1,vascular biology mouse atherosclerosis
+G184,2267,Khiem Hoang,khhoang@emory.edu,train,D,2,one education website analysis
+G185,941,Bryan Christensen,bchri27@emory.edu,test,D,1,outbreak epidemiology and household air pollution
+G186,5367,Christine Tallo,ctallo@emory.edu,test,D,1,genetic counselling clinical
+G187,3833,Syeda Naqvi,stnaqvi@emory.edu,train,D,2,one inpatient database analysis
+G188,195,Deborah Andresen,dandres@emory.edu,test,D,1,infant infection clinical series
+G189,2561,Sarah Johnson,sajohn9@emory.edu,train,D,2,nephrology clinical; ALPACA paper is a namesake
+G190,1137,Sayantan Datta,sdatt27@emory.edu,test,W,1,RPE cell biology and experimental evolution
+G191,4775,Gabriel Santamarina,gsantam@emory.edu,train,D,1,diabetic foot clinical trials and reviews
+G192,4232,John Pearce,jjpearc@emory.edu,test,D,2,air pollution epidemiology
+G193,6390,Stella Felix Lourenco,stella.lourenco@emory.edu,train,D,1,developmental cognitive psychology
+G194,780,Sierra Carter,secart3@emory.edu,train,D,1,trauma psychology and health disparities
+G195,656,Fernanda Romano Bruno,fbruno@emory.edu,train,W,2,immune cell profiling and multiplex tissue imaging
+G196,319,Michael Balk,mbalk@emory.edu,test,D,2,one clinical device essay
+G197,368,Reneeta Basu,rbasu@emory.edu,test,U,1,family medicine profile only
+G198,3521,Zachary McEachin,zmceach@emory.edu,test,W,1,ALS/FTD molecular neuroscience and proteomics
+G199,3204,Zan Li,zcli@emory.edu,test,U,1,gynaecologist; both papers are materials-science namesakes
+G200,4151,Rosa Pasculli,rmpascu@emory.edu,test,D,1,sports medicine clinical reviews
+G201,3359,Gregory Mackay,gjmacka@emory.edu,train,D,2,one clinical review
+G202,6855,Richard Levinson,rlevins@emory.edu,test,D,1,health politics sociology
+G203,3700,Ross Molinaro,rjmolin@emory.edu,test,H,2,clinical LC-MS/MS assay development plus A1c modelling
+G204,2868,Jamie Kitzman,jkitzma@emory.edu,test,D,1,paediatric anaesthesia clinical
+G205,5803,Daiana Weiss,dweiss2@emory.edu,train,W,1,mouse bone and vascular biology
+G206,3744,Johnnie Morgan,jmorg05@emory.edu,test,D,2,one review
+G207,3109,Jacqueline C. Lee,jclee23@emory.edu,test,D,1,reproductive endocrinology registry outcomes
+G208,6795,Elizabeth Head,elizabeth.n.head@emory.edu,test,U,2,behavioural sciences dept but papers are Down syndrome AD neuropathology; likely namesake
+G209,6498,Rasheeta D. Chandler,r.d.chandler@emory.edu,train,D,1,nursing HIV and maternal health equity
+G210,1026,Max D Cooper,mdcoope@emory.edu,train,W,1,lamprey adaptive immunity
+G211,179,Rachel Ammirati,rammira@emory.edu,train,D,1,clinical psychology
+G212,6692,John Blevins,jblevin@emory.edu,test,D,1,qualitative global health and religion
+G213,129,Joanne Allam,jallam@emory.edu,test,D,1,sleep medicine guidelines and education
+G214,4621,Amanda Romeu,amromeu@emory.edu,test,D,2,one expert-opinion review
+G215,2492,Ashesh Jani,abjani@emory.edu,test,D,1,radiation oncology trials and planning
+G216,4635,Michael Rosenthal,mrose3@emory.edu,train,D,2,case reports
+G217,2809,Soroosh Kiani,skiani@emory.edu,test,D,1,electrophysiology device outcomes
+G218,2303,McKenzie Hollon,mmayo2@emory.edu,train,D,1,anaesthesia POCUS education and case reports
+G219,3406,Beryl Manning-Geist,bmanni3@emory.edu,train,D,1,gynaecologic oncology clinical; bio is a patient review
+G220,325,Sapna Bamrah,sbamrah@emory.edu,train,D,1,TB and field epidemiology
+G221,5297,Viranuj Sueblinvong,vsuebli@emory.edu,test,W,1,alcohol lung fibroblast and SCD mouse lung biology
+G222,4364,Elisabeth Preston-Hsu,epresto@emory.edu,train,D,2,one clinical review
+G223,5498,Mylin A. Torres,matorre@emory.edu,test,D,1,radiation oncology trials and disparities
+G224,1097,David Cutler,djcutle@emory.edu,train,D,1,statistical and population genetics methods
+G225,3225,S Sam Lim,sslim@emory.edu,train,D,1,lupus population cohorts and self-management
+G226,322,Laurence Balter,lbalte2@emory.edu,test,D,2,clinical implementation and case report
+G227,3105,Gregory Lee,ghlee8@emory.edu,train,D,1,orthopaedic and ophthalmology clinical
+G228,2631,Sheril Kalarithara,sokalar@emory.edu,test,D,2,one education study
+G229,1742,Matthew Gary,mfgary@emory.edu,test,D,1,spine surgery outcomes
+G230,1794,Neena Ghose,nghose@emory.edu,train,D,2,one survey study
+G231,1213,Hailey Dennis,hcampb5@emory.edu,test,D,2,clinical decision support and case series
+G232,1988,David Guidot,dguidot@emory.edu,test,W,1,alcohol and HIV lung injury in rodents
+G233,289,Harry Baddour Jr,hbaddou@emory.edu,test,D,1,head and neck surgery outcomes
+G234,3799,Jonathan Murrow,jmurrow@emory.edu,train,D,2,human vascular physiology and cell-therapy trials
+G235,3120,Simon Lee,sclee6@emory.edu,test,U,2,anaesthesiologist; most papers look like genomics namesakes
+G236,725,Joan Cain,jcain2@emory.edu,train,W,2,lymphoma apoptosis pharmacology
+G237,3063,Stephen Lau,slau@emory.edu,test,D,1,cytopathology practice
+G238,3712,Katherine Monroe,kcmonro@emory.edu,train,D,1,anaesthesia assistant education
+G239,1611,Ida Fonkoue,ifonkou@emory.edu,train,D,1,human physiology and PTSD in women
+G240,552,Kevin Bonney,kbonne3@emory.edu,test,U,1,education administrator profile only
+G241,1112,Lisa Daley-Bauer,ldaley@emory.edu,train,W,1,cytomegalovirus cell-death immunology in mice
+G242,1713,Shipra Gandhi,sgand30@emory.edu,train,H,2,bio and grant describe TME bench work; papers computational and clinical
+G243,495,Elizabeth Billingsley,epgoodi@emory.edu,test,D,1,Delphi consensus guidelines
+G244,2395,Lina Hwang,lshwang@emory.edu,test,U,1,bio is a patient review; no papers
+G245,2090,Jesse Handler,jshandl@emory.edu,test,W,2,carcinoma cell-state biology; one health services paper
+G246,3578,Mansi Mehta,mhmehta@emory.edu,test,D,1,psychotherapy trials
+G247,1366,Paul Earley,pearley@emory.edu,train,D,1,addiction psychiatry clinical
+G248,4868,Allison Schwartz,aschw30@emory.edu,train,D,1,comparative cognition and autism telehealth
+G249,5616,Srihari Veeraraghavan,sveerar@emory.edu,train,D,1,interstitial lung disease clinical and imaging
+G250,2188,Michael Heit,mheit2@emory.edu,train,D,1,urogynaecology trials and outcomes
+G251,6051,James Zaidan,jzaidan@emory.edu,train,D,2,one education paper
+G252,4069,Abayomi Oyenuga,aooyenu@emory.edu,test,D,2,cohort and survey studies
+G253,5569,Saila Upadhyayula,srupadh@emory.edu,test,D,1,neuromuscular natural history and case reports
+G254,5615,Hima Veeramachaneni,hveera2@emory.edu,train,D,1,hepatology case reports and screening
+G255,5556,Guneesh Uberoi,guberoi@emory.edu,train,D,2,one meta-analysis
+G256,767,Danielle Carns,dcarns@emory.edu,test,D,2,functional seizure diagnosis studies
+G257,285,Ahmed Babiker,ababike@emory.edu,train,D,2,ID clinical and epidemiology with some microbiology lab methods
+G258,715,Isida Byku,ibyku@emory.edu,train,D,1,structural heart interventional outcomes
+G259,4407,Anees Quyyumi,aquyyu2@emory.edu,test,D,2,bio is a patient review; one clinical trial
+G260,2856,Karen A Kirby,kkirby2@emory.edu,test,W,1,HIV capsid antiviral structural biology and chemistry
+G261,554,Robert Bonsall,rbonsal@emory.edu,test,W,2,neuroendocrine assays and primate behavioural endocrinology
+G262,3610,Rozina Merchant,rmerch4@emory.edu,train,D,2,bio is a patient review; meta-analysis and trial analysis
+G263,6652,Weihua Zhang,wzhang3@emory.edu,test,D,1,nursing education and end-of-life care
+G264,1499,Blaine Farmer,befarme@emory.edu,train,D,1,cardiac anaesthesia reviews
+G265,4807,Gagan Sawhney,gsawhne@emory.edu,train,D,1,glaucoma clinical trials
+G266,545,Nicholas Boleman,nbolema@emory.edu,train,U,1,bio is a patient review; no papers
+G267,4670,Sharmistha Rudra,srudra5@emory.edu,test,D,1,paediatric IBD clinical
+G268,6455,Rafael A. Medina,rafael.medina@emory.edu,test,W,1,influenza and zoonotic virology
+G269,7037,Lavanya Vasudevan,sci.rsph.info@emory.edu,test,D,1,vaccination implementation research
+G270,2977,Thomas Kukar,tkukar@emory.edu,test,W,1,progranulin lysosome biology in mice
+G271,5653,Sarah Vinson,syvinso@emory.edu,test,D,2,one claims database study
+G272,5621,Venu Velagapudi,vvelag2@emory.edu,test,D,2,ICU clinical abstracts
+G273,2368,Michael Hughes,mshugh4@emory.edu,train,D,1,diabetes technology clinical
+G274,1612,Hananeh Fonoudi,hfonoud@emory.edu,test,W,2,bio: stem-cell cardiac biology; no papers listed
+G275,4874,Stephen Schwarzmann,sschw04@emory.edu,test,D,2,old antibiotic reviews; one lab paper
+G276,4784,Renato Santos,rsanto5@emory.edu,test,U,1,cardiology clinician profile only
+G277,168,Franck Amblard,famblar@emory.edu,test,W,1,antiviral nucleoside chemistry and virology
+G278,2341,Rawleigh Howe,rhowe2@emory.edu,test,W,1,TB T-cell and monocyte immunology on patient samples
+G279,4193,Snehal Patel,sgpate2@emory.edu,train,D,1,endocrine surgery outcomes
+G280,6955,Wilhemina Quarpong,wilhemina.quarpong@emory.edu,test,D,1,nutrition epidemiology and food environment
+G281,1798,Briana Gibson,brgibs2@emory.edu,train,D,1,TTP registry and ML
+G282,2691,Peter Kasson,pkasson@emory.edu,train,W,1,single-virus fusion biophysics and protein modelling
+G283,5405,Seema Tekwani,stekwa2@emory.edu,train,D,1,critical care clinical
+G284,6222,Diedre Rowe,diedre.rowe@choa.org,test,U,1,hospitalist profile only
+G285,6242,Duc Q Tran,duc.quang.tran.jr@emory.edu,train,D,1,haemophilia outcomes and psychosocial
+G286,2012,Vedant Gupta,vgupta3@emory.edu,train,U,1,hospitalist profile only
+G287,1933,Sonya Green,sbgreen@emory.edu,test,D,2,education and questionnaire reliability
+G288,4184,Priti Patel,ppate51@emory.edu,train,D,1,dialysis infection control epidemiology
+G289,2361,Lauren Hudak,lhudak@emory.edu,test,D,1,trauma cohort neuroimaging and ED
+G290,2126,Peter Harri,pharri@emory.edu,test,D,1,radiology informatics and pictorial reviews
+G291,5126,Kiara Smith,kcsmit9@emory.edu,train,D,2,one case report
+G292,2494,Andrew Janowczyk,ajanowc@emory.edu,train,D,1,computational digital pathology
+G293,4419,Prashant Raghavendran,pragha3@emory.edu,test,D,1,paediatric haematology clinical reviews
+G294,1271,Jie Ding,jding30@emory.edu,train,D,1,medical physics ML; aerogel paper is a namesake
+G295,1858,Heather Gold,hlgold@emory.edu,train,D,1,contraception and women's health mixed methods
+G296,1760,Melat Gebre,magebre@emory.edu,test,D,1,neurostimulation fMRI trials and reviews
+G297,3768,Dina Moustafa,dmousta@emory.edu,test,W,1,bio: CF airway microbiology with animal models
+G298,4937,Jay Shah,jhshah2@emory.edu,test,D,1,paediatric interventional radiology outcomes
+G299,4965,Weirong Shang,wshang@emory.edu,test,W,1,T-cell signalling and follicular fluid biology
+G300,6602,Sudeshna Paul,sudeshna.paul@emory.edu,train,D,1,nursing statistician
+G301,6932,Priyadarshni Patel,priyadarshni.patel@emory.edu,train,D,2,epigenetic epidemiology in children
+G302,3297,Meredith Lora,mholtz@emory.edu,train,D,1,HIV prevention implementation
+G303,6714,Thomas Clasen,thomas.f.clasen@emory.edu,test,D,1,household energy and WASH trials
+G304,3580,Nirja Mehta,nmeht26@emory.edu,test,D,1,C. difficile and FMT clinical
+G305,4834,Joshua Schier,jgschie@emory.edu,train,D,1,toxicology surveillance epidemiology
+G306,1292,Hai Dong,hdong30@emory.edu,train,D,2,computational aortic biomechanics; a little mouse work
+G307,1947,David Greenky,dgreenk@emory.edu,train,D,2,case reports and education
+G308,6662,O. Yaw Addo,yaw.addo@emory.edu,test,D,1,nutrition biomarker epidemiology
+G309,5213,Sumathi Srivatsa,ssrivat@emory.edu,test,D,1,endocrinology clinical
+G310,5161,James Someren,jsomere@emory.edu,train,W,2,one in vitro calcineurin biochemistry paper
+G311,2858,Andrew Kirsch,akirsch@emory.edu,test,D,1,paediatric urology outcomes
+G312,821,A. Alfred Chahine,aachahi@emory.edu,train,D,1,paediatric surgery outcomes and education
+G313,5831,Charles Wheeler,cwheel4@emory.edu,train,D,2,one outbreak report
+G314,4629,Ami Rosen,arosen3@emory.edu,train,D,1,genetic counselling
+G315,5772,Edit Weber-Shrikant,ewebers@emory.edu,train,U,1,pathologist profile only
+G316,5949,Laura A. Wright,lawrig5@emory.edu,test,D,1,paediatric psychology
+G317,6696,Robert Breiman,rfbreiman@emory.edu,test,D,1,global infectious disease epidemiology
+G318,474,Rohini K. Bhatia,rkbhati@emory.edu,train,D,1,radiation oncology global health
+G319,2054,Lance T. Hall,lthall2@emory.edu,train,D,1,nuclear medicine reviews
+G320,6593,Rose Murphree,rmurphr@emory.edu,train,D,2,nursing education profile; one surveillance paper
+G321,4329,Mark Pollock,mtpollo@emory.edu,train,D,1,sleep device validation
+G322,3742,James Morgan,jwmorg4@emory.edu,test,D,2,case report and registry
+G323,1866,Kelly C. Goldsmith,kgoldsm@emory.edu,test,D,1,paediatric oncology clinical trials
+G324,3882,Mary Newell,mnewll@emory.edu,test,D,1,breast imaging guidelines and datasets
+G325,3447,Jennifer Mascaro,jmascar@emory.edu,test,D,1,chaplaincy and compassion interventions
+G326,5305,Cinnamon Sullivan,clsulli@emory.edu,test,D,1,transplant anaesthesia reviews
+G327,504,Elliot Bishop,ebisho7@emory.edu,test,D,1,trauma surgery clinical
+G328,661,Phudit Buaprasert,pbuapra@emory.edu,train,D,1,prehospital EMS research
+G329,4857,Kindell Schoffner,kschoff@emory.edu,test,D,1,paediatric psychology
+G330,2292,Christie Hogue,chogue4@emory.edu,train,D,1,oral health geriatrics reviews
+G331,846,Ravi Chandran,rchan50@emory.edu,train,D,2,finite element biomechanics
+G332,2724,Jessica Keilson,jkeilso@emory.edu,train,D,2,surgical oncology outcomes with a few bench papers
+G333,1681,George Fulk,gfulk@emory.edu,train,D,1,stroke rehabilitation and actigraphy
+G334,625,Stuart Brooker,sbrooke@emory.edu,test,D,2,two old clinical papers
+G335,5289,Jonathan Suarez,jsuare9@emory.edu,train,D,1,ICU nephrology clinical
+G336,4886,Kavya Sebastian,ksebast@emory.edu,train,D,1,GI case reports
+G337,6073,Ronnie Zeidan,rzeidan@emory.edu,train,D,2,one case report
+G338,2656,Yuseon Kang,ykang41@emory.edu,test,W,2,muscle stem cells and microphysiological systems
+G339,4972,Sara Sharif,sshar90@emory.edu,test,D,2,one QI project
+G340,5130,Melissa Smith,msmit53@emory.edu,test,U,2,psychiatrist; papers look like mixed namesakes
+G341,1401,Robert Eisner,reisner@emory.edu,test,D,2,cardiac imaging analysis
+G342,5198,James Spivey,jspivey@emory.edu,train,D,1,hepatology clinical
+G343,296,Anna V. Baer,anbaer@emory.edu,test,D,2,paediatric neuroradiology imaging research; no papers
+G344,5144,Wyatt Smith,wlsmit2@emory.edu,train,D,2,one chatbot study
+G345,2183,Stacy Heilman,sheilma@emory.edu,test,D,2,clinical lab COVID testing evaluation and serosurveys
+G346,1096,Jennifer Curtis,jacurti@emory.edu,train,W,1,biofilm and polymer brush biophysics
+G347,6427,Christine M. Dunham,cmdunha@emory.edu,train,W,1,ribosome structural biology and antibiotic resistance
+G348,6780,Marissa Grossman,marissa.grossman@emory.edu,train,D,1,outbreak and environmental epidemiology
+G349,6357,Peng Qiu,peng-qiu@bme.gatech.edu,test,D,1,computational single-cell and omics methods
+G350,4186,Ravi Mangal Patel,rmpatel@emory.edu,test,D,1,neonatal clinical trials
+G351,5687,Nida Waheed,nwaheed@emory.edu,train,D,1,cardio-oncology clinical
+G352,1390,Adekemi Egunsola,aegunso@emory.edu,test,D,1,surgical case reports
+G353,5034,Amita Shroff,ashrof3@emory.edu,test,D,2,one ED quality study
+G354,2197,Carolyn Henderson,cjhend2@emory.edu,train,D,1,paediatric pulmonology clinical
+G355,529,Ingrid Bloom,ibloom@emory.edu,test,D,1,prehospital sepsis
+G356,6863,Benjamin Lopman,benjamin.alan.lopman@emory.edu,train,D,1,infectious disease modelling and vaccine epidemiology
+G357,2708,Jordan Kaylor,jkaylor@emory.edu,train,D,2,QI abstract and review
+G358,6989,Don Seeman,dseeman@emory.edu,train,D,2,grant is cancer survival epidemiology; papers are religious-studies namesakes
+G359,5866,Gemariah Williams,gvalenc@emory.edu,test,D,1,one psychology paper
+G360,5122,Elizabeth Smith,esmit71@emory.edu,train,D,1,TB household contact epidemiology
+G361,3282,Koba Lomashvili,klomash@emory.edu,train,W,2,experimental uraemic vascular calcification; recent case reports
+G362,6721,Jonathan Crocker,jonny.crocker@emory.edu,test,D,2,WASH engineering and HIV pharmacy grant; no papers
+G363,5175,Ella Sorscher,esorsch@emory.edu,train,U,2,palliative care; two unrelated papers
+G364,5607,Geetanjali Vasandani,gvasand@emory.edu,train,D,2,bio is a patient review; two case reports
+G365,1740,Amy Garvey,agarve4@emory.edu,train,D,1,breast imaging education
+G366,102,Bruce Aldred,baldred@emory.edu,train,D,1,ID clinical cohorts
+G367,4801,Glen Satten,gsatten@emory.edu,train,D,1,microbiome statistics methods
+G368,2692,Jennifer Kasten,jlkaste@emory.edu,test,D,1,infectious disease case and field studies
+G369,1247,Amitha Dhingra,adhingr@emory.edu,train,D,1,ECT clinical
+G370,4096,Tony Pan,tcpan@emory.edu,test,D,1,biomedical informatics
+G371,6295,Timothy L. Lash,timothy.lee.lash@emory.edu,train,D,1,cancer epidemiology methods
+G372,2811,Emily Kiernan,eakiern@emory.edu,test,D,1,medical toxicology clinical
+G373,2580,Noble Jones,ngjones@emory.edu,train,U,1,rehab clinician profile only
+G374,2756,Emily Kern-Smith,emkern@emory.edu,test,D,1,paediatric neurology clinical
+G375,5204,Gautam Sreeram,gsreera@emory.edu,train,D,2,cardiac anaesthesia clinical; one thrombin generation study
+G376,22,Peter Abramson,pabrams@emory.edu,train,D,1,otolaryngology guidelines
+G377,3819,Andre Nahmias,anahmia@emory.edu,train,D,2,paediatric ID reviews; some older lab work
+G378,588,Selen Bozkurt,sbozkur@emory.edu,test,D,1,clinical NLP and AI
+G379,2514,James Jeong,tjeong@emory.edu,train,D,1,maxillofacial surgery outcomes
+G380,3295,Viviana Serra Lopez,vserral@emory.edu,train,D,2,one clinical study
+G381,5106,Clint Sliker,csliker@emory.edu,train,D,1,emergency radiology
+G382,3014,Fiza Laheji,flaheji@emory.edu,train,U,1,paediatric neurology profile only
+G383,6617,Michael Smart,mjsmar2@emory.edu,test,D,2,one diabetes education study
+G384,6405,Daniel D. Dilks,ddilks@emory.edu,test,D,1,developmental cognitive neuroscience fMRI
+G385,4604,Ashley Rogers,amroger@emory.edu,train,D,2,bio is a patient review; one disparities study
+G386,5527,Randy Trumbower,rdtrumb@emory.edu,test,D,2,neurostimulation trial and motor physiology
+G387,5534,Hayley Tseng,hktseng@emory.edu,test,W,2,two endothelial and smooth muscle cell papers
+G388,3769,Lalita Movva,lmovva@emory.edu,test,D,2,one clinical unit description
+G389,4679,Jonathan Rupp,jrupp2@emory.edu,test,D,1,injury prevention research centre
+G390,6620,Sydney A. Spangler,s.spangler@emory.edu,train,D,1,global reproductive health qualitative
+G391,2715,Matthew Keadey,mkeadey@emory.edu,train,D,1,ED fundus imaging
+G392,3010,Sameh Labib,slabib@emory.edu,train,D,1,sports orthopaedics outcomes
+G393,330,Tue Banke,tbanke@emory.edu,train,W,1,NMDA receptor pharmacology and electrophysiology
+G394,1632,LeAnne Fox,lfox3@emory.edu,train,D,1,meningitis and malaria sero-epidemiology
+G395,5224,Kristen Starbuck,kstarbu@emory.edu,train,D,1,gynaecologic oncology case reports
+G396,489,Kelly Bijanki,kbijank@emory.edu,test,D,2,human intracranial stimulation studies
+G397,6658,Aryeh Stein,aryeh.stein@emory.edu,train,D,1,nutrition cohort epidemiology
+G398,52,Patricia Aguayo,paguayo@emory.edu,test,D,2,bio: psychiatric care quality research; no papers
+G399,1739,Katherine Gartin,kdowney@emory.edu,train,U,1,paediatric EM profile only
+G400,900,Joshua Chern,jchern@emory.edu,test,D,1,paediatric neurosurgery clinical
+G401,6573,Jiaying Lu,jiaying.lu@emory.edu,test,D,1,clinical AI and LLMs
+G402,6684,Ruth Berkelman,rberkel@emory.edu,test,D,1,infectious disease epidemiology
+G403,6283,Jill Hamilton,jbhamil@emory.edu,train,D,1,nursing health disparities
+G404,5920,Gayle Wong,gwong6@emory.edu,train,D,2,one case report
+G405,48,Simon Agolory,sagolor@emory.edu,train,D,1,HIV programme epidemiology
+G406,4680,Bryce Rushing,bjrushi@emory.edu,test,D,2,one case report
+G407,5493,Matthew Topel,mtopel@emory.edu,train,D,1,cardiovascular epidemiology; bio is a patient review
+G408,3407,Dawn Manning-Williams,dmannin@emory.edu,test,U,1,obstetric anaesthesia profile only
+G409,2245,Lula Hilenski,lhilens@emory.edu,train,W,1,vascular senescence cell biology
+G410,2500,Thomas Jarrett,tljarre@emory.edu,test,D,1,primary care surveys
+G411,5311,Ryan J. Summers,rjsumme@emory.edu,test,D,1,paediatric leukaemia clinical
+G412,2019,Julie Gutman,jrgutma@emory.edu,test,D,1,malaria epidemiology and trials
+G413,4517,Jyothi Rengarajan,jrengar@emory.edu,train,W,1,TB immunology in humans and primates
+G414,765,Mary Carlton,mscarlt@emory.edu,test,U,1,optometrist profile only
+G415,6109,Lei Zhu,lzhu30@emory.edu,train,W,1,nanomedicine and cancer cell biology
+G416,3782,Susan Muller,smull01@emory.edu,train,D,2,oral pathology practice; one mouse imaging study
+G417,643,Stephanie Brown,sbro250@emory.edu,train,D,1,PICU data science
+G418,5189,Boris Spektor,bspekto@emory.edu,train,D,1,pain medicine clinical and education
+G419,6356,Richard Qiu,lei.qiu@emory.edu,train,D,1,medical physics and imaging AI
+G420,43,Marcy Adler,madle22@emory.edu,train,U,1,neuropsychologist profile only
+G421,1340,Boadie Dunlop,bdunlop@emory.edu,train,D,1,psychiatry trials and neuroimaging
+G422,4841,Karen Schmeichel,kschmei@emory.edu,train,W,1,C. elegans germline epigenetics
+G423,6892,Martin Meltzer,martin.i.meltzer@emory.edu,train,D,1,health economics
+G424,2005,Nitika Gupta,narorag@emory.edu,test,H,2,bio: bench liver injury immunology plus clinical hepatology
+G425,4969,Wanda Shao,wshao@emory.edu,test,D,2,forensic psychiatry
+G426,2300,David Holland,dholl01@emory.edu,train,D,1,HIV prevention research
+G427,4949,Samad Shah,sshah70@emory.edu,test,D,2,one workforce study
+G428,6794,Venice Haynes,venice.haynes@emory.edu,test,D,1,community health education
+G429,782,Emily Cartwright,ecartw2@emory.edu,test,D,1,hepatitis C care cascade
+G430,2943,Alisha Kramer,akrame6@emory.edu,train,D,2,one systematic review
+G431,574,Nicholas Boulis,nboulis@emory.edu,test,W,2,translational neurosurgery lab: gene delivery and tumour models
+G432,3665,Hamid Mirsalimi,hmirsal@emory.edu,test,D,1,psychology essays
+G433,1380,Dale Edmondson,deedmon@emory.edu,test,W,1,monoamine oxidase enzymology
+G434,5660,Vidya Viswanathan,vvisw27@emory.edu,train,D,1,radiomics and imaging AI
+G435,3842,Neela Natarajan,nnatar7@emory.edu,train,D,2,one trial protocol
+G436,2268,Kim Hoang,klhoang@emory.edu,test,W,1,host-microbe experimental evolution
+G437,4843,Megan Schmidt,mschm28@emory.edu,train,D,2,one psychology paper
+G438,3060,Bernard Lassegue,medbpl@emory.edu,train,W,1,Poldip2 vascular biology in mice
+G439,3202,Yinlong Li,yli231@emory.edu,train,W,1,PET radiochemistry and medicinal chemistry
+G440,674,Daniel Budnitz,dbudnit@emory.edu,train,D,1,medication safety surveillance
+G441,2095,Krisztina Hanley,khanley@emory.edu,test,D,1,gynaecologic surgical pathology
+G442,6632,Heather Venrick,heather.wensil.venrick@emory.edu,test,D,1,nursing workforce
+G443,5565,Jasmine Umana,jatayl4@emory.edu,train,D,2,one clinical study
+G444,3753,Mackenzie Morris,mmorr39@emory.edu,test,D,2,review and case report
+G445,1853,Katrina Goines,kbridgm@emory.edu,train,D,1,neurodevelopmental phenotyping psychology
+G446,1030,Victor Corces,vcorces@emory.edu,train,W,1,chromatin and epigenetic inheritance lab
+G447,1568,Peter Fischbach,pfischb@emory.edu,train,D,2,one review chapter
+G448,5050,Soumitri Sil,ssil@emory.edu,test,D,1,paediatric pain psychology
+G449,4265,Jessica Petri,jpetri@emory.edu,test,D,1,trauma psychometrics
+G450,3400,Caroline Maness,cmaness@emory.edu,test,D,1,sleep medicine clinical
+G451,5394,Susan Taylor,sdtayl3@emory.edu,test,D,1,radiology education
+G452,6873,Matthew Magee,mjmagee@emory.edu,test,D,1,TB epidemiology
+G453,5666,Peggy Vogt,pvogt2@emory.edu,train,D,1,paediatric anaesthesia outcomes
+G454,2572,George Jones Jr.,gradghj@emory.edu,test,U,2,primary care physician; papers look like microbiology namesakes
+G455,1640,David A. Frank,dafran5@emory.edu,train,W,1,STAT signalling and leukaemia pharmacology
+G456,429,Jacob E. Berchuck,jeberch@emory.edu,train,H,2,cfDNA epigenomic assays plus GU oncology clinical
+G457,2507,David Jaye,dljaye@emory.edu,test,D,2,haematopathology cohorts with some lab studies
+G458,6697,Donna Brogan,dbrogan@emory.edu,test,D,1,biostatistics and survey methods
+G459,3332,Matthew Lustig,mlustig@emory.edu,test,D,1,paediatric neurology and health policy
+G460,4852,Rebecca Schneider,rschne7@emory.edu,test,D,2,clinical psychologist; hydrogel papers are namesakes
+G461,4850,Lonnie Schneider,leschne@emory.edu,train,W,2,mouse and pig preclinical biology
+G462,334,Marissa Baranowski,mlbaran@emory.edu,train,D,1,dermatology clinical and health services
+G463,1373,James Eckman,jeckman@emory.edu,train,D,1,sickle cell clinical programme
+G464,3698,Nassir Mokarram-Dorri,nmokar2@emory.edu,train,W,2,bio: immunomodulatory biomaterials engineer; no papers
+G465,2141,Taylor Harrison,tharri4@emory.edu,test,D,1,neuromuscular clinical
+G466,5738,Kristin Ward,kaward4@emory.edu,train,D,2,one clinical trial
+G467,4946,Nishi Shah,nnshah5@emory.edu,test,D,1,myeloma clinical
+G468,6493,Brittany Butts,brittany.butts@emory.edu,train,D,1,biobehavioural nursing cardiovascular
+G469,6178,Penelope P. Howards,phoward@emory.edu,test,D,1,reproductive epidemiology
+G470,5646,Mateo Villa,mvilla@emory.edu,train,U,1,surgeon profile only
+G471,4369,Eric Price,ewprice@emory.edu,test,U,1,paediatric pulmonology profile only
+G472,6245,Patricia Vega-Fernandez,patricia.vega-fernandez@emory.edu,test,D,1,paediatric rheumatology ultrasound
+G473,2348,Jian HuB,jhu86@emory.edu,test,D,1,statistical methods for spatial omics
+G474,623,Elaine Bromberek,ebromb2@emory.edu,train,D,1,emergency medicine clinical
+G475,6046,Abarmard Zafari,azafari@emory.edu,train,D,2,cardiology abstracts
+G476,2968,James Krupp,jckrupp@emory.edu,train,D,2,plastic surgery clinical
+G477,2224,Sheryl Heron,sheron@emory.edu,train,D,1,EM leadership and equity
+G478,5898,Thomas Wingo,twingo@emory.edu,test,D,1,statistical genetics and proteomic analyses
+G479,970,Kelly Coffman,kerwin@emory.edu,train,D,1,forensic psychiatry services
+G480,6372,Katia Koelle,katia.koelle@emory.edu,test,D,1,computational viral evolution and epidemiology
+G481,1732,Laura Gardner,ljgardn@emory.edu,test,D,2,one retrospective study
+G482,373,Glaivy Batsuli,gbatsul@emory.edu,test,H,2,haemophilia B-cell immunology lab plus clinical
+G483,3967,Kevin O'Laughlin,kolaugh@emory.edu,test,D,1,travel medicine surveillance
+G484,303,Bhakti Baheti,bbaheti@emory.edu,test,D,1,computational pathology
+G485,1784,Timothy Gershon,tgersho@emory.edu,train,W,2,preclinical brain tumour biology plus trials
+G486,5689,Richard Wainford,rwainfo@emory.edu,train,W,1,rat hypertension physiology
+G487,2931,Sarah Koumtouzoua,shenn3@emory.edu,test,D,1,primary care hepatology
+G488,3051,Thomas Large,tmlarge@emory.edu,train,D,1,orthopaedic trauma outcomes
+G489,4540,Zakiya Rice,zpressl@emory.edu,train,D,1,dermatology trials
+G490,1624,Paul Forfia,pforfia@emory.edu,test,D,2,one clinical study
+G491,4789,Rein Saral,rsaral@emory.edu,test,D,2,old transplant clinical
+G492,731,Rami Calis,rcalis@emory.edu,test,U,1,bio is a patient review; no papers
+G493,3746,Michael Morrier,mmorrie@emory.edu,test,D,1,autism clinical and telehealth
+G494,2511,Elan Jenkins,ejenki3@emory.edu,test,D,1,paediatric case reports
+G495,6835,David Kleinbaum,dkleinb@emory.edu,train,D,1,epidemiology methods
+G496,875,Saurabh Chawla,schawl2@emory.edu,train,D,1,gastroenterology clinical
+G497,5231,Christodoulos Stefanadis,cistefa@emory.edu,test,D,2,human vascular function studies
+G498,6648,Huiwen Xu,huiwen.xu@emory.edu,train,D,1,nursing home policy
+G499,5053,Juliana Da Silva,jdasil5@emory.edu,train,D,1,HIV drug resistance surveillance
+G500,3235,Shin Lin,slin61@emory.edu,test,D,2,heart failure transplant clinical
+G501,5266,Steven Storey,scstore@emory.edu,test,U,1,radiologist profile only
+G502,3171,Allana Lewis,aplewi3@emory.edu,train,U,1,PA profile only
+G503,5946,Jennifer Wrenn,jawrenn@emory.edu,test,U,1,OB/GYN profile only
+G504,1216,John Dennison,jvdenn2@emory.edu,test,D,2,case report and imaging review
+G505,0,Thomas Aaberg Sr.,ophttma@emory.edu,train,D,2,ophthalmic oncology clinical
+G506,919,Leah Chisholm,lchisho@emory.edu,train,U,1,bio is a patient review; no papers
+G507,4760,Floyd Sanders,fsander@emory.edu,train,D,2,one essay
+G508,6158,Lyndsey Darrow,ldarrow@emory.edu,test,D,1,environmental epidemiology
+G509,2867,William Kitchens Jr,whkitch@emory.edu,train,H,2,transplant immunology in animal models plus clinical transplant
+G510,1202,Mahlon DeLong,medmrd@emory.edu,test,D,1,DBS clinical outcomes
+G511,171,Darshana Amin,damin6@emory.edu,train,D,2,one clinical study
+G512,136,Emily Allen,emgrave@emory.edu,train,D,2,FMR1 and trisomy population genetics
+G513,3906,Kendall Nichols,kjnich2@emory.edu,train,D,1,sleep neurology clinical
+G514,6361,Phillip Zhe Sun,pzhesun@emory.edu,test,H,2,CEST MRI physics plus rodent stroke models
+G515,5194,Mark Spencer,mspen22@emory.edu,train,D,2,health policy essays
+G516,6568,Aparna Kumar,akuma36@emory.edu,test,D,2,nursing mental health; no papers
+G517,2700,Randy Katz,rskatz@emory.edu,train,U,1,orthopaedic clinician profile only
+G518,6642,Kelly Wiltse Nicely,kelly.wiltse.nicely@emory.edu,test,D,1,nurse anaesthesia practice research
+G519,2675,Joelle Karlik,jbkarli@emory.edu,test,D,1,paediatric anaesthesia clinical
+G520,5827,Stacy Westerman,swester@emory.edu,train,D,1,cardiac electrophysiology device outcomes
+G521,7047,Yuke Wang,yuke.wang@emory.edu,test,H,2,wastewater dPCR and exposure field sampling plus modelling
+G522,4551,Christopher Riehm,criehm@emory.edu,train,D,1,sports biomechanics and neuroimaging
+G523,5229,Arlene Stecenko,astecen@emory.edu,train,D,2,CF clinical research with a little lab work
+G524,2942,David Krakow,dkrakow@emory.edu,test,D,1,hospital medicine case reports
+G525,936,Terence Chorba,tchorba@emory.edu,test,D,1,TB programme epidemiology
+G526,4061,Jessica Owen,jqowen@emory.edu,train,U,1,psychologist profile only
+G527,1749,Morgan Gause,mdooley@emory.edu,test,D,2,bio: global anaesthesia services research; no papers
+G528,1719,Susan Gantt,sgantt@emory.edu,train,D,1,group psychotherapy theory
+G529,4146,Joshua Parry,japarry@emory.edu,test,D,1,orthopaedic trauma outcomes
+G530,6587,Shawana S. Moore,shawana.moore@emory.edu,train,D,1,nursing community health
+G531,3158,Allan Levey,alevey@emory.edu,test,H,2,AD proteomics lab and mouse work plus clinical cohorts
+G532,62,Shahid Ahmed,ssahme2@emory.edu,train,D,1,GU oncology clinical
+G533,7016,Yan Sun,yvsun@emory.edu,train,D,2,bioinformatics; one paper
+G534,3145,Jacob Lepard,jlepard@emory.edu,train,D,1,paediatric neurosurgery outcomes
+G535,651,Beau Bruce,bbbruce@emory.edu,test,D,1,foodborne disease epidemiology and neuro-ophthalmology
+G536,157,Lucia Alvarez,lalva22@emory.edu,test,D,1,structural heart clinical; bio is a patient review
+G537,2770,Yousuf Khalifa,ykhalif@emory.edu,test,D,1,ophthalmic surgery education
+G538,4275,Rebecca Philipsborn,rpass@emory.edu,test,D,1,climate and health education
+G539,1736,Lorne Garrettson,lgarret@emory.edu,test,D,2,old toxicology commentaries
+G540,6679,Edmund Becker,edmund.becker@emory.edu,test,D,1,health economics
+G541,479,Sivasubramanium Bhavani,sbhava2@emory.edu,train,D,1,sepsis data science
+G542,5568,Archil Undilashvili,aundila@emory.edu,test,D,1,medical education
+G543,5301,Nina Suh,nsuh3@emory.edu,train,D,1,hand surgery clinical
+G544,4730,Ninad Salastekar,nsalast@emory.edu,test,D,1,emergency radiology
+G545,6433,Uriel Kitron,ukitron@emory.edu,train,D,2,disease ecology and spatial epidemiology
+G546,6352,Dennis C. Liotta,dliotta@emory.edu,train,W,1,medicinal chemistry
+G547,6184,Lucky Jain,ljain@emory.edu,train,D,1,neonatology editorials
+G548,3514,Michael McDaniel,mmcdan2@emory.edu,train,D,1,interventional cardiology trials
+G549,5747,Carl Washington,cwashin@emory.edu,test,D,1,Mohs surgery clinical
+G550,2693,Sudhir Kasturi,skastur@emory.edu,test,W,1,primate vaccine immunology
+G551,2081,Benjamin Hampstead,bhampst@emory.edu,train,D,1,cognitive neuroscience and tDCS
+G552,583,Brock Bowman,bbowman@emory.edu,test,D,1,spinal cord injury rehab
+G553,3266,Michael Liu,mliu223@emory.edu,test,D,1,neurovascular clinical
+G554,3661,Michael Minyard,mminya2@emory.edu,train,U,1,paediatric dentist profile only
+G555,4191,Shilpa Patel,spat261@emory.edu,train,D,2,grants are clinical RCTs; no papers
+G556,5509,Stephanie Tran,smtran@emory.edu,test,D,1,paediatric anaesthesia clinical
+G557,5217,Bashar Staitieh,bstaiti@emory.edu,test,H,2,alveolar macrophage HIV/alcohol lab work plus ICU education
+G558,1986,Liliana Guevara-Bermudez,lguevar@emory.edu,train,D,2,one case report
+G559,3430,Britt Marshall,bmars22@emory.edu,train,D,2,bio is a patient review; two clinical studies
+G560,2023,Daniel Guy,dkguy@emory.edu,train,D,2,one registry study
+G561,3719,Sean Mooney,smmoone@emory.edu,test,U,2,otolaryngologist; tau papers look like namesakes
+G562,573,Jeanne Boudreaux,jboudre@emory.edu,test,D,1,thalassaemia clinical and registry
+G563,79,Fofie Akoto,fakoto@emory.edu,train,D,2,one review
+G564,2547,Suzana John,sjohn8@emory.edu,test,D,2,one case report
+G565,2937,Atsuko Koyama,akoyama@emory.edu,train,D,1,paediatric EM sexual health
+G566,3927,Zikora Nnadike,znnadik@emory.edu,train,D,2,one case series
+G567,3552,Kera McNelis,kmmcnel@emory.edu,test,D,1,neonatal nutrition clinical
+G568,3140,Jeffrey Lennox,jlennox@emory.edu,train,D,1,HIV clinical trials
+G569,5307,Patrick Sullivan,psulli2@emory.edu,test,D,1,HIV epidemiology and modelling
+G570,3547,Meara McMahon,mmcmah8@emory.edu,test,D,1,behaviour analysis
+G571,4130,Kyoung Shin Park,kpark51@emory.edu,train,D,1,exercise and cognition in older adults
+G572,3641,Laura Miller,ljmill2@emory.edu,test,D,1,child psychiatry education and QI
+G573,5814,Jill Wells,jwells4@emory.edu,test,D,1,ocular oncology clinical
+G574,4925,Virginia Shaffer,voliva@emory.edu,test,D,1,colorectal surgery outcomes
+G575,513,Paige Black,peblack@emory.edu,test,U,1,genetic counsellor profile only
+G576,4890,Beth Seelig,bseelig@emory.edu,train,D,1,psychoanalysis
+G577,5249,Melissa Stevens,mbsteve@emory.edu,train,D,1,geriatric prescribing QI
+G578,6751,Rebecca Filipowicz,rebecca.filipowicz@emory.edu,test,D,1,HIV prevention digital health
+G579,439,Frank Berkowitz,fberkow@emory.edu,train,D,1,paediatric ID case reports
+G580,854,Jae Won Chang,jchan51@emory.edu,test,W,1,chemical proteomics and imaging probes
+G581,1456,Lauren Esposito,lquast@emory.edu,test,D,2,one survivorship study
+G582,2762,Bethany Ketchen,bketche@emory.edu,test,D,1,addiction services research
+G583,5752,Kathleen Waters,kwater5@emory.edu,train,U,1,paediatric EM profile only
+G584,3213,Henry Liberman,hliberm@emory.edu,test,D,1,cardiac surgery outcomes
+G585,6970,Eli Rosenberg,esrose2@emory.edu,train,D,1,HIV public health epidemiology
+G586,3847,Bhagyashri Navalkele,bnavalk@emory.edu,test,D,2,bio is a patient review; two reviews
+G587,2614,Julie Kable,jkabl01@emory.edu,test,D,1,prenatal exposure neurodevelopment cohorts
+G588,2929,Nicholas Koullas,nkoulla@emory.edu,train,U,1,surgeon profile only
+G589,3219,Matthew Lilien,mlilien@emory.edu,test,U,1,paediatric anaesthesia profile only
+G590,2860,Susan Kirsch,sskirsc@emory.edu,test,D,2,paediatric urology quality of life
+G591,2489,Sanyukta K. Janardan,sjanard@emory.edu,test,D,1,childhood cancer survivorship
+G592,4742,Salam Salman,sosalma@emory.edu,train,D,2,case reports and education
+G593,5820,Nanette Wenger,nwenger@emory.edu,test,D,1,women's cardiology reviews
+G594,5255,Arthur Stillman,aestill@emory.edu,train,D,1,cardiac imaging
+G595,6777,Brandeis Green,brandeis.nilaja.green@emory.edu,train,D,2,one psychology paper
+G596,1025,Jessica Cooper,jcrobi4@emory.edu,train,D,1,computational psychiatry
+G597,3091,Mary Jo Lechowicz,mlechow@emory.edu,train,D,1,lymphoma trials and registries
+G598,6494,Nicole Carlson,nicole.carlson@emory.edu,test,D,2,biobehavioural nursing labour research
+G599,395,William Beckworth,wbeckwo@emory.edu,train,D,1,interventional spine clinical
+G600,4663,Isadore Rubin,lrubi01@emory.edu,test,D,1,autism equity and environmental justice
+G601,603,Jennifer Brandt,jezora@emory.edu,train,D,1,rheumatology QI and cohort
+G602,2367,James Hughes,jmhughe@emory.edu,train,D,2,ID public health; papers are mostly namesakes
+G603,2742,David Kempfert,dkempfe@emory.edu,test,D,1,physical therapy biomechanics
+G604,3684,Sananda Moctezuma,smoctez@emory.edu,train,U,1,bio is a patient review; no papers
+G605,1945,Elizabeth Greenfield,esgree5@emory.edu,test,D,2,one autism phenotype paper
+G606,142,Susan Allen,sallen5@emory.edu,train,H,2,HIV virology lab plus vaccine trials and epidemiology
+G607,6478,Teresa B. Ades,tades@emory.edu,test,D,1,nursing consensus studies
+G608,1955,Jeana Griffith,jgriff4@emory.edu,train,D,2,psychology programme description
+G609,3475,Gail Mattox,gmattox@emory.edu,train,D,2,mental health services
+G610,2306,Philip Holt,pholt@emory.edu,train,D,1,paediatric epilepsy clinical and QI
+G611,2625,Azeem Kaka,akaka@emory.edu,train,D,1,head and neck surgery outcomes
+G612,6570,SeJung Kwon,sj.kwon@emory.edu,train,D,1,learning systems research
+G613,5606,Nicholas Varvel,nvarvel@emory.edu,train,W,1,neuroinflammation in mouse seizure models
+G614,2786,Shabtab Khan,skhan61@emory.edu,test,D,2,one case report
+G615,4188,Sajani Patel,spat377@emory.edu,test,D,2,HIV testing commentary
+G616,3687,Surbhi Modi,smodi@emory.edu,test,D,1,PMTCT implementation research
+G617,3969,Lynn O'Neill,lbunch@emory.edu,test,D,1,palliative care reviews
+G618,2948,Steve Kraus,skravs@emory.edu,test,D,2,physical therapy reviews
+G619,6049,Tamara Zagustin,tzagust@emory.edu,test,D,2,one consensus guideline
+G620,3685,Gourav Modanwal,gmodanw@emory.edu,train,D,1,imaging AI
+G621,895,Zhen Chen,zchen61@emory.edu,test,W,2,cancer biology KRAS models
+G622,6418,Karen Hegtvedt,khegtve@emory.edu,train,D,1,sociology of justice
+G623,1152,Christopher Davis,cdavi80@emory.edu,test,U,2,radiologist; influenza virology papers look like namesakes
+G624,3633,Andrew H. Miller,amill02@emory.edu,train,D,1,inflammation and depression clinical trials
+G625,4566,Hans-Jurgen Ristow,hkristo@emory.edu,train,W,2,one keratinocyte culture paper
+G626,2590,Dorothy Henry Jordan,djorda8@emory.edu,train,D,2,nursing pilot study
+G627,5280,Margaret Strieper,mstriep@emory.edu,test,D,1,paediatric electrophysiology clinical
+G628,6884,Colleen Mcbride,btechcolleen.marie.mcbride@emory.edu,train,D,1,public health genomics
+G629,2850,Bryan Kindya,bkindya@emory.edu,train,D,1,interventional cardiology; bio is a patient review
+G630,215,Cletus A. Arciero,carcier@emory.edu,train,D,1,breast surgical oncology
+G631,1120,Richard Danilkowicz,rdanilk@emory.edu,test,D,1,sports orthopaedics outcomes
+G632,6039,Jessica Yuen,jyuen4@emory.edu,test,U,1,breast radiologist profile only
+G633,6145,Laura Blackwell,laura.blackwell@choa.org,test,D,1,paediatric neuropsychology cohorts
+G634,2785,Noreen Khan,nkhan30@emory.edu,test,D,2,oncology clinical
+G635,3427,Glenn Maron,gmaron@emory.edu,train,D,2,dental commentaries
+G636,6705,William Caudle,william.m.caudle@emory.edu,train,U,2,exposome grant and one PFOS lab paper; too little to judge
+G637,143,Christen Allred,caallre@emory.edu,train,D,2,one review chapter
+G638,1806,Laura Gilbertson,lgilbe5@emory.edu,test,D,1,paediatric anaesthesia clinical
+G639,1696,Marie-Helene Gagnon,mgagno3@emory.edu,train,D,1,paediatric imaging reviews
+G640,5933,Anna Woodbury,awoodbu@emory.edu,test,D,1,pain medicine trials and reviews
+G641,701,Mark Burton,msburto@emory.edu,test,D,1,PTSD therapy trials
+G642,4774,Bhagya Sannananja,bsannan@emory.edu,train,D,1,neurovascular imaging
+G643,3844,Jennifer Nathan,jnatha9@emory.edu,train,D,1,radiology commentaries
+G644,6294,Michelle Kegler,mkegler@emory.edu,test,D,1,community prevention research
+G645,4336,Andrew Porter,amport5@emory.edu,train,D,1,paediatric cardiology clinical
+G646,6580,Carrie McDermott,carrie.mcdermott@emoryhealthcare.org,train,D,1,nursing education
+G647,4318,Ananda Podilapu,apodila@emory.edu,train,W,1,lipid nanoparticle mRNA delivery
+G648,4589,Francisco Robles,frobles@emory.edu,train,W,2,optical microscopy instrumentation on cells and tissue
+G649,3617,Pradnya Mhatre,pymhatr@emory.edu,train,D,1,global health radiology
+G650,1725,Jose Garcia,jegarci@emory.edu,test,D,2,imaging ML papers; likely namesake of an orthopaedist
+G651,125,Iheoma Alinnor,ialinno@emory.edu,train,D,2,one case report
+G652,6068,Denis Zavodny,dzavodn@emory.edu,test,D,2,one forensic psychology paper
+G653,4572,Monica Rizzo,mrizzo@emory.edu,train,D,1,surgical oncology outcomes; bio is a patient review
+G654,6480,Brenda Baker,brenda.baker@emory.edu,test,D,1,nursing incarceration and perinatal
+G655,1521,Amanda Feinstein,afeins6@emory.edu,train,D,1,paediatric pain psychology
+G656,6085,Linsheng Zhang,lzhan3@emory.edu,test,D,1,haematopathology practice
+G657,2057,Tyler Halle,thalle@emory.edu,train,D,1,otolaryngology clinical
+G658,3559,Lukas Meadows,ldmeado@emory.edu,train,D,2,imaging review and LLM coding
+G659,1017,Jeffrey Cook,jtcook@emory.edu,train,D,2,two reviews
+G660,5638,Brian Vickery,bpvicke@emory.edu,test,D,2,bio: food allergy clinical trials; no papers
+G661,36,Melissa Adams,mcbreed@emory.edu,train,D,1,disability epidemiology
+G662,4280,Rogsbert Phillips-Reed,rphil02@emory.edu,test,D,2,one clinical paper
+G663,7057,Michael Windle,mwindle@emory.edu,test,D,1,substance use developmental psychology
+G664,3794,Jennifer Murphy,jhmurph@emory.edu,test,D,1,WASH evaluation and trial analysis
+G665,39,Adejimi Adeniji,aadeni7@emory.edu,test,U,1,paediatric radiologist profile only
+G666,5593,Javier Valle,jvalle2@emory.edu,test,D,2,one travel clinic study
+G667,5610,Dipak Vashi,dvashi@emory.edu,train,D,2,one survey
+G668,5256,Leisa Stillman,ljgolds@emory.edu,train,D,2,immunotherapy compliance surveys
+G669,5555,Yih-Ling Tzeng,ytzeng@emory.edu,test,W,1,Neisseria pathogenesis microbiology
+G670,3424,Jeffrey Markowitz,jmarko9@emory.edu,test,W,2,mouse behaviour neuroscience and tools
+G671,1233,Robert DeStefano,rdestef@emory.edu,train,D,2,case and biomarker abstracts
+G672,5064,Wendy Siman,wsiman@emory.edu,train,D,2,dosimetry technical note
+G673,3217,Chandler Ligas,cligas@emory.edu,train,D,2,foot surgery outcomes
+G674,2895,Karishma Kodia,kkodia@emory.edu,test,D,2,one outcomes study
+G675,3230,Jenny Lin,jlin33@emory.edu,train,D,1,paediatric neurology clinical
+G676,5587,Eduard Valdes,ehvalde@emory.edu,train,D,2,stroke disparities
+G677,2465,Joshy Jacob,jjacob@emory.edu,test,W,1,B-cell immunology and vaccines
+G678,5690,William Wainright,wwainri@emory.edu,test,U,1,glaucoma clinician profile only
+G679,2421,Ghulam Ilyas,gilyas@emory.edu,test,W,2,mouse liver autophagy; recent cytopathology
+G680,35,Carolina Adams,cadam40@emory.edu,test,D,1,paediatric ophthalmology clinical
+G681,4678,Martin Runnstrom,mrunnst@emory.edu,train,H,2,human B-cell immunology lab plus asthma biologics clinical
+G682,2026,Lina Ha,lha7@emory.edu,train,D,1,paediatric EM simulation and disparities
+G683,5174,Katherine Sorrentino,kmsorre@emory.edu,test,D,2,one meta-analysis
+G684,5127,Lisa Smith,llsmit8@emory.edu,test,D,1,pharmacotherapy literature reviews
+G685,1837,Ezequiel Gleichgerrcht,elgleic@emory.edu,train,D,1,epilepsy neuroimaging and data science
+G686,6527,Kathy Forte,kjforte@emory.edu,test,D,1,nursing ethics
+G687,5674,Joshua Vova,jvova@emory.edu,test,D,1,paediatric rehab reviews
+G688,3374,Cheryl Maier,clmaier@emory.edu,test,H,2,coagulation laboratory assays plus clinical DIC
+G689,4008,Viktor Olah,volah@emory.edu,test,W,1,cortical neuron biophysics and AAV tools
+G690,1351,Sunil W. Dutta,swdutta@emory.edu,test,D,1,radiation oncology clinical
+G691,1063,Octav Cristea,ocriste@emory.edu,test,D,1,transplant urology clinical
+G692,584,Brian J. Boyce,bboyce@emory.edu,train,D,1,head and neck surgery outcomes
+G693,1702,Daniel Gallina,dgallin@emory.edu,test,D,1,diabetes primary care research
+G694,4707,Ruth Sacks,rlsacks@emory.edu,test,D,1,breast oncology reviews
+G695,235,Jamie Arnst,jarnst@emory.edu,train,W,1,phosphate biology in mice and cancer cells
+G696,4804,Jessica Saurman,jsaurma@emory.edu,train,D,1,neuropsychology and stroke cognition
+G697,1936,Jordan Greenbaum,jgree22@emory.edu,test,D,1,human trafficking public health
+G698,3710,Hassan Monfared,hmonfar@emory.edu,test,U,1,physiatrist profile only
+G699,4021,Ann Oluloro,oolulo2@emory.edu,train,D,2,one screening study
+G700,3247,Jason Linefsky,jlinefs@emory.edu,train,D,1,valvular cardiology clinical and GWAS
+G701,2559,Leslie Johnson,lmunoz@emory.edu,test,D,1,community engagement public health
+G702,2033,Madeleine Hackney,mehackn@emory.edu,test,D,1,dance rehabilitation trials
+G703,3227,Nicholas Lima,nlima2@emory.edu,train,D,2,interventional radiology services
+G704,3526,Gary McGillivary,grmcgil@emory.edu,test,D,2,one clinical paper
+G705,6946,Christopher Portier,mhachristopher.j.portier@emory.edu,train,D,1,biostatistics
+G706,2034,Rachel Hadler,rhadler@emory.edu,test,D,1,palliative and critical care
+G707,6919,Gregory Noland,gregory.noland@emory.edu,test,D,2,one community malaria study
+G708,4603,Gerald Rodts Jr.,grodts@emory.edu,test,D,1,spine surgery outcomes
+G709,6351,Lanny Liebeskind,chemll1@emory.edu,test,W,1,synthetic organic chemistry
+G710,3693,Mahmoud Mohammaden,mmoha37@emory.edu,test,D,1,stroke thrombectomy outcomes
+G711,3516,John McDonald,jmcdo01@emory.edu,train,H,2,cancer nanomedicine and mouse neuropathy plus computational networks
+G712,6453,Steven Bosinger,steven.bosinger@emory.edu,test,W,2,primate genomics and immunology core
+G713,3392,John Malko,jmalko@emory.edu,train,D,2,MRI physics clinical support
+G714,2342,Karen Howell,khowell@emory.edu,train,D,2,one cohort study
+G715,1282,Thomas Dodson,tdods02@emory.edu,test,D,1,surgical history and outcomes
+G716,2957,Iris Krishna,ikrishn@emory.edu,train,D,1,obstetric hypertension trials
+G717,2810,Lindsay Kibuyaga,lkibuya@emory.edu,test,U,1,paediatric EM profile only
+G718,5043,Mithilesh Siddu,msiddu@emory.edu,train,D,1,stroke clinical trials
+G719,6404,Stephan Hamann,shamann@emory.edu,train,D,1,cognitive neuroscience fMRI
+G720,5382,Sijia Tao,stao3@emory.edu,test,W,2,grant: HBV capsid modulator discovery; no papers
+G721,1475,Nadene Fair,nfair@emory.edu,test,D,2,COPD reviews
+G722,237,Sona Arora,ssshah@emory.edu,train,D,1,anaesthesia clinical and education
+G723,3320,Deborah Luessen,dluesse@emory.edu,train,W,2,grant: rodent mGlu1 cortical mechanisms; no papers
+G724,5155,Mary Solis,masolis@emory.edu,train,D,2,bio is a patient review; documentation studies
+G725,2751,James Kennedy,jckenn2@emory.edu,train,D,2,one GWAS meta-analysis
+G726,1142,Sagar Dave,sbdave2@emory.edu,train,D,1,ECMO clinical and decision support
+G727,1608,Allison Foley,alfoley@emory.edu,test,D,1,genetic counselling and newborn screening
+G728,6298,Yufen Lin,yufen.lin@emory.edu,test,D,1,oncology nursing symptom science
+G729,6117,James Zimring,jzimrin@emory.edu,train,W,2,murine transfusion immunology
+G730,5384,Sudha Tata,stata@emory.edu,test,D,1,transplant nephrology clinical
+G731,2748,Salathiel Kendrick-Allwood,srkendr@emory.edu,test,D,1,developmental paediatrics
+G732,3647,Lauren Millett,lmill31@emory.edu,test,U,1,OB/GYN profile only
+G733,7001,Donna Smith,dsmith@emory.edu,train,D,2,one psychology paper
+G734,2569,Danielle Jones,djone22@emory.edu,test,D,1,medical education and faculty development
+G735,3195,Shiyong Li,sli2@emory.edu,test,D,2,haematopathology practice with a few lab papers
+G736,2010,Sanjay Gupta,sgupta2@emory.edu,train,D,2,neurosurgeon and journalist; grant looks like a namesake
+G737,332,Carolyn Bannister,cbannis@emory.edu,train,D,2,paediatric anaesthesia clinical
+G738,5980,Jiong Yan,jyan2@emory.edu,test,D,1,retina clinical
+G739,505,Joseph Bishop,jbishop@emory.edu,test,W,2,one mouse AD model paper
+G740,4653,Nanda Kishore Routhu,nrouthu@emory.edu,test,W,1,primate vaccine virology
+G741,894,Yue Chen,ychen99@emory.edu,train,D,2,surgical robotics engineering
+G742,3335,Jerre Lutz,jlutz01@emory.edu,test,D,2,cardiology reviews
+G743,3944,Shannon Novosad,snovosa@emory.edu,test,D,1,dialysis infection surveillance
+G744,309,James Bailey,jlbaile@emory.edu,test,U,2,nephrologist; papers are economics namesakes
+G745,230,Tamara Arnautovic,tarnaut@emory.edu,test,D,2,one POCUS paper
+G746,2686,Ajay Kasi,akasi@emory.edu,test,D,1,paediatric pulmonology case reports
+G747,2474,Geetha Jagannathan,gjagann@emory.edu,test,D,1,surgical pathology
+G748,5818,Zhexing Wen,zwen3@emory.edu,test,W,1,iPSC neurons and organoids
+G749,2889,Elizabeth Kobe,ekobe@emory.edu,train,U,1,bio is a patient review; no papers
+G750,4223,Melinda G. Pauly,mpauly@emory.edu,train,D,1,paediatric leukaemia trials
+G751,4508,Jean Reinoso,jreinos@emory.edu,train,D,1,interventional pulmonology
+G752,6058,Ronine Zamor,rzamor@emory.edu,test,D,1,paediatric EM qualitative
+G753,54,Dolly Aguilera,daguile@emory.edu,train,D,1,paediatric neuro-oncology trials
+G754,6975,Eri Saikawa,eri.saikawa@emory.edu,train,D,2,environmental modelling and exposure studies
+G755,1532,Andrew Feola,afeola2@emory.edu,test,W,1,ocular biomechanics and mouse retina models
+G756,873,Alejandro Chavarriaga,achava5@emory.edu,test,D,1,transplant surgery clinical
+G757,5104,Bojan Slavnic,bslavni@emory.edu,train,D,1,catatonia case series
+G758,3925,Kingsley Njoku,knjoku@emory.edu,train,D,1,GI outcomes and informatics
+G759,3173,Briana Lewis,brlewi3@emory.edu,test,U,2,internist with one HIV bench paper
+G760,221,Tracy Argueta,targuet@emory.edu,train,D,1,behaviour analysis
+G761,3155,Enoch Leung,ecleung@emory.edu,test,D,2,one clinical review
+G762,2333,Debra Houry,dhoury@emory.edu,test,D,2,public health leader; no papers
+G763,2598,Anand Joshi,abjosh3@emory.edu,test,D,1,interventional spine clinical
+G764,6382,Paul Lennard,plennar@emory.edu,test,W,2,one cat spinal neuroanatomy paper
+G765,1987,Lokesh Guglani,lguglan@emory.edu,train,D,2,CF clinical physiology; grant mentions phagocyte lab work
+G766,6556,Roseline Jean Louis,jroseli@emory.edu,test,D,1,nursing epidemiology reviews
+G767,1649,Helyn Fraser,hgriss2@emory.edu,test,D,1,orthopaedic trauma outcomes; one microbiology namesake
+G768,6354,Michael C. Lowe,mlowe3@emory.edu,train,D,2,melanoma surgical trials with some immunology collaborations
+G769,6213,Limin Peng,lpeng@emory.edu,test,D,1,biostatistics
+G770,1647,Ryan Fransman,rfransm@emory.edu,train,D,1,trauma surgery clinical
+G771,4468,Philip Rather,prather@emory.edu,test,W,1,Acinetobacter microbiology
+G772,3813,Charles Bou Nader,cbounad@emory.edu,train,W,1,R-loop biochemistry and structural biology
+G773,1884,Kaundinya Gopinath,kgopina@emory.edu,train,D,1,neuroimaging methods
+G774,5235,David Steinhauer,dsteinh@emory.edu,test,W,1,influenza haemagglutinin virology and glycomics
+G775,4998,Michelle Sheng,msheng3@emory.edu,test,D,2,case report and survey
+G776,1024,Jacinta Cooper,jecoop4@emory.edu,train,D,1,paediatric EM case reports
+G777,2532,Dinesh Jillella,djillel@emory.edu,train,D,1,stroke clinical trials
+G778,2683,Rustin Kashani,rkasha3@emory.edu,test,D,2,otology case and outcomes
+G779,5387,Meysam Tavakoli,mtavak2@emory.edu,test,D,1,medical physics imaging AI
+G780,6764,Logan Gerig,logan.gerig@emory.edu,train,D,2,one clinical cohort paper
+G781,5938,Kerri Woodward,kewoodw@emory.edu,test,D,1,paediatric psychology
+G782,259,Fahim Atif,fatif@emory.edu,test,W,1,progesterone neuroprotection in stroke and glioma models
+G783,1278,Thanh Doan,tdoan@emory.edu,train,W,1,cartilage regeneration in rats and iPSC-MSCs
+G784,6912,Eric Nehl,enehl@emory.edu,train,D,1,CTSA evaluation and behavioural research
+G785,1080,Angel Cuadrado,acuadra@emory.edu,train,D,1,paediatric cardiac ICU clinical
+G786,1165,Stephanie Davis,schasta@emory.edu,test,D,1,PEPFAR programme evaluation
+G787,2177,Kiran Hebbar,khebbar@emory.edu,test,D,1,PICU simulation and safety
+G788,2938,Phyllis Kozarsky,pkozars@emory.edu,train,D,2,ID clinician; grant looks like a namesake
+G789,2185,Christine Heim,cmheim@emory.edu,train,D,2,stress biomarkers and epigenetics in human cohorts
+G790,6340,Latonia Taliaferro-Smith,ltsmit3@emory.edu,test,W,1,breast cancer signalling cell biology
+G791,5911,Angela Wittenauer,alwitte@emory.edu,train,D,1,newborn screening programme
+G792,6682,David Benkeser,benkeser@emory.edu,test,D,1,biostatistics causal inference
+G793,6287,David Howard,dhhowar@emory.edu,train,D,1,health economics
+G794,2591,Gregory Jordan,gjorda5@emory.edu,train,D,2,imaging cost surveys
+G795,1345,Sarah Dupont,sdupont@emory.edu,train,D,1,preventive medicine and hepatitis C cascade
+G796,7002,Iris Smith,ismith@emory.edu,train,D,2,one psychology paper
+G797,2199,Andrew Hendrick,ahendr6@emory.edu,train,D,1,retina clinical
+G798,1303,Samuel Dotson,sdotso3@emory.edu,test,D,1,psychotherapy education
+G799,2736,Aine Kelly,amkell5@emory.edu,test,D,1,thoracic imaging guidelines
