@@ -8,7 +8,7 @@ trained and tested on records that a person read and labelled.
 
 ## Result, on a locked test set
 
-These are 400 investigators drawn at random and labelled by reading their
+These are 400 investigators drawn at random and labelled by Claude reading their
 records, with no model output visible. None of them was used to fit or tune
 anything. The table is from `report/evaluation.md` (model wd-2026.09.2, since v79):
 
@@ -43,9 +43,10 @@ measure well (11 in the test half), and the page says so.
 | file | what it is |
 |---|---|
 | `LABELLING_RUBRIC.md` | the definitions of W / D / H / U used for every label |
-| `gold_labels.csv` | 800 hand labels: code, record index, name, email, train/test, label, confidence (1 sure, 2 judgment call), a one-line reason |
-| `gold_labels_dept.csv` | 220 more hand labels (codes A000-A219), chosen department by department (below). Training only; never in the test half |
-| `department_types.csv` | every one of the 107 units, typed by hand by research character, with a one-line reason |
+| `gold_labels.csv` | 800 labels Claude assigned by reading each record: code, record index, name, email, train/test, label, confidence (1 sure, 2 judgment call), a one-line reason |
+| `gold_labels_dept.csv` | 220 more labels, assigned the same way (codes A000-A219), chosen department by department (below). Training only; never in the test half |
+| `department_types.csv` | every one of the 107 units, typed by Claude by research character, with a one-line reason |
+| `human_check/` | the blind check of those labels by people: a labelling workbook of 150 random test records, its key, and how to run it (`make_human_check.py` builds it, `human_check.py` scores it) |
 | `split.json` | the random draw (seed 20260925): `order` maps code G000-G799 to record index; `train` and `test` are the two halves |
 | `relabel_check.csv` | 60 records re-labelled after all 800 were done, shuffled and under new codes, compared with the first pass: 59/60 agree (Cohen's kappa 0.95), 60/60 on wet vs not-wet |
 | `wetdry.py` | the model: `cv`, `evaluate`, `predict` |
@@ -93,7 +94,7 @@ the same side. It is not P(wet). A record at P(wet) 0.02 is confidently *dry*.
 
 It is learnt, not asserted. The shipped model is refitted five times, each
 time without a fifth of the 800 random gold labels, and the calls it makes on
-the people it left out are compared with their hand labels. A small curve then
+the people it left out are compared with their gold labels. A small curve then
 maps each call to how often calls like it were right.
 
 - **Wet- and dry-side calls:** a logistic curve in the margin |logit P(wet)|,
@@ -172,7 +173,7 @@ they raised wet F1 in cross-validation (0.887 to 0.903) and hybrid F1
 (0.17 to 0.32).
 
 **It reports accuracy by department.** `report/departments.md` has every
-unit's wet/hybrid/dry mix, how many of its people were hand-labelled, and
+unit's wet/hybrid/dry mix, how many of its people were labelled, and
 test agreement. By character, on the locked test set: clinical 92%
 (258/279), population health 89%, basic science 83% (19/23), and
 translational centres the weakest at 68% (27/40). The page shows each
@@ -181,10 +182,16 @@ every profile.
 
 ## Honest limits
 
-- **One labeller.** The same person labelled every record, so the test
-  measures agreement with a careful reader, not with the labs. The blind
+- **The labels are Claude's, not a person's.** Claude assigned every gold
+  label by reading the record under `LABELLING_RUBRIC.md`, so every figure
+  here measures agreement with that reading, not with the labs. The blind
   re-label shows the labels are consistent. It cannot show whether they are
-  right.
+  right: if the reading is off in some systematic way, the model learns the
+  same bias and the test cannot see it. `human_check/` is the fix. People who
+  know Emory's labs label 150 random test records blind, and
+  `human_check.py` reports how often they agree with Claude and whether the
+  published accuracy holds up by their labels. Until that is run, treat the
+  figures as agreement with a careful machine reader.
 - **Namesakes.** A paper credited to the wrong person by a namesake misleads
   the model, exactly as it would mislead a reader.
 - **Profile-only records.** Clinicians with no titles and no grants are left
@@ -194,11 +201,11 @@ every profile.
 
 ```sh
 L="--split ml/split.json --labels ml/gold_labels.csv --extra ml/gold_labels_dept.csv"
-python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v80.html $L
-python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v80.html $L --out ml/report
-python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v80.html $L --out predictions.json
-python3 ml/department_report.py Emory_Lab_Atlas_v80.html predictions.json ml/report/test_predictions.csv $L --out ml/report
-python3 ml/apply_wetdry.py Emory_Lab_Atlas_v80.html predictions.json ml/report/evaluation.csv \
+python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v81.html $L
+python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v81.html $L --out ml/report
+python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v81.html $L --out predictions.json
+python3 ml/department_report.py Emory_Lab_Atlas_v81.html predictions.json ml/report/test_predictions.csv $L --out ml/report
+python3 ml/apply_wetdry.py Emory_Lab_Atlas_v81.html predictions.json ml/report/evaluation.csv \
     --departments ml/report/departments.json --confidence ml/report/confidence.json -o atlas_out.html
 ```
 
@@ -207,7 +214,7 @@ refuses an extra label that points at a test-half or already-labelled
 person.
 
 Needs `numpy`, `scipy` and `scikit-learn`. Every run is deterministic;
-re-running `predict` on v80 reproduces its stored predictions exactly. The gold
+re-running `predict` on v81 reproduces its stored predictions exactly. The gold
 labels point at records by position. If the data is re-scraped or re-ordered,
 `wetdry.py` notices that the names no longer match and stops rather than pin a
 label on the wrong person.

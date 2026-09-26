@@ -58,6 +58,10 @@ reported on all labels and, separately, on the sure ones.
 The labels were assigned by Claude, reading each record in full, because no
 human-checked labels existed and accuracy cannot be measured without them.
 Every label is in `gold_labels.csv` with the person's name, so any of them can
-be checked or overruled. `evaluate.py` re-scores both models against whatever
+be checked or overruled. `wetdry.py evaluate` re-scores both models against whatever
 labels the file holds, so correcting a label and re-running it is all a
 re-check takes.
+
+No person has yet checked these labels. `human_check/` holds a blind labelling
+workbook of 150 random test records for people who know the labs, and
+`human_check.py` scores their labels against these.
