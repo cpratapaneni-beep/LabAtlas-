@@ -1,7 +1,7 @@
 """Put photographs into the landing page's image slots.
 
 The landing page has one slot per photograph, named in PHOTOS.landing in the
-page's script (hero-1, view-atlas, note-method, ...). An empty slot shows its
+page's script (hero-1 to hero-4, note-warning, note-method). An empty slot shows its
 label and the size it wants. This fills slots from a folder of image files named
 after them, embedding each as a data URI so the atlas stays one self-contained
 file.
