@@ -150,7 +150,7 @@ G147,1788,Paul Ghareeb,pgharee@emory.edu,test,D,1,hand and plastic surgery outco
 G148,6624,Shannon Stevenson,shannon.stevenson@emory.edu,train,D,1,nursing education
 G149,3283,Jackson Londeree,jlonder@emory.edu,test,D,1,paediatric nephrology registries and case series
 G150,4683,Maria Russell,mcitare@emory.edu,train,D,1,surgical oncology outcomes
-G151,5054,Juliete Silva,jfran40@emory.edu,test,W,2,transplant immunology T-cell mechanisms
+G151,5054,Juliete Silva,jfran40@emory.edu,test,H,2,transplant immunology T-cell mechanisms [hybrid audit 2026-09-29: was W; T-cell alloresponse experiments alongside transplant-cohort biomarker trials]
 G152,3934,Gabriela Garcia Nores,gdgarc2@emory.edu,test,D,1,breast reconstruction outcomes
 G153,5267,Katie Stormes,kstorme@emory.edu,train,D,2,one allergy review
 G154,3152,Elizabeth Leslie-Clarkson,ejlesli@emory.edu,train,H,2,orofacial cleft GWAS plus functional and single-cell work
@@ -281,7 +281,7 @@ G278,2341,Rawleigh Howe,rhowe2@emory.edu,test,W,1,TB T-cell and monocyte immunol
 G279,4193,Snehal Patel,sgpate2@emory.edu,train,D,1,endocrine surgery outcomes
 G280,6955,Wilhemina Quarpong,wilhemina.quarpong@emory.edu,test,D,1,nutrition epidemiology and food environment
 G281,1798,Briana Gibson,brgibs2@emory.edu,train,D,1,TTP registry and ML
-G282,2691,Peter Kasson,pkasson@emory.edu,train,W,1,single-virus fusion biophysics and protein modelling
+G282,2691,Peter Kasson,pkasson@emory.edu,train,H,1,single-virus fusion biophysics and protein modelling [hybrid audit 2026-09-29: was W; single-virus fusion experiments alongside molecular dynamics and modelling software of their own]
 G283,5405,Seema Tekwani,stekwa2@emory.edu,train,D,1,critical care clinical
 G284,6222,Diedre Rowe,diedre.rowe@choa.org,test,U,1,hospitalist profile only
 G285,6242,Duc Q Tran,duc.quang.tran.jr@emory.edu,train,D,1,haemophilia outcomes and psychosocial
@@ -430,7 +430,7 @@ G427,4949,Samad Shah,sshah70@emory.edu,test,D,2,one workforce study
 G428,6794,Venice Haynes,venice.haynes@emory.edu,test,D,1,community health education
 G429,782,Emily Cartwright,ecartw2@emory.edu,test,D,1,hepatitis C care cascade
 G430,2943,Alisha Kramer,akrame6@emory.edu,train,D,2,one systematic review
-G431,574,Nicholas Boulis,nboulis@emory.edu,test,W,2,translational neurosurgery lab: gene delivery and tumour models
+G431,574,Nicholas Boulis,nboulis@emory.edu,test,H,2,"translational neurosurgery lab: gene delivery and tumour models [hybrid audit 2026-09-29: was W; gene-delivery and tumour-model lab alongside clinical outcomes, case series and machine learning]"
 G432,3665,Hamid Mirsalimi,hmirsal@emory.edu,test,D,1,psychology essays
 G433,1380,Dale Edmondson,deedmon@emory.edu,test,W,1,monoamine oxidase enzymology
 G434,5660,Vidya Viswanathan,vvisw27@emory.edu,train,D,1,radiomics and imaging AI
@@ -456,7 +456,7 @@ G453,5666,Peggy Vogt,pvogt2@emory.edu,train,D,1,paediatric anaesthesia outcomes
 G454,2572,George Jones Jr.,gradghj@emory.edu,test,U,2,primary care physician; papers look like microbiology namesakes
 G455,1640,David A. Frank,dafran5@emory.edu,train,W,1,STAT signalling and leukaemia pharmacology
 G456,429,Jacob E. Berchuck,jeberch@emory.edu,train,H,2,cfDNA epigenomic assays plus GU oncology clinical
-G457,2507,David Jaye,dljaye@emory.edu,test,D,2,haematopathology cohorts with some lab studies
+G457,2507,David Jaye,dljaye@emory.edu,test,H,2,haematopathology cohorts with some lab studies [hybrid audit 2026-09-29: was D; myeloma and tuberculosis bench studies alongside lymphoma cohorts and machine-learning diagnosis]
 G458,6697,Donna Brogan,dbrogan@emory.edu,test,D,1,biostatistics and survey methods
 G459,3332,Matthew Lustig,mlustig@emory.edu,test,D,1,paediatric neurology and health policy
 G460,4852,Rebecca Schneider,rschne7@emory.edu,test,D,2,clinical psychologist; hydrogel papers are namesakes
@@ -484,7 +484,7 @@ G481,1732,Laura Gardner,ljgardn@emory.edu,test,D,2,one retrospective study
 G482,373,Glaivy Batsuli,gbatsul@emory.edu,test,H,2,haemophilia B-cell immunology lab plus clinical
 G483,3967,Kevin O'Laughlin,kolaugh@emory.edu,test,D,1,travel medicine surveillance
 G484,303,Bhakti Baheti,bbaheti@emory.edu,test,D,1,computational pathology
-G485,1784,Timothy Gershon,tgersho@emory.edu,train,W,2,preclinical brain tumour biology plus trials
+G485,1784,Timothy Gershon,tgersho@emory.edu,train,H,2,preclinical brain tumour biology plus trials [hybrid audit 2026-09-29: was W; preclinical brain-tumour lab alongside the clinical trials it feeds]
 G486,5689,Richard Wainford,rwainfo@emory.edu,train,W,1,rat hypertension physiology
 G487,2931,Sarah Koumtouzoua,shenn3@emory.edu,test,D,1,primary care hepatology
 G488,3051,Thomas Large,tmlarge@emory.edu,train,D,1,orthopaedic trauma outcomes
@@ -711,7 +711,7 @@ G708,4603,Gerald Rodts Jr.,grodts@emory.edu,test,D,1,spine surgery outcomes
 G709,6351,Lanny Liebeskind,chemll1@emory.edu,test,W,1,synthetic organic chemistry
 G710,3693,Mahmoud Mohammaden,mmoha37@emory.edu,test,D,1,stroke thrombectomy outcomes
 G711,3516,John McDonald,jmcdo01@emory.edu,train,H,2,cancer nanomedicine and mouse neuropathy plus computational networks
-G712,6453,Steven Bosinger,steven.bosinger@emory.edu,test,W,2,primate genomics and immunology core
+G712,6453,Steven Bosinger,steven.bosinger@emory.edu,test,H,2,primate genomics and immunology core [hybrid audit 2026-09-29: was W; primate infection experiments alongside multi-omics profiling and systems vaccinology]
 G713,3392,John Malko,jmalko@emory.edu,train,D,2,MRI physics clinical support
 G714,2342,Karen Howell,khowell@emory.edu,train,D,2,one cohort study
 G715,1282,Thomas Dodson,tdods02@emory.edu,test,D,1,surgical history and outcomes

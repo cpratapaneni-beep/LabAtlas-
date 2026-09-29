@@ -10,33 +10,41 @@ trained and tested on records that a person read and labelled.
 
 These are 400 investigators drawn at random and labelled by Claude reading their
 records, with no model output visible. None of them was used to fit or tune
-anything. The table is from `report/evaluation.md` (model wd-2026.09.2, since v79):
+anything. The table is from `report/evaluation.md` (model wd-2026.09.3, v82),
+scored against the labels as revised by the hybrid audit (below):
 
 | | v3.1 | new model | difference (95% CI) |
 |---|---|---|---|
-| on the right side of the axis | 14.9% | **91.6%** | +72.0 to +81.3 pts |
-| right, among records it placed | 25.8% | **94.7%** | +62.5 to +75.0 pts |
+| on the right side of the axis | 14.6% | **91.6%** | +72.4 to +81.4 pts |
+| right, among records it placed | 25.4% | **94.7%** | +63.1 to +75.3 pts |
 | given a setting at all | 57.7% | **96.7%** | +33.8 to +44.4 pts |
-| wet labs found (F1) | 48.1% | **85.5%** | +28.3 to +47.0 pts |
-| dry labs found (F1) | 8.2% | **96.2%** | +83.6 to +92.4 pts |
-| hybrids found (F1) | 5.9% | 35.3% | -3.8 to +57.1 pts |
+| wet labs found (F1) | 46.5% | **89.1%** | +33.5 to +52.4 pts |
+| dry labs found (F1) | 8.2% | **96.1%** | +83.5 to +92.4 pts |
+| hybrids found (F1) | 7.6% | 42.9% | +13.0 to +55.2 pts |
 
-Against the v78 model (90.5% on the right side), the only change whose
-interval clears zero is wet recall: 82.7% to 90.4% (+1.6 to +15.1 pts).
-Wet precision held at 81%.
+This is the fourth time the test half has been scored, and the first time
+any of its labels changed: the hybrid audit revised 4 of its 400 labels (3 wet
+and 1 dry became hybrid). So the v81 model and this one are shown against
+both versions of the labels:
 
-This is the second time the test half has been scored. Nothing was tuned on
-it either time: every choice below was made by cross-validation on the
-training half and on the department-targeted labels, and the test half was
-scored once, at the end.
+| labels | model | right side | hybrid F1 | wet precision | wet recall |
+|---|---|---|---|---|---|
+| before the audit | v81 (P(wet) bands) | 91.6% | 35.3% | 81.0% | 90.4% |
+| before the audit | v82 (mix of work) | 91.3% | 33.3% | 88.5% | 88.5% |
+| after the audit | v81 (P(wet) bands) | 91.3% | 38.1% | 77.6% | 91.8% |
+| after the audit | v82 (mix of work) | 91.6% | 42.9% | 86.5% | 91.8% |
+
+The differences are small and their intervals are wide (15 test hybrids). The
+honest summary is: no loss of accuracy, fewer bench-and-computation labs
+called plain wet, and settings that now say what mix of work a record shows.
 
 v3.1 almost never reached "dry". Of 306 test investigators labelled dry, it
 called 64 of them wet, 86 hybrid and 143 unclassified. At Emory, where most
 faculty are clinical, that made the axis close to meaningless.
 
-Hybrids are still the weak spot. There are 20 in the random gold set and 27
+Hybrids are still the weak spot. There are 26 in the random gold set and 29
 more among the department-targeted labels, still too few to learn from or to
-measure well (11 in the test half), and the page says so.
+measure well (15 in the test half), and the page says so.
 
 ## Files
 
@@ -46,6 +54,8 @@ measure well (11 in the test half), and the page says so.
 | `gold_labels.csv` | 800 labels Claude assigned by reading each record: code, record index, name, email, train/test, label, confidence (1 sure, 2 judgment call), a one-line reason |
 | `gold_labels_dept.csv` | 220 more labels, assigned the same way (codes A000-A219), chosen department by department (below). Training only; never in the test half |
 | `department_types.csv` | every one of the 107 units, typed by Claude by research character, with a one-line reason |
+| `hybrid_audit.csv` | the 57 gold records re-read for missed hybrids, with each decision and its reason |
+| `lab_corrections.csv` | settings reported by people who know the lab; shown on the page in place of the model's |
 | `human_check/` | the blind check of those labels by people: a labelling workbook of 150 random test records, its key, and how to run it (`make_human_check.py` builds it, `human_check.py` scores it) |
 | `split.json` | the random draw (seed 20260925): `order` maps code G000-G799 to record index; `train` and `test` are the two halves |
 | `relabel_check.csv` | 60 records re-labelled after all 800 were done, shuffled and under new codes, compared with the first pass: 59/60 agree (Cohen's kappa 0.95), 60/60 on wet vs not-wet |
@@ -76,11 +86,12 @@ measure well (11 in the test half), and the page says so.
    whether trained on or held out, are never in that pool. In
    cross-validation on the training half this raised accuracy from 90.9% to
    93.7%.
-5. **Bands.** Wet from 0.70, leans wet from 0.50, hybrid between, leans dry
-   to 0.30, dry at 0.05 or below. They were chosen by cross-validation on the
-   training half. A record with no titles is placed only if it has grants or
-   a real profile *and* is a clear call (P ≥ 0.70 or ≤ 0.02). Otherwise it is
-   left unclassified.
+5. **Setting.** P(wet) decides the side: the wet side from 0.50, the dry
+   side at 0.30 or below, hybrid between. The mix of the record's titles then
+   decides where on its side it sits (see "Hybrids and the mix of work"). How
+   sure the call is lives in the confidence, not in the setting. A record with
+   no titles is placed only if it has grants or a real profile *and* is a clear
+   call (P ≥ 0.70 or ≤ 0.02); otherwise it is left unclassified.
 
 The shipped model is refitted on all 1,020 labels, so it has seen the test half.
 The test figures above are from the version trained on the training half
@@ -132,6 +143,62 @@ Across the atlas: 4,961 calls rated high, 282 moderate and 189 low (every
 hybrid is low). The page prints the figure under each mark in lists, in full
 on each profile (with how test calls at that level did), in tooltips and on
 the P(wet) ridge, and the glyph's stain now follows it.
+
+## Hybrids and the mix of work
+
+Until v81 a setting was a band of P(wet): "leans wet" meant P between 0.50 and
+0.70, that is, the model was unsure. Two labs showed why that was wrong.
+- **Rafick-Pierre Sékaly** runs wet-bench immunology *and* systems immunology,
+  multi-omics and machine learning, yet sat at P(wet) 0.98, "wet". The
+  immunology words in every title (T cells, SIV, HIV) outweighed the method.
+- **Charles Bou Nader** is mostly wet but has fully dry projects. That should
+  read as "leans wet".
+
+Since the confidence (above) now says how sure a call is, the setting is free
+to say what mix of work the record shows:
+
+| setting | means |
+|---|---|
+| wet | bench work throughout |
+| leans wet | mostly bench, with a real share (10% or more of titles) of computational, omics, modelling, cohort or trial work |
+| hybrid | bench work alongside 30% or more such titles, or P(wet) between 0.30 and 0.50 |
+| leans dry | mostly non-bench, with 10% or more bench titles that use no dry method |
+| dry | no bench work |
+
+Each title is read twice:
+- by the title model, for whether it reads as bench work;
+- by `DRY_METHOD` in `wetdry.py`, for whether its *method* is computation,
+  prediction, omics analysis, a cohort or a trial, whatever its topic.
+
+"Multi-omics analyses reveal that HIV-1 alters CD4 T cell immunometabolism" is
+both, which is what a systems lab looks like.
+
+The 30% line was chosen on the random training half (out-of-fold). There it
+raised hybrid F1 from 0.32 to 0.48 and accuracy from 95.7% to 96.2%. The 10%
+lines are definitions, since no gold label says "leans". A dry-side hybrid
+rule lost accuracy, because computational genomics titles read as bench work
+to the title model, so there is none.
+
+**The audit of Claude's labels.** The same problem was in the answer key.
+Every gold record whose titles mixed bench work with a real share of
+dry-method titles (or the reverse) was flagged by a rule on the titles alone,
+57 records, and re-read under the rubric. Eight were hybrids that Claude had
+labelled wet or dry. Peter Kasson, Melissa Kemp, Yesim Gokmen-Polar, Timothy
+Gershon, Juliete Silva, Nicholas Boulis and Steven Bosinger were bench labs
+paired with computation or clinical studies, labelled wet; David Jaye was
+labelled dry. Four of the eight are in the test half. Every decision and its
+reason is in `hybrid_audit.csv`, and each revised row of the gold files keeps
+its old label in the note. Claude's reading leaned toward calling
+bench-plus-computation labs wet; the human check (`human_check/`) is the way
+to find what else it leans on.
+
+**Corrections from people who know the lab.** Some mixes do not show in the
+public record: Bou Nader's four titles and profile are all bench work.
+`lab_corrections.csv` holds settings reported by people who know the lab, with
+the reason, source and date. `apply_wetdry.py --corrections` puts them on the
+page in place of the model's setting, marked "corrected by someone who knows
+the lab", with the model's own call kept beside it. They do not train the
+model or change the test.
 
 ## Department by department
 
@@ -201,12 +268,13 @@ every profile.
 
 ```sh
 L="--split ml/split.json --labels ml/gold_labels.csv --extra ml/gold_labels_dept.csv"
-python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v81.html $L
-python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v81.html $L --out ml/report
-python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v81.html $L --out predictions.json
-python3 ml/department_report.py Emory_Lab_Atlas_v81.html predictions.json ml/report/test_predictions.csv $L --out ml/report
-python3 ml/apply_wetdry.py Emory_Lab_Atlas_v81.html predictions.json ml/report/evaluation.csv \
-    --departments ml/report/departments.json --confidence ml/report/confidence.json -o atlas_out.html
+python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v82.html $L
+python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v82.html $L --out ml/report
+python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v82.html $L --out predictions.json
+python3 ml/department_report.py Emory_Lab_Atlas_v82.html predictions.json ml/report/test_predictions.csv $L --out ml/report
+python3 ml/apply_wetdry.py Emory_Lab_Atlas_v82.html predictions.json ml/report/evaluation.csv \
+    --departments ml/report/departments.json --confidence ml/report/confidence.json \
+    --corrections ml/lab_corrections.csv -o atlas_out.html
 ```
 
 `--extra` adds the department-targeted labels to training. `wetdry.py`
@@ -214,7 +282,7 @@ refuses an extra label that points at a test-half or already-labelled
 person.
 
 Needs `numpy`, `scipy` and `scikit-learn`. Every run is deterministic;
-re-running `predict` on v81 reproduces its stored predictions exactly. The gold
+re-running `predict` on v82 reproduces its stored predictions exactly. The gold
 labels point at records by position. If the data is re-scraped or re-ordered,
 `wetdry.py` notices that the names no longer match and stops rather than pin a
 label on the wrong person.

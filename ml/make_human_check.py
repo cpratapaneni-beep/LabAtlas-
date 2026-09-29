@@ -7,7 +7,7 @@ rubric, without seeing Claude's label or the model's. `human_check.py` then
 scores the filled workbooks: how often the people agree with Claude's labels,
 with each other, and with the model.
 
-  python ml/make_human_check.py Emory_Lab_Atlas_v81.html --n 150 --out ml/human_check
+  python ml/make_human_check.py Emory_Lab_Atlas_v82.html --n 150 --out ml/human_check
 
 Writes labelling_sheet.xlsx (give this to the labellers) and key.csv (keep it:
 it maps the sheet's codes back to atlas records, and is the only link between

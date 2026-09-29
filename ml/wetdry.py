@@ -19,9 +19,11 @@ How it decides:
   3. A small stacking model turns the per-title scores (mean, upper quartile,
      share above 0.5, count) and the context score into P(wet). Hybrid gold
      labels enter as half wet, half dry.
-  4. P(wet) is cut into five states: wet, leans wet, hybrid, leans dry, dry.
-     A record with no titles, no grants and too little profile text to judge
-     is left unclassified instead of guessed at.
+  4. P(wet) picks the side, and the mix of the record's titles (how many read
+     as bench work, how many use a dry method: computation, omics analysis,
+     modelling, cohorts, trials) picks the setting on it: wet, leans wet,
+     hybrid, leans dry, dry (see MIX). A record with no titles, no grants and
+     too little profile text to judge is left unclassified instead of guessed at.
   5. Every placed record gets a confidence: the chance its call is right,
      learnt from how often out-of-fold calls on hand-labelled people were
      right (see Confidence). `evaluate` checks it on the locked test set.
@@ -51,7 +53,7 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 
-MODEL_VERSION = 'wd-2026.09.2'
+MODEL_VERSION = 'wd-2026.09.3'
 SEED = 20260925
 USE_LEX = True
 # Department features (colleagues' scores, hand-typed department mix) were built
@@ -63,10 +65,38 @@ USE_DEPT = False
 PSEUDO = (0.90, 0.02)
 PSEUDO_WEIGHT = 0.3
 
-# P(wet) bands. Chosen by cross-validation on the training half only (see `cv`).
-BANDS = {'wet': 0.70, 'lean_wet': 0.50, 'lean_dry': 0.30, 'dry': 0.05,
+# P(wet) decides the side: the wet side from 0.50, the dry side at 0.30 or below,
+# hybrid between. How sure the call is lives in the confidence, not in the state.
+BANDS = {'wet_side': 0.50, 'dry_side': 0.30,
          # a record with no titles is placed only beyond these stricter lines
          'bare_wet': 0.70, 'bare_dry': 0.02}
+
+# The mix of a record's work decides where on its side it sits. Each title is
+# read twice: by the title model (does it read as bench work?) and by
+# DRY_METHOD (is its method computation, prediction, omics analysis, a cohort
+# or a trial, whatever its topic?). "Multi-omics analyses reveal that HIV-1
+# alters CD4 T cell immunometabolism" is both, which is what a systems lab
+# looks like.
+#   wet side: hybrid when dry-method titles are 30% or more of the record (and
+#             bench titles a quarter or more), leans wet when they are 10% or
+#             more, wet otherwise;
+#   dry side: leans dry when bench titles with no dry method are 10% or more,
+#             dry otherwise.
+# The 30% line was chosen by cross-validation on the random training half,
+# where it raised hybrid F1 from 0.32 to 0.48 and accuracy from 95.7% to 96.2%.
+# A dry-side hybrid rule was tested the same way and lost accuracy (genomics and
+# modelling titles read as bench work to the title model), so there is none.
+# The 10% lines are definitions, not fits: no gold label says "leans".
+MIX = {'hybrid_dry_share': 0.30, 'hybrid_bench_floor': 0.25, 'lean_share': 0.10, 'min_titles': 2}
+DRY_METHOD = re.compile(
+    r"\b(multi-?omics?|omics|systems (immunology|biology|vaccinology|serology|approach\w*)|"
+    r"machine learning|deep learning|artificial intelligence|neural networks?|computational|in silico|"
+    r"bioinformatic\w*|algorithms?|software|pipeline|model(l)?ing|mathematical models?|simulations?|"
+    r"predict(s|ed|ing|ion|ions|ive|or|ors)?|prognostic models?|signatures?|interactome|network analysis|"
+    r"integrative|integrated analysis|meta-analysis|data ?(resource|base|sets?)|datasets?|compendium|"
+    r"atlas of|statistical|bayesian|genome-wide association|gwas|mendelian randomi[sz]ation|"
+    r"cohorts?|trials?|randomi[sz]ed|retrospective|prospective|registry|epidemiolog\w*|prevalence|"
+    r"incidence|surveillance|case reports?|case series|survey\w*|outcomes)\b", re.I)
 
 STATE = {'none': 0, 'wet': 1, 'dry': 2, 'hybrid': 3, 'lean_wet': 4, 'lean_dry': 5}
 SIDE = {0: None, 1: 'W', 4: 'W', 2: 'D', 5: 'D', 3: 'H'}
@@ -264,6 +294,8 @@ class Vectors:
         self.by_person = [[] for _ in P]
         for r, i in enumerate(owner):
             self.by_person[i].append(r)
+        # per title: is its method non-bench work (see DRY_METHOD)?
+        self.drym = np.array([bool(DRY_METHOD.search(t)) for t in rows], dtype=bool)
         self.deg = np.array([degree_flags(p) for p in P], dtype=np.float32)
         self.ngrant = np.array([len(p.get('gn') or []) for p in P], dtype=np.float32)
         self.nbio = np.array([len(bio_of(p)) for p in P], dtype=np.float32)
@@ -486,9 +518,28 @@ class Model:
             P[bare] = self.cal.predict_proba(_logit(c)[:, None])[:, 1]
         return P, set(bare)
 
+    def mix(self, people):
+        """The mix of each person's titles: how many read as bench work, how many
+        use a dry method, how many are bench work with no dry method. None for a
+        record with no titles."""
+        out = []
+        for i in people:
+            rows = self.V.by_person[i]
+            if not rows:
+                out.append(None)
+                continue
+            b = self.tm.predict_proba(self.V.Xt[rows])[:, 1] > 0.5
+            d = self.V.drym[rows]
+            n = len(rows)
+            out.append({'n': n, 'n_bench': int(b.sum()), 'bench_share': float(b.sum()) / n,
+                        'n_dry': int(d.sum()), 'dry_share': float(d.sum()) / n,
+                        'n_pure_bench': int((b & ~d).sum()), 'pure_bench_share': float((b & ~d).sum()) / n})
+        return out
+
     def states(self, people):
         people = list(people)
         P, bare = self.proba(people)
+        mixes = self.mix(people)
         out = []
         for n, i in enumerate(people):
             # banded at the precision it is stored and shown at, so the state and
@@ -500,23 +551,29 @@ class Model:
                 if not enough:
                     out.append((0, p, 'no publications, grants or profile text'))
                     continue
-                if self.bands.get('bare_dry', self.bands['dry']) < p < self.bands.get('bare_wet', self.bands['wet']):
+                if self.bands['bare_dry'] < p < self.bands['bare_wet']:
                     out.append((0, p, 'profile only, and it does not settle the question'))
                     continue
-            out.append((band(p, self.bands), p, None))
+                out.append((STATE['wet'] if p >= self.bands['wet_side'] else STATE['dry'], p, None))
+                continue
+            out.append((band(p, self.bands, mixes[n]), p, None))
         return out
 
 
-def band(p, b):
-    if p >= b['wet']:
+def band(p, b, m):
+    """The state: P(wet) picks the side, the mix of titles picks where on it."""
+    if b['dry_side'] < p < b['wet_side']:
+        return STATE['hybrid']
+    if p >= b['wet_side']:
+        if (m['dry_share'] >= MIX['hybrid_dry_share'] and m['n_dry'] >= MIX['min_titles']
+                and m['bench_share'] >= MIX['hybrid_bench_floor']):
+            return STATE['hybrid']
+        if m['dry_share'] >= MIX['lean_share'] and m['n_dry'] >= MIX['min_titles']:
+            return STATE['lean_wet']
         return STATE['wet']
-    if p >= b['lean_wet']:
-        return STATE['lean_wet']
-    if p <= b['dry']:
-        return STATE['dry']
-    if p <= b['lean_dry']:
+    if m['pure_bench_share'] >= MIX['lean_share'] and m['n_pure_bench'] >= MIX['min_titles']:
         return STATE['lean_dry']
-    return STATE['hybrid']
+    return STATE['dry']
 
 
 # ---------------------------------------------------------------- confidence
@@ -830,7 +887,8 @@ def cmd_predict(a):
     names = np.array(V.tv.get_feature_names_out())
     co = m.tm.coef_[0]
     out = []
-    for i, (s, p, why), k in zip(everyone, st, ck):
+    mixes = m.mix(everyone)
+    for i, (s, p, why), k, mx in zip(everyone, st, ck, mixes):
         # the title that pushed hardest each way, as evidence a reader can check
         ev = {'model': MODEL_VERSION, 'P': round(p, 3), 'n_titles': len(V.by_person[i]),
               'n_grants': int(V.ngrant[i])}
@@ -853,11 +911,16 @@ def cmd_predict(a):
                 ev['wet_terms'] = words(o[::-1][:40], 1)
             if s in (2, 5, 3):
                 ev['dry_terms'] = words(o[:40], -1)
+            # the mix that placed it on its side, and a title of each kind
+            ev['mix'] = [mx['n_bench'], mx['n_dry'], mx['n_pure_bench']]
+            dm = V.drym[rows]
+            if dm.any():
+                ev['dry_method_title'] = raw[int(np.argmax(dm))][:140]
         if why:
             ev['why_unclassified'] = why
         out.append({'l': s, 'c': round(100 * p, 1), 'cf': None if k is None else int(round(100 * k)), 'ev': ev})
     wet, dry = top_terms(V, m.tm)
-    json.dump({'model': MODEL_VERSION, 'bands': m.bands,
+    json.dump({'model': MODEL_VERSION, 'bands': m.bands, 'mix': MIX,
                'trained_on': len([i for i in gold if gold[i] in 'WHD']),
                'confidence': cf.describe(),
                'top_wet_terms': wet, 'top_dry_terms': dry, 'people': out},

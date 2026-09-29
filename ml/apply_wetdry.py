@@ -27,6 +27,7 @@ def main():
     ap.add_argument('evaluation')
     ap.add_argument('-o', '--out', required=True)
     ap.add_argument('--departments', help='departments.json from department_report.py')
+    ap.add_argument('--corrections', help='lab_corrections.csv: settings reported by people who know the lab')
     ap.add_argument('--confidence', help='confidence.json from wetdry.py evaluate (how the confidence held up on the test set)')
     a = ap.parse_args()
 
@@ -56,6 +57,21 @@ def main():
         p['ev'] = q['ev']
         p['cr'] = p['cr'] if p.get('status') else 'wet/dry model ' + pred['model']
 
+    # a correction from someone who knows the lab replaces the displayed setting.
+    # The model's own call stays in fx, so the page can show both, and the record
+    # carries no model confidence: the setting is no longer the model's.
+    if a.corrections:
+        STATES = {'wet': 1, 'leans wet': 4, 'hybrid': 3, 'leans dry': 5, 'dry': 2}
+        for r in csv.DictReader(open(a.corrections, encoding='utf-8')):
+            i = int(r['index'])
+            if not 0 <= i < len(P) or P[i]['n'] != r['name']:
+                sys.exit('lab_corrections.csv: record %s is not %s' % (r['index'], r['name']))
+            st = STATES.get(r['setting'].strip().lower())
+            if st is None:
+                sys.exit('lab_corrections.csv: %s has setting %r; use one of %s' % (r['name'], r['setting'], ', '.join(STATES)))
+            p = P[i]
+            p['fx'] = {'why': r['reason'], 'by': r['source'], 'on': r['date'], 'ml': p['l'], 'mcf': p.get('cf')}
+            p['l'], p['cf'] = st, None
     ev = {}
     for r in csv.DictReader(open(a.evaluation)):
         ev[r['metric']] = {k: round(float(v), 4) for k, v in r.items() if k != 'metric'}
@@ -65,6 +81,7 @@ def main():
     D['wd'] = {
         'model': pred['model'],
         'bands': pred['bands'],
+        'mix': pred.get('mix'),
         'trained_on': pred['trained_on'],
         'generated': datetime.date.today().isoformat(),
         'test': ev,

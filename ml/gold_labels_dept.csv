@@ -136,7 +136,7 @@ A133,1900,Gerald Gowitt,ggowitt@emory.edu,train_dept,clinical_lab,D,1,forensic a
 A134,2476,Jaishree Jagirdar,jjagird@emory.edu,train_dept,clinical_lab,D,2,cardiothoracic pathology practice
 A135,5038,Gabriel Sica,gsica@emory.edu,train_dept,clinical_lab,H,2,lung pathologist on many translational bench studies
 A136,5807,Sharon Weiss,swweiss@emory.edu,train_dept,clinical_lab,D,2,one obituary
-A137,4321,Yesim Gokmen-Polar,ypolar@emory.edu,train_dept,clinical_lab,W,1,breast cancer resistance lab models
+A137,4321,Yesim Gokmen-Polar,ypolar@emory.edu,train_dept,clinical_lab,H,2,breast cancer resistance lab models [hybrid audit 2026-09-29: was W; breast and thymic cancer lab models alongside AI prognostic models and spatial-omics cohorts]
 A138,3962,Una O'Doherty,uodoher@emory.edu,train_dept,clinical_lab,W,1,HIV reservoir lab
 A139,1457,Perla del Rio Estrada,pmdelri@emory.edu,train_dept,clinical_lab,W,1,HIV follicular T-cell immunology lab
 A140,201,Aftab Ansari,pathaaa@emory.edu,train_dept,clinical_lab,W,1,SIV and dengue immunology lab
@@ -152,7 +152,7 @@ A149,422,Guy Benian,pathgb@emory.edu,train_dept,clinical_lab,W,1,C. elegans musc
 A150,1399,Jonathan Eisenstat,jeisen7@emory.edu,train_dept,clinical_lab,D,2,one case report
 A151,1134,Lakshmi Dasi,ldasi@emory.edu,train_dept,engineering,H,2,computational valve biomechanics plus bioprinted tissue models
 A152,5408,Johnna Temenoff,jtemeof@emory.edu,train_dept,engineering,W,1,musculoskeletal tissue engineering
-A153,2741,Melissa Lambeth Kemp,mkemp3@emory.edu,train_dept,engineering,W,1,stem cell bioengineering and spatial metabolomics
+A153,2741,Melissa Lambeth Kemp,mkemp3@emory.edu,train_dept,engineering,H,1,stem cell bioengineering and spatial metabolomics [hybrid audit 2026-09-29: was W; stem-cell and metabolic experiments alongside genome-scale metabolic modelling and machine learning]
 A154,3669,Cassie S. Mitchell,csmitch@emory.edu,train_dept,engineering,D,1,biomedical AI
 A155,2987,Sandeep Kumar,skuma3@emory.edu,train_dept,engineering,D,1,computational antibody design
 A156,2214,Christopher Hermann,cdherma@emory.edu,train_dept,engineering,W,1,mouse craniosynostosis models
