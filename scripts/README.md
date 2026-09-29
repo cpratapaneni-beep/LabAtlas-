@@ -133,6 +133,7 @@ program or the lab before relying on it.
 | `clean_atlas_data.py in.html out.html [--log dir]` | fixes what can be fixed with certainty and logs every change; nothing it does rests on a guess |
 | `nih_reporter_verify.py atlas.html --patch` | re-reads every Emory award from NIH RePORTER, matches the PIs to atlas people and writes `atlas_nih.html` with verified figures and per-award links. It needs internet access to `api.reporter.nih.gov`; `--selftest` runs its checks offline |
 | `build_atlas.sh source.html out.html [--no-nih]` | all of it in order: clean, verify NIH, run the wet/dry model (see `ml/README.md`), audit |
+| `landing_images.py atlas.html photos/ -o out.html` | puts photographs into the landing page's image slots from files named after them (`hero-1.jpg`, `view-atlas.png`, ...), embedded so the atlas stays one file; `--list` prints every slot and the size it is drawn at |
 
 Only RePORTER can settle the NIH grant figures. Until `nih_reporter_verify.py`
 has been run from a machine that can reach it, the audit will keep listing
