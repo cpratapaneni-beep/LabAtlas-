@@ -1,0 +1,38 @@
+{
+  "name": "startup-ideation-kit",
+  "version": "3.2.0",
+  "description": "Interactive 11-phase startup ideation kit powered by Claude Code skills. Brainstorm, score, research competitors, position, build offers, validate, model revenue, plan leads, match AI skills, pitch investors, and export -- using frameworks from $100M Offers, April Dunford, and 446 business books and founder biographies.",
+  "bin": {
+    "startupkit": "bin/cli.js"
+  },
+  "keywords": [
+    "startup",
+    "ideation",
+    "claude-code",
+    "business",
+    "brainstorming",
+    "hormozi",
+    "offers",
+    "competitive-intelligence",
+    "positioning",
+    "investor-pitch",
+    "april-dunford",
+    "founder-biographies",
+    "entrepreneur-wisdom"
+  ],
+  "author": "Mohamed Ameen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedameen-io/StartupKit.git"
+  },
+  "scripts": {
+    "doctor": "node bin/cli.js doctor",
+    "prepublishOnly": "node bin/cli.js doctor"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "templates/"
+  ]
+}
