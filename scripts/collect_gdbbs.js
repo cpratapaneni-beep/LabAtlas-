@@ -12,8 +12,8 @@
  *   4. Run:   await GDBBS.all()
  *
  * It reads each program's faculty directory, prints what it found per program,
- * and downloads `gdbbs.json`. Load that file into the atlas: Notes -> Load a
- * GDBBS roster -> Choose a file (or just drop it on the page).
+ * and downloads `gdbbs.json`. Write that file into the atlas with
+ *   python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>
  *
  * IF A PROGRAM COMES BACK EMPTY
  * Its list is probably drawn by JavaScript after the page loads, so the HTML
@@ -340,7 +340,7 @@ API.save = function () {
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   console.log(`Saved gdbbs.json — ${Object.keys(API.roster.people).length} people. ` +
-    'Load it into the atlas: Notes → Load a GDBBS roster.');
+    'Write it into the atlas with: python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>');
 };
 
 API.show = function () {

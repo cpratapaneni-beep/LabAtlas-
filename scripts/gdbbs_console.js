@@ -188,8 +188,8 @@
     a.href = URL.createObjectURL(new Blob([JSON.stringify(roster, null, 1)], { type: 'application/json' }));
     a.download = 'gdbbs.json';
     a.click();
-    console.log('Saved gdbbs.json. Repeat on the other programme pages, then load it in the atlas: ' +
-      'Notes → Load a GDBBS roster.   (GDBBS_RESET() to start over.)');
+    console.log('Saved gdbbs.json. Repeat on the other programme pages, then write it into the atlas with: ' +
+      'python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>   (GDBBS_RESET() to start over.)');
   }
 
   var bumped = showAll();

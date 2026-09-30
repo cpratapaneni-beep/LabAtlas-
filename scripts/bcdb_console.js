@@ -2,7 +2,8 @@
  * Open https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html
  * then paste this whole block and press Enter. It reads the page you are
  * looking at - already rendered, so a JavaScript-built list is fine - and
- * downloads gdbbs.json. Load that in the atlas: Notes -> Load a GDBBS roster.
+ * downloads gdbbs.json. Write it into the atlas with
+ *   python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>
  *
  * Another program: change CODE below, open that program's page, paste again.
  * (Chrome may ask you to type  allow pasting  in the console first.)
@@ -85,6 +86,6 @@ if (!names.length) {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(roster, null, 1)], { type: 'application/json' }));
   a.download = 'gdbbs.json'; a.click();
-  console.log('Saved gdbbs.json — load it in the atlas: Notes → Load a GDBBS roster.');
+  console.log('Saved gdbbs.json — write it into the atlas with: python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>');
 }
 })();

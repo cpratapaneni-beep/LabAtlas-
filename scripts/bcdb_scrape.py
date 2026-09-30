@@ -7,7 +7,8 @@ Standard library only - nothing to install. It fetches the BCDB faculty page,
 pulls out the faculty names and whether each is listed as accepting graduate
 students, prints what it found, and writes gdbbs.json.
 
-Load that file into the atlas: Notes -> Load a GDBBS roster -> Choose a file.
+Write that file into the atlas with
+  python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>
 Or write it straight into a copy of the atlas:
 
     python3 bcdb_scrape.py --atlas Emory_Lab_Atlas_v64.html --out marked.html
@@ -663,7 +664,7 @@ def main() -> int:
             print("     research topics or filter options looks like, not a faculty roster.")
             print("     Check the names above before you rely on this.")
     else:
-        print("  Load it in the atlas:  Notes -> Load a GDBBS roster -> Choose a file")
+        print("  Write it into the atlas:  python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>")
     print()
     return 0
 

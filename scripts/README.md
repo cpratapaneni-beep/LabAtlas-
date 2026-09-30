@@ -12,7 +12,11 @@ badge, no filter, and no claim either way about anybody. A marking that was
 guessed at would be worse than no marking, on a page people use to decide who
 to write to.
 
-## Three ways to get one
+## Two ways to get one
+
+The roster is part of the atlas file: it is written into the page when the page
+is built, and the page itself has no way to load one afterwards. Both routes
+below end with the roster inside a new copy of the HTML.
 
 ### 1. From your own browser — no install (easiest)
 
@@ -34,9 +38,12 @@ If a program still comes back empty, open it yourself, scroll to the bottom so
 every entry has rendered, and run `GDBBS.here('MMG')` — results accumulate
 across pages. Then `GDBBS.save()`.
 
-Load the file into the atlas: **Notes → Load a GDBBS roster → Choose a file**,
-or just drop it anywhere on the page. It is kept in that browser, so it survives
-a reload without anyone rewriting a forty-megabyte file.
+Write the file into the atlas:
+
+```bash
+python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
+    --atlas Emory_Lab_Atlas_v86.html --out Emory_Lab_Atlas_v87.html
+```
 
 ### 2. From a machine that can reach the site
 
@@ -55,16 +62,12 @@ to a record. Open `gdbbs.json` and read a few entries before trusting a run: if
 a program's count is 0, or the names look like headings rather than people, the
 markup has moved and the parser needs a look.
 
-`gdbbs.json` from either route works in the other — the script will apply a
-collector file with `--from-json`, and the atlas will load a script file.
+`gdbbs.json` from either route works in the other: the script applies a
+collector file with `--from-json`.
 
-### 3. Paste a directory page
-
-Nothing installed at all: open a program's faculty directory, select the whole
-page, copy it, and paste it into **Notes → Load a GDBBS roster → A directory
-page, pasted**, picking the program it belongs to. The names and the
-accepting-students wording are read out of it in the page, by the same rules the
-script uses. Ten pastes and you have the set.
+(Until v85 the atlas also had a panel under Notes for loading a roster file or
+pasting a directory page into the open page. It was removed in v86; a roster now
+only arrives through the build, so every copy of the file says the same thing.)
 
 ## Options
 

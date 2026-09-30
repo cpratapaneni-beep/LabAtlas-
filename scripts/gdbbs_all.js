@@ -259,6 +259,6 @@
     a.href = URL.createObjectURL(new Blob([JSON.stringify(roster, null, 1)], { type: 'application/json' }));
     a.download = 'gdbbs.json';
     a.click();
-    console.log('Saved gdbbs.json — load it in the atlas: Notes → Load a GDBBS roster.');
+    console.log('Saved gdbbs.json — write it into the atlas with: python3 scripts/gdbbs_scrape.py --from-json gdbbs.json --atlas <atlas.html> --out <new.html>');
   }
 })();
