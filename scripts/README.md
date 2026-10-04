@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v92.html --out Emory_Lab_Atlas_v93.html
+    --atlas Emory_Lab_Atlas_v93.html --out Emory_Lab_Atlas_v94.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -141,3 +141,40 @@ program or the lab before relying on it.
 Only RePORTER can settle the NIH grant figures. Until `nih_reporter_verify.py`
 has been run from a machine that can reach it, the audit will keep listing
 those as errors, and the page says the figures are unverified.
+
+# Past undergrad mentors (symposium abstract books)
+
+The "Past undergrad mentors" view, and the symposium record on each profile,
+come from the abstract books of Emory's undergraduate research symposia (SURE in
+summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
+that data and can write it straight into the page:
+
+```bash
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v93.html \
+    --cache build/symposia --fetch \
+    --out build/surehist.json --report build/symposium_report.md \
+    --write-atlas
+```
+
+- **Read from the books themselves** (`--fetch` downloads them from
+  college.emory.edu): the Summer 2021 abstract book, the Spring 2026
+  abstracts, and the Summer symposium page. That page is rewritten each year,
+  and the script reads the year from it. Each project gives its student,
+  title, faculty mentor and page.
+- **2007–2019** exist only as Issuu editions, which do not serve scripts, so
+  those records are taken from the page's earlier extraction and every mentor
+  name is checked before it is kept:
+  - department, facility and sentence fragments are dropped;
+  - names run into other text are recovered ("Religion Diannestewart" → Dianne Stewart);
+  - co-authors listed beside the real faculty mentor are dropped;
+  - names that are the presenting student are dropped.
+- Mentors are matched to atlas investigators by name: exact, then nicknames,
+  then one-letter slips. A match only counts when it is unique, and spelling
+  variants of one person are merged.
+- `--report` lists every name dropped, repaired, merged or matched, with the
+  reason. `docs/symposium_mentors_report.md` is the report for v93.
+
+To add a year: put its book in `SOURCES` at the top of the script. A new SURE
+year needs nothing, because the Summer page is re-read. To re-read an
+Issuu-only book properly, download its PDF from Issuu in a browser, add it to
+`SOURCES` with a parser, and its old records are replaced.
