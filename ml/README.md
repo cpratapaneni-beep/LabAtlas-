@@ -268,11 +268,11 @@ every profile.
 
 ```sh
 L="--split ml/split.json --labels ml/gold_labels.csv --extra ml/gold_labels_dept.csv"
-python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v88.html $L
-python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v88.html $L --out ml/report
-python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v88.html $L --out predictions.json
-python3 ml/department_report.py Emory_Lab_Atlas_v88.html predictions.json ml/report/test_predictions.csv $L --out ml/report
-python3 ml/apply_wetdry.py Emory_Lab_Atlas_v88.html predictions.json ml/report/evaluation.csv \
+python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v91.html $L
+python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v91.html $L --out ml/report
+python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v91.html $L --out predictions.json
+python3 ml/department_report.py Emory_Lab_Atlas_v91.html predictions.json ml/report/test_predictions.csv $L --out ml/report
+python3 ml/apply_wetdry.py Emory_Lab_Atlas_v91.html predictions.json ml/report/evaluation.csv \
     --departments ml/report/departments.json --confidence ml/report/confidence.json \
     --corrections ml/lab_corrections.csv -o atlas_out.html
 ```
@@ -282,7 +282,7 @@ refuses an extra label that points at a test-half or already-labelled
 person.
 
 Needs `numpy`, `scipy` and `scikit-learn`. Every run is deterministic;
-re-running `predict` on v88 (whose records are v82's, byte for byte) reproduces its stored predictions exactly. The gold
+up to v88 the records were v82's byte for byte and re-running `predict` reproduced the stored predictions exactly. v90's data block was rebuilt outside this pipeline (NIH grant fields added, 69 investigators' publication lists revised, 43 wet/dry calls changed), and that reproduction has not been re-checked against it. The gold
 labels point at records by position. If the data is re-scraped or re-ordered,
 `wetdry.py` notices that the names no longer match and stops rather than pin a
 label on the wrong person.

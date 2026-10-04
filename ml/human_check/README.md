@@ -19,6 +19,12 @@ none of Claude's labels, so it can be labelled blind. The 150 people are a
 random draw (seed 20260926) from the 400-person locked test set, in random
 order. `make_human_check.py` rebuilds exactly the same workbook.
 
+## Results so far
+
+One labeller returned the sheet in October 2026 (`labelling_sheet_L1.xlsx`).
+The scored report is `results/results.md` and the reading of it, with what
+was and was not changed, is `results/review.md`.
+
 ## Running the check
 
 1. **Choose one or two labellers** who know biomedical research at Emory: a

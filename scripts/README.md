@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v88.html --out Emory_Lab_Atlas_v89.html
+    --atlas Emory_Lab_Atlas_v91.html --out Emory_Lab_Atlas_v92.html
 ```
 
 ### 2. From a machine that can reach the site
