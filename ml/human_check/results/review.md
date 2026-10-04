@@ -33,7 +33,7 @@ the rubric supports Claude's label, and a single labeller cannot show which of
 two readings is wrong. What the check does establish is that the accuracy the
 page publishes is measured against one careful reader, and that a second
 careful reader puts the model about 6 points lower on the people both could
-judge. The page now says so (v91, the model note under "how this works").
+judge. The page now says so (since v91, in the model note under "how this works").
 
 ## Also flagged in the notes
 
