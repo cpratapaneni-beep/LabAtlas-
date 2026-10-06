@@ -19,7 +19,7 @@ Searching or opening the atlas before the data has arrived is remembered and
 done as soon as it lands.
 
 Usage
-  python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v95.html --out site \\
+  python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v96.html --out site \\
       --site-url https://labatlas.example.edu/
   (--site-url makes the share image and canonical links absolute, which link
    previews need; leave it out for a local preview: python3 -m http.server -d site)
