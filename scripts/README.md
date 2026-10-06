@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v93.html --out Emory_Lab_Atlas_v94.html
+    --atlas Emory_Lab_Atlas_v94.html --out Emory_Lab_Atlas_v95.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -150,7 +150,7 @@ summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
 that data and can write it straight into the page:
 
 ```bash
-python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v93.html \
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v94.html \
     --cache build/symposia --fetch \
     --out build/surehist.json --report build/symposium_report.md \
     --write-atlas
@@ -172,9 +172,59 @@ python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v93.html \
   then one-letter slips. A match only counts when it is unique, and spelling
   variants of one person are merged.
 - `--report` lists every name dropped, repaired, merged or matched, with the
-  reason. `docs/symposium_mentors_report.md` is the report for v93.
+  reason. `docs/symposium_mentors_report.md` is the report for the current page.
+
+- **Students' names are not published.** The page keeps each project's mentor,
+  year, program, title, number of presenting students and a link to the book
+  page. The script keeps the full 2007–2019 records (with names) in
+  `build/symposia/legacy_records.json`, which is gitignored and stays on your
+  machine. If you start from a fresh clone without that file, rebuild it from
+  the v93 page in git history:
+  `git show 371c904:Emory_Lab_Atlas_v93.html > build/v93.html`, then run the
+  script once with `--atlas build/v93.html`. Use `--keep-students` only for
+  internal checking.
 
 To add a year: put its book in `SOURCES` at the top of the script. A new SURE
 year needs nothing, because the Summer page is re-read. To re-read an
 Issuu-only book properly, download its PDF from Issuu in a browser, add it to
 `SOURCES` with a parser, and its old records are replaced.
+
+# Deploying the site, and the two settings to fill in
+
+## Settings in the page
+
+Search the HTML for these placeholders and replace them; left as they are, the
+feature stays switched off:
+
+- `__CONTACT_EMAIL__` is the address behind the Contact link and the "Want this
+  for your campus?" form. While it's unset, both are hidden.
+- `__ANALYTICS_KIND__`, `__ANALYTICS_ENDPOINT__`, `__ANALYTICS_DOMAIN__` and
+  `__ANALYTICS_WEBSITE__` turn on usage counts. The page counts searches,
+  profile opens, email clicks, saves, outreach marks and experiences saved.
+  Counts never include names, search text or cookies, and nothing is counted
+  when the browser sends Do Not Track or Global Privacy Control.
+  - Plausible: kind `plausible`, endpoint `https://plausible.io/api/event` (or
+    your own instance), domain = the site's domain.
+  - Umami: kind `umami`, endpoint `https://<your-umami>/api/send`, website = the
+    site id.
+  - Counting only happens on a page served over http(s), never on a file
+    opened from disk.
+
+## A fast site for phones (`scripts/build_site.py`)
+
+```bash
+node scripts/og_image.mjs og-image.png            # the link-preview image (needs playwright)
+python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v94.html --out site \
+    --site-url https://your-domain/
+```
+
+This writes `site/`:
+- `index.html` is the page without its data or code (about 430 KB), so the landing shows at once.
+- `data/` and `app/` hold the records and scripts, which load next and are cached by the browser.
+- `departments/` has one plain page per department, readable by search engines
+  and AI assistants without JavaScript.
+- `sitemap.xml`, `robots.txt` and the share image complete it.
+
+A search typed before the data arrives runs as soon as it does. Put `site/` on
+any static host with gzip or brotli turned on (GitHub Pages, Netlify,
+Cloudflare Pages).

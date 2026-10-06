@@ -268,11 +268,11 @@ every profile.
 
 ```sh
 L="--split ml/split.json --labels ml/gold_labels.csv --extra ml/gold_labels_dept.csv"
-python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v93.html $L
-python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v93.html $L --out ml/report
-python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v93.html $L --out predictions.json
-python3 ml/department_report.py Emory_Lab_Atlas_v93.html predictions.json ml/report/test_predictions.csv $L --out ml/report
-python3 ml/apply_wetdry.py Emory_Lab_Atlas_v93.html predictions.json ml/report/evaluation.csv \
+python3 ml/wetdry.py cv       --data Emory_Lab_Atlas_v94.html $L
+python3 ml/wetdry.py evaluate --data Emory_Lab_Atlas_v94.html $L --out ml/report
+python3 ml/wetdry.py predict  --data Emory_Lab_Atlas_v94.html $L --out predictions.json
+python3 ml/department_report.py Emory_Lab_Atlas_v94.html predictions.json ml/report/test_predictions.csv $L --out ml/report
+python3 ml/apply_wetdry.py Emory_Lab_Atlas_v94.html predictions.json ml/report/evaluation.csv \
     --departments ml/report/departments.json --confidence ml/report/confidence.json \
     --corrections ml/lab_corrections.csv -o atlas_out.html
 ```
@@ -286,3 +286,18 @@ up to v88 the records were v82's byte for byte and re-running `predict` reproduc
 labels point at records by position. If the data is re-scraped or re-ordered,
 `wetdry.py` notices that the names no longer match and stops rather than pin a
 label on the wrong person.
+
+## Confidence held to the evidence (v94)
+
+The model's confidence is calibrated on records with titles to read. From v94
+the page holds it to what a record can carry:
+
+| Evidence on record | What the page does | Records |
+|---|---|---|
+| No paper titles or grants (profile text only) | Unclassified, as the gold-label rubric already says. The profile's own reading is kept as `lp` and shown in words. | 225 |
+| One title or grant in all | Confidence capped at 65% (low) | 713 |
+| Two | Confidence capped at 80% (moderate) | 473 |
+
+A capped record keeps the model's own figure as `cf0` and the number of pieces
+of evidence as `cap`. Its profile says "based on 1 paper title" and why the
+figure was held down. Corrections from people who know the lab are left alone.

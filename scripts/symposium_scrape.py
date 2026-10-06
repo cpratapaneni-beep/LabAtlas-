@@ -35,7 +35,7 @@ middle names and initials, then a nickname table, then one-letter spelling
 slips; a match is taken only when it is unique.
 
 Usage
-  python scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v93.html \
+  python scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v94.html \
       --cache build/symposia --fetch --out build/surehist.json \
       --report build/symposium_report.md
   # then splice build/surehist.json into the page's <script id="surehist">
@@ -217,6 +217,10 @@ class Names:
             if kf == f and len(l) >= 6 and lev1(kl, l): cands.update(v)
             elif kl == l and len(f) >= 5 and lev1(kf, f): cands.update(v)
         if len(cands) == 1: return cands.pop(), 'spelling'
+        # a longer or shorter form of the first name (Shrutiben / Shruti)
+        cands = {i for k, v in self.by_key.items() if k.split(' ', 1)[1] == l and len(f) >= 4
+                 and len(k.split(' ', 1)[0]) >= 4 and same_first(f, k.split(' ', 1)[0]) for i in v}
+        if len(cands) == 1: return cands.pop(), 'longer or shorter first name'
         # a hyphenated surname given in part
         if '-' not in l:
             ids = [i for i in self.by_last.get(l, []) if tokens(self.pis[i]['n'])[0] == f and '-' in tokens(self.pis[i]['n'])[-1]]
@@ -363,12 +367,19 @@ def parse_2021(path, src):
             if l.startswith('Presentation Link:') or l.startswith('Presentation Time:'):
                 start = i + 1
             if not l.startswith('Presenter/s:'): continue
-            mentor = next((x.split(':', 1)[1] for x in lines[i + 1:i + 4] if x.startswith('Emory Faculty Mentor:')), '')
+            mentor = next((x.split(':', 1)[1] for x in lines[i + 1:i + 4] if re.match(r'(Emory )?Faculty Mentors?:', x)), '')
             head = [x for x in lines[start:i] if x]
             # the author list ('Last, First; Last, First ...', which may wrap) follows the title
-            j = next((k for k in range(1, len(head))
-                      if re.match(r"^(Author \d+\s+)?[^\s,;][^,;]{0,40},\s*\S", head[k])
-                      and (';' in ' '.join(head[k:]) or k == len(head) - 1)), len(head))
+            pres = tidy(l.split(':', 1)[1]).lower()
+            def authorish(k):
+                x = head[k]
+                if re.match(r"^(Author \d+\s+)?[^\s,;][^,;]{0,40},\s*\S", x) and (';' in ' '.join(head[k:]) or k == len(head) - 1):
+                    return True          # Last, First; Last, First
+                segs = [g.strip() for g in x.split(';') if g.strip()]
+                if len(segs) >= 2 and all(1 <= len(g.split()) <= 5 and not re.search(r'[:.?]$', g) for g in segs):
+                    return True          # First Last; First Last
+                return bool(pres) and pres.split(' and ')[0] in x.lower()   # the presenter's own name starts the list
+            j = next((k for k in range(1, len(head)) if authorish(k)), len(head))
             title = tidy(' '.join(head[:j]))
             out.append(dict(student=tidy(l.split(':', 1)[1]), title=title, mentors=split_people(mentor),
                             authors=tidy(' '.join(head[j:])), page=pno))
@@ -458,7 +469,12 @@ def main():
     ap.add_argument('--out', default='build/surehist.json')
     ap.add_argument('--report', default=None)
     ap.add_argument('--write-atlas', action='store_true', help='splice the result into --atlas in place')
+    ap.add_argument('--keep-students', action='store_true',
+                    help='keep presenting students\' names in the output (default: left out; the page shows a count)')
+    ap.add_argument('--legacy-cache', default=None,
+                    help='the 2007-2019 records with student names, kept outside the page (default: <cache>/legacy_records.json)')
     a = ap.parse_args()
+    a.legacy_cache = a.legacy_cache or os.path.join(a.cache, 'legacy_records.json')
 
     pis, vocab, old, page = read_atlas(a.atlas)
     names = Names(pis, vocab)
@@ -486,17 +502,29 @@ def main():
         fresh += recs
         print('%-34s %4d presentations' % (label, len(recs)), file=sys.stderr)
 
-    # 2. the old records, from books that were not parsed fresh
+    # 2. the old records, from books that were not parsed fresh. The page no
+    #    longer carries students' names, so the full records are kept in a local
+    #    cache (never published); a page that still has the names refreshes it.
+    has_names = any(r.get('student') for m in old.get('mentors', []) for r in m.get('records', []))
+    if not has_names and os.path.exists(a.legacy_cache):
+        old = json.load(open(a.legacy_cache, encoding='utf-8'))
+        print('old records from', a.legacy_cache, file=sys.stderr)
+    elif has_names:
+        os.makedirs(os.path.dirname(os.path.abspath(a.legacy_cache)), exist_ok=True)
+        json.dump({'mentors': old.get('mentors', [])}, open(a.legacy_cache, 'w', encoding='utf-8'), ensure_ascii=False)
+    else:
+        print('note: no student names in the page and no', a.legacy_cache, '- the checks that compare mentors with '
+              'students are skipped for the old records', file=sys.stderr)
     legacy = collections.defaultdict(lambda: dict(mentors=[]))
     for m in old.get('mentors', []):
         for r in m.get('records', []):
             src = r.get('source', '')
             if src in replaced or src in srcmeta or src.startswith('news_'): continue
-            k = (src, r.get('y'), r.get('student', ''), r.get('title', '')) if r.get('student') else (src, r.get('y'), id(r))
+            k = (src, r.get('y'), r.get('student', ''), r.get('title', '')) if (r.get('student') or r.get('title')) else (src, r.get('y'), id(r))
             L = legacy[k]
             L.update(y=r.get('y'), term=r.get('term'), program=r.get('program'), student=tidy(r.get('student', '')),
                      title=r.get('title', ''), page=r.get('page', ''), source=LEGACY.get(src, src),
-                     url=r.get('url') or (ISSUU + src if src in LEGACY else ''), book=False)
+                     url=r.get('url') or (ISSUU + src if src in LEGACY else ''), book=False, ns=r.get('ns'))
             L['mentors'].append(m['name'])
             if L['student']:
                 for st in split_people(L['student']): names.learn(st, student=True)
@@ -517,12 +545,17 @@ def main():
     for r in fresh + list(legacy.values()):
         raw = list(dict.fromkeys(r['mentors']))
         if not raw and r.get('authors'):
-            # no mentor printed: the book's last author, if a known faculty member
-            last = re.split(r';', r['authors'])[-1]
-            if ',' in last:
-                ln, fn = [x.strip() for x in last.split(',', 1)]
+            # no mentor printed: the last author who is known faculty, if any
+            for au in reversed(r['authors'].split(';')):
+                if ',' not in au: continue
+                ln, fn = [x.strip() for x in au.split(',', 1)]
                 cand = smart_case(fn + ' ' + ln)
-                if names.known(cand): raw = [cand]; log['mentor from last author'].append(cand)
+                if names.known(cand):
+                    raw = [cand]; log['mentor taken from the author list (none printed)'].append(cand); break
+            else:
+                log['dropped: no mentor printed and no known faculty among the authors'].append(r['title'][:90])
+        elif not raw:
+            log['dropped: no mentor printed and no author list'].append(r['title'][:90])
         cleaned = []
         for m in raw:
             for nm, why in clean_names(m, names, strict=not r['book']):
@@ -541,19 +574,20 @@ def main():
         studs = [fold(x).lower() for x in split_people(r['student'])]
         stud_keys = {key(x) for x in studs}
         title = fix_title(r['title'], r['student'])
-        if title != tidy(r['title']): log['title repaired'].append('%s -> %s' % (tidy(r['title'])[:80], title[:80]))
+        if title != tidy(r['title']): log['title repaired'].append(title[:90])
         for c in dict.fromkeys(cleaned):
             k = key(c)
             cl = fold(c).lower()
             if k in stud_keys or any(same_person(c, x) for x in studs) or \
                     (not r['book'] and k in names.students and not names.known(c)) or \
                     any(len(x) >= 6 and (cl.startswith(x + ' ') or cl.endswith(x)) for x in studs):
-                log['dropped: the presenting student, not a mentor'].append(c); continue
+                log['dropped: the presenting student, not a mentor'].append(None); continue
             pid, how = names.match(c)
-            if how in ('nickname', 'spelling', 'hyphen'): log['matched to atlas by ' + how].append('%s -> %s' % (c, pis[pid]['n']))
+            if how in ('nickname', 'spelling', 'hyphen', 'longer or shorter first name'): log['matched to atlas by ' + how].append('%s -> %s' % (c, pis[pid]['n']))
             P = person(c, pid)
             rec = dict(y=r['y'], term=r['term'], program=r['program'], student=r['student'], title=title,
-                       source=r['source'], page=r['page'])
+                       source=r['source'], page=r['page'],
+                       ns=len(split_people(r['student'])) if r['student'] else (r.get('ns') or 1))
             if r.get('url'): rec['url'] = r['url']
             if rec not in P['records']: P['records'].append(rec)
 
@@ -578,11 +612,13 @@ def main():
     ref = a.ref_year or max([r['y'] for r in fresh] + [r.get('y') or 0 for r in legacy.values()] + [0])
     mentors = []
     for P in people.values():
-        recs = sorted(P['records'], key=lambda r: (-r['y'], r['student']))
+        recs = sorted(P['records'], key=lambda r: (-r['y'], r['title'], r['student']))
         studs = set()
         for r in recs:
-            ss = split_people(r['student']) if r['student'] else ['#%d' % id(r)]
+            ss = split_people(r['student']) if r['student'] else ['#%d.%d' % (id(r), i) for i in range(r['ns'])]
             studs.update(key(s) or s for s in ss)
+        if not a.keep_students:
+            for r in recs: r.pop('student', None)
         mentors.append(dict(name=P['name'], pi_id=P['pi_id'], programs=sorted({r['program'] for r in recs}),
                             years=sorted({r['y'] for r in recs}), n_students=len(studs), records=recs))
     mentors.sort(key=lambda m: (-m['n_students'], m['name']))
@@ -612,7 +648,10 @@ def main():
             f.write('| project records | %d | %d |\n\n' % (sum(len(m['records']) for m in oldm), sum(len(m['records']) for m in mentors)))
             f.write('Records are counted once per mentor they are listed under, so "before" includes a copy for every '
                     'fragment and co-author name that sat in a mentor slot.\n\n')
+            f.write('Students\' names are not listed here or published in the page.\n\n')
             for k in sorted(log):
+                if all(x is None for x in log[k]):
+                    f.write('## %s (%d)\n\nNames not listed.\n\n' % (k, len(log[k]))); continue
                 v = list(dict.fromkeys(log[k]))
                 f.write('## %s (%d)\n\n' % (k, len(v)))
                 f.writelines('- %s\n' % x for x in sorted(v))
