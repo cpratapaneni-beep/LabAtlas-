@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v94.html --out Emory_Lab_Atlas_v95.html
+    --atlas Emory_Lab_Atlas_v95.html --out Emory_Lab_Atlas_v96.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -150,7 +150,7 @@ summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
 that data and can write it straight into the page:
 
 ```bash
-python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v94.html \
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v95.html \
     --cache build/symposia --fetch \
     --out build/surehist.json --report build/symposium_report.md \
     --write-atlas
@@ -214,7 +214,7 @@ feature stays switched off:
 
 ```bash
 node scripts/og_image.mjs og-image.png            # the link-preview image (needs playwright)
-python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v94.html --out site \
+python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v95.html --out site \
     --site-url https://your-domain/
 ```
 
@@ -228,3 +228,51 @@ This writes `site/`:
 A search typed before the data arrives runs as soon as it does. Put `site/` on
 any static host with gzip or brotli turned on (GitHub Pages, Netlify,
 Cloudflare Pages).
+
+# Google Drive sync (`scripts/drive_sync.py`, `.github/workflows/drive-sync.yml`)
+
+This keeps the shared "Emory Lab Atlas" Drive folder and the repository in step.
+- **Every new version is published to the folder.** A push that adds or
+  changes `Emory_Lab_Atlas_v*.html` uploads it, and the folder's
+  `Lab Atlas versions.md` lists every version, newest first.
+- **Versions others put in the folder are merged in.** Every 3 hours, and on
+  demand from the Actions tab, any atlas HTML in the folder or its subfolders
+  that the pipeline did not publish is downloaded. A collaborator's
+  `v96 kt/Emory_Lab_Atlas_v96_kt.html` is one. Each one is merged into the
+  current version three ways, against the earlier version it started from:
+  - the page and its scripts merge line by line;
+  - the records merge person by person and field by field;
+  - where both sides changed the same thing, ours is kept and the clash is listed.
+
+  The result is committed as the next version, with its report in `docs/merges/`,
+  and published back to the folder.
+
+## One-time setup (about 10 minutes)
+
+1. In Google Cloud Console, create a project, enable the **Google Drive API**,
+   and create an **OAuth client ID** of type **Desktop app**. Note its client ID
+   and secret.
+2. On your own machine, run:
+   ```bash
+   GDRIVE_CLIENT_ID=... GDRIVE_CLIENT_SECRET=... python3 scripts/drive_sync.py auth
+   ```
+   Sign in with an account that can edit the folder. The command prints a
+   refresh token.
+3. In the GitHub repository, add four secrets under Settings → Secrets and
+   variables → Actions:
+   - `GDRIVE_CLIENT_ID`
+   - `GDRIVE_CLIENT_SECRET`
+   - `GDRIVE_REFRESH_TOKEN`
+   - `GDRIVE_FOLDER_ID`: the id in the folder's URL; for "Emory Lab Atlas" it
+     is `14_ZcVAechYZ-Hqbex3s2IdGag2GuU3gG`.
+4. Scheduled runs use the workflow file on the default branch. Either merge this
+   branch into it, or set the repository variable `ATLAS_BRANCH` to the branch
+   the atlas lives on.
+
+To try it by hand without Drive, use a plain folder:
+`python3 scripts/drive_sync.py --local /tmp/fake-drive sync --repo .`
+
+The folder also holds a data archive whose README marks one bundle (the
+private search-benchmark labels) as not to be shared with implementation
+agents. The pipeline only looks at `Emory_Lab_Atlas_v*.html` files and never
+opens the archives.
