@@ -247,7 +247,28 @@ This keeps the shared "Emory Lab Atlas" Drive folder and the repository in step.
   The result is committed as the next version, with its report in `docs/merges/`,
   and published back to the folder.
 
-## One-time setup (about 10 minutes)
+## Publishing every version: `scripts/drive_publish.gs` (2 minutes)
+
+The publishing half doesn't need Google Cloud. `drive_publish.gs` is a Google
+Apps Script that runs in your own Google account. Every hour it reads the
+repository, and if the newest `Emory_Lab_Atlas_vNN.html` (on
+`claude/exciting-carson-83od2i` or `main`) isn't in the folder yet, it copies
+it there. It also writes the row in `Lab Atlas versions.md`, and it uses the
+same bookkeeping file as `drive_sync.py`, so the two never duplicate a
+version.
+
+1. Open <https://script.google.com>, choose **New project**, replace the
+   editor's contents with `scripts/drive_publish.gs`, and save.
+2. Choose `install` in the function menu, press **Run**, and allow access.
+   Sign in as an account that can edit the folder.
+
+`install` publishes the current version at once and schedules the hourly
+check; `uninstall` stops it. Apps Script handles files up to 50 MB; the
+atlas is about 38 MB.
+
+## Merging versions from the folder: one-time setup (about 10 minutes)
+
+The merging half runs in GitHub Actions and needs Drive credentials:
 
 1. In Google Cloud Console, create a project, enable the **Google Drive API**,
    and create an **OAuth client ID** of type **Desktop app**. Note its client ID
