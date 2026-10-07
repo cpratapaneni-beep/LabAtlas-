@@ -35,7 +35,7 @@ middle names and initials, then a nickname table, then one-letter spelling
 slips; a match is taken only when it is unique.
 
 Usage
-  python scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v100.html \
+  python scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v101.html \
       --cache build/symposia --fetch --out build/surehist.json \
       --report build/symposium_report.md
   # then splice build/surehist.json into the page's <script id="surehist">
