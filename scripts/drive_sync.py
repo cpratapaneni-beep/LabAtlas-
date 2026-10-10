@@ -36,10 +36,10 @@ Credentials (never stored in the repository)
 
 Usage
   python3 scripts/drive_sync.py auth                       # once, on your machine
-  python3 scripts/drive_sync.py push Emory_Lab_Atlas_v102.html
+  python3 scripts/drive_sync.py push Emory_Lab_Atlas_v103.html
   python3 scripts/drive_sync.py pull --to build/incoming
-  python3 scripts/drive_sync.py merge build/incoming/X.html --ours Emory_Lab_Atlas_v102.html \\
-      --out Emory_Lab_Atlas_v102.html --report build/merge_report.md
+  python3 scripts/drive_sync.py merge build/incoming/X.html --ours Emory_Lab_Atlas_v103.html \\
+      --out Emory_Lab_Atlas_v103.html --report build/merge_report.md
   python3 scripts/drive_sync.py sync                       # all of the above, as the workflow does
   Any command takes --local DIR to use a plain folder instead of Drive (tests).
 """
