@@ -68,6 +68,10 @@ USE_DEPT = False
 USE_GRANTS = False
 GRANT_SCALE = 1.0
 DEPT_SCALE = 1.0
+# With THIN set, the grant and department features are scaled by how little the
+# record's own titles say: full weight with no titles, half at THIN titles,
+# fading as titles accumulate. A record with many titles is placed by its titles.
+THIN = 0
 # NIH activity codes: the R01 class (a lab's own main research awards), and the
 # codes whose titles say nothing about the holder's own research (training,
 # centre cores, shared instruments, conferences, resources)
@@ -514,16 +518,17 @@ def stack_features(V, tm, cm, people):
              _logit(cp)[:, None], np.log1p(V.ngrant[people])[:, None], V.deg[people]]
     if USE_LEX:
         feats.append(V.lex[people])
+    thin = (1.0 / (1.0 + ta[:, 3:4] / math.log1p(THIN))) if THIN else 1.0   # ta[:, 3] is log1p(#titles)
     if USE_GRANTS:
-        feats.append(GRANT_SCALE * V.grant_feats(tm, people))
+        feats.append(GRANT_SCALE * thin * V.grant_feats(tm, people))
     if USE_DEPT:
         dc = V.dept_context(tm)[people]
         tl = _logit(ta[:, 0:1])
         # the department signal, the hand-typed department mix, and the title
         # score read relative to the department (a middling bench signal means
         # more in a clinical unit than in a basic-science one)
-        feats += ([DEPT_SCALE * dc] if USE_DEPT == 'context' else
-                  [DEPT_SCALE * dc, DEPT_SCALE * V.utype[people], DEPT_SCALE * tl * dc[:, 0:1]])
+        feats += ([DEPT_SCALE * thin * dc] if USE_DEPT == 'context' else
+                  [DEPT_SCALE * thin * dc, DEPT_SCALE * thin * V.utype[people], DEPT_SCALE * thin * tl * dc[:, 0:1]])
     return np.hstack(feats)
 
 
