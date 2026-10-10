@@ -1,0 +1,1076 @@
+"""Wet/dry lab classifier for the Emory Lab Atlas, trained on hand-checked labels.
+
+The atlas used to place every investigator on the wet/dry axis with a
+hand-weighted keyword score (model v3.1). This module replaces it with a model
+fitted to a gold set of 800 investigators labelled by reading their records
+(see LABELLING_RUBRIC.md). Half of the gold set trains the model; the other
+half is locked away and only ever used by `evaluate`.
+
+What the model reads, per investigator:
+  * every publication title on the record (the main signal),
+  * the profile text, grant titles, departments/centres and degrees.
+
+How it decides:
+  1. A title model scores each publication title for bench-lab wording. It is
+     trained on the titles of gold wet investigators (target 1) and gold dry
+     investigators (target 0), each person's titles weighted so a prolific
+     author counts once, not once per paper.
+  2. A context model scores the profile, grants, departments and degrees.
+  3. A small stacking model turns the per-title scores (mean, upper quartile,
+     share above 0.5, count) and the context score into P(wet). Hybrid gold
+     labels enter as half wet, half dry.
+  4. P(wet) picks the side, and the mix of the record's titles (how many read
+     as bench work, how many use a dry method: computation, omics analysis,
+     modelling, cohorts, trials) picks the setting on it: wet, leans wet,
+     hybrid, leans dry, dry (see MIX). A record with no titles, no grants and
+     too little profile text to judge is left unclassified instead of guessed at.
+  5. Every placed record gets a confidence: the chance its call is right,
+     learnt from how often out-of-fold calls on hand-labelled people were
+     right (see Confidence). `evaluate` checks it on the locked test set.
+
+Stages 1-2 feed stage 3 with out-of-fold scores, so the stacker never sees a
+score produced by a model that was trained on the same person.
+
+Usage (from the repository root):
+  python ml/wetdry.py cv       --data atlas.html --split ml/split.json --labels ml/gold_labels.csv
+  python ml/wetdry.py evaluate --data atlas.html --split ml/split.json --labels ml/gold_labels.csv --out ml/report
+  python ml/wetdry.py predict  --data atlas.html --split ml/split.json --labels ml/gold_labels.csv --out predictions.json
+
+`--data` accepts either the atlas JSON or the atlas HTML file itself.
+Needs numpy, scipy and scikit-learn.
+"""
+import argparse
+import csv
+import json
+import math
+import os
+import re
+import sys
+
+import numpy as np
+from scipy.sparse import csr_matrix, hstack
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedKFold
+
+MODEL_VERSION = 'wd-2026.10.1'
+SEED = 20260925
+USE_LEX = True
+# Department features (colleagues' scores, hand-typed department mix) were built
+# and tested. They did not help on the random sample and cost 3-4 points on the
+# department-targeted hard cases, so they are off; department typing is used to
+# choose whom to label and to report accuracy by department instead.
+USE_DEPT = False
+# Grant titles read by the title model, R01-class awards counted double, enter
+# the stacker as features of their own (see grant_rows); GRANT_SCALE and
+# DEPT_SCALE multiply those features, so the stacker's penalty holds them back
+# less and they can carry more weight.
+USE_GRANTS = False
+GRANT_SCALE = 1.0
+DEPT_SCALE = 1.0
+# With THIN set, the grant and department features are scaled by how little the
+# record's own titles say: full weight with no titles, half at THIN titles,
+# fading as titles accumulate. A record with many titles is placed by its titles.
+THIN = 0
+# Department and R01 nudge, applied after the model: a record in a basic-science
+# unit, or holding an R01-class grant whose titles read as bench work, has its
+# log-odds of wet raised by 'unit' and 'r01', scaled down as its own titles grow
+# (half strength at 'thin' titles). Learned department and grant features were
+# tried first and lost accuracy on the department-targeted hard cases (they pull
+# everyone toward their department's usual side); this nudge only lifts records
+# whose titles are few and whose department and funding both say bench. The
+# values were chosen on out-of-fold calls on the training side only.
+NUDGE_TUNED = {'unit': 0.5, 'r01': 1.0, 'thin': 8, 'types': ('basic_science',)}
+# off until checked once on the locked test set
+NUDGE = None
+# NIH activity codes: the R01 class (a lab's own main research awards), and the
+# codes whose titles say nothing about the holder's own research (training,
+# centre cores, shared instruments, conferences, resources)
+R01_CLASS = {'R01', 'R37', 'RF1', 'R35', 'DP1', 'DP2', 'DP5', 'R56', 'U01'}
+NOT_RESEARCH = re.compile(r'^(T\d\d|F\d\d|R25|R36|D43|D71|K12|KL2|TL1|P30|P51|UL1|S10|G20|R13|U13|U24|R24|U2C|UC7|C06)$')
+_NOT_RESEARCH_TITLE = re.compile(r'\b(training (program|grant)|fellowship|scholars? program|career development|'
+                                 r'core facility|shared instrument|conference|symposium)\b', re.I)
+# self-training thresholds on P(wet) for unlabelled records, and their weight
+PSEUDO = (0.90, 0.02)
+PSEUDO_WEIGHT = 0.3
+
+# P(wet) decides the side: the wet side from 0.50, the dry side at 0.30 or below,
+# hybrid between. How sure the call is lives in the confidence, not in the state.
+BANDS = {'wet_side': 0.50, 'dry_side': 0.30,
+         # a record with no titles is placed only beyond these stricter lines
+         'bare_wet': 0.70, 'bare_dry': 0.02}
+
+# The mix of a record's work decides where on its side it sits. Each title is
+# read twice: by the title model (does it read as bench work?) and by
+# DRY_METHOD (is its method computation, prediction, omics analysis, a cohort
+# or a trial, whatever its topic?). "Multi-omics analyses reveal that HIV-1
+# alters CD4 T cell immunometabolism" is both, which is what a systems lab
+# looks like.
+#   wet side: hybrid when dry-method titles are 30% or more of the record (and
+#             bench titles a quarter or more), leans wet when they are 10% or
+#             more, wet otherwise;
+#   dry side: leans dry when bench titles with no dry method are 10% or more,
+#             dry otherwise.
+# The 30% line was chosen by cross-validation on the random training half,
+# where it raised hybrid F1 from 0.32 to 0.48 and accuracy from 95.7% to 96.2%.
+# A dry-side hybrid rule was tested the same way and lost accuracy (genomics and
+# modelling titles read as bench work to the title model), so there is none.
+# The 10% lines are definitions, not fits: no gold label says "leans".
+MIX = {'hybrid_dry_share': 0.30, 'hybrid_bench_floor': 0.25, 'lean_share': 0.10, 'min_titles': 2}
+DRY_METHOD = re.compile(
+    r"\b(multi-?omics?|omics|systems (immunology|biology|vaccinology|serology|approach\w*)|"
+    r"machine learning|deep learning|artificial intelligence|neural networks?|computational|in silico|"
+    r"bioinformatic\w*|algorithms?|software|pipeline|model(l)?ing|mathematical models?|simulations?|"
+    r"predict(s|ed|ing|ion|ions|ive|or|ors)?|prognostic models?|signatures?|interactome|network analysis|"
+    r"integrative|integrated analysis|meta-analysis|data ?(resource|base|sets?)|datasets?|compendium|"
+    r"atlas of|statistical|bayesian|genome-wide association|gwas|mendelian randomi[sz]ation|"
+    r"cohorts?|trials?|randomi[sz]ed|retrospective|prospective|registry|epidemiolog\w*|prevalence|"
+    r"incidence|surveillance|case reports?|case series|survey\w*|outcomes)\b", re.I)
+
+STATE = {'none': 0, 'wet': 1, 'dry': 2, 'hybrid': 3, 'lean_wet': 4, 'lean_dry': 5}
+SIDE = {0: None, 1: 'W', 4: 'W', 2: 'D', 5: 'D', 3: 'H'}
+
+
+# ---------------------------------------------------------------- data access
+def load_data(path):
+    txt = open(path, encoding='utf-8').read()
+    # the atlas HTML, or a bare data part still wrapped in its <script> tag
+    if path.lower().endswith(('.html', '.htm')) or txt.lstrip().startswith('<'):
+        m = re.search(r'<script[^>]*id="atlasdata"[^>]*>(.*?)</script>', txt, re.S)
+        if not m:
+            sys.exit('no <script id="atlasdata"> in ' + path)
+        txt = m.group(1)
+    D = json.loads(txt)
+    if 'wd' in D and any('l31' not in p for p in D['pis']):
+        # v78 overwrote the keyword score's label; comparing against it would
+        # compare the model with its own earlier output
+        sys.exit(path + ' already carries model labels and no copy of the v3.1 label (l31); '
+                 'use a pre-model atlas or v79 or later')
+    return D
+
+
+def load_gold(labels_path, split_path, D=None, extra_path=None):
+    """gold[person_index] = 'W'|'H'|'D'|'U', plus the train/test index sets.
+
+    The random gold set is addressed through split.json. An extra label file
+    (the department-stratified labels, chosen where the model was least sure)
+    names its people by index and only ever adds to the training side: those
+    people were picked by looking at model output, so they can never stand in
+    for a random test sample.
+
+    The labels point at people by their position in the data. If the file
+    carries names and the data is given, every one is checked, so a re-scraped
+    or re-ordered atlas cannot silently pin a label on the wrong person."""
+    split = json.load(open(split_path))
+    order = split['order']
+    gold, wrong = {}, []
+    train, test = set(split['train']), set(split['test'])
+    files = [(labels_path, False)] + ([(extra_path, True)] if extra_path else [])
+    for path, extra in files:
+        for r in csv.DictReader(open(path, encoding='utf-8')):
+            i = int(r['index']) if extra else order[int(r['code'][1:])]
+            if D is not None and r.get('name') and (i >= len(D['pis']) or D['pis'][i]['n'] != r['name']):
+                wrong.append(r['code'])
+            if extra:
+                if i in test or i in gold:
+                    sys.exit('extra label %s points at a person already in the gold set' % r['code'])
+                train.add(i)
+            gold[i] = r['label']
+    if wrong:
+        sys.exit('%d gold labels no longer point at the person they were given to (%s ...); '
+                 'the data has changed order since labelling' % (len(wrong), ', '.join(wrong[:5])))
+    return gold, train, test
+
+
+# boilerplate that says nothing about the method of the underlying work
+_TITLE_NOISE = re.compile(
+    r'^(abstract\s+[a-z]*\d+[a-z]?\s*:|faculty opinions recommendation of|'
+    r'(supplementary|supplemental)\s+\w+( \w+)? from|table s\d+ from|figure s\d+ from|'
+    r'movie s\d+ from|data s\d+ from|correction( to)?:|erratum( to)?:|'
+    r'corrigendum( to)?|publisher correction:|author correction:)\s*', re.I)
+_CODE = re.compile(r'^[#]?\s*[a-z]{0,6}[- ]?\d{1,5}[a-z]?[.:]\s+', re.I)
+
+
+def clean_title(t):
+    t = str(t or '').strip()
+    for _ in range(2):
+        t = _TITLE_NOISE.sub('', t)
+        t = _CODE.sub('', t)
+    return t.lower()
+
+
+def _title_key(t):
+    return re.sub(r'[^a-z0-9]+', '', t)
+
+
+def titles_of(p, raw=False):
+    """Cleaned, de-duplicated titles; with raw=True, the original wording of each.
+    A title listed again with something appended (a journal name, a full stop)
+    counts once: two titles are the same when one's letters and digits start
+    the other's and the shorter has at least 40 of them."""
+    out, keys = [], []
+    for e in p.get('p') or []:
+        r = str(e[0] if isinstance(e, list) else e or '').strip()
+        t = clean_title(r)
+        if len(t) < 12:
+            continue
+        k = _title_key(t)
+        if any(k == q or (min(len(k), len(q)) >= 40 and (k.startswith(q) or q.startswith(k))) for q in keys):
+            continue
+        keys.append(k)
+        out.append(r if raw else t)
+    return out
+
+
+def grant_rows(p):
+    """The research grant titles on a record, each with its weight and whether it
+    is R01-class. NIH awards carry their activity code; other grant titles (DoD,
+    foundations) count once, unless the title says it is a training or core award."""
+    out, seen = [], set()
+    for g in p.get('nih') or []:
+        t, code = str(g[0] or '').strip(), str(g[5] or '').upper()
+        k = _title_key(t.lower())
+        if not t or k in seen or NOT_RESEARCH.match(code):
+            seen.add(k)
+            continue
+        seen.add(k)
+        r01 = code in R01_CLASS
+        out.append((t.lower(), 2.0 if r01 else 1.0, r01))
+    for t in p.get('gn') or []:
+        t = str(t or '').strip()
+        k = _title_key(t.lower())
+        if not t or k in seen or _NOT_RESEARCH_TITLE.search(t):
+            continue
+        seen.add(k)
+        out.append((t.lower(), 1.0, False))
+    return out
+
+
+# a profile made of a patient's review says nothing about the lab
+_REVIEW = re.compile(r"\b(my (doctor|wife|husband|son|daughter|pcp|visit)|i (was|had|have|felt|needed)|"
+                     r"highly recommend|recommend (him|her|dr)|listens? to me|made me feel)\b", re.I)
+
+
+def bio_of(p):
+    b = str(p.get('b') or '')
+    return '' if _REVIEW.search(b) else b
+
+
+def context_text(p, D):
+    units = [str(D['depts'][j].get('n', '')) for j in p.get('d') or [] if j < len(D['depts'])]
+    insts = [str(D['insts'][j].get('k', '')) for j in p.get('i') or [] if j < len(D['insts'])]
+    kw = []
+    for t in p.get('t') or []:
+        kw.extend(t if isinstance(t, list) else [t])
+    deg = str(p.get('g') or '')
+    parts = [bio_of(p), ' '.join(p.get('gn') or []), ' '.join(kw),
+             ' '.join('unit_' + re.sub(r'\W+', '_', u.lower()) for u in units),
+             ' '.join('inst_' + i.lower() for i in insts),
+             ' '.join('deg_' + d.lower() for d in re.findall(r'[A-Za-z]+', deg))]
+    return ' '.join(x for x in parts if x)
+
+
+def degree_flags(p):
+    g = ' ' + re.sub(r'[^a-z]+', ' ', str(p.get('g') or '').lower()) + ' '
+    has = lambda *ks: float(any(' ' + k + ' ' in g for k in ks))
+    phd, md = has('phd'), has('md', 'mbbs', 'do')
+    return [phd, md, phd * (1 - md), has('rn', 'dnp', 'msn', 'bsn', 'aprn', 'cnm', 'np', 'fnp'),
+            has('dds', 'dmd'), has('psyd', 'abpp'), has('mph', 'msph', 'dsc')]
+
+
+# Prior knowledge: word lists that mark a title as bench, computational or clinical.
+# They add a little robustness for words too rare in the gold set to be learned.
+LEX = {
+    'organism': r"\b(mice|mouse|murine|rats?|rodents?|zebrafish|drosophila|elegans|primates?|macaques?|rhesus|"
+                r"marmosets?|ferrets?|hamsters?|porcine|swine|piglets?|xenografts?|transgenic|knockout|knock-in|"
+                r"organoids?|in vivo|in vitro|ex vivo|cell lines?|yeast|saccharomyces|embryos?|ipsc|"
+                r"stem cells?|cultured|explants?|lampreys?|nematodes?|voles?|songbirds?|bacteria|bacterial)\b",
+    'bench': r"\b(proteins?|crystal structures?|cryo-?em|structural basis|binding|enzymes?|enzymatic|kinases?|"
+             r"phosphorylation|signal(l)?ing|receptors?|mutagenesis|synthesis|synthetic|catalys[ie]s|catalytic|"
+             r"spectroscop\w*|mass spectrometr\w*|western|pcr|antibod(y|ies)|t cells?|b cells?|macrophages?|"
+             r"neurons?|mitochondri\w*|transcription factors?|chromatin|histones?|ligands?|inhibitors?|"
+             r"nanoparticles?|hydrogels?|biomaterials?|scaffolds?|peptides?|glycans?|replication|virions?|"
+             r"plasmids?|crispr|electrophysiolog\w*|patch-clamp|imaging agents?|radioligands?|probes?|"
+             r"assays?|purification|recombinant|mechanism|mechanisms|pathway|pathways)\b",
+    'comp': r"\b(algorithms?|software|computational|machine learning|deep learning|neural networks?|"
+            r"statistical|bayesian|simulations?|in silico|bioinformatic\w*|genome-wide association|gwas|"
+            r"mendelian randomization|polygenic|language models?|llms?|segmentation|radiomics?|"
+            r"natural language|data science|framework for|r package|estimat(ion|ing|or))\b",
+    'clinic': r"\b(patients?|cohort|trials?|randomi[sz]ed|retrospective|case reports?|case series|surveys?|"
+              r"outcomes|clinical|registry|meta-analysis|systematic review|qualitative|disparit\w+|"
+              r"screening|veterans|residents?|residency|students|education|quality improvement|"
+              r"implementation|nursing|caregivers?|adolescents|women|children|infants|emergency department|"
+              r"hospital\w*|surgery|surgical|guidelines?|consensus|policy|epidemiolog\w*|prevalence|"
+              r"incidence|mortality|risk factors?)\b",
+}
+LEX_RE = {k: re.compile(v) for k, v in LEX.items()}
+
+
+def lexicon_rates(ts):
+    """Share of a person's titles that use each word list."""
+    if not ts:
+        return [0.0] * len(LEX_RE)
+    return [sum(1 for t in ts if r.search(t)) / len(ts) for r in LEX_RE.values()]
+
+
+def evidence(p):
+    return len(titles_of(p)), len(p.get('gn') or []), len(bio_of(p))
+
+
+# -------------------------------------------------------------------- models
+def _tfidf(min_df=2):
+    return TfidfVectorizer(ngram_range=(1, 2), min_df=min_df, max_df=0.5, sublinear_tf=True,
+                           token_pattern=r'(?u)\b[a-z][a-z0-9\-]{1,}\b', dtype=np.float32)
+
+
+DEPT_TYPES = ['basic_science', 'translational_centre', 'engineering', 'genetics', 'clinical_lab',
+              'clinical', 'population', 'quantitative', 'behavioural_social', 'nursing_education', 'admin']
+
+
+def load_dept_types(path, D):
+    """unit index -> hand-assigned research character (department_types.csv)."""
+    t = {}
+    for r in csv.DictReader(open(path, encoding='utf-8')):
+        i = int(r['index'])
+        if i < len(D['depts']) and D['depts'][i]['n'] != r['unit']:
+            sys.exit('department_types.csv no longer matches the units in the data (row %d)' % i)
+        t[i] = r['type']
+    return t
+
+
+class Vectors:
+    """Fits the vocabularies once on every record's text (no labels involved)."""
+
+    def __init__(self, D, dept_types=None):
+        P = D['pis']
+        self.titles = [titles_of(p) for p in P]
+        self.ctx = [context_text(p, D) for p in P]
+        self.tv = _tfidf(2).fit([t for ts in self.titles for t in ts])
+        self.cv = _tfidf(2).fit(self.ctx)
+        self.Xctx = self.cv.transform(self.ctx)
+        # title matrix, row per title, with owner index
+        rows, owner = [], []
+        for i, ts in enumerate(self.titles):
+            rows.extend(ts)
+            owner.extend([i] * len(ts))
+        self.Xt = self.tv.transform(rows) if rows else csr_matrix((0, 0))
+        self.owner = np.array(owner, dtype=np.int64)
+        self.by_person = [[] for _ in P]
+        for r, i in enumerate(owner):
+            self.by_person[i].append(r)
+        # research grant titles, read by the same title model
+        g_rows, g_owner, self.g_w, self.g_r01 = [], [], [], []
+        for i, p in enumerate(P):
+            for t, w, r in grant_rows(p):
+                g_rows.append(t); g_owner.append(i); self.g_w.append(w); self.g_r01.append(r)
+        self.Xg = self.tv.transform(g_rows) if g_rows else csr_matrix((0, len(self.tv.vocabulary_)))
+        self.g_owner = np.array(g_owner, dtype=np.int64)
+        self.g_w, self.g_r01 = np.array(self.g_w, dtype=np.float32), np.array(self.g_r01, dtype=bool)
+        self.g_by_person = [[] for _ in P]
+        for r, i in enumerate(g_owner):
+            self.g_by_person[i].append(r)
+        # per title: is its method non-bench work (see DRY_METHOD)?
+        self.drym = np.array([bool(DRY_METHOD.search(t)) for t in rows], dtype=bool)
+        self.deg = np.array([degree_flags(p) for p in P], dtype=np.float32)
+        self.ngrant = np.array([len(p.get('gn') or []) for p in P], dtype=np.float32)
+        self.nbio = np.array([len(bio_of(p)) for p in P], dtype=np.float32)
+        self.lex = np.array([lexicon_rates(ts) for ts in self.titles], dtype=np.float32)
+        # departments: each person's units, and the share of them of each hand-typed kind
+        self.units = [list(p.get('d') or []) for p in P]
+        self.nunits = len(D['depts'])
+        self.utype = np.zeros((len(P), len(DEPT_TYPES)), dtype=np.float32)
+        if dept_types:
+            for i, us in enumerate(self.units):
+                for u in us:
+                    t = dept_types.get(u)
+                    if t in DEPT_TYPES:
+                        self.utype[i, DEPT_TYPES.index(t)] += 1.0 / len(us)
+        self._dept_cache = {}
+
+    def grant_feats(self, tm, people):
+        """Per person: the weighted mean bench reading (log-odds) of their research
+        grant titles, the same over R01-class grants only, whether they have any,
+        and how many R01-class grants. Zero where there is nothing to read."""
+        out = np.zeros((len(people), 4), dtype=np.float32)
+        rows = [r for i in people for r in self.g_by_person[i]]
+        if not rows:
+            return out
+        lg = dict(zip(rows, _logit(tm.predict_proba(self.Xg[rows])[:, 1])))
+        for n, i in enumerate(people):
+            rs = self.g_by_person[i]
+            if not rs:
+                continue
+            w = self.g_w[rs]
+            v = np.array([lg[r] for r in rs])
+            out[n, 0] = (w * v).sum() / w.sum()
+            m = self.g_r01[rs]
+            if m.any():
+                out[n, 1] = v[m].mean()
+            out[n, 2] = 1.0
+            out[n, 3] = math.log1p(int(m.sum()))
+        return out
+
+    def dept_context(self, tm):
+        """How bench-like the *other* members of each person's departments read.
+
+        For every unit, the mean title score of its titled members; for each
+        person, that mean with the person's own score taken out, averaged (and
+        maximised) over their units. No labels are involved, only the title
+        model's reading of colleagues, so it carries a department's character
+        into a record that has few titles of its own."""
+        if self._dept_cache.get('tm') is tm:
+            return self._dept_cache['out']
+        n = len(self.by_person)
+        own = np.full(n, np.nan)
+        if self.Xt.shape[0]:
+            pr = tm.predict_proba(self.Xt)[:, 1]
+            sums = np.bincount(self.owner, weights=pr, minlength=n)
+            cnt = np.bincount(self.owner, minlength=n)
+            has = cnt > 0
+            own[has] = sums[has] / cnt[has]
+        usum = np.zeros(self.nunits)
+        ucnt = np.zeros(self.nunits)
+        for i, us in enumerate(self.units):
+            if not np.isnan(own[i]):
+                for u in us:
+                    usum[u] += own[i]
+                    ucnt[u] += 1
+        glob = np.nanmean(own)
+        out = np.zeros((n, 3), dtype=np.float32)
+        for i, us in enumerate(self.units):
+            vals = []
+            for u in us:
+                s_, c_ = usum[u], ucnt[u]
+                if not np.isnan(own[i]):
+                    s_, c_ = s_ - own[i], c_ - 1
+                # shrink small units toward the collection-wide mean
+                vals.append((s_ + 5 * glob) / (c_ + 5))
+            if not vals:
+                vals = [glob]
+            lv = _logit(np.array(vals))
+            out[i] = [lv.mean(), lv.max(), math.log1p(len(us))]
+        self._dept_cache = {'tm': tm, 'out': out}
+        return out
+
+
+def _target(lbl):
+    return {'W': 1.0, 'D': 0.0, 'H': 0.5}.get(lbl)
+
+
+def fit_title_model(V, people, gold, C=4.0, pseudo=None):
+    rows, y, w = [], [], []
+    for i in people:
+        t = _target(gold[i])
+        if t is None or t == 0.5 or not V.by_person[i]:
+            continue
+        r = V.by_person[i]
+        rows.extend(r)
+        y.extend([int(t)] * len(r))
+        w.extend([1.0 / math.sqrt(len(r))] * len(r))
+    # confidently scored unlabelled people, at reduced weight (self-training)
+    for i, t in (pseudo or {}).items():
+        r = V.by_person[i]
+        rows.extend(r)
+        y.extend([t] * len(r))
+        w.extend([PSEUDO_WEIGHT / math.sqrt(len(r))] * len(r))
+    y, w = np.array(y), np.array(w)
+    # give the two sides equal total weight so the rarer wet class is not drowned out
+    for c in (0, 1):
+        m = y == c
+        if m.any():
+            w[m] *= (w.sum() / 2.0) / w[m].sum()
+    w *= len(w) / w.sum()
+    m = LogisticRegression(C=C, max_iter=3000)
+    m.fit(V.Xt[rows], y, sample_weight=w)
+    return m
+
+
+def fit_ctx_model(V, people, gold, C=2.0):
+    idx, y, w = [], [], []
+    for i in people:
+        t = _target(gold[i])
+        if t is None:
+            continue
+        if t == 0.5:
+            idx += [i, i]; y += [1, 0]; w += [0.5, 0.5]
+        else:
+            idx.append(i); y.append(int(t)); w.append(1.0)
+    m = LogisticRegression(C=C, max_iter=3000, class_weight='balanced')
+    m.fit(V.Xctx[idx], np.array(y), sample_weight=np.array(w))
+    return m
+
+
+def title_agg(V, tm, people):
+    """Per-person summary of the title scores."""
+    out = np.zeros((len(people), 5), dtype=np.float32)
+    all_rows = [r for i in people for r in V.by_person[i]]
+    pr = tm.predict_proba(V.Xt[all_rows])[:, 1] if all_rows else np.array([])
+    k = 0
+    for n, i in enumerate(people):
+        m = len(V.by_person[i])
+        if m:
+            s = np.sort(pr[k:k + m])
+            k += m
+            q = s[int(0.75 * (m - 1)):]
+            out[n] = [s.mean(), q.mean(), (s > 0.5).mean(), math.log1p(m), 1.0]
+    return out
+
+
+def _logit(x):
+    x = np.clip(x, 1e-4, 1 - 1e-4)
+    return np.log(x / (1 - x))
+
+
+def stack_features(V, tm, cm, people):
+    """Stacking features for people who have at least one title."""
+    ta = title_agg(V, tm, people)
+    cp = cm.predict_proba(V.Xctx[people])[:, 1]
+    feats = [_logit(ta[:, 0:1]), _logit(ta[:, 1:2]), ta[:, 2:3], ta[:, 3:4],
+             _logit(cp)[:, None], np.log1p(V.ngrant[people])[:, None], V.deg[people]]
+    if USE_LEX:
+        feats.append(V.lex[people])
+    thin = (1.0 / (1.0 + ta[:, 3:4] / math.log1p(THIN))) if THIN else 1.0   # ta[:, 3] is log1p(#titles)
+    if USE_GRANTS:
+        feats.append(GRANT_SCALE * thin * V.grant_feats(tm, people))
+    if USE_DEPT:
+        dc = V.dept_context(tm)[people]
+        tl = _logit(ta[:, 0:1])
+        # the department signal, the hand-typed department mix, and the title
+        # score read relative to the department (a middling bench signal means
+        # more in a clinical unit than in a basic-science one)
+        feats += ([DEPT_SCALE * thin * dc] if USE_DEPT == 'context' else
+                  [DEPT_SCALE * thin * dc, DEPT_SCALE * thin * V.utype[people], DEPT_SCALE * thin * tl * dc[:, 0:1]])
+    return np.hstack(feats)
+
+
+def oof_stack(V, people, gold, folds=5, seed=SEED, pseudo=None):
+    """Out-of-fold stacking features for titled labelled people, and out-of-fold
+    context scores for every labelled person (used to calibrate the context model)."""
+    people = [i for i in people if _target(gold[i]) is not None]
+    ylab = np.array([gold[i] for i in people])
+    titled = np.array([len(V.by_person[i]) > 0 for i in people])
+    X, ctx = None, np.zeros(len(people))
+    skf = StratifiedKFold(folds, shuffle=True, random_state=seed)
+    for tr, te in skf.split(people, ylab):
+        trp = [people[j] for j in tr]
+        tm, cm = fit_title_model(V, trp, gold, pseudo=pseudo), fit_ctx_model(V, trp, gold)
+        ctx[te] = cm.predict_proba(V.Xctx[[people[j] for j in te]])[:, 1]
+        tt = [j for j in te if titled[j]]
+        if not tt:
+            continue
+        f = stack_features(V, tm, cm, [people[j] for j in tt])
+        if X is None:
+            X = np.zeros((len(people), f.shape[1]), dtype=np.float32)
+        X[tt] = f
+    keep = np.where(titled)[0]
+    return [people[j] for j in keep], X[keep], people, ctx
+
+
+def _soft_fit(X, labs, C):
+    """Logistic fit with hybrid labels counted half wet, half dry. No class
+    re-weighting, so the output stays a calibrated probability."""
+    Xs, y, w = [], [], []
+    for x, l in zip(X, labs):
+        t = _target(l)
+        if t == 0.5:
+            Xs += [x, x]; y += [1, 0]; w += [0.5, 0.5]
+        else:
+            Xs.append(x); y.append(int(t)); w.append(1.0)
+    m = LogisticRegression(C=C, max_iter=3000)
+    m.fit(np.array(Xs), np.array(y), sample_weight=np.array(w))
+    return m
+
+
+class Model:
+    def __init__(self, V, people, gold, bands=None):
+        self.V = V
+        self.bands = dict(bands or BANDS)
+        lab = [i for i in people if _target(gold[i]) is not None]
+        self.pseudo = None
+        self._fit(lab, gold, None)
+        if PSEUDO:
+            # self-training: score every titled record nobody labelled, keep the
+            # confident ones, and refit with them at reduced weight. Every gold
+            # record, trained on or held out, is kept out of the pool.
+            pool = [i for i in range(len(V.by_person)) if V.by_person[i] and i not in gold]
+            P, _ = self.proba(pool)
+            self.pseudo = {i: int(p >= 0.5) for i, p in zip(pool, P) if p >= PSEUDO[0] or p <= PSEUDO[1]}
+            self._fit(lab, gold, self.pseudo)
+
+    def _fit(self, lab, gold, pseudo):
+        V = self.V
+        self.tm = fit_title_model(V, lab, gold, pseudo=pseudo)
+        self.cm = fit_ctx_model(V, lab, gold)
+        pp, X, allp, ctx = oof_stack(V, lab, gold, pseudo=pseudo)
+        self.st = _soft_fit(X, [gold[i] for i in pp], C=0.5)
+        # maps the (class-balanced) context score to a calibrated P(wet)
+        self.cal = _soft_fit(_logit(ctx)[:, None], [gold[i] for i in allp], C=1.0)
+
+    def proba(self, people):
+        """P(wet) for each person, and whether it came from titles or profile only."""
+        people = list(people)
+        P = np.zeros(len(people))
+        titled = [n for n, i in enumerate(people) if self.V.by_person[i]]
+        bare = [n for n, i in enumerate(people) if not self.V.by_person[i]]
+        if titled:
+            X = stack_features(self.V, self.tm, self.cm, [people[n] for n in titled])
+            P[titled] = self.st.predict_proba(X)[:, 1]
+        if bare:
+            c = self.cm.predict_proba(self.V.Xctx[[people[n] for n in bare]])[:, 1]
+            P[bare] = self.cal.predict_proba(_logit(c)[:, None])[:, 1]
+        return P, set(bare)
+
+    def mix(self, people):
+        """The mix of each person's titles: how many read as bench work, how many
+        use a dry method, how many are bench work with no dry method. None for a
+        record with no titles."""
+        out = []
+        for i in people:
+            rows = self.V.by_person[i]
+            if not rows:
+                out.append(None)
+                continue
+            b = self.tm.predict_proba(self.V.Xt[rows])[:, 1] > 0.5
+            d = self.V.drym[rows]
+            n = len(rows)
+            out.append({'n': n, 'n_bench': int(b.sum()), 'bench_share': float(b.sum()) / n,
+                        'n_dry': int(d.sum()), 'dry_share': float(d.sum()) / n,
+                        'n_pure_bench': int((b & ~d).sum()), 'pure_bench_share': float((b & ~d).sum()) / n})
+        return out
+
+    def nudge(self, people, P, bare):
+        """P(wet) after the department and R01 nudge (see NUDGE)."""
+        if not NUDGE:
+            return P
+        P = np.array(P, dtype=float)
+        self.nudged = {}
+        gf = self.V.grant_feats(self.tm, people)
+        cols = [DEPT_TYPES.index(t) for t in NUDGE['types']]
+        for n, i in enumerate(people):
+            if n in bare:
+                continue
+            unit, r01 = self.V.utype[i, cols].sum() > 0, gf[n, 3] > 0 and gf[n, 1] > 0
+            b = (NUDGE['unit'] if unit else 0.0) + (NUDGE['r01'] if r01 else 0.0)
+            if b:
+                p0 = P[n]
+                k = len(self.V.by_person[i])
+                b /= 1.0 + math.log1p(k) / math.log1p(NUDGE['thin'])
+                P[n] = 1.0 / (1.0 + math.exp(-(_logit(np.array([P[n]]))[0] + b)))
+                self.nudged[i] = {'unit': bool(unit), 'r01': bool(r01), 'from': round(float(p0), 3)}
+        return P
+
+    def states(self, people):
+        people = list(people)
+        P, bare = self.proba(people)
+        P = self.nudge(people, P, bare)
+        mixes = self.mix(people)
+        out = []
+        for n, i in enumerate(people):
+            # banded at the precision it is stored and shown at, so the state and
+            # the printed P(wet) can never disagree at a band edge
+            p = round(float(P[n]), 3)
+            if n in bare:
+                # no titles: grants or a real profile are needed, and then only a clear call
+                enough = self.V.ngrant[i] > 0 or self.V.nbio[i] >= 200
+                if not enough:
+                    out.append((0, p, 'no publications, grants or profile text'))
+                    continue
+                if self.bands['bare_dry'] < p < self.bands['bare_wet']:
+                    out.append((0, p, 'profile only, and it does not settle the question'))
+                    continue
+                out.append((STATE['wet'] if p >= self.bands['wet_side'] else STATE['dry'], p, None))
+                continue
+            out.append((band(p, self.bands, mixes[n]), p, None))
+        return out
+
+
+def band(p, b, m):
+    """The state: P(wet) picks the side, the mix of titles picks where on it."""
+    if b['dry_side'] < p < b['wet_side']:
+        return STATE['hybrid']
+    if p >= b['wet_side']:
+        if (m['dry_share'] >= MIX['hybrid_dry_share'] and m['n_dry'] >= MIX['min_titles']
+                and m['bench_share'] >= MIX['hybrid_bench_floor']):
+            return STATE['hybrid']
+        if m['dry_share'] >= MIX['lean_share'] and m['n_dry'] >= MIX['min_titles']:
+            return STATE['lean_wet']
+        return STATE['wet']
+    if m['pure_bench_share'] >= MIX['lean_share'] and m['n_pure_bench'] >= MIX['min_titles']:
+        return STATE['lean_dry']
+    return STATE['dry']
+
+
+# ---------------------------------------------------------------- confidence
+# P(wet) says which way a record leans. The confidence says how likely the call
+# on the page is to be right: the chance that a careful reader of the record
+# would put it on the same side. It is fitted to out-of-fold calls on the random
+# gold labels, calls made by a model that had never seen those people, so it
+# reports how often calls like this one turned out right, not how sure the model
+# feels. The department-targeted labels are kept out of it: they were chosen
+# because they are hard, so they would drag every figure down.
+CONF_LEVELS = {'high': 0.90, 'moderate': 0.70}
+# a few hundred checked records cannot support a figure closer to certain
+CONF_CAP = 0.99
+
+
+def _margin(p):
+    """How far P(wet) sits from a coin toss, in log-odds."""
+    q = min(max(p, 1e-4), 1 - 1e-4)
+    return min(abs(math.log(q / (1 - q))), 8.0)
+
+
+def oof_calls(V, gold, scored, always, folds=5):
+    """(gold, state, P) for each of `scored`, from models fitted without them.
+    `always` (the targeted labels) is in every training fold, as in the shipped model."""
+    scored = sorted(scored)
+    labs = [gold[i] for i in scored]
+    calls = []
+    for tr, te in StratifiedKFold(folds, shuffle=True, random_state=SEED).split(scored, labs):
+        m = Model(V, [scored[j] for j in tr] + sorted(always), gold)
+        pe = [scored[j] for j in te]
+        calls += [(gold[i], s, p) for i, (s, p, _) in zip(pe, m.states(pe))]
+    return calls
+
+
+class Confidence:
+    """P(the call is right) for a placed record.
+
+    Wet-side and dry-side calls: a logistic curve on the margin |logit P(wet)|.
+    Chosen by cross-validation on the training half's out-of-fold calls; adding
+    the side, the number of titles, grants or a profile-only flag made it worse
+    (there are only a dozen or so wrong calls to learn from).
+    Hybrid calls: too few to fit a curve, and a hybrid sits in the middle by
+    definition, so it gets the share of hybrid calls that were right."""
+
+    def __init__(self, calls):
+        calls = [(g, s, p) for g, s, p in calls if g in 'WHD' and s]
+        side = [(g, s, p) for g, s, p in calls if SIDE[s] != 'H']
+        hyb = [g for g, s, p in calls if SIDE[s] == 'H']
+        X = np.array([[_margin(p)] for _, _, p in side])
+        y = np.array([SIDE[s] == g for g, s, _ in side], dtype=int)
+        if y.all() or not y.any():
+            sys.exit('confidence: the out-of-fold calls are all right or all wrong; nothing to fit')
+        self.m = LogisticRegression(C=1.0, max_iter=2000).fit(X, y)
+        # Jeffreys-smoothed, so a handful of calls cannot give 0% or 100%
+        self.hybrid = (sum(g == 'H' for g in hyb) + 0.5) / (len(hyb) + 1)
+        self.n_side, self.n_hybrid = len(side), len(hyb)
+        self.n_wrong = int(len(y) - y.sum()) + sum(g != 'H' for g in hyb)
+
+    def __call__(self, calls):
+        """[(state, P)] -> [confidence or None for unclassified]."""
+        calls = list(calls)
+        c = self.m.predict_proba(np.array([[_margin(p)] for _, p in calls]))[:, 1] if calls else []
+        return [None if not s else round(min(self.hybrid if SIDE[s] == 'H' else float(k), CONF_CAP), 2)
+                for (s, _), k in zip(calls, c)]
+
+    def describe(self):
+        return {'levels': CONF_LEVELS, 'cap': CONF_CAP,
+                'curve': [round(float(self.m.intercept_[0]), 4), round(float(self.m.coef_[0][0]), 4)],
+                'hybrid': round(self.hybrid, 4), 'fitted_on': self.n_side + self.n_hybrid,
+                'wrong_in_fit': self.n_wrong}
+
+
+def conf_level(k):
+    return 'high' if k >= CONF_LEVELS['high'] else 'moderate' if k >= CONF_LEVELS['moderate'] else 'low'
+
+
+def wilson(k, n, z=1.96):
+    if not n:
+        return float('nan'), float('nan')
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return c - h, c + h
+
+
+def confidence_report(golds, calls, conf):
+    """How well the confidence held up: per level, is the share of right calls
+    what the confidence said it would be?"""
+    rows = [(SIDE[s] == g, k) for g, (s, _), k in zip(golds, calls, conf) if g in 'WHD' and s]
+    right = np.array([r for r, _ in rows], dtype=float)
+    k = np.array([c for _, c in rows])
+    out = {'n': len(rows), 'right': int(right.sum()), 'mean_confidence': round(float(k.mean()), 4),
+           'brier': round(float(np.mean((k - right) ** 2)), 4),
+           # the same score for a flat confidence equal to the overall hit rate
+           'brier_flat': round(float(np.mean((right.mean() - right) ** 2)), 4), 'levels': {}}
+    try:
+        from sklearn.metrics import roc_auc_score
+        out['auc'] = round(float(roc_auc_score(right, k)), 4) if 0 < right.sum() < len(right) else None
+    except ValueError:
+        out['auc'] = None
+    for lv in ('high', 'moderate', 'low'):
+        sel = [(r, c) for r, c in rows if conf_level(c) == lv]
+        n, r = len(sel), sum(x for x, _ in sel)
+        lo, hi = wilson(r, n)
+        out['levels'][lv] = {'n': n, 'right': int(r), 'mean_confidence': round(sum(c for _, c in sel) / n, 4) if n else None,
+                             'lo': round(lo, 4) if n else None, 'hi': round(hi, 4) if n else None}
+    return out
+
+
+# ------------------------------------------------------------------- scoring
+def score(pairs):
+    """pairs: [(gold 'W'|'H'|'D'|'U', predicted state int)]. Returns a dict of metrics."""
+    sc = [(g, SIDE[s]) for g, s in pairs if g in 'WHD']
+    n = len(sc)
+    cov = [x for x in sc if x[1] is not None]
+    acc_all = sum(g == s for g, s in sc) / n if n else float('nan')
+    acc_cov = sum(g == s for g, s in cov) / len(cov) if cov else float('nan')
+    f1 = []
+    for c in 'WHD':
+        tp = sum(g == c and s == c for g, s in sc)
+        fp = sum(g != c and s == c for g, s in sc)
+        fn = sum(g == c and s != c for g, s in sc)
+        pr = tp / (tp + fp) if tp + fp else 0.0
+        rc = tp / (tp + fn) if tp + fn else 0.0
+        f1.append(2 * pr * rc / (pr + rc) if pr + rc else 0.0)
+    wtp = sum(g == 'W' and s == 'W' for g, s in sc)
+    wfp = sum(g != 'W' and s == 'W' for g, s in sc)
+    wfn = sum(g == 'W' and s != 'W' for g, s in sc)
+    u = [(g, s) for g, s in pairs if g == 'U']
+    return {
+        'n_scored': n,
+        'coverage': len(cov) / n if n else float('nan'),
+        'accuracy_all': acc_all,
+        'accuracy_when_placed': acc_cov,
+        'macro_f1': sum(f1) / 3,
+        'f1_W': f1[0], 'f1_H': f1[1], 'f1_D': f1[2],
+        'wet_precision': wtp / (wtp + wfp) if wtp + wfp else float('nan'),
+        'wet_recall': wtp / (wtp + wfn) if wtp + wfn else float('nan'),
+        'unclear_left_unclassified': (sum(1 for g, s in u if s == 0) / len(u)) if u else float('nan'),
+        'n_unclear': len(u),
+    }
+
+
+def bootstrap(pairs, key, n=2000, seed=SEED):
+    rng = np.random.default_rng(seed)
+    pairs = list(pairs)
+    vals = []
+    for _ in range(n):
+        smp = [pairs[j] for j in rng.integers(0, len(pairs), len(pairs))]
+        v = score(smp)[key]
+        if not math.isnan(v):
+            vals.append(v)
+    return float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
+
+
+def bootstrap_diff(pa, pb, key, n=2000, seed=SEED):
+    """CI for score(pa)[key] - score(pb)[key], resampling the same people."""
+    rng = np.random.default_rng(seed)
+    m = len(pa)
+    vals = []
+    for _ in range(n):
+        ix = rng.integers(0, m, m)
+        a = score([pa[j] for j in ix])[key]
+        b = score([pb[j] for j in ix])[key]
+        if not (math.isnan(a) or math.isnan(b)):
+            vals.append(a - b)
+    return float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
+
+
+V31_STATE = lambda p: int((p['l31'] if 'l31' in p else p.get('l')) or 0)
+
+
+# ---------------------------------------------------------------- commands
+def cmd_cv(a):
+    """Cross-validate on the random training half. Extra (department-stratified)
+    labels are always in the training folds and never scored, because they were
+    chosen by looking at model output and are not a random sample."""
+    D = load_data(a.data)
+    gold, train, test = load_gold(a.labels, a.split, D, a.extra)
+    V = Vectors(D, load_dept_types(a.dept_types, D))
+    rand = sorted(set(json.load(open(a.split))['train']))
+    extra = sorted(train - set(rand))
+    labs = np.array([gold[i] for i in rand])
+    res_new, res_old = [], []
+    for rep in range(a.repeats):
+        skf = StratifiedKFold(5, shuffle=True, random_state=SEED + rep)
+        for f_tr, f_te in skf.split(rand, labs):
+            ptr = [rand[j] for j in f_tr] + extra
+            pte = [rand[j] for j in f_te]
+            m = Model(V, ptr, gold)
+            st = m.states(pte)
+            res_new += [(gold[i], s[0]) for i, s in zip(pte, st)]
+            res_old += [(gold[i], V31_STATE(D['pis'][i])) for i in pte]
+    print('cross-validated on the random training half, %d x 5 folds, %d extra labels in every training fold'
+          % (a.repeats, len(extra)))
+    for name, r in (('v3.1', res_old), ('new', res_new)):
+        s = score(r)
+        print('  %-5s ' % name + '  '.join('%s=%.3f' % (k, v) for k, v in s.items() if isinstance(v, float)))
+
+
+def _fmt(v):
+    return '%.1f%%' % (100 * v) if isinstance(v, float) and not math.isnan(v) else 'n/a'
+
+
+def cmd_evaluate(a):
+    D = load_data(a.data)
+    gold, train, test = load_gold(a.labels, a.split, D, a.extra)
+    V = Vectors(D, load_dept_types(a.dept_types, D))
+    m = Model(V, sorted(train), gold)
+    te = sorted(test)
+    st = m.states(te)
+    new = [(gold[i], s[0]) for i, s in zip(te, st)]
+    # the confidence is fitted to out-of-fold calls on the random training half only
+    rand = sorted(json.load(open(a.split))['train'])
+    cf = Confidence(oof_calls(V, gold, rand, train - set(rand)))
+    ck = cf([(s[0], s[1]) for s in st])
+    crep = confidence_report([gold[i] for i in te], [(s[0], s[1]) for s in st], ck)
+    old = [(gold[i], V31_STATE(D['pis'][i])) for i in te]
+    os.makedirs(a.out, exist_ok=True)
+    keys = ['coverage', 'accuracy_all', 'accuracy_when_placed', 'macro_f1', 'f1_W', 'f1_H', 'f1_D',
+            'wet_precision', 'wet_recall', 'unclear_left_unclassified']
+    so, sn = score(old), score(new)
+    rows = []
+    for k in keys:
+        lo_o, hi_o = bootstrap(old, k)
+        lo_n, hi_n = bootstrap(new, k)
+        dl, dh = bootstrap_diff(new, old, k)
+        rows.append((k, so[k], lo_o, hi_o, sn[k], lo_n, hi_n, dl, dh))
+    with open(os.path.join(a.out, 'evaluation.csv'), 'w', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(['metric', 'v3.1', 'v3.1_lo', 'v3.1_hi', 'new', 'new_lo', 'new_hi', 'diff_lo', 'diff_hi'])
+        for r in rows:
+            w.writerow([r[0]] + ['%.4f' % x for x in r[1:]])
+    # confusion tables
+    def conf(pairs):
+        names = {None: 'unclassified', 'W': 'wet side', 'D': 'dry side', 'H': 'hybrid'}
+        t = {}
+        for g, s in pairs:
+            t[(g, names[SIDE[s]])] = t.get((g, names[SIDE[s]]), 0) + 1
+        cols = ['wet side', 'hybrid', 'dry side', 'unclassified']
+        lines = ['| gold \\ predicted | ' + ' | '.join(cols) + ' |', '|' + '---|' * (len(cols) + 1)]
+        for g in 'WHDU':
+            lines.append('| %s | ' % {'W': 'wet', 'H': 'hybrid', 'D': 'dry', 'U': 'unclear'}[g] +
+                         ' | '.join(str(t.get((g, c), 0)) for c in cols) + ' |')
+        return '\n'.join(lines)
+    with open(os.path.join(a.out, 'evaluation.md'), 'w') as f:
+        f.write('# Wet/dry model: locked test set\n\n')
+        f.write('%d investigators, drawn at random and labelled by reading their records before any '
+                'model output was looked at. None of them was used to fit or tune the model.\n\n' % len(te))
+        f.write('| metric | v3.1 (keyword score) | new model | difference (95% CI) |\n|---|---|---|---|\n')
+        for r in rows:
+            f.write('| %s | %s (%s-%s) | %s (%s-%s) | %+.1f to %+.1f pts |\n' % (
+                r[0], _fmt(r[1]), _fmt(r[2]), _fmt(r[3]), _fmt(r[4]), _fmt(r[5]), _fmt(r[6]),
+                100 * r[7], 100 * r[8]))
+        f.write('\nScored on the %d test people whose gold label is wet, hybrid or dry; the %d the '
+                'labeller could not call are only used for the last row.\n\n' % (sn['n_scored'], sn['n_unclear']))
+        f.write('## v3.1\n\n' + conf(old) + '\n\n## New model\n\n' + conf(new) + '\n')
+        f.write('\n## Confidence\n\nEvery placed record carries a confidence: the chance that the call is on the '
+                'right side. It was fitted to out-of-fold calls on the random training half only, then checked '
+                'here. If it is honest, the share of right calls in each level matches the confidence it gave.\n\n'
+                '| level | test calls | mean confidence | right | 95% CI |\n|---|---|---|---|---|\n')
+        for lv, band_ in (('high', '90% and up'), ('moderate', '70-89%'), ('low', 'under 70%')):
+            x = crep['levels'][lv]
+            f.write('| %s (%s) | %d | %s | %s | %s |\n' % (
+                lv, band_, x['n'], _fmt(x['mean_confidence']) if x['n'] else '-',
+                ('%s (%d of %d)' % (_fmt(x['right'] / x['n']), x['right'], x['n'])) if x['n'] else '-',
+                ('%s-%s' % (_fmt(x['lo']), _fmt(x['hi']))) if x['n'] else '-'))
+        f.write('| all placed | %d | %s | %s (%d of %d) | |\n\n' % (
+            crep['n'], _fmt(crep['mean_confidence']), _fmt(crep['right'] / crep['n']), crep['right'], crep['n']))
+        f.write('Brier score %.3f, against %.3f for a flat confidence equal to the overall hit rate (lower is '
+                'better). AUC %s: how often a right call gets a higher confidence than a wrong one.\n'
+                % (crep['brier'], crep['brier_flat'], '%.2f' % crep['auc'] if crep['auc'] is not None else 'n/a'))
+    json.dump(dict(cf.describe(), test=crep), open(os.path.join(a.out, 'confidence.json'), 'w'), indent=1)
+    with open(os.path.join(a.out, 'test_predictions.csv'), 'w', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(['index', 'name', 'gold', 'v31_state', 'new_state', 'p_wet', 'confidence'])
+        for i, s, k in zip(te, st, ck):
+            w.writerow([i, D['pis'][i]['n'], gold[i], V31_STATE(D['pis'][i]), s[0], '%.3f' % s[1],
+                        '' if k is None else '%.3f' % k])
+    print(open(os.path.join(a.out, 'evaluation.md')).read())
+
+
+def readable(term):
+    """A term worth showing a reader: no stop words, nothing trivially short."""
+    ws = term.split()
+    return all(len(w) >= 3 and w not in ENGLISH_STOP_WORDS for w in ws)
+
+
+def top_terms(V, tm, k=25):
+    names = np.array(V.tv.get_feature_names_out())
+    co = tm.coef_[0]
+    o = np.argsort(co)
+    return ([t for t in names[o[::-1][:4 * k]] if readable(t)][:k],
+            [t for t in names[o[:4 * k]] if readable(t)][:k])
+
+
+def cmd_predict(a):
+    """Fit on every gold label (train and test) and score all investigators."""
+    D = load_data(a.data)
+    gold, train, test = load_gold(a.labels, a.split, D, a.extra)
+    V = Vectors(D, load_dept_types(a.dept_types, D))
+    m = Model(V, sorted(train | test), gold)
+    everyone = list(range(len(D['pis'])))
+    st = m.states(everyone)
+    # confidence fitted to out-of-fold calls on every random gold label
+    sp = json.load(open(a.split))
+    rand = set(sp['train']) | set(sp['test'])
+    cf = Confidence(oof_calls(V, gold, rand, (train | test) - rand))
+    ck = cf([(s, p) for s, p, _ in st])
+    names = np.array(V.tv.get_feature_names_out())
+    co = m.tm.coef_[0]
+    out = []
+    mixes = m.mix(everyone)
+    for i, (s, p, why), k, mx in zip(everyone, st, ck, mixes):
+        # the title that pushed hardest each way, as evidence a reader can check
+        ev = {'model': MODEL_VERSION, 'P': round(p, 3), 'n_titles': len(V.by_person[i]),
+              'n_grants': int(V.ngrant[i])}
+        rows = V.by_person[i]
+        if rows:
+            pr = m.tm.predict_proba(V.Xt[rows])[:, 1]
+            ev['title_mean'] = round(float(pr.mean()), 3)
+            ev['wet_titles'] = int((pr > 0.5).sum())
+            j = int(np.argmax(pr))
+            raw = titles_of(D['pis'][i], raw=True)
+            ev['most_wet'] = [raw[j][:140], round(float(pr[j]), 2)]
+            j = int(np.argmin(pr))
+            ev['most_dry'] = [raw[j][:140], round(float(pr[j]), 2)]
+            row = V.Xt[rows].sum(axis=0).A1 * co
+            o = np.argsort(row)
+            # the words shown to a reader: content words only, and only the side
+            # the call landed on (both sides for a hybrid)
+            words = lambda seq, sign: [names[t] for t in seq if sign * row[t] > 0 and readable(names[t])][:3]
+            if s in (1, 4, 3):
+                ev['wet_terms'] = words(o[::-1][:40], 1)
+            if s in (2, 5, 3):
+                ev['dry_terms'] = words(o[:40], -1)
+            # the mix that placed it on its side, and a title of each kind
+            ev['mix'] = [mx['n_bench'], mx['n_dry'], mx['n_pure_bench']]
+            dm = V.drym[rows]
+            if dm.any():
+                ev['dry_method_title'] = raw[int(np.argmax(dm))][:140]
+        if why:
+            ev['why_unclassified'] = why
+        if i in getattr(m, 'nudged', {}):
+            ev['nudge'] = m.nudged[i]
+        out.append({'l': s, 'c': round(100 * p, 1), 'cf': None if k is None else int(round(100 * k)), 'ev': ev})
+    wet, dry = top_terms(V, m.tm)
+    json.dump({'model': MODEL_VERSION, 'bands': m.bands, 'mix': MIX,
+               'trained_on': len([i for i in gold if gold[i] in 'WHD']),
+               'confidence': cf.describe(),
+               'top_wet_terms': wet, 'top_dry_terms': dry, 'people': out},
+              open(a.out, 'w'), separators=(',', ':'))
+    from collections import Counter
+    print('states:', Counter(o['l'] for o in out))
+    print('confidence:', Counter(conf_level(o['cf'] / 100) for o in out if o['cf'] is not None), cf.describe())
+    print('wet terms:', ', '.join(wet[:15]))
+    print('dry terms:', ', '.join(dry[:15]))
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('cmd', choices=['cv', 'evaluate', 'predict'])
+    ap.add_argument('--data', required=True)
+    ap.add_argument('--split', required=True)
+    ap.add_argument('--labels', required=True)
+    ap.add_argument('--extra', default=None, help='department-stratified labels, added to training only')
+    ap.add_argument('--dept-types', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'department_types.csv'))
+    ap.add_argument('--out', default='wetdry_out')
+    ap.add_argument('--repeats', type=int, default=3)
+    a = ap.parse_args()
+    {'cv': cmd_cv, 'evaluate': cmd_evaluate, 'predict': cmd_predict}[a.cmd](a)
+
+
+if __name__ == '__main__':
+    main()
