@@ -10,7 +10,9 @@ trained and tested on records that a person read and labelled.
 
 These are 400 investigators drawn at random and labelled by Claude reading their
 records, with no model output visible. None of them was used to fit or tune
-anything. The table is from `report/evaluation.md` (model wd-2026.09.3, v82),
+anything. From v104 the shipped model is wd-2026.10.1, at 90.8% on this set
+(see "Departments and R01 grants, revisited"); `report/evaluation.md` holds
+its full figures. The table below is model wd-2026.09.3 (v82),
 scored against the labels as revised by the hybrid audit (below):
 
 | | v3.1 | new model | difference (95% CI) |
@@ -246,6 +248,43 @@ test agreement. By character, on the locked test set: clinical 92%
 translational centres the weakest at 68% (27/40). The page shows each
 unit's character and its hand-checked figures on the unit card and in
 every profile.
+
+## Departments and R01 grants, revisited (v104)
+
+A bench lab in a clinical department with few titles on record can read dry:
+David Yu (Radiation Oncology and Winship Cell & Molecular Biology, SAMHD1
+DNA-repair R01s) came out leans dry at P(wet) 0.29. So department and grant
+evidence was tried again, three ways, all scored on the training side only
+(random half by 5-fold, 3 repeats; the 220 hard cases by 5-fold):
+
+| variant | random half right side | hybrid F1 | hard cases right side |
+|---|---|---|---|
+| v103 model | 94.7% | 50.7% | 69.1% |
+| + titles listed twice counted once | 94.7% | 50.7% | 69.1% |
+| + grant titles as features (R01s count double) | 94.1-94.3% | 46-52% | 69.1-69.6% |
+| + department features, weighted 1x or 2x | 94.8-95.1% | 41-48% | 64.9-65.5% |
+| + both | 93.9-94.4% | 36-41% | 68.1-68.6% |
+| + both, weighted by how few titles a record has | 94.1-94.4% | 39-45% | 66.5-70.2% |
+
+Learned weights repeat the earlier finding: a department pulls the people
+who don't match it toward the wrong side. What ships is a small nudge
+after the model (`NUDGE` in `wetdry.py`): a record in a basic-science unit
+gains 0.5 in log-odds of wet, one with an R01-class grant whose titles read
+as bench work gains 1.0, and both are scaled down as the record's own
+titles grow (half strength at 8 titles). Chosen on out-of-fold calls on the
+training side, it raised the random half from 94.9% to 95.7% and hybrid F1
+from 52% to 70%, and cost one hard case.
+
+On the locked test set it changed one of 400 calls, the wrong way: 90.8%
+against 91.1% without it. That is one person, well inside the interval.
+Across the atlas it moves 12 calls, mostly leans dry to hybrid (with the
+refit, 73 calls differ from v103). Each nudged record keeps `ev.nudge`, and
+the profile says when the department or an R01 raised the bench score by
+3 points or more.
+
+The test-set figure fell from 91.6% to 90.8% between v103 and v104: 0.3 from
+the newer data block (v90's rebuilt records), 0.2 from counting titles
+listed twice once, 0.3 from the nudge. Each step is one person.
 
 ## Honest limits
 
