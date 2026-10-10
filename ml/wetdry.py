@@ -72,6 +72,17 @@ DEPT_SCALE = 1.0
 # record's own titles say: full weight with no titles, half at THIN titles,
 # fading as titles accumulate. A record with many titles is placed by its titles.
 THIN = 0
+# Department and R01 nudge, applied after the model: a record in a basic-science
+# unit, or holding an R01-class grant whose titles read as bench work, has its
+# log-odds of wet raised by 'unit' and 'r01', scaled down as its own titles grow
+# (half strength at 'thin' titles). Learned department and grant features were
+# tried first and lost accuracy on the department-targeted hard cases (they pull
+# everyone toward their department's usual side); this nudge only lifts records
+# whose titles are few and whose department and funding both say bench. The
+# values were chosen on out-of-fold calls on the training side only.
+NUDGE_TUNED = {'unit': 0.5, 'r01': 1.0, 'thin': 8, 'types': ('basic_science',)}
+# off until checked once on the locked test set
+NUDGE = None
 # NIH activity codes: the R01 class (a lab's own main research awards), and the
 # codes whose titles say nothing about the holder's own research (training,
 # centre cores, shared instruments, conferences, resources)
@@ -627,9 +638,31 @@ class Model:
                         'n_pure_bench': int((b & ~d).sum()), 'pure_bench_share': float((b & ~d).sum()) / n})
         return out
 
+    def nudge(self, people, P, bare):
+        """P(wet) after the department and R01 nudge (see NUDGE)."""
+        if not NUDGE:
+            return P
+        P = np.array(P, dtype=float)
+        self.nudged = {}
+        gf = self.V.grant_feats(self.tm, people)
+        cols = [DEPT_TYPES.index(t) for t in NUDGE['types']]
+        for n, i in enumerate(people):
+            if n in bare:
+                continue
+            unit, r01 = self.V.utype[i, cols].sum() > 0, gf[n, 3] > 0 and gf[n, 1] > 0
+            b = (NUDGE['unit'] if unit else 0.0) + (NUDGE['r01'] if r01 else 0.0)
+            if b:
+                p0 = P[n]
+                k = len(self.V.by_person[i])
+                b /= 1.0 + math.log1p(k) / math.log1p(NUDGE['thin'])
+                P[n] = 1.0 / (1.0 + math.exp(-(_logit(np.array([P[n]]))[0] + b)))
+                self.nudged[i] = {'unit': bool(unit), 'r01': bool(r01), 'from': round(float(p0), 3)}
+        return P
+
     def states(self, people):
         people = list(people)
         P, bare = self.proba(people)
+        P = self.nudge(people, P, bare)
         mixes = self.mix(people)
         out = []
         for n, i in enumerate(people):
@@ -1009,6 +1042,8 @@ def cmd_predict(a):
                 ev['dry_method_title'] = raw[int(np.argmax(dm))][:140]
         if why:
             ev['why_unclassified'] = why
+        if i in getattr(m, 'nudged', {}):
+            ev['nudge'] = m.nudged[i]
         out.append({'l': s, 'c': round(100 * p, 1), 'cf': None if k is None else int(round(100 * k)), 'ev': ev})
     wet, dry = top_terms(V, m.tm)
     json.dump({'model': MODEL_VERSION, 'bands': m.bands, 'mix': MIX,
