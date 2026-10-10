@@ -53,7 +53,7 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 
-MODEL_VERSION = 'wd-2026.09.3'
+MODEL_VERSION = 'wd-2026.10.1'
 SEED = 20260925
 USE_LEX = True
 # Department features (colleagues' scores, hand-typed department mix) were built
@@ -61,6 +61,20 @@ USE_LEX = True
 # department-targeted hard cases, so they are off; department typing is used to
 # choose whom to label and to report accuracy by department instead.
 USE_DEPT = False
+# Grant titles read by the title model, R01-class awards counted double, enter
+# the stacker as features of their own (see grant_rows); GRANT_SCALE and
+# DEPT_SCALE multiply those features, so the stacker's penalty holds them back
+# less and they can carry more weight.
+USE_GRANTS = False
+GRANT_SCALE = 1.0
+DEPT_SCALE = 1.0
+# NIH activity codes: the R01 class (a lab's own main research awards), and the
+# codes whose titles say nothing about the holder's own research (training,
+# centre cores, shared instruments, conferences, resources)
+R01_CLASS = {'R01', 'R37', 'RF1', 'R35', 'DP1', 'DP2', 'DP5', 'R56', 'U01'}
+NOT_RESEARCH = re.compile(r'^(T\d\d|F\d\d|R25|R36|D43|D71|K12|KL2|TL1|P30|P51|UL1|S10|G20|R13|U13|U24|R24|U2C|UC7|C06)$')
+_NOT_RESEARCH_TITLE = re.compile(r'\b(training (program|grant)|fellowship|scholars? program|career development|'
+                                 r'core facility|shared instrument|conference|symposium)\b', re.I)
 # self-training thresholds on P(wet) for unlabelled records, and their weight
 PSEUDO = (0.90, 0.02)
 PSEUDO_WEIGHT = 0.3
@@ -170,15 +184,50 @@ def clean_title(t):
     return t.lower()
 
 
+def _title_key(t):
+    return re.sub(r'[^a-z0-9]+', '', t)
+
+
 def titles_of(p, raw=False):
-    """Cleaned, de-duplicated titles; with raw=True, the original wording of each."""
-    out, seen = [], set()
+    """Cleaned, de-duplicated titles; with raw=True, the original wording of each.
+    A title listed again with something appended (a journal name, a full stop)
+    counts once: two titles are the same when one's letters and digits start
+    the other's and the shorter has at least 40 of them."""
+    out, keys = [], []
     for e in p.get('p') or []:
         r = str(e[0] if isinstance(e, list) else e or '').strip()
         t = clean_title(r)
-        if len(t) >= 12 and t not in seen:
-            seen.add(t)
-            out.append(r if raw else t)
+        if len(t) < 12:
+            continue
+        k = _title_key(t)
+        if any(k == q or (min(len(k), len(q)) >= 40 and (k.startswith(q) or q.startswith(k))) for q in keys):
+            continue
+        keys.append(k)
+        out.append(r if raw else t)
+    return out
+
+
+def grant_rows(p):
+    """The research grant titles on a record, each with its weight and whether it
+    is R01-class. NIH awards carry their activity code; other grant titles (DoD,
+    foundations) count once, unless the title says it is a training or core award."""
+    out, seen = [], set()
+    for g in p.get('nih') or []:
+        t, code = str(g[0] or '').strip(), str(g[5] or '').upper()
+        k = _title_key(t.lower())
+        if not t or k in seen or NOT_RESEARCH.match(code):
+            seen.add(k)
+            continue
+        seen.add(k)
+        r01 = code in R01_CLASS
+        out.append((t.lower(), 2.0 if r01 else 1.0, r01))
+    for t in p.get('gn') or []:
+        t = str(t or '').strip()
+        k = _title_key(t.lower())
+        if not t or k in seen or _NOT_RESEARCH_TITLE.search(t):
+            continue
+        seen.add(k)
+        out.append((t.lower(), 1.0, False))
     return out
 
 
@@ -294,6 +343,17 @@ class Vectors:
         self.by_person = [[] for _ in P]
         for r, i in enumerate(owner):
             self.by_person[i].append(r)
+        # research grant titles, read by the same title model
+        g_rows, g_owner, self.g_w, self.g_r01 = [], [], [], []
+        for i, p in enumerate(P):
+            for t, w, r in grant_rows(p):
+                g_rows.append(t); g_owner.append(i); self.g_w.append(w); self.g_r01.append(r)
+        self.Xg = self.tv.transform(g_rows) if g_rows else csr_matrix((0, len(self.tv.vocabulary_)))
+        self.g_owner = np.array(g_owner, dtype=np.int64)
+        self.g_w, self.g_r01 = np.array(self.g_w, dtype=np.float32), np.array(self.g_r01, dtype=bool)
+        self.g_by_person = [[] for _ in P]
+        for r, i in enumerate(g_owner):
+            self.g_by_person[i].append(r)
         # per title: is its method non-bench work (see DRY_METHOD)?
         self.drym = np.array([bool(DRY_METHOD.search(t)) for t in rows], dtype=bool)
         self.deg = np.array([degree_flags(p) for p in P], dtype=np.float32)
@@ -311,6 +371,29 @@ class Vectors:
                     if t in DEPT_TYPES:
                         self.utype[i, DEPT_TYPES.index(t)] += 1.0 / len(us)
         self._dept_cache = {}
+
+    def grant_feats(self, tm, people):
+        """Per person: the weighted mean bench reading (log-odds) of their research
+        grant titles, the same over R01-class grants only, whether they have any,
+        and how many R01-class grants. Zero where there is nothing to read."""
+        out = np.zeros((len(people), 4), dtype=np.float32)
+        rows = [r for i in people for r in self.g_by_person[i]]
+        if not rows:
+            return out
+        lg = dict(zip(rows, _logit(tm.predict_proba(self.Xg[rows])[:, 1])))
+        for n, i in enumerate(people):
+            rs = self.g_by_person[i]
+            if not rs:
+                continue
+            w = self.g_w[rs]
+            v = np.array([lg[r] for r in rs])
+            out[n, 0] = (w * v).sum() / w.sum()
+            m = self.g_r01[rs]
+            if m.any():
+                out[n, 1] = v[m].mean()
+            out[n, 2] = 1.0
+            out[n, 3] = math.log1p(int(m.sum()))
+        return out
 
     def dept_context(self, tm):
         """How bench-like the *other* members of each person's departments read.
@@ -431,13 +514,16 @@ def stack_features(V, tm, cm, people):
              _logit(cp)[:, None], np.log1p(V.ngrant[people])[:, None], V.deg[people]]
     if USE_LEX:
         feats.append(V.lex[people])
+    if USE_GRANTS:
+        feats.append(GRANT_SCALE * V.grant_feats(tm, people))
     if USE_DEPT:
         dc = V.dept_context(tm)[people]
         tl = _logit(ta[:, 0:1])
         # the department signal, the hand-typed department mix, and the title
         # score read relative to the department (a middling bench signal means
         # more in a clinical unit than in a basic-science one)
-        feats += [dc] if USE_DEPT == 'context' else [dc, V.utype[people], tl * dc[:, 0:1]]
+        feats += ([DEPT_SCALE * dc] if USE_DEPT == 'context' else
+                  [DEPT_SCALE * dc, DEPT_SCALE * V.utype[people], DEPT_SCALE * tl * dc[:, 0:1]])
     return np.hstack(feats)
 
 
