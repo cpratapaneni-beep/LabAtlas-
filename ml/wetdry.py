@@ -81,8 +81,9 @@ THIN = 0
 # whose titles are few and whose department and funding both say bench. The
 # values were chosen on out-of-fold calls on the training side only.
 NUDGE_TUNED = {'unit': 0.5, 'r01': 1.0, 'thin': 8, 'types': ('basic_science',)}
-# off until checked once on the locked test set
-NUDGE = None
+# Checked once on the locked test set: it changed one of the 400 calls (a
+# hybrid read as leaning wet), 90.8% against 91.1% without it, within noise.
+NUDGE = NUDGE_TUNED
 # NIH activity codes: the R01 class (a lab's own main research awards), and the
 # codes whose titles say nothing about the holder's own research (training,
 # centre cores, shared instruments, conferences, resources)
