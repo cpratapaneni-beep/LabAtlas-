@@ -20,3 +20,11 @@ Shortlist: 02 Axes & Peak, 04 Pole A, 26 Round-Bottom Globe, 38 Wet ∩ Dry, 39 
 - Each emblem also has a simplified small version for favicons and app icons.
 - `emblems/index.html` is the gallery. `emblems/svg/` holds four files per emblem: full and small, in each palette.
 - Rebuild with `python3 emblems/build.py [atlas-text.css]`.
+
+## Round three: Pole A
+
+`pole-a/` develops concept 04 (Pole A) from the first round. The A is two meridians meeting at the north pole, with a parallel as its crossbar. The L is built from the same globe, and the background is a true orthographic globe (`pole-a/globe.py`).
+
+- The lead version, Graticule Ligature, draws both letters as lines of the globe's 15° grid in one unbroken stroke.
+- There are eight variations, each in the navy-and-gold and earth palettes, with a simplified small version.
+- Rebuild with `python3 pole-a/build.py [atlas-text.css]`.
