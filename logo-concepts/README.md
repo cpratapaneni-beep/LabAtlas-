@@ -49,3 +49,11 @@ In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meri
 - The poses are drawn in `atlas-titan/figure.py`: the Farnese kneeling pose, a standing pose whose legs form an A, and a shoulders-and-sphere bust for small sizes.
 - There are six versions: Farnese Atlas, Standing Titan, Black-figure Vase (Greek key border), Titan's Shoulders, Night Titan and One Colour.
 - Rebuild with `python3 atlas-titan/build.py [atlas-text.css]`.
+
+## Round eight: YC Fall 2026 conventions
+
+`yc-style/` starts over from a review of all 127 logos in the YC Fall 2026 batch, taken from the public YC directory. The patterns: a single heavy flat glyph on black or white, letters cut from geometry, at most one accent colour, and pixel and stencil marks.
+
+- The round has fifteen marks on a 100-unit grid: Pole A, Knockout Globe, Bitmap Globe, North Star A, LA Blocks, One Stroke, Titan, Pin A, Graticule Cell, Compass, Lens, Folded Map, Latitude Bars, Pole Star and Meridian Point.
+- The gallery shows each mark on black, white and navy, with an accent switch: signal orange, gold or none.
+- Rebuild with `python3 yc-style/build.py [atlas-text.css]`.
