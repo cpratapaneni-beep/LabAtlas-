@@ -161,9 +161,10 @@ def merge(a):
     names = Names(pis, vocab)
     in_college = college_appointment(page)
     recs = [json.loads(l) for l in open(os.path.join(a.cache, 'records.jsonl'))]
-    # undergraduate honors theses only (a few graduate programs also file an "honors thesis")
+    # undergraduate honors theses: those filed through Emory College (a few graduate programs, e.g. public
+    # health, also file an "honors thesis"; those are left out)
     honors = [r for r in recs if 'error' not in r and any('honors' in s.lower() for s in r.get('submission') or [])
-              and re.match(r'B\.', (r.get('degree') or [''])[0])]
+              and (r.get('school') or [''])[0].strip() == 'Emory College']
     log, by_pi = collections.defaultdict(collections.Counter), collections.defaultdict(list)
     for r in honors:
         m = re.match(r'(Spring|Summer|Fall|Winter)\s+(\d{4})', r.get('term') or '')
