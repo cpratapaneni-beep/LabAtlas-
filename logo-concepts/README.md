@@ -34,3 +34,10 @@ Shortlist: 02 Axes & Peak, 04 Pole A, 26 Round-Bottom Globe, 38 Wet ∩ Dry, 39 
 `moth/` combines the atlas moth with the Pole A globe in six ways: perched on the pole, an L and an A cut as windows in map-gridded wings, a seal, flying toward the globe, hemisphere wings that spell LA, and a resting moth shaped like an A on an L-shaped branch. It reuses the `pole-a` geometry. Rebuild with `python3 moth/build.py [atlas-text.css]`.
 
 In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meridian from 72°N, and the view is rotated to 22°W so the L stays straight.
+
+## Rounds five and six: drawn to the light, then silhouette
+
+- `drawn-to-the-light/` redraws the moth in side view, flying, with no face and no letters on its wings, and places it in front of the glowing Pole A globe.
+- `silhouette/` is the chosen direction. The moth is a single dark shape crossing the lit globe, framed by a compass ring with graduated ticks and half-shaded cardinal pointers instead of light rays. North carries a star.
+- The silhouette round has six versions: lead, plain globe, rose behind, breaking the ring, one colour, and night globe.
+- Rebuild with `python3 silhouette/build.py [atlas-text.css]`.
