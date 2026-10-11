@@ -61,3 +61,9 @@ In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meri
 ## Round nine (paused): circle-and-ellipse marques
 
 `emblem-marques/` holds emblems built only from circles and ellipses, after Audi and Toyota: Horizon, Atlas Arch, Orbit A, Armillary and Borromean. Each is rendered flat, as a chrome badge and as a construction drawing. It is paused while the product name is reconsidered: labatlas.com belongs to an existing research-lab product. Rebuild with `python3 emblem-marques/build.py [atlas-text.css]`.
+
+## Benchcarta
+
+The product is now called **Benchcarta**: bench + carta (Latin and Italian for map). labatlas.com belongs to an existing research-lab product. benchcarta.com and benchcarta.io were unregistered when checked.
+
+`benchcarta/` has seven marks built only from circles, ellipses and straight lines: Hemisphere B, Linked bc, Bench Globe, Compass C, Contour C, Pin C and Open Globe. Each is shown flat, in chrome, as a construction drawing and in a lockup with the name. It reuses the renderers from `emblem-marques/`. Rebuild with `python3 benchcarta/build.py [atlas-text.css]`.
