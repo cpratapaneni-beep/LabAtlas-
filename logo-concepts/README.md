@@ -28,3 +28,9 @@ Shortlist: 02 Axes & Peak, 04 Pole A, 26 Round-Bottom Globe, 38 Wet ∩ Dry, 39 
 - The lead version, Graticule Ligature, draws both letters as lines of the globe's 15° grid in one unbroken stroke.
 - There are eight variations, each in the navy-and-gold and earth palettes, with a simplified small version.
 - Rebuild with `python3 pole-a/build.py [atlas-text.css]`.
+
+## Round four: the atlas moth
+
+`moth/` combines the atlas moth with the Pole A globe in six ways: perched on the pole, an L and an A cut as windows in map-gridded wings, a seal, flying toward the globe, hemisphere wings that spell LA, and a resting moth shaped like an A on an L-shaped branch. It reuses the `pole-a` geometry. Rebuild with `python3 moth/build.py [atlas-text.css]`.
+
+In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meridian from 72°N, and the view is rotated to 22°W so the L stays straight.

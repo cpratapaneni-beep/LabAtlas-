@@ -54,6 +54,7 @@ def sphere(g, style="engraved", dlon=15, dlat=15, back=False):
 def letters(g, alpha=30, lat_end=-15, cross=15, L=None, w=9, c="let", cross_c="acc"):
     """The A: meridians at +/-alpha from the pole down to lat_end, crossbar on a parallel.
     L: legs list for globe.path, drawn in the same stroke as the A's left leg when it joins."""
+    if L is not None: lat_end = L[-1][1]
     a_left = [("m", -alpha, lat_end, 90)] if L is None else L + [("m", -alpha, lat_end, 90)]
     d = g.path(a_left + [("m", alpha, 90, lat_end)])
     return stroke(d, c, w) + stroke(g.parallel(cross, -alpha, alpha), cross_c, w*.8)
@@ -67,27 +68,27 @@ def star(x, y, R, c="acc", n=5, k=.42):
     pts = [(x + (R if i % 2 == 0 else R*k)*math.cos(math.radians(-90 + i*180/n)), y + (R if i % 2 == 0 else R*k)*math.sin(math.radians(-90 + i*180/n))) for i in range(2*n)]
     return f'<path d="M{" L".join(f"{a:.2f} {b:.2f}" for a, b in pts)}Z" {F(c)}/>'
 
-LIMB_L = [("m", -75, 45, -15), ("p", -15, -75, -30)]
+LIMB_L = [("m", -82, 72, -25), ("p", -25, -82, -30)]
 
 V = []
 def variant(name, idea, full, small):
     V.append(dict(n=len(V)+1, name=name, idea=idea, full=merge(full), small=merge(small)))
 
 # 1 Grid ligature: every stroke of L and A is a line of a 15-degree graticule
-g = Globe(r=74, tilt=26, lon0=-12)
+g = Globe(r=74, tilt=26, lon0=-22)
 variant("Graticule Ligature",
-        "Both letters are lines of the globe's own 15° grid. The L comes down the 75°W meridian and turns along 15°S, then climbs the A's left meridian to the pole in one unbroken stroke. The crossbar is 15°N. The letters were always on the map.",
+        "Both letters are lines of the globe's own 15° grid. The L comes down the 82°W meridian, nearly as tall as the A, turns along 25°S, then climbs the A's left meridian to the pole in one unbroken stroke. The crossbar is 15°N. The letters were always on the map.",
         sphere(g) + letters(g, L=LIMB_L) + f'<circle cx="{g.xy(90,0)[0]:.2f}" cy="{g.xy(90,0)[1]:.2f}" r="4" {F("acc")}/>',
-        sphere(Globe(r=88, tilt=26, lon0=-12), "solid", 30, 30) + letters(Globe(r=88, tilt=26, lon0=-12), L=LIMB_L, w=17))
+        sphere(Globe(r=88, tilt=26, lon0=-22), "solid", 30, 30) + letters(Globe(r=88, tilt=26, lon0=-22), L=LIMB_L, w=17))
 
 # 2 Same, as a solid sphere with a back-side graticule showing through
 variant("Glass Globe",
         "The same ligature on a glass globe: you can see the far side's grid through it, faint and dashed, like an armillary sphere. The letters sit on the near face.",
         sphere(g, "solid", back=True) + letters(g, L=LIMB_L) + f'<circle cx="{g.xy(90,0)[0]:.2f}" cy="{g.xy(90,0)[1]:.2f}" r="4" {F("acc")}/>',
-        sphere(Globe(r=88, tilt=26, lon0=-12), "solid", 30, 30) + letters(Globe(r=88, tilt=26, lon0=-12), L=LIMB_L, w=17))
+        sphere(Globe(r=88, tilt=26, lon0=-22), "solid", 30, 30) + letters(Globe(r=88, tilt=26, lon0=-22), L=LIMB_L, w=17))
 
 # 3 Compass rose at the pole: the apex of the A is the north point of a rose
-g3 = Globe(r=74, tilt=26, lon0=-12)
+g3 = Globe(r=74, tilt=26, lon0=-22)
 px3, py3, _ = g3.xy(90, 0)
 def rose(x, y, L, W, c1="acc", c2="ground", w=.9):
     out = ""
@@ -106,8 +107,8 @@ variant("Rose at the Pole",
         "The ligature globe with a compass rose set on the north pole, where the A's two meridians meet, and rhumb lines running out across the sky as on a sea chart. True north is the top of the A.",
         f'<clipPath id="@@r"><rect width="200" height="200"/></clipPath><g clip-path="url(#@@r)">{rhumbs}</g>' + f'<circle cx="100" cy="100" r="76" {F("ground")}/>' +
         sphere(g3) + letters(g3, L=LIMB_L) + rose(px3, py3, 22, 4.2),
-        sphere(Globe(r=84, tilt=26, lon0=-12, cy=108), "solid", 30, 30) + letters(Globe(r=84, tilt=26, lon0=-12, cy=108), L=LIMB_L, w=16) +
-        rose(*Globe(r=84, tilt=26, lon0=-12, cy=108).xy(90, 0)[:2], 26, 6, w=1.6))
+        sphere(Globe(r=84, tilt=26, lon0=-22, cy=108), "solid", 30, 30) + letters(Globe(r=84, tilt=26, lon0=-22, cy=108), L=LIMB_L, w=16) +
+        rose(*Globe(r=84, tilt=26, lon0=-22, cy=108).xy(90, 0)[:2], 26, 6, w=1.6))
 
 # 4 Coordinate corner: the L is a surveyor's corner mark on the globe, pinning a location
 g4 = Globe(r=74, tilt=26)
@@ -131,29 +132,29 @@ variant("Globe on an L",
         stroke("M26 18V184H186", "let", 18))
 
 # 6 Seal: the graticule ligature inside an instrument bezel with stars
-g6 = Globe(r=66, tilt=26, lon0=-12)
+g6 = Globe(r=66, tilt=26, lon0=-22)
 variant("Pole Seal",
         "The ligature globe set into a graduated bezel, with a star at the pole and two at the equator. It works as a seal for print, stickers and certificates.",
         bezel() + sphere(g6) + letters(g6, L=LIMB_L, w=8) + star(*g6.xy(90, 0)[:2], 6.5) + star(18, 100, 3.6) + star(182, 100, 3.6),
-        f'<circle cx="100" cy="100" r="96" fill="none" {S("ring")} stroke-width="8"/>' + sphere(Globe(r=78, tilt=26, lon0=-12), "solid", 30, 30) +
-        letters(Globe(r=78, tilt=26, lon0=-12), L=LIMB_L, w=15))
+        f'<circle cx="100" cy="100" r="96" fill="none" {S("ring")} stroke-width="8"/>' + sphere(Globe(r=78, tilt=26, lon0=-22), "solid", 30, 30) +
+        letters(Globe(r=78, tilt=26, lon0=-22), L=LIMB_L, w=15))
 
 # 7 Day and night: half the globe in shadow, the letters catch the light
-g7 = Globe(r=74, tilt=26, lon0=-12)
+g7 = Globe(r=74, tilt=26, lon0=-22)
 variant("Terminator",
         "The globe is half in night, with the shadow line cutting through the letters, as the planet looks from space. The A's pole sits in daylight.",
         sphere(g7, "night") + letters(g7, L=LIMB_L) + f'<circle cx="{g7.xy(90,0)[0]:.2f}" cy="{g7.xy(90,0)[1]:.2f}" r="4" {F("acc")}/>' +
         "".join(f'<circle cx="{x}" cy="{y}" r="{r}" {F("acc")}/>' for x, y, r in [(176, 30, 1.6), (186, 62, 1), (160, 176, 1.2), (20, 40, 1), (28, 170, 1.4)]),
-        sphere(Globe(r=88, tilt=26, lon0=-12), "solid", 30, 30) +
+        sphere(Globe(r=88, tilt=26, lon0=-22), "solid", 30, 30) +
         f'<clipPath id="@@t"><circle cx="100" cy="100" r="88"/></clipPath><g clip-path="url(#@@t)"><path d="M116 8Q78 100 116 192H200V8Z" {F("night")}/></g>' +
-        letters(Globe(r=88, tilt=26, lon0=-12), L=LIMB_L, w=17))
+        letters(Globe(r=88, tilt=26, lon0=-22), L=LIMB_L, w=17))
 
 # 8 Bold monoline: fewer grid lines, heavier letters, built for small sizes first
-g8 = Globe(r=80, tilt=26, lon0=-12)
+g8 = Globe(r=80, tilt=26, lon0=-22)
 variant("Bold Globe",
         "Built small-first: a 30° grid and heavy letters, so the mark survives as a 16-pixel favicon and still reads as a globe on a billboard.",
         sphere(g8, "solid", 30, 30) + letters(g8, L=LIMB_L, w=13) + f'<circle cx="{g8.xy(90,0)[0]:.2f}" cy="{g8.xy(90,0)[1]:.2f}" r="6" {F("acc")}/>',
-        sphere(Globe(r=92, tilt=26, lon0=-12), "solid", 45, 45) + letters(Globe(r=92, tilt=26, lon0=-12), L=LIMB_L, w=20))
+        sphere(Globe(r=92, tilt=26, lon0=-22), "solid", 45, 45) + letters(Globe(r=92, tilt=26, lon0=-22), L=LIMB_L, w=20))
 
 # ---------------------------------------------------------------- page
 def svg(body, size, key):
