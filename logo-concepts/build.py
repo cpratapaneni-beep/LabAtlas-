@@ -506,7 +506,7 @@ BODY = r"""<div class="wrap">
   <div class="notes">
     <div><h4>How they were made</h4><p>Five methods from the workspace's brand-kit guidance: monogram plus meaning, product action, metaphor fusion, negative space and construction geometry. No mark uses more than two ideas at once.</p></div>
     <div><h4>Small-size check</h4><p>The two chips on each card show the mark at 32 and 16 pixels, the sizes for an app icon and a browser tab. A mark that falls apart at 16 needs a simpler favicon version.</p></div>
-    <div><h4>The shortlist</h4><p>The gold-tagged six carry the most meaning in the fewest strokes. Round-Bottom Globe and Prism A each read as both lab and atlas. Wet ∩ Dry and Bubbles to Pixels draw the product's own categories.</p></div>
+    <div><h4>The shortlist</h4><p>The seven gold-tagged marks carry the most meaning in the fewest strokes. Round-Bottom Globe and Prism A each read as both lab and atlas. Wet ∩ Dry and Bubbles to Pixels draw the product's own categories.</p></div>
   </div>
 </div>
 <script>
