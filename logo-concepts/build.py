@@ -10,10 +10,10 @@ import math, os, re, sys, html
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# Ground palettes taken from the live product (current mark + light theme).
+# One accent (gold) plus the ink in two softer tones. Ground colours come from the live product.
 GROUNDS = {
-    "navy":  {"ink": "#fdffee", "wet": "#cf5f49", "hyb": "#c9a2f2", "dry": "#3b8ccc", "gold": "#d4a72c", "slate": "#5a6b82", "bg": "#031b36"},
-    "paper": {"ink": "#031b36", "wet": "#cf5f49", "hyb": "#9a78cc", "dry": "#2f7fbf", "gold": "#b98a12", "slate": "#8b98a6", "bg": "#fdffee"},
+    "navy":  {"ink": "#fdffee", "gold": "#d4a72c", "tone": "#9ea8a8", "mist": "#5a6b76", "ground": "#031b36", "bg": "#031b36"},
+    "paper": {"ink": "#031b36", "gold": "#b98a12", "tone": "#62727c", "mist": "#a6afae", "ground": "#fdffee", "bg": "#fdffee"},
 }
 
 def F(c): return f'style="fill:var(--{c})"'
@@ -56,8 +56,8 @@ yh = 31.5
 mark("Axes & Peak", "initials", "Monogram + meaning",
      "The L is a chart's axes, the A is a measured peak, and its crossbar is the half-height line every bench scientist reads.",
      stroke("M12 9V53H56", 4.5) +
-     stroke("M17 50C27 50 28.5 13 33 13C37.5 13 39 50 49 50", 4.5, "wet") +
-     stroke(f"M{x_at_y(g, yh)+4:.1f} {yh}H{x_at_y(g2, yh)-4:.1f}", 3.5, "gold"), pick=True)
+     stroke("M17 50C27 50 28.5 13 33 13C37.5 13 39 50 49 50", 4.5, "gold") +
+     stroke(f"M{x_at_y(g, yh)+4:.1f} {yh}H{x_at_y(g2, yh)-4:.1f}", 3.5, "tone"), pick=True)
 
 mark("Drafting Compass", "initials", "Metaphor fusion",
      "A cartographer's compass is an A: hinge at the apex, two legs, and the arc it draws as the crossbar.",
@@ -67,22 +67,22 @@ mark("Drafting Compass", "initials", "Metaphor fusion",
 mark("Pole A", "initials", "Monogram + meaning",
      "Two meridians meet at the north pole to make the A; the equator is its crossbar.",
      f'<circle cx="32" cy="32" r="24" fill="none" stroke="{INK}" stroke-width="2.5" opacity=".3"/>' +
-     stroke("M32 8Q18 28 16.5 49M32 8Q46 28 47.5 49", 4.5) + stroke("M18.5 35Q32 41 45.5 35", 4, "dry"), pick=True)
+     stroke("M32 8Q18 28 16.5 49M32 8Q46 28 47.5 49", 4.5) + stroke("M18.5 35Q32 41 45.5 35", 4, "tone"), pick=True)
 
 mark("Atlas A", "initials", "Metaphor fusion",
      "The titan reduced to a letter: an A carrying a globe on its apex.",
      stroke("M14 56L32 31L50 56", 5) + stroke("M21 46H43", 4) +
-     dot(32, 18, 11, "dry") + stroke("M21.5 18Q32 22 42.5 18", 2.2, extra='opacity=".85"'))
+     dot(32, 18, 11, "tone") + stroke("M21.5 18Q32 22 42.5 18", 2.2, "ground"))
 
 ticks = "".join(f'<path d="M18 {y}H{24 if i%2 else 28}" stroke="{INK}" stroke-width="2.5" stroke-linecap="round"/>' for i, y in enumerate(range(14, 46, 6)))
 mark("Graduated L", "initials", "Monogram + meaning",
      "An L marked like a graduated cylinder, with a single drop beside it: the bench in one letter.",
      stroke("M18 8V50H54", 5.5) + ticks +
-     f'<path d="M42 17C42 17 34 27 34 33a8 8 0 0 0 16 0C50 27 42 17 42 17Z" {F("wet")}/>')
+     f'<path d="M42 17C42 17 34 27 34 33a8 8 0 0 0 16 0C50 27 42 17 42 17Z" {F("gold")}/>')
 
 mark("Corner & Summit", "initials", "Construction",
      "A map's corner registration mark is the L; the summit it frames is the A.",
-     stroke("M10 20V54H44", 5) + f'<path d="M24 46L40 16L56 46Z" {F("dry")} stroke-linejoin="round"/>' +
+     stroke("M10 20V54H44", 5) + f'<path d="M24 46L40 16L56 46Z" {F("tone")} stroke-linejoin="round"/>' +
      f'<path d="M34.7 26L40 16L45.3 26L42.5 24L40 27L37.5 24Z" fill="{INK}"/>')
 
 mark("Doorway A", "initials", "Negative space",
@@ -107,7 +107,7 @@ mark("Cutout LA", "initials", "Negative space",
 mark("Ball-and-Stick A", "initials", "Metaphor fusion",
      "An A built like a molecular model: bonds for strokes, atoms at the joints.",
      stroke("M14 52L32 14L50 52", 3.5) + stroke("M19.7 40H44.3", 3) +
-     dot(32, 14, 5.5, "gold") + dot(14, 52, 5, "wet") + dot(50, 52, 5, "dry") + dot(19.7, 40, 3.4, "hyb") + dot(44.3, 40, 3.4, "hyb"))
+     dot(32, 14, 5.5) + dot(14, 52, 5, "gold") + dot(50, 52, 5, "tone") + dot(19.7, 40, 3.4, "mist") + dot(44.3, 40, 3.4, "mist"))
 
 mark("Crossbar Foot", "initials", "Monogram",
      "The L's foot keeps going and becomes the A's crossbar, so the two letters lock into one shape.",
@@ -116,18 +116,18 @@ mark("Crossbar Foot", "initials", "Monogram",
 # II. Atlas ------------------------------------------------------------
 mark("Three-Fold Map", "atlas", "Metaphor fusion",
      "A folded map whose three panels are the three kinds of lab: wet, hybrid, dry.",
-     f'<path d="M8 16L23 10.5V50L8 55.5Z" {F("wet")}/><path d="M25 10.5L39 16V55.5L25 50Z" {F("hyb")}/><path d="M41 16L56 10.5V50L41 55.5Z" {F("dry")}/>')
+     f'<path d="M8 16L23 10.5V50L8 55.5Z" {F("gold")}/><path d="M25 10.5L39 16V55.5L25 50Z" {F("mist")}/><path d="M41 16L56 10.5V50L41 55.5Z" {F("tone")}/>')
 
 mark("Dotted Equator", "atlas", "Evolution of current mark",
-     "Today's three dots, now sitting on a globe's equator. The smallest step from the current icon.",
+     "The current icon's three dots, now sitting on a globe's equator. The smallest step from the current icon.",
      f'<circle cx="32" cy="32" r="22" fill="none" stroke="{INK}" stroke-width="4"/>' +
      f'<ellipse cx="32" cy="32" rx="9" ry="22" fill="none" stroke="{INK}" stroke-width="2.2" opacity=".45"/>' +
-     stroke("M10 32H54", 2.2, extra='opacity=".45"') + dot(19, 32, 4.6, "wet") + dot(32, 32, 4.6, "hyb") + dot(45, 32, 4.6, "dry"))
+     stroke("M10 32H54", 2.2, extra='opacity=".45"') + dot(19, 32, 4.6, "gold") + dot(32, 32, 4.6, "mist") + dot(45, 32, 4.6, "tone"))
 
 mark("Banded Globe", "atlas", "Construction",
      "A sphere cut along two latitudes into wet, hybrid and dry bands.",
      '<mask id="@@m"><circle cx="32" cy="32" r="24" fill="#fff"/><path d="M4 24Q32 31 60 24M4 40Q32 47 60 40" stroke="#000" stroke-width="3" fill="none"/></mask>'
-     f'<g mask="url(#@@m)"><rect y="0" width="64" height="28" {F("wet")}/><rect y="27" width="64" height="16" {F("hyb")}/><rect y="42" width="64" height="22" {F("dry")}/></g>')
+     f'<g mask="url(#@@m)"><rect y="0" width="64" height="28" {F("gold")}/><rect y="27" width="64" height="16" {F("mist")}/><rect y="42" width="64" height="22" {F("tone")}/></g>')
 
 cells = "".join(
     f'<rect x="{10+c*16}" y="{10+r*16}" width="12" height="12" rx="2.5" ' +
@@ -138,55 +138,55 @@ mark("Grid Reference", "atlas", "Product action",
 
 mark("Contour Summit", "atlas", "Metaphor fusion",
      "Topographic contour lines rising to a peak, with the peak marked in gold.",
-     stroke("M10 50C10 34 22 10 34 10C48 10 56 34 54 50C52 56 12 56 10 50Z", 3.5, "dry") +
-     stroke("M18 46C18 34 26 20 34 20C44 20 48 36 46 46C45 50 19 50 18 46Z", 3.5, "hyb") +
-     stroke("M26 42C26 36 30 30 34 30C40 30 40 38 39 42C38 45 27 45 26 42Z", 3.5, "wet") + dot(34, 37, 2.6, "gold"))
+     stroke("M10 50C10 34 22 10 34 10C48 10 56 34 54 50C52 56 12 56 10 50Z", 3.5, "tone") +
+     stroke("M18 46C18 34 26 20 34 20C44 20 48 36 46 46C45 50 19 50 18 46Z", 3.5, "mist") +
+     stroke("M26 42C26 36 30 30 34 30C40 30 40 38 39 42C38 45 27 45 26 42Z", 3.5, "gold") + dot(34, 37, 2.6))
 
 mark("Needle Drop", "atlas", "Metaphor fusion",
      "A drop and a map pin set point to point make a compass needle: lab work that finds its direction.",
      f'<circle cx="32" cy="32" r="26" fill="none" stroke="{INK}" stroke-width="2.5" opacity=".4"/>'
-     f'<g transform="rotate(35 32 32)"><path d="M32 7C37 18 40 26 40 32H24C24 26 27 18 32 7Z" {F("wet")}/>'
-     f'<path d="M24 32H40C40 38 37 46 32 57C27 46 24 38 24 32Z" {F("dry")}/></g>' + dot(32, 32, 3.6, extra='') )
+     f'<g transform="rotate(35 32 32)"><path d="M32 7C37 18 40 26 40 32H24C24 26 27 18 32 7Z" {F("gold")}/>'
+     f'<path d="M24 32H40C40 38 37 46 32 57C27 46 24 38 24 32Z" {F("tone")}/></g>' + dot(32, 32, 3.6, extra='') )
 
 route = ((12, 50), (12, 34), (30, 42), (30, 28)); route2 = ((30, 28), (30, 15), (46, 22), (50, 14))
 mark("Route", "atlas", "Product action",
      "A dotted route through three stops, ending at a ringed destination.",
      stroke("M12 50C12 34 30 42 30 28C30 15 46 22 50 14", 3, extra='stroke-dasharray="0.1 5.5"') +
-     dot(12, 50, 4.5, "wet") + dot(30, 28, 4.5, "hyb") + dot(50, 14, 4.5, "dry") +
-     f'<circle cx="50" cy="14" r="8.5" fill="none" {S("dry")} stroke-width="2.2"/>')
+     dot(12, 50, 4.5, "gold") + dot(30, 28, 4.5, "mist") + dot(50, 14, 4.5, "tone") +
+     f'<circle cx="50" cy="14" r="8.5" fill="none" {S("tone")} stroke-width="2.2"/>')
 
 mark("Cradle", "atlas", "Metaphor fusion",
      "A world held in an open hand, the way Atlas carries it.",
-     dot(32, 27, 14, "dry") + stroke("M18.5 27Q32 32 45.5 27", 2.2, extra='opacity=".8"') +
-     f'<ellipse cx="32" cy="27" rx="6" ry="14" fill="none" stroke="{INK}" stroke-width="2.2" opacity=".8"/>' +
+     dot(32, 27, 14, "tone") + stroke("M18.5 27Q32 32 45.5 27", 2.2, "ground") +
+     f'<ellipse cx="32" cy="27" rx="6" ry="14" fill="none" {S("ground")} stroke-width="2.2"/>' +
      stroke("M10 32A22 22 0 0 0 54 32", 5))
 
 mark("Tented Atlas", "atlas", "Monogram + meaning",
-     "A book left open face down forms an A. Its fanned pages carry the three lab colours.",
-     stroke("M32 18Q25 35 19 52", 3, "wet") + stroke("M32 18V53", 3, "hyb") + stroke("M32 18Q39 35 45 52", 3, "dry") +
+     "A book left open face down forms an A. Its fanned pages stand for the three kinds of lab.",
+     stroke("M32 18Q25 35 19 52", 3, "gold") + stroke("M32 18V53", 3, "mist") + stroke("M32 18Q39 35 45 52", 3, "tone") +
      stroke("M8 52L32 12L56 52", 5))
 
 mark("Map Layers", "atlas", "Construction",
      "Three stacked map layers, like a GIS view, one per kind of lab.",
-     stroke("M10 42L32 53L54 42", 4.5, "wet") + stroke("M10 32L32 43L54 32", 4.5, "hyb") +
-     f'<path d="M32 11L54 22L32 33L10 22Z" {F("dry")} stroke-linejoin="round"/>')
+     stroke("M10 42L32 53L54 42", 4.5, "gold") + stroke("M10 32L32 43L54 32", 4.5, "mist") +
+     f'<path d="M32 11L54 22L32 33L10 22Z" {F("tone")} stroke-linejoin="round"/>')
 
 mark("Compass Rose", "atlas", "Construction",
      "A plain four-point rose with only north in gold. It keeps the tradition and drops the ornament.",
      f'<path d="M32 6L37 27L58 32L37 37L32 58L27 37L6 32L27 27Z" fill="{INK}"/>' +
-     f'<path d="M32 6L37 27L32 32L27 27Z" {F("gold")}/>' + dot(32, 32, 2.6, "wet"))
+     f'<path d="M32 6L37 27L32 32L27 27Z" {F("gold")}/>' + dot(32, 32, 2.6, "ground"))
 
 mark("Pin Flask", "atlas", "Negative space",
      "A map pin with a flask cut out of it: a place where science happens.",
      '<mask id="@@m"><rect width="64" height="64" fill="#fff"/><path d="M28.5 12H35.5V20L44 35H20L28.5 20Z" fill="#000" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/></mask>'
      f'<path d="M32 59C22 45 11 37 11 24A21 21 0 0 1 53 24C53 37 42 45 32 59Z" fill="{INK}" mask="url(#@@m)"/>' +
-     f'<path d="M23.4 29H40.6L44 35H20Z" {F("wet")}/>')
+     f'<path d="M23.4 29H40.6L44 35H20Z" {F("gold")}/>')
 
 grid = "".join(f'<path d="M{v} 8V48M8 {v}H48" stroke="{INK}" stroke-width="1.4" opacity=".4"/>' for v in (16, 22, 28, 34, 40))
 mark("Loupe Grid", "atlas", "Product action",
      "A magnifier over a map grid, with one point in focus. This is what the product does: search.",
      f'<clipPath id="@@c"><circle cx="28" cy="28" r="15"/></clipPath><g clip-path="url(#@@c)">{grid}</g>' +
-     dot(31, 25, 3.8, "wet") + f'<circle cx="28" cy="28" r="17" fill="none" stroke="{INK}" stroke-width="5"/>' +
+     dot(31, 25, 3.8, "gold") + f'<circle cx="28" cy="28" r="17" fill="none" stroke="{INK}" stroke-width="5"/>' +
      stroke("M40.5 40.5L54 54", 7))
 
 # III. Lab -------------------------------------------------------------
@@ -194,37 +194,37 @@ yc = 40 - math.sqrt(18*18 - 3*3)
 mark("Round-Bottom Globe", "lab", "Metaphor fusion",
      "A round-bottom flask is already a globe. The liquid line doubles as the equator, so the mark reads as lab and atlas at once.",
      f'<clipPath id="@@c"><circle cx="32" cy="40" r="16"/></clipPath>'
-     f'<g clip-path="url(#@@c)"><path d="M10 41Q32 47 54 41V64H10Z" {F("dry")}/>'
+     f'<g clip-path="url(#@@c)"><path d="M10 41Q32 47 54 41V64H10Z" {F("tone")}/>'
      f'<ellipse cx="32" cy="40" rx="7" ry="18" fill="none" stroke="{INK}" stroke-width="2" opacity=".5"/></g>' +
      stroke(f"M29 8V{yc:.2f}A18 18 0 1 0 35 {yc:.2f}V8", 4.5) + stroke("M25.5 8H38.5", 4.5), pick=True)
 
 mark("Globe Flask", "lab", "Metaphor fusion",
-     "An Erlenmeyer flask filled with latitude lines in the three lab colours.",
+     "An Erlenmeyer flask filled with latitude lines, one per kind of lab.",
      '<clipPath id="@@c"><path d="M29 8V24L13 52Q12 56 16 56H48Q52 56 51 52L35 24V8Z"/></clipPath>'
      f'<g clip-path="url(#@@c)" fill="none" stroke-width="3.2">'
-     f'<path d="M4 36Q32 42 60 36" {S("wet")}/><path d="M4 43Q32 49 60 43" {S("hyb")}/><path d="M4 50Q32 56 60 50" {S("dry")}/></g>' +
+     f'<path d="M4 36Q32 42 60 36" {S("gold")}/><path d="M4 43Q32 49 60 43" {S("mist")}/><path d="M4 50Q32 56 60 50" {S("tone")}/></g>' +
      stroke("M29 8V24L13 52Q12 56 16 56H48Q52 56 51 52L35 24V8M26 8H38", 4.5))
 
 mark("Flask A", "lab", "Monogram + meaning",
      "The A becomes a vessel: liquid fills it up to the crossbar and bubbles rise through the apex.",
-     f'<path d="M18.6 40H45.4L51.5 56H12.5Z" {F("wet")}/>' +
+     f'<path d="M18.6 40H45.4L51.5 56H12.5Z" {F("gold")}/>' +
      stroke("M12 56L32 8L52 56", 5) + stroke("M18.6 40H45.4", 4.5) +
-     f'<circle cx="31" cy="31" r="3" fill="none" {S("hyb")} stroke-width="2.2"/><circle cx="34" cy="22" r="2" fill="none" {S("dry")} stroke-width="2"/>')
+     f'<circle cx="31" cy="31" r="3" fill="none" {S("mist")} stroke-width="2.2"/><circle cx="34" cy="22" r="2" fill="none" {S("tone")} stroke-width="2"/>')
 
 mark("Petri Contours", "lab", "Metaphor fusion",
      "Rings spreading in a petri dish that also read as a contour map.",
      f'<circle cx="32" cy="32" r="24" fill="none" stroke="{INK}" stroke-width="3.5"/>' +
-     f'<circle cx="28.5" cy="34" r="15" fill="none" {S("dry")} stroke-width="3"/>' +
-     f'<circle cx="26" cy="36" r="8.5" fill="none" {S("hyb")} stroke-width="3"/>' + dot(24.5, 37, 3.4, "wet"))
+     f'<circle cx="28.5" cy="34" r="15" fill="none" {S("tone")} stroke-width="3"/>' +
+     f'<circle cx="26" cy="36" r="8.5" fill="none" {S("mist")} stroke-width="3"/>' + dot(24.5, 37, 3.4, "gold"))
 
 mark("Petri Colonies", "lab", "Evolution of current mark",
      "Today's three dots become three colonies of different sizes growing in a dish.",
      f'<circle cx="32" cy="32" r="24" fill="none" stroke="{INK}" stroke-width="4"/>' +
      f'<circle cx="32" cy="32" r="19.5" fill="none" stroke="{INK}" stroke-width="1.4" opacity=".35"/>' +
-     dot(24, 26, 7, "wet") + dot(40.5, 23.5, 4, "hyb") + dot(36, 41, 8.5, "dry"))
+     dot(24, 26, 7, "gold") + dot(40.5, 23.5, 4, "mist") + dot(36, 41, 8.5, "tone"))
 
 tubes = ""
-for x, top, c in [(18, 36, "wet"), (32, 28, "hyb"), (46, 18, "dry")]:
+for x, top, c in [(18, 36, "gold"), (32, 28, "mist"), (46, 18, "tone")]:
     tubes += f'<path d="M{x-3} {top}V46A3 3 0 0 0 {x+3} 46V{top}Z" {F(c)}/>'
     tubes += stroke(f"M{x-5} 9V46A5 5 0 0 0 {x+5} 46V9", 3)
 mark("Test Tube Trio", "lab", "Product action",
@@ -234,63 +234,63 @@ mark("Test Tube Trio", "lab", "Product action",
 c1 = ((32, 8), (14, 16), (14, 24), (32, 32)); c2 = ((32, 8), (50, 16), (50, 24), (32, 32))
 rungs = ""
 for y in (14, 20, 26):
-    rungs += stroke(f"M{x_at_y(c1, y)+2.5:.1f} {y}H{x_at_y(c2, y)-2.5:.1f}", 2.2, "hyb")
-    rungs += stroke(f"M{x_at_y(c1, y)+2.5:.1f} {64-y}H{x_at_y(c2, y)-2.5:.1f}", 2.2, "hyb")
+    rungs += stroke(f"M{x_at_y(c1, y)+2.5:.1f} {y}H{x_at_y(c2, y)-2.5:.1f}", 2.2, "mist")
+    rungs += stroke(f"M{x_at_y(c1, y)+2.5:.1f} {64-y}H{x_at_y(c2, y)-2.5:.1f}", 2.2, "mist")
 mark("Helix Meridians", "lab", "Metaphor fusion",
      "Inside a circle, a double helix doubles as the curved meridians of a globe.",
      f'<circle cx="32" cy="32" r="24" fill="none" stroke="{INK}" stroke-width="3.5"/>' + rungs +
-     stroke("M32 8C14 16 14 24 32 32C50 40 50 48 32 56", 3.5, "wet") +
-     stroke("M32 8C50 16 50 24 32 32C14 40 14 48 32 56", 3.5, "dry"))
+     stroke("M32 8C14 16 14 24 32 32C50 40 50 48 32 56", 3.5, "gold") +
+     stroke("M32 8C50 16 50 24 32 32C14 40 14 48 32 56", 3.5, "tone"))
 
 px = ""
-for x, y, c in [(20, 47, "wet"), (26, 47, "wet"), (32, 47, "hyb"), (38, 47, "dry"), (26, 41, "wet"), (32, 41, "hyb"), (38, 41, "dry"), (32, 35, "dry")]:
+for x, y, c in [(20, 47, "gold"), (26, 47, "gold"), (32, 47, "mist"), (38, 47, "tone"), (26, 41, "gold"), (32, 41, "mist"), (38, 41, "tone"), (32, 35, "tone")]:
     px += f'<rect x="{x-2.4}" y="{y-2.4}" width="4.8" height="4.8" rx="1" {F(c)}/>'
 mark("Pixel Flask", "lab", "Metaphor fusion",
      "A flask filled with pixels instead of liquid: the bench and the computer in one vessel.",
-     px + dot(36, 28, 1.8, "dry") + stroke("M29 8V24L13 52Q12 56 16 56H48Q52 56 51 52L35 24V8M26 8H38", 4.5))
+     px + dot(36, 28, 1.8, "tone") + stroke("M29 8V24L13 52Q12 56 16 56H48Q52 56 51 52L35 24V8M26 8H38", 4.5))
 
 mark("Drop on the Map", "lab", "Product action",
      "A pipette lets one drop fall onto a map line. This is where the experiment happens.",
      f'<ellipse cx="32" cy="11" rx="6" ry="6.5" fill="{INK}"/>' + stroke("M30 18V32L32 37L34 32V18Z", 2.8) +
-     f'<path d="M32 40C32 40 26.5 46.5 26.5 50a5.5 5.5 0 0 0 11 0C37.5 46.5 32 40 32 40Z" {F("wet")}/>' +
+     f'<path d="M32 40C32 40 26.5 46.5 26.5 50a5.5 5.5 0 0 0 11 0C37.5 46.5 32 40 32 40Z" {F("gold")}/>' +
      stroke("M8 58H24M40 58H56", 2.6, extra='opacity=".5"'))
 
 mark("Beaker Bars", "lab", "Metaphor fusion",
      "A beaker holding a bar chart: wet-lab glass, dry-lab data.",
-     f'<rect x="20" y="37" width="6" height="13" rx="1" {F("wet")}/><rect x="29" y="29" width="6" height="21" rx="1" {F("hyb")}/><rect x="38" y="20" width="6" height="30" rx="1" {F("dry")}/>' +
+     f'<rect x="20" y="37" width="6" height="13" rx="1" {F("gold")}/><rect x="29" y="29" width="6" height="21" rx="1" {F("mist")}/><rect x="38" y="20" width="6" height="30" rx="1" {F("tone")}/>' +
      stroke("M10 9H14V50Q14 55 19 55H45Q50 55 50 50V9H54", 4.5))
 
 mark("Iso Cube", "lab", "Construction",
      "An isometric cube with one face per kind of lab: a single solid block of research.",
      '<mask id="@@m"><rect width="64" height="64" fill="#fff"/><path d="M32 32.5L13 21.5M32 32.5L51 21.5M32 32.5V55" stroke="#000" stroke-width="2.4"/></mask>'
-     f'<g mask="url(#@@m)"><path d="M32 10L51 21V43L32 54L13 43V21Z" {F("dry")}/><path d="M32 10L51 21L32 32L13 21Z" {F("hyb")}/><path d="M13 21L32 32V54L13 43Z" {F("wet")}/></g>')
+     f'<g mask="url(#@@m)"><path d="M32 10L51 21V43L32 54L13 43V21Z" {F("tone")}/><path d="M32 10L51 21L32 32L13 21Z" {F("mist")}/><path d="M13 21L32 32V54L13 43Z" {F("gold")}/></g>')
 
 hexv = [(32+20*math.cos(math.radians(a)), 32+20*math.sin(math.radians(a))) for a in range(-90, 270, 60)]
 hexd = "M" + "L".join(f"{x:.2f} {y:.2f}" for x, y in hexv) + "Z"
 mark("Ring Nodes", "lab", "Construction",
      "A benzene ring with a coloured atom at every other corner. Chemistry's most familiar shape, made specific to the product.",
      stroke(hexd, 4) + f'<circle cx="32" cy="32" r="10.5" fill="none" stroke="{INK}" stroke-width="2.5" opacity=".5"/>' +
-     dot(*hexv[0], 5, "wet") + dot(*hexv[2], 5, "hyb") + dot(*hexv[4], 5, "dry"))
+     dot(*hexv[0], 5, "gold") + dot(*hexv[2], 5, "mist") + dot(*hexv[4], 5, "tone"))
 
 # IV. Spectrum ---------------------------------------------------------
 mark("Wet ∩ Dry", "spectrum", "Product meaning",
-     "Wet and dry labs as two circles. Where they overlap is the hybrid lab. This is the product's taxonomy as a Venn diagram.",
-     dot(23, 32, 16, "wet") + dot(41, 32, 16, "dry") +
-     f'<path d="M32 18.75A16 16 0 0 1 32 45.25A16 16 0 0 1 32 18.75Z" {F("hyb")}/>', pick=True)
+     "Wet and dry labs as two circles. Their overlap is cut out, and that gap is the hybrid lab. This is the product's taxonomy as a Venn diagram.",
+     dot(23, 32, 16, "gold") + dot(41, 32, 16, "tone") +
+     f'<path d="M32 18.75A16 16 0 0 1 32 45.25A16 16 0 0 1 32 18.75Z" {F("ground")}/>', pick=True)
 
 bp = ""
 for r in range(3):
-    for c, (col, rx) in enumerate([("wet", 6), ("hyb", 3.2), ("dry", 0.8)]):
+    for c, (col, rx) in enumerate([("gold", 6), ("mist", 3.2), ("tone", 0.8)]):
         bp += f'<rect x="{10+c*16}" y="{10+r*16}" width="12" height="12" rx="{rx}" {F(col)}/>'
 mark("Bubbles to Pixels", "spectrum", "Product meaning",
-     "From left to right, drops turn into pixels. The shift from bench to computer, shown as change in shape and colour.", bp, pick=True)
+     "From left to right, drops turn into pixels. The shift from bench to computer, shown as a change in shape.", bp, pick=True)
 
 mark("Three Primitives", "spectrum", "Construction",
      "Peak, drop and pixel stand for the field, the bench and the computer. Three basic shapes, no letters needed.",
-     f'<path d="M30 8L44 32H16Z" {F("gold")} stroke-linejoin="round"/>' + dot(19, 44, 11, "wet") +
-     f'<rect x="33" y="34" width="21" height="21" rx="1.5" {F("dry")}/>')
+     f'<path d="M30 8L44 32H16Z" fill="{INK}" stroke-linejoin="round"/>' + dot(19, 44, 11, "gold") +
+     f'<rect x="33" y="34" width="21" height="21" rx="1.5" {F("tone")}/>')
 
-segs = [("wet", 22), ("hyb", 10), ("dry", 44), ("slate", 24)]
+segs = [("gold", 22), ("ink", 10), ("tone", 44), ("mist", 24)]
 ring, off = "", 0
 for c, v in segs:
     ring += f'<circle cx="32" cy="32" r="19" fill="none" {S(c)} stroke-width="10" pathLength="100" stroke-dasharray="{v-2.5} {100-v+2.5}" stroke-dashoffset="{-off:.2f}" transform="rotate(-90 32 32)"/>'
@@ -300,7 +300,7 @@ mark("Census Ring", "spectrum", "Product meaning",
      ring, pick=True)
 
 arc = ((10, 40), (32, 20), (54, 40))
-ad = "".join(dot(*qbez(*arc, t), 5, c) for t, c in [(0.18, "wet"), (0.5, "hyb"), (0.82, "dry")])
+ad = "".join(dot(*qbez(*arc, t), 5, c) for t, c in [(0.18, "gold"), (0.5, "mist"), (0.82, "tone")])
 mark("Arc of Dots", "spectrum", "Evolution of current mark",
      "The current three dots moved onto a curved line of latitude: a globe suggested by a single arc.",
      f'<circle cx="32" cy="38" r="24" fill="none" stroke="{INK}" stroke-width="3" opacity=".25"/>' +
@@ -316,24 +316,24 @@ for _ in range(26):
     sc += dot(x, y, 1.7, extra='opacity=".5"')
 mark("Found", "spectrum", "Product action",
      "A scatter of investigators with one of them ringed. It says the product's job: find the one lab that fits.",
-     sc + dot(38, 26, 3.8, "wet") + f'<circle cx="38" cy="26" r="8.5" fill="none" stroke="{INK}" stroke-width="2.5"/>')
+     sc + dot(38, 26, 3.8, "gold") + f'<circle cx="38" cy="26" r="8.5" fill="none" stroke="{INK}" stroke-width="2.5"/>')
 
 mark("Socket", "spectrum", "Negative space",
      "A circle sitting in a matching notch. The product's promise is fit, so the mark shows a fit.",
      '<mask id="@@m"><rect width="64" height="64" fill="#fff"/><circle cx="43" cy="21" r="12" fill="#000"/></mask>'
-     f'<rect x="9" y="9" width="46" height="46" rx="7" fill="{INK}" mask="url(#@@m)"/>' + dot(43, 21, 8.5, "wet"))
+     f'<rect x="9" y="9" width="46" height="46" rx="7" fill="{INK}" mask="url(#@@m)"/>' + dot(43, 21, 8.5, "gold"))
 
 pix = ""
 for cx in (36, 44, 52):
     for cy in range(12, 56, 8):
         if math.hypot(cx-32, cy-32) <= 25:
-            pix += f'<rect x="{cx-3.4}" y="{cy-3.4}" width="6.8" height="6.8" rx="1" {F("dry")}/>'
+            pix += f'<rect x="{cx-3.4}" y="{cy-3.4}" width="6.8" height="6.8" rx="1" {F("tone")}/>'
 mark("Analog / Digital", "spectrum", "Product meaning",
      "One sphere: the left half is smooth like a drop, the right half is stepped like a screen.",
-     f'<path d="M31 8A24 24 0 0 0 31 56Z" {F("wet")}/>' + pix)
+     f'<path d="M31 8A24 24 0 0 0 31 56Z" {F("gold")}/>' + pix)
 
 bars = ""
-for x, h, c in [(8, 14, "wet"), (19, 28, "wet"), (30, 42, "hyb"), (41, 28, "dry"), (52, 14, "dry")]:
+for x, h, c in [(8, 14, "gold"), (19, 28, "gold"), (30, 42, "mist"), (41, 28, "tone"), (52, 14, "tone")]:
     bars += f'<rect x="{x-4}" y="{54-h}" width="8" height="{h}" rx="1.5" {F(c)}/>'
 mark("Peak Bars", "spectrum", "Monogram + meaning",
      "A histogram shaped like an A, with a gap cut across it where the crossbar would be.",
@@ -341,29 +341,29 @@ mark("Peak Bars", "spectrum", "Monogram + meaning",
      f'<g mask="url(#@@m)" transform="translate(4 0)">{bars}</g>')
 
 mark("Prism A", "spectrum", "Metaphor fusion",
-     "White light enters an A-shaped prism and leaves split into the three lab colours. The beam inside the prism is the crossbar.",
+     "White light enters an A-shaped prism and leaves split into three beams, one per kind of lab. The beam inside the prism is the crossbar.",
      stroke("M3 39L20 34", 3.2) + stroke("M20 34L40 26", 3.2) +
-     stroke("M40 26L61 19", 3.2, "wet") + stroke("M40 26L61 27", 3.2, "hyb") + stroke("M40 26L61 35", 3.2, "dry") +
+     stroke("M40 26L61 19", 3.2, "gold") + stroke("M40 26L61 27", 3.2, "mist") + stroke("M40 26L61 35", 3.2, "tone") +
      stroke("M32 9L52 50H12Z", 4.2), pick=True)
 
 arcs = ""
-for i, c in enumerate(["wet", "hyb", "dry"]):
+for i, c in enumerate(["gold", "mist", "tone"]):
     a0, a1 = math.radians(-90 + i*120 + 8), math.radians(-90 + i*120 + 112)
     p0 = (32+21*math.cos(a0), 32+21*math.sin(a0)); p1 = (32+21*math.cos(a1), 32+21*math.sin(a1))
     arcs += stroke(f"M{p0[0]:.2f} {p0[1]:.2f}A21 21 0 0 1 {p1[0]:.2f} {p1[1]:.2f}", 4, c)
 mark("Ring Seal", "spectrum", "Construction",
-     "A seal: a three-colour ring around a single-line A. Works on a stamp, a badge or an avatar.",
+     "A seal: a three-part ring around a single-line A. Works on a stamp, a badge or an avatar.",
      f'<circle cx="32" cy="32" r="27" fill="none" stroke="{INK}" stroke-width="1.8" opacity=".5"/>' + arcs +
      stroke("M23 43L32 20L41 43M26 36H38", 4))
 
 mark("Reticle", "spectrum", "Product action",
      "A crosshair locked on a single point: the moment the search lands on the right lab.",
      f'<circle cx="32" cy="32" r="17" fill="none" stroke="{INK}" stroke-width="3.5"/>' +
-     stroke("M32 4V14M32 50V60M4 32H14M50 32H60", 3.5) + dot(32, 32, 4.5, "wet"))
+     stroke("M32 4V14M32 50V60M4 32H14M50 32H60", 3.5) + dot(32, 32, 4.5, "gold"))
 
 mark("Chevron Peak", "spectrum", "Monogram + meaning",
      "Three stacked chevrons, one per kind of lab, climbing like contour lines toward an A.",
-     stroke("M12 30L32 12L52 30", 5.5, "wet") + stroke("M12 42L32 24L52 42", 5.5, "hyb") + stroke("M12 54L32 36L52 54", 5.5, "dry"))
+     stroke("M12 30L32 12L52 30", 5.5, "gold") + stroke("M12 42L32 24L52 42", 5.5, "mist") + stroke("M12 54L32 36L52 54", 5.5, "tone"))
 
 assert len(M) == 50, len(M)
 
@@ -449,10 +449,10 @@ h1{font-weight:300;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacin
 .gh span{color:var(--fg2);font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--rule);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.tile{--ink:var(--cream);--wet:#cf5f49;--hyb:#c9a2f2;--dry:#3b8ccc;--gold:#d4a72c;--slate:#5a6b82;
+.tile{--ink:var(--cream);--gold:#d4a72c;--tone:#9ea8a8;--mist:#5a6b76;--ground:var(--navy);
   background:var(--navy);color:var(--ink);aspect-ratio:1/1;max-width:100%;display:grid;place-items:center;position:relative}
 .tile svg{width:52%;height:52%}
-main[data-ground="paper"] .tile, main[data-ground="paper"] .chip{--ink:var(--navy);--hyb:#9a78cc;--dry:#2f7fbf;--gold:#b98a12;--slate:#8b98a6;background:var(--cream);color:var(--ink)}
+main[data-ground="paper"] .tile, main[data-ground="paper"] .chip{--ink:var(--navy);--gold:#b98a12;--tone:#62727c;--mist:#a6afae;--ground:var(--cream);background:var(--cream);color:var(--ink)}
 main[data-ground="paper"] .tile{box-shadow:inset 0 -1px 0 var(--rule)}
 .pick{position:absolute;top:10px;left:10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);background:#d4a72c;border-radius:999px;padding:2px 8px}
 .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
@@ -463,7 +463,7 @@ main[data-ground="paper"] .tile{box-shadow:inset 0 -1px 0 var(--rule)}
 .foot{justify-content:space-between;align-items:center}
 .method{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--fg2)}
 .sizes{display:flex;gap:6px;align-items:center}
-.chip{--ink:var(--cream);--wet:#cf5f49;--hyb:#c9a2f2;--dry:#3b8ccc;--gold:#d4a72c;--slate:#5a6b82;background:var(--navy);color:var(--ink);display:grid;place-items:center;border-radius:7px}
+.chip{--ink:var(--cream);--gold:#d4a72c;--tone:#9ea8a8;--mist:#5a6b76;--ground:var(--navy);background:var(--navy);color:var(--ink);display:grid;place-items:center;border-radius:7px}
 .chip.c32{width:32px;height:32px}.chip.c16{width:16px;height:16px;border-radius:4px}
 .chip.c16 svg{width:14px;height:14px}
 .card[hidden],.grp[hidden]{display:none!important}
@@ -481,8 +481,8 @@ BODY = r"""<div class="wrap">
       <h1>Fifty marks, no words.</h1>
     </div>
     <div>
-      <p class="lede">Each concept is a single symbol for Lab Atlas, the directory that shows whether a research lab works at the bench, at a computer or both. Every mark is built on a 64-unit grid in the product's own colours: <strong>coral for wet labs, lilac for hybrid, blue for dry</strong>, gold for highlights, on navy. Nothing is tied to one university.</p>
-      <div class="palette" aria-hidden="true"><span><i style="background:#cf5f49"></i>Wet</span><span><i style="background:#c9a2f2"></i>Hybrid</span><span><i style="background:#3b8ccc"></i>Dry</span><span><i style="background:#d4a72c"></i>Highlight</span><span><i style="background:#031b36;box-shadow:inset 0 0 0 1px #5d7088"></i>Navy</span></div>
+      <p class="lede">Each concept is a single symbol for Lab Atlas, the directory that shows whether a research lab works at the bench, at a computer or both. Every mark is built on a 64-unit grid in <strong>one ink colour and one gold accent</strong>, with two softer tones of the ink where a mark needs more than one shade. Nothing is tied to one university.</p>
+      <div class="palette" aria-hidden="true"><span><i style="background:#d4a72c"></i>Gold</span><span><i style="background:#fdffee;box-shadow:inset 0 0 0 1px #8b98a6"></i>Cream</span><span><i style="background:#9ea8a8"></i>Tone</span><span><i style="background:#5a6b76"></i>Mist</span><span><i style="background:#031b36;box-shadow:inset 0 0 0 1px #5d7088"></i>Navy</span></div>
     </div>
   </div>
   <div class="bar">
