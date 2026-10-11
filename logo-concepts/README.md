@@ -57,3 +57,7 @@ In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meri
 - The round has fifteen marks on a 100-unit grid: Pole A, Knockout Globe, Bitmap Globe, North Star A, LA Blocks, One Stroke, Titan, Pin A, Graticule Cell, Compass, Lens, Folded Map, Latitude Bars, Pole Star and Meridian Point.
 - The gallery shows each mark on black, white and navy, with an accent switch: signal orange, gold or none.
 - Rebuild with `python3 yc-style/build.py [atlas-text.css]`.
+
+## Round nine (paused): circle-and-ellipse marques
+
+`emblem-marques/` holds emblems built only from circles and ellipses, after Audi and Toyota: Horizon, Atlas Arch, Orbit A, Armillary and Borromean. Each is rendered flat, as a chrome badge and as a construction drawing. It is paused while the product name is reconsidered: labatlas.com belongs to an existing research-lab product. Rebuild with `python3 emblem-marques/build.py [atlas-text.css]`.
