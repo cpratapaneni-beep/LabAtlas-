@@ -41,3 +41,11 @@ In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meri
 - `silhouette/` is the chosen direction. The moth is a single dark shape crossing the lit globe, framed by a compass ring with graduated ticks and half-shaded cardinal pointers instead of light rays. North carries a star.
 - The silhouette round has six versions: lead, plain globe, rose behind, breaking the ring, one colour, and night globe.
 - Rebuild with `python3 silhouette/build.py [atlas-text.css]`.
+
+## Round seven: the titan Atlas
+
+`atlas-titan/` drops the moth and models the mark on the titan Atlas carrying the heavens. He is a dark silhouette on the lit disc inside the compass ring, and the sphere he carries has the globe grid and Pole A cut into it, as on a black-figure vase.
+
+- The poses are drawn in `atlas-titan/figure.py`: the Farnese kneeling pose, a standing pose whose legs form an A, and a shoulders-and-sphere bust for small sizes.
+- There are six versions: Farnese Atlas, Standing Titan, Black-figure Vase (Greek key border), Titan's Shoulders, Night Titan and One Colour.
+- Rebuild with `python3 atlas-titan/build.py [atlas-text.css]`.
