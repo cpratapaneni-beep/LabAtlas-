@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v114.html --out Emory_Lab_Atlas_v115.html
+    --atlas Emory_Lab_Atlas_v115.html --out Emory_Lab_Atlas_v116.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -150,7 +150,7 @@ summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
 that data and can write it straight into the page:
 
 ```bash
-python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v114.html \
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v115.html \
     --cache build/symposia --fetch \
     --out build/surehist.json --report build/symposium_report.md \
     --write-atlas
@@ -200,7 +200,7 @@ undergrad mentors.
 
 ```bash
 python3 scripts/etd_honors.py crawl --cache build/etd          # about 14,000 pages, several hours
-python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v114.html --cache build/etd \
+python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v115.html --cache build/etd \
     --report build/etd/honors_report.md --write-atlas
 ```
 
@@ -250,7 +250,7 @@ feature stays switched off:
 
 ```bash
 node scripts/og_image.mjs og-image.png            # the link-preview image (needs playwright)
-python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v114.html --out site \
+python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v115.html --out site \
     --site-url https://your-domain/
 ```
 
