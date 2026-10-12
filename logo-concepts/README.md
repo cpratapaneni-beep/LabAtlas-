@@ -71,3 +71,7 @@ The product is now called **Benchcarta**: bench + carta (Latin and Italian for m
 ### Benchcarta, round two: Open Globe turned
 
 `benchcarta/open_globe.py` turns the Open Globe 90° to the left, so the opening and its point face the top and the globe reads as a round-bottom flask. There are four versions, each with a science reference: Flask Globe (a narrowed opening with a neck and lip), Rising Bubbles, Molecule (a benzene hexagon) and Atom Globe (two electron orbits). The page is `benchcarta/open-globe.html` and the SVGs are in `benchcarta/svg-open-globe/`.
+
+### Benchcarta, round three: Atom Globe
+
+`benchcarta/atom.py` closes the circle and removes the rising line, leaving a globe that holds two electron orbits around a nucleus. It adds one map reference that leaves the circle whole, in four versions: North Pointer, Compass Ticks, Pin Nucleus and Compass Bezel. The page is `benchcarta/atom.html` and the SVGs are in `benchcarta/svg-atom/`.
