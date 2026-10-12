@@ -75,3 +75,7 @@ The product is now called **Benchcarta**: bench + carta (Latin and Italian for m
 ### Benchcarta, round three: Atom Globe
 
 `benchcarta/atom.py` closes the circle and removes the rising line, leaving a globe that holds two electron orbits around a nucleus. It adds one map reference that leaves the circle whole, in four versions: North Pointer, Compass Ticks, Pin Nucleus and Compass Bezel. The page is `benchcarta/atom.html` and the SVGs are in `benchcarta/svg-atom/`.
+
+### Benchcarta mark
+
+`benchcarta/final.py` builds the chosen mark, Compass Bezel with a third orbit on the vertical axis. It is a globe (R 50) with three electron orbits 60° apart around a nucleus, inside a bezel of ticks every 15° with a north pointer. At 32 px and below a simplified version drops the bezel. The page is `benchcarta/final.html` and the SVGs are in `benchcarta/svg-final/`: full mark on black, white, transparent and chrome, plus the small version.
