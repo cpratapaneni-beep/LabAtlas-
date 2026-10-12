@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v113.html --out Emory_Lab_Atlas_v114.html
+    --atlas Emory_Lab_Atlas_v114.html --out Emory_Lab_Atlas_v115.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -150,7 +150,7 @@ summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
 that data and can write it straight into the page:
 
 ```bash
-python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v113.html \
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v114.html \
     --cache build/symposia --fetch \
     --out build/surehist.json --report build/symposium_report.md \
     --write-atlas
@@ -189,6 +189,42 @@ year needs nothing, because the Summer page is re-read. To re-read an
 Issuu-only book properly, download its PDF from Issuu in a browser, add it to
 `SOURCES` with a parser, and its old records are replaced.
 
+## Honors-thesis advisors (`scripts/etd_honors.py`)
+
+Emory's theses and dissertations repository (etd.library.emory.edu) holds the
+honors theses Emory College students deposit, back to 2009. Each record names
+the thesis advisor. `scripts/etd_honors.py` adds those advisors to the same
+mentor data, so they get the "Mentored undergrads" mark, an "Undergraduate
+mentoring" section on their profile and rows under "Honors theses" in Past
+undergrad mentors.
+
+```bash
+python3 scripts/etd_honors.py crawl --cache build/etd          # about 14,000 pages, several hours
+python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v114.html --cache build/etd \
+    --report build/etd/honors_report.md --write-atlas
+```
+
+- **Crawl.** The catalog search refuses scripts, so the crawl reads every record
+  listed in the site's sitemap (robots.txt allows this). The site turns
+  clients away for a few minutes if they go faster than about one page a
+  second. The crawl stops at the first refusal; run it again later and it
+  carries on where it stopped. It keeps title, term or year, school,
+  department, degree, submission type and committee. Students' names are
+  never kept.
+- **Which theses.** Submission type "Honors Thesis" and school "Emory College".
+  A few graduate programs also file "honors theses"; those are left out.
+- **Matching.** Advisors are matched with the symposium script's matcher (unique
+  matches only). A name in a non-lab field (humanities, economics, political
+  science and similar) counts only when the investigator also holds an Emory
+  College appointment. Otherwise it is usually a namesake, such as a
+  political scientist and a psychiatrist with the same name. A spelling-level
+  match needs the same surname. `NOT_THE_SAME` lists matches checked by hand
+  against the thesis title and found to be a different person.
+- **Order.** `symposium_scrape.py --write-atlas` rewrites the whole mentor block,
+  so run `etd_honors.py merge` after it. Rerunning the merge replaces the
+  honors records it added before. `docs/honors_thesis_mentors_report.md` is the
+  report for the current page.
+
 # Deploying the site, and the two settings to fill in
 
 ## Settings in the page
@@ -214,7 +250,7 @@ feature stays switched off:
 
 ```bash
 node scripts/og_image.mjs og-image.png            # the link-preview image (needs playwright)
-python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v113.html --out site \
+python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v114.html --out site \
     --site-url https://your-domain/
 ```
 

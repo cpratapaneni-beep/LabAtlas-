@@ -68,7 +68,17 @@ def fields(page):
             out.append(x)
         return out
     m = re.search(r'\(((?:Spring|Summer|Fall|Winter)\s+\d{4})\)', ' '.join(L[:40]))
-    return {'title': L[L.index('Home') + 1] if 'Home' in L else '', 'term': m.group(1) if m else '',
+    # records deposited before about 2018 give only "(YYYY)" after the author, on the line above the
+    # permanent URL, and break the title over several lines
+    h = L.index('Home') if 'Home' in L else -1
+    p = next((k for k in range(h + 1, len(L)) if L[k].startswith('Permanent URL')), None) if h >= 0 else None
+    title, year = (L[h + 1] if h >= 0 and h + 1 < len(L) else ''), None
+    if p is not None:
+        end = p - 2 if L[p - 2] in ('Open Access', 'Restricted', 'Embargoed', 'Campus Only') else p - 1
+        title = ' '.join(L[h + 1:end]) or title
+        y = re.search(r'\((\d{4})\)\s*$', L[p - 1])
+        year = int(y.group(1)) if y else None
+    return {'title': title, 'term': m.group(1) if m else '', 'year': year,
             'school': after('School')[:1], 'dept': after('Department')[:2], 'sub': after('Subfield / Discipline')[:2],
             'degree': after('Degree')[:1], 'submission': after('Submission')[:1],
             'chair': after('Committee Chair / Thesis Advisor')[:4], 'members': after('Committee Members')[:8]}
@@ -122,19 +132,30 @@ def crawl(a):
         t.join()
 
 
+# fields that are not lab fields even when the name also says "mathematics" etc.
+NOT_LAB = re.compile(r'econom|politic|history|philosoph|religio|english|literat|music|theater|film|classic|french|spanish|'
+                     r'german|italian|russian|chinese|japanese|east asian|women|african american|american studies|jewish|'
+                     r'middle eastern|art\b|dance', re.I)
+# matches read against the thesis titles and found to be a different person with the same name
+NOT_THE_SAME = {('Elizabeth Kim', 'Psychology')}
+
 AFFIL = re.compile(r'\b(universit\w*|college|institute|school|center|centre|hospital|clinic|cdc|inc|llc|lab\w*|'
                    r'foundation|department|agency|centers|program|office|museum|library|ministry)\b', re.I)
 TITLE = re.compile(r'^(dr|prof|professor|mr|mrs|ms|rev|rabbi)\.?\s+', re.I)
 
 
+SUFFIX = re.compile(r'\s+(jr|sr|ii|iii|iv)\.?$', re.I)
+
+
 def advisor(raw):
-    """(name, at Emory?) from 'Dr. Jane Doe, Emory University' or 'Doe, Jane'."""
-    s = re.sub(r'\s+', ' ', raw).strip()
-    parts = [p.strip() for p in s.split(',') if p.strip()]
+    """(name, at Emory?) from 'Dr. Jane Doe, Emory University', 'Doe, Jane' or 'Doe III, Jane'."""
+    s = re.sub(r'\s+', ' ', re.sub(r"'[^']*'|\"[^\"]*\"", ' ', raw)).strip()     # drop quoted nicknames
+    parts = [TITLE.sub('', p.strip()).strip() for p in s.split(',')]
+    parts = [p for p in parts if p]
     if not parts:
         return '', False
-    name, rest = parts[0], parts[1:]
-    if rest and not AFFIL.search(rest[0]) and len(rest[0].split()) <= 2 and len(name.split()) == 1:
+    name, rest = SUFFIX.sub('', parts[0]), parts[1:]
+    if rest and not AFFIL.search(rest[0]) and len(rest[0].split()) <= 3 and len(name.split()) == 1:
         name, rest = rest[0] + ' ' + name, rest[1:]          # "Doe, Jane"
     rest = [r for r in rest if not re.fullmatch(r'(ph\.?d|m\.?d|jr|sr|ii|iii|mph|ms|ma)\.?', r, re.I)]
     name = TITLE.sub('', name).strip()
@@ -168,10 +189,13 @@ def merge(a):
     log, by_pi = collections.defaultdict(collections.Counter), collections.defaultdict(list)
     for r in honors:
         m = re.match(r'(Spring|Summer|Fall|Winter)\s+(\d{4})', r.get('term') or '')
-        if not m:
-            log['no term'][r['id']] += 1
+        if m:
+            term, y = m.group(1).lower(), int(m.group(2))
+        elif r.get('year'):
+            term, y = '', int(r['year'])     # older records give the year only
+        else:
+            log['no date'][r['id']] += 1
             continue
-        term, y = m.group(1).lower(), int(m.group(2))
         dept = (r.get('dept') or [''])[0]
         seen = set()
         for raw in r.get('chair') or []:
@@ -188,7 +212,13 @@ def merge(a):
                 continue
             if pid in seen:
                 continue
-            if not LAB_FIELDS.search(dept) and not in_college[pid]:
+            if how == 'spelling' and tokens(name)[-1:] != tokens(pis[pid]['n'])[-1:]:
+                log['left out: surname spelled differently'][name + ' / ' + pis[pid]['n']] += 1
+                continue
+            if (name, dept) in NOT_THE_SAME:
+                log['left out: checked by hand, a different person'][name + ' (' + dept + ')'] += 1
+                continue
+            if (NOT_LAB.search(dept) or not LAB_FIELDS.search(dept)) and not in_college[pid]:
                 log['left out: same name, other field'][name + ' (' + (dept or 'no department') + ')'] += 1
                 continue
             seen.add(pid)
