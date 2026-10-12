@@ -11,9 +11,37 @@ Mark, ellipse_pts, d_of, construction, svg = MQ.Mark, MQ.ellipse_pts, MQ.d_of, M
 flat2, chrome2, ico = AT.flat2, AT.chrome2, AT.ico
 CX, CY, R, ORX, ORY = AT.CX, AT.CY, AT.R, AT.ORX, AT.ORY
 
-m = Mark("Benchcarta", "A globe holding three electron orbits set 60° apart around a nucleus, inside a compass bezel. The three orbits make the atom fully symmetrical; the bezel's ticks every 15° and its north pointer make the globe a compass.")
+# Electrons: one per orbit, at each orbit's outer end, so they sit 120 degrees apart around the nucleus.
+ELECTRON_T = 40
+ELECTRONS = [(270, "#a98ad4", "#c9a2f2"), (150, "#cf5f49", "#e0705a"), (30, "#3b8ccc", "#5fa8de")]   # (angle, base, highlight)
+def electrons(mk, bg, r=5.2, gap=2.2, chrome=False, uid="e"):
+    if not getattr(mk, "electron_r", None): return ""
+    r = mk.electron_r; out = ""
+    for i, (a, c, hi) in enumerate(ELECTRONS):
+        t = math.radians(ELECTRON_T)                       # same position along every orbit keeps the 120-degree rotational symmetry
+        lx, ly = ORX*math.cos(t), ORY*math.sin(t); ph = math.radians(a)
+        x, y = CX + lx*math.cos(ph) - ly*math.sin(ph), CY + lx*math.sin(ph) + ly*math.cos(ph)
+        out += f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{r + gap}" fill="{bg}"/>'
+        if chrome:
+            gid = f"{uid}g{i}"
+            out += (f'<defs><radialGradient id="{gid}" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/>'
+                    f'<stop offset=".25" stop-color="{hi}"/><stop offset="1" stop-color="{c}"/></radialGradient></defs>'
+                    f'<circle cx="{x:.2f}" cy="{y + .9:.2f}" r="{r}" fill="#000" opacity=".45"/><circle cx="{x:.2f}" cy="{y:.2f}" r="{r}" fill="url(#{gid})"/>')
+        else:
+            out += f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{r}" fill="{c if bg in ("#fbfaf7", "#ffffff", "#fff", "#f4f3ef") else hi}"/>'
+    return out
+
+_flat2, _chrome2, _construction = flat2, chrome2, construction
+def flat2(mk, ink, uid, bg): return _flat2(mk, ink, uid, bg) + electrons(mk, bg)
+def chrome2(mk, uid, bg): return _chrome2(mk, uid, bg) + electrons(mk, bg, chrome=True, uid=uid)
+def construction(mk, uid): return _construction(mk, uid) + electrons(mk, "var(--paper)")
+def ico(mk, k, size, bg, ink):
+    return f'<svg viewBox="30 0 140 140" width="{size}" height="{size}" aria-hidden="true">{flat2(mk, ink, k, bg)}</svg>'
+
+m = Mark("Benchcarta", "A globe holding three electron orbits set 60° apart around a nucleus, inside a compass bezel. Three electrons, in coral, purple and blue, ride the orbits at matching points, 120° apart. The three orbits make the atom fully symmetrical; the bezel's ticks every 15° and its north pointer make the globe a compass.")
 m.strokes += [(d_of(ellipse_pts(CX, CY, R, R, 0, 360)), 7)] + [(d_of(ellipse_pts(CX, CY, ORX, ORY, t, 360)), 2.8) for t in (30, -30, 90)]
 m.fills += [d_of(ellipse_pts(CX, CY, 7, 7, 0, 90))]
+m.electron_r = 5.2
 d = ""
 for i in range(1, 24):
     a = -90 + i*15; L = 6 if i % 6 == 0 else 3; r0 = R + 8
@@ -28,6 +56,7 @@ m.dims += [(124, 10, "ticks every 15°"), (110, 136, "orbits 60° apart"), (4, 6
 small = Mark("Benchcarta small", "")
 small.strokes += [(d_of(ellipse_pts(CX, CY, R, R, 0, 360)), 9)] + [(d_of(ellipse_pts(CX, CY, ORX, ORY, t, 360)), 4.4) for t in (30, -30, 90)]
 small.fills += [d_of(ellipse_pts(CX, CY, 8.5, 8.5, 0, 90))]
+small.electron_r = 7
 def ico_s(k, size, bg, ink):
     return f'<svg viewBox="44 18 112 112" width="{size}" height="{size}" aria-hidden="true">{flat2(small, ink, k, bg)}</svg>'
 
@@ -75,6 +104,7 @@ def page(fonts, full_doc):
       <div><b>Globe</b><span>Circle, radius 50, stroke 7</span></div>
       <div><b>Orbits</b><span>Three ellipses, 45 × 15, at 30°, 90° and 150° (60° apart), stroke 2.8</span></div>
       <div><b>Nucleus</b><span>Solid circle, radius 7, at the shared centre</span></div>
+      <div><b>Electrons</b><span>Radius 5.2, one on each orbit at the same point (40° along from the orbit's tip), so they keep 120° rotational symmetry: purple #A98AD4 at the top, coral #CF5F49 lower left, blue #3B8CCC lower right. On dark grounds the lighter tints are used (#C9A2F2, #E0705A, #5FA8DE). A 2.2 gap separates each from its orbit.</span></div>
       <div><b>Bezel</b><span>23 ticks every 15° from radius 58: 6 long at the quarters, 3 short between, stroke 2.2. A solid pointer replaces the tick at north.</span></div>
     </div>
   </div>
