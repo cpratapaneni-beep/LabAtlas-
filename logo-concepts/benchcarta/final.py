@@ -12,7 +12,7 @@ flat2, chrome2, ico = AT.flat2, AT.chrome2, AT.ico
 CX, CY, R, ORX, ORY = AT.CX, AT.CY, AT.R, AT.ORX, AT.ORY
 
 m = Mark("Benchcarta", "A globe holding three electron orbits set 60° apart around a nucleus, inside a compass bezel. The three orbits make the atom fully symmetrical; the bezel's ticks every 15° and its north pointer make the globe a compass.")
-m.strokes += [(d_of(ellipse_pts(CX, CY, R, R, 0, 360)), 7)] + [(d_of(ellipse_pts(CX, CY, ORX, ORY, t, 360)), 4.2) for t in (30, -30, 90)]
+m.strokes += [(d_of(ellipse_pts(CX, CY, R, R, 0, 360)), 7)] + [(d_of(ellipse_pts(CX, CY, ORX, ORY, t, 360)), 2.8) for t in (30, -30, 90)]
 m.fills += [d_of(ellipse_pts(CX, CY, 7, 7, 0, 90))]
 d = ""
 for i in range(1, 24):
@@ -26,7 +26,7 @@ m.guides += [f'<circle cx="{CX}" cy="{CY}" r="{R}"/>', f'<circle cx="{CX}" cy="{
 m.dims += [(124, 10, "ticks every 15°"), (110, 136, "orbits 60° apart"), (4, 68, "globe R 50")]
 
 small = Mark("Benchcarta small", "")
-small.strokes += [(d_of(ellipse_pts(CX, CY, R, R, 0, 360)), 9)] + [(d_of(ellipse_pts(CX, CY, ORX, ORY, t, 360)), 5.6) for t in (30, -30, 90)]
+small.strokes += [(d_of(ellipse_pts(CX, CY, R, R, 0, 360)), 9)] + [(d_of(ellipse_pts(CX, CY, ORX, ORY, t, 360)), 4.4) for t in (30, -30, 90)]
 small.fills += [d_of(ellipse_pts(CX, CY, 8.5, 8.5, 0, 90))]
 def ico_s(k, size, bg, ink):
     return f'<svg viewBox="44 18 112 112" width="{size}" height="{size}" aria-hidden="true">{flat2(small, ink, k, bg)}</svg>'
@@ -73,7 +73,7 @@ def page(fonts, full_doc):
     <figure class="panel p-build" style="margin:0"><div class="art">{svg(construction(m, "g1"))}</div><figcaption class="cap">Construction</figcaption></figure>
     <div class="spec">
       <div><b>Globe</b><span>Circle, radius 50, stroke 7</span></div>
-      <div><b>Orbits</b><span>Three ellipses, 45 × 15, at 30°, 90° and 150° (60° apart), stroke 4.2</span></div>
+      <div><b>Orbits</b><span>Three ellipses, 45 × 15, at 30°, 90° and 150° (60° apart), stroke 2.8</span></div>
       <div><b>Nucleus</b><span>Solid circle, radius 7, at the shared centre</span></div>
       <div><b>Bezel</b><span>23 ticks every 15° from radius 58: 6 long at the quarters, 3 short between, stroke 2.2. A solid pointer replaces the tick at north.</span></div>
     </div>
