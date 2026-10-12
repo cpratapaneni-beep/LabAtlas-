@@ -79,3 +79,7 @@ The product is now called **Benchcarta**: bench + carta (Latin and Italian for m
 ### Benchcarta mark
 
 `benchcarta/final.py` builds the chosen mark, Compass Bezel with a third orbit on the vertical axis. It is a globe (R 50) with three electron orbits 60° apart around a nucleus, inside a bezel of ticks every 15° with a north pointer. At 32 px and below a simplified version drops the bezel. The page is `benchcarta/final.html` and the SVGs are in `benchcarta/svg-final/`: full mark on black, white, transparent and chrome, plus the small version.
+
+### Benchcarta glyphs (YC style)
+
+`benchcarta/glyphs.py` draws thirteen bold, flat glyphs in the conventions of the YC Fall 2026 batch, built from the Benchcarta motifs: Atom, Knockout Atom, Flask, Solid Flask, Open C, Hemisphere B, bc, One Orbit, Compass, Bezel, Bench Globe, Pin and Bitmap Atom. The only colour is the three-dot nucleus (coral, purple, blue). The page is `benchcarta/glyphs.html` and the SVGs are in `benchcarta/svg-glyphs/`.
