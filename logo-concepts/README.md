@@ -83,3 +83,7 @@ The product is now called **Benchcarta**: bench + carta (Latin and Italian for m
 ### Benchcarta glyphs (YC style)
 
 `benchcarta/glyphs.py` draws thirteen bold, flat glyphs in the conventions of the YC Fall 2026 batch, built from the Benchcarta motifs: Atom, Knockout Atom, Flask, Solid Flask, Open C, Hemisphere B, bc, One Orbit, Compass, Bezel, Bench Globe, Pin and Bitmap Atom. The only colour is the three-dot nucleus (coral, purple, blue). The page is `benchcarta/glyphs.html` and the SVGs are in `benchcarta/svg-glyphs/`.
+
+### Benchcarta glyphs, round two
+
+`benchcarta/glyph_atoms.py` refines the two chosen glyphs, Atom and Knockout Atom, with thinner lines and a compass bezel: ticks every 15°, longer ticks at the quarters, and a north pointer. At 32 px and below each uses a simplified version without the bezel. The page is `benchcarta/glyph-atoms.html` and the SVGs (full and small, black and white) are in `benchcarta/svg-glyph-atoms/`.
