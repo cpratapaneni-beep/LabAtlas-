@@ -67,3 +67,7 @@ In `pole-a/`, the L is now nearly as tall as the A: it comes down the 82°W meri
 The product is now called **Benchcarta**: bench + carta (Latin and Italian for map). labatlas.com belongs to an existing research-lab product. benchcarta.com and benchcarta.io were unregistered when checked.
 
 `benchcarta/` has seven marks built only from circles, ellipses and straight lines: Hemisphere B, Linked bc, Bench Globe, Compass C, Contour C, Pin C and Open Globe. Each is shown flat, in chrome, as a construction drawing and in a lockup with the name. It reuses the renderers from `emblem-marques/`. Rebuild with `python3 benchcarta/build.py [atlas-text.css]`.
+
+### Benchcarta, round two: Open Globe turned
+
+`benchcarta/open_globe.py` turns the Open Globe 90° to the left, so the opening and its point face the top and the globe reads as a round-bottom flask. There are four versions, each with a science reference: Flask Globe (a narrowed opening with a neck and lip), Rising Bubbles, Molecule (a benzene hexagon) and Atom Globe (two electron orbits). The page is `benchcarta/open-globe.html` and the SVGs are in `benchcarta/svg-open-globe/`.
