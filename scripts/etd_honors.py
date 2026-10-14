@@ -23,7 +23,7 @@ Two steps
 
 Usage
   python scripts/etd_honors.py crawl --cache build/etd
-  python scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v115.html --cache build/etd \
+  python scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v116.html --cache build/etd \
       --report build/etd/honors_report.md --write-atlas
 """
 import argparse, collections, html, json, os, re, sys, threading, queue, time, urllib.request, urllib.error
