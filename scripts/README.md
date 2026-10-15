@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v117.html --out Emory_Lab_Atlas_v118.html
+    --atlas Emory_Lab_Atlas_v118.html --out Emory_Lab_Atlas_v119.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -150,7 +150,7 @@ summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
 that data and can write it straight into the page:
 
 ```bash
-python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v117.html \
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v118.html \
     --cache build/symposia --fetch \
     --out build/surehist.json --report build/symposium_report.md \
     --write-atlas
@@ -200,7 +200,7 @@ undergrad mentors.
 
 ```bash
 python3 scripts/etd_honors.py crawl --cache build/etd          # about 14,000 pages, several hours
-python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v117.html --cache build/etd \
+python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v118.html --cache build/etd \
     --report build/etd/honors_report.md --write-atlas
 ```
 
@@ -224,6 +224,63 @@ python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v117.html --cache bu
   so run `etd_honors.py merge` after it. Rerunning the merge replaces the
   honors records it added before. `docs/honors_thesis_mentors_report.md` is the
   report for the current page.
+
+# Publications from PubMed, and missed faculty (`scripts/pubmed/`)
+
+These scripts collect every investigator's papers from NCBI PubMed and add
+them to the page under the site's PubMed source ("matched by author
+affiliation"). They also add the undergraduate mentors the original scrape
+missed. Run them from a working directory such as `build/pubmed`; each one
+reads and writes files in the current directory. PubMed's E-utilities allow
+3 requests a second without an API key, so the searches take about an hour
+for 7,000 people. The network steps can be resumed.
+
+```bash
+mkdir -p build/pubmed && cd build/pubmed
+S=../../scripts/pubmed
+python3 $S/years.py ../../Emory_Lab_Atlas_v118.html             # PubMed's year for every ID on file
+python3 $S/prep.py ../../Emory_Lab_Atlas_v118.html ../etd/records.jsonl
+python3 $S/search.py pi_names.json search.jsonl                  # investigators
+python3 $S/search.py outside_mentors.json mentor_search.jsonl    # mentors with no profile
+python3 $S/fetch.py search.jsonl mentor_search.jsonl             # full records -> records.jsonl
+python3 $S/verify.py                                             # -> verified.json
+python3 $S/disambig.py                                           # -> verified2.json, disambig_report.txt
+ETD_RECORDS=../etd/records.jsonl python3 $S/merge.py ../../Emory_Lab_Atlas_v118.html out.html merge_report.md
+python3 $S/link_mentors.py out.html
+python3 ../../scripts/etd_honors.py merge --atlas out.html --cache ../etd \
+    --report ../etd/honors_report.md --write-atlas
+python3 $S/classify_new.py ../../Emory_Lab_Atlas_v118.html out.html
+```
+
+- **Search.** One query per person: `(Surname, Given*[FAU]) AND (Emory[ad] OR
+  "Children's Healthcare of Atlanta"[ad] OR Yerkes[ad] OR Winship[ad])`.
+  The wildcard catches any middle initial.
+- **Verify.** The `[ad]` filter matches any author on a paper, so each paper
+  is checked again. One of its authors must be this person by name (same
+  surname, given name starting with theirs). That author's own affiliation
+  on the paper must also be Emory or a partner (Children's Healthcare of
+  Atlanta, Yerkes, Winship, Grady, Rollins, Atlanta VA).
+- **Same names.** When two Emory people share a name, their papers carry
+  different middle initials. The paper set kept is the one whose initials
+  match the papers already on file; with nothing on file to decide it,
+  nothing new is added. `disambig_report.txt` lists each case.
+- **Merge.** Nothing on file is removed. A title-only paper whose title
+  matches a PubMed record gains its PubMed ID and year. Co-author links gain
+  the newly shared papers. IDs with no PubMed record are cleared, so their
+  titles open a title search instead of a dead page.
+- **Missed faculty.** A mentor with no profile gets one when all of these hold:
+  - at least 3 verified Emory papers, including at least 1 as last (senior)
+    author;
+  - a paper since 2021 or a mentoring record since 2023, so former faculty
+    stay out;
+  - their own affiliation names a department already in the atlas.
+
+  A new profile keeps only the papers that name that department. The
+  report lists everyone added and everyone left out, with the reason.
+- **Wet/dry.** `classify_new.py` runs `ml/wetdry.py` on the base page plus the
+  new people. Only the new people's settings are written; nobody else's
+  changes.
+- `docs/v118_publications_report.md` is the report for the current page.
 
 # Deploying the site, and the two settings to fill in
 
@@ -250,7 +307,7 @@ feature stays switched off:
 
 ```bash
 node scripts/og_image.mjs og-image.png            # the link-preview image (needs playwright)
-python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v117.html --out site \
+python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v118.html --out site \
     --site-url https://your-domain/
 ```
 

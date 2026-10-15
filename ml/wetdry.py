@@ -133,6 +133,21 @@ SIDE = {0: None, 1: 'W', 4: 'W', 2: 'D', 5: 'D', 3: 'H'}
 
 
 # ---------------------------------------------------------------- data access
+def unpack(D):
+    """Atlases from v108 on store each publication as [title index, source index, year, PMID]; the title and
+    source tables sit in pnames and $pack (the page's atlasUnpack does the same). Older atlases pass through."""
+    pack = D.pop('$pack', None)
+    if not pack:
+        return D
+    titles, labels = D['pnames'], pack['labels']
+    for p in D['pis']:
+        if p.get('p'):
+            p['p'] = [[titles[e[0]], labels[e[1]] if e[2] is None else labels[e[1]] + ', ' + str(e[2]),
+                       str(e[3]) if isinstance(e[3], int) else e[3], e[4] if len(e) > 4 else pack.get('flag')] for e in p['p']]
+    D['pnames'] = titles[:pack.get('pnamesLen', len(titles))]
+    return D
+
+
 def load_data(path):
     txt = open(path, encoding='utf-8').read()
     # the atlas HTML, or a bare data part still wrapped in its <script> tag
@@ -142,6 +157,7 @@ def load_data(path):
             sys.exit('no <script id="atlasdata"> in ' + path)
         txt = m.group(1)
     D = json.loads(txt)
+    unpack(D)
     if 'wd' in D and any('l31' not in p for p in D['pis']):
         # v78 overwrote the keyword score's label; comparing against it would
         # compare the model with its own earlier output
