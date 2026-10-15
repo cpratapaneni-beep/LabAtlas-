@@ -42,7 +42,7 @@ Write the file into the atlas:
 
 ```bash
 python3 scripts/gdbbs_scrape.py --from-json gdbbs.json \
-    --atlas Emory_Lab_Atlas_v119.html --out Emory_Lab_Atlas_v120.html
+    --atlas Emory_Lab_Atlas_v120.html --out Emory_Lab_Atlas_v121.html
 ```
 
 ### 2. From a machine that can reach the site
@@ -150,7 +150,7 @@ summer, URP / SIRE in spring and fall). `scripts/symposium_scrape.py` rebuilds
 that data and can write it straight into the page:
 
 ```bash
-python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v119.html \
+python3 scripts/symposium_scrape.py --atlas Emory_Lab_Atlas_v120.html \
     --cache build/symposia --fetch \
     --out build/surehist.json --report build/symposium_report.md \
     --write-atlas
@@ -200,7 +200,7 @@ undergrad mentors.
 
 ```bash
 python3 scripts/etd_honors.py crawl --cache build/etd          # about 14,000 pages, several hours
-python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v119.html --cache build/etd \
+python3 scripts/etd_honors.py merge --atlas Emory_Lab_Atlas_v120.html --cache build/etd \
     --report build/etd/honors_report.md --write-atlas
 ```
 
@@ -238,18 +238,18 @@ for 7,000 people. The network steps can be resumed.
 ```bash
 mkdir -p build/pubmed && cd build/pubmed
 S=../../scripts/pubmed
-python3 $S/years.py ../../Emory_Lab_Atlas_v119.html             # PubMed's year for every ID on file
-python3 $S/prep.py ../../Emory_Lab_Atlas_v119.html ../etd/records.jsonl
+python3 $S/years.py ../../Emory_Lab_Atlas_v120.html             # PubMed's year for every ID on file
+python3 $S/prep.py ../../Emory_Lab_Atlas_v120.html ../etd/records.jsonl
 python3 $S/search.py pi_names.json search.jsonl                  # investigators
 python3 $S/search.py outside_mentors.json mentor_search.jsonl    # mentors with no profile
 python3 $S/fetch.py search.jsonl mentor_search.jsonl             # full records -> records.jsonl
 python3 $S/verify.py                                             # -> verified.json
 python3 $S/disambig.py                                           # -> verified2.json, disambig_report.txt
-ETD_RECORDS=../etd/records.jsonl python3 $S/merge.py ../../Emory_Lab_Atlas_v119.html out.html merge_report.md
+ETD_RECORDS=../etd/records.jsonl python3 $S/merge.py ../../Emory_Lab_Atlas_v120.html out.html merge_report.md
 python3 $S/link_mentors.py out.html
 python3 ../../scripts/etd_honors.py merge --atlas out.html --cache ../etd \
     --report ../etd/honors_report.md --write-atlas
-python3 $S/classify_new.py ../../Emory_Lab_Atlas_v119.html out.html
+python3 $S/classify_new.py ../../Emory_Lab_Atlas_v120.html out.html
 ```
 
 - **Search.** One query per person: `(Surname, Given*[FAU]) AND (Emory[ad] OR
@@ -307,7 +307,7 @@ feature stays switched off:
 
 ```bash
 node scripts/og_image.mjs og-image.png            # the link-preview image (needs playwright)
-python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v119.html --out site \
+python3 scripts/build_site.py --atlas Emory_Lab_Atlas_v120.html --out site \
     --site-url https://your-domain/
 ```
 
