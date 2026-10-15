@@ -1,0 +1,435 @@
+# Publications re-collected from PubMed, and missed faculty (v118)
+
+Produced by scripts/pubmed (see scripts/README.md). Nothing on file was removed.
+
+
+- dead PMIDs cleared: 20
+- papers added: 61,121
+- title-only papers given their PMID: 11,546
+- papers left out of new profiles (other department): 270
+- people added: 116
+- new co-author pairs: 27,006
+- shared papers added to pairs: 91,139
+- papers before: 111,586
+- papers after: 175,946
+
+## Faculty added from the undergraduate mentor records (116)
+
+- Ajit Srivastava: ECAS Physics (Biophysics); 10 papers, senior author on 6, 2017-2026
+- Alexandre Orthwein: SOM Radiation Oncology; 10 papers, senior author on 3, 2022-2026
+- Aliza Wingo: SOM Psychiatry; 78 papers, senior author on 22, 2007-2025
+- Andrew Adams: SOM Surgery; 35 papers, senior author on 9, 2002-2025
+- Andrew Neish: SOM Pathology & Lab Medicine; 72 papers, senior author on 28, 2002-2026
+- Anna Knight: SOM Gynecology & Obstetrics; 33 papers, senior author on 4, 2015-2025
+- Anna M. Kenney: SOM Pediatrics; 12 papers, senior author on 8, 2018-2026
+- Anna Zelaya: ECAS Biology; 4 papers, senior author on 2, 2020-2024
+- Anthony W.S. Chan: SOM Human Genetics; 40 papers, senior author on 24, 2002-2022
+- Arber Tasimi: ECAS Psychology; 14 papers, senior author on 12, 2021-2026
+- Arjen Boender: SOM Psychiatry; 9 papers, senior author on 1, 2020-2026
+- Arri Eisen: ECAS Biology; 9 papers, senior author on 3, 2002-2026
+- Astrid A Prinz: ECAS Biology; 18 papers, senior author on 11, 2006-2026
+- Ayman Alkhoder: SOM Medicine; 47 papers, senior author on 1, 2016-2026
+- Berry J Brosi: ECAS Environmental Science; 36 papers, senior author on 15, 2012-2023
+- Brian Dias: SOM Psychiatry; 19 papers, senior author on 6, 2013-2023
+- Caitlin Kjeldsen: SOM Pediatrics; 12 papers, senior author on 1, 2023-2026
+- Celine A Saulnier: SOM Pediatrics; 24 papers, senior author on 3, 2015-2024
+- Chris Scarborough: ECAS Chemistry; 7 papers, senior author on 4, 2012-2021
+- Christopher Beck: ECAS Biology; 18 papers, senior author on 5, 2003-2026
+- Clintoria Latrice Williams: SOM Medicine; 7 papers, senior author on 2, 2012-2021
+- Connie B. Roth: ECAS Physics (Biophysics); 24 papers, senior author on 22, 2014-2026
+- Cora E. MacBeth: ECAS Chemistry; 8 papers, senior author on 1, 2015-2021
+- Curtis J. Henry: SOM Pediatrics; 20 papers, senior author on 6, 2018-2024
+- Cynthia Derdeyn: SOM Pathology & Lab Medicine; 41 papers, senior author on 12, 2005-2023
+- Daniel B Weissman: ECAS Physics (Biophysics); 27 papers, senior author on 10, 2017-2026
+- Daniel Reines: SOM Biochemistry; 12 papers, senior author on 11, 2003-2022
+- David Dunlap: ECAS Physics (Biophysics); 26 papers, senior author on 8, 2014-2025
+- Debjani Sihi: ECAS Environmental Science; 3 papers, senior author on 1, 2021-2023
+- Donald G. Stein: SOM Emergency Medicine; 66 papers, senior author on 38, 2003-2026
+- Donald Rainnie: SOM Psychiatry; 26 papers, senior author on 13, 2003-2026
+- Douglas D Robertson: SOM Radiology & Imaging; 6 papers, senior author on 1, 2016-2021
+- Drew Westen: ECAS Psychology; 22 papers, senior author on 5, 2002-2021
+- Elizabeth R. Wright: SOM Pediatrics; 23 papers, senior author on 12, 2010-2021
+- Emily Burchfield: ECAS Environmental Science; 8 papers, senior author on 3, 2021-2026
+- Emily McLean: ECAS Biology; 7 papers, senior author on 1, 2020-2024
+- Eric R. Weeks: ECAS Physics (Biophysics); 50 papers, senior author on 29, 2002-2026
+- Fang Liu: ECAS Chemistry; 12 papers, senior author on 9, 2021-2025
+- Francesco A. Evangelista: ECAS Chemistry; 70 papers, senior author on 55, 2014-2026
+- Francois Villinger: SOM Pathology & Lab Medicine; 42 papers, senior author on 7, 2002-2021
+- Gary W Miller: SOM Pharmacology & Chemical Biology; 23 papers, senior author on 11, 2014-2024
+- Gretchen Neigh: SOM Psychiatry; 31 papers, senior author on 21, 2006-2025
+- Harold Trent Spencer: SOM Pediatrics; 4 papers, senior author on 1, 2018-2022
+- He-Ping Ma: SOM Cell Biology; 6 papers, senior author on 2, 2004-2022
+- Hee Cheol Cho: SOM Biomedical Engineering; 24 papers, senior author on 12, 2014-2024
+- Ichiro Matsumura: SOM Biochemistry; 11 papers, senior author on 7, 2002-2022
+- J. Douglas Bremner: SOM Psychiatry; 172 papers, senior author on 31, 2002-2026
+- Jacobus de Roode: ECAS Biology; 64 papers, senior author on 27, 2005-2026
+- James Kindt: ECAS Chemistry; 17 papers, senior author on 13, 2005-2024
+- Jennifer Heemstra: ECAS Chemistry; 35 papers, senior author on 31, 2018-2023
+- Jennifer Rieser: ECAS Physics (Biophysics); 6 papers, senior author on 1, 2021-2025
+- Jessica Dugan: ECAS Psychology; 7 papers, senior author on 1, 2016-2025
+- Jessica Maples-Keller: SOM Psychiatry; 66 papers, senior author on 5, 2017-2026
+- Jin-Tang Dong: SOM Cell Biology; 25 papers, senior author on 20, 2012-2024
+- Jithin Sam Varghese: RSPH Global Health; 51 papers, senior author on 15, 2019-2026
+- John Bacsa: ECAS Chemistry; 76 papers, senior author on 4, 2013-2026
+- Jon Willie: SOM Neurosurgery; 36 papers, senior author on 11, 2013-2023
+- Joya Hampton-Anderson: SOM Psychiatry; 12 papers, senior author on 2, 2020-2026
+- Justin Clifford Burton: ECAS Physics (Biophysics); 21 papers, senior author on 13, 2016-2026
+- Karen Rommelfanger: SOM Psychiatry; 23 papers, senior author on 11, 2004-2023
+- Keith Berland: ECAS Physics (Biophysics); 6 papers, senior author on 3, 2003-2017
+- Kurt Warncke: ECAS Physics (Biophysics); 31 papers, senior author on 19, 2004-2026
+- Lance Gunderson: ECAS Environmental Science; 20 papers, senior author on 4, 2007-2026
+- Laura Finzi: ECAS Physics (Biophysics); 25 papers, senior author on 14, 2010-2025
+- Laura Plantinga: SOM Medicine; 80 papers, senior author on 16, 2011-2026
+- Letian Dou: ECAS Chemistry; 13 papers, senior author on 8, 2025-2026
+- Li Xiong: SOM Biomedical Informatics; 27 papers, senior author on 8, 2014-2025
+- Linda Craighead: ECAS Psychology; 16 papers, senior author on 4, 2015-2025
+- Lisa Parr: SOM Psychiatry; 36 papers, senior author on 10, 2003-2021
+- Luiz H. Santos: ECAS Physics (Biophysics); 5 papers, senior author on 5, 2020-2026
+- Lynn Sibley: RSPH Global Health; 24 papers, senior author on 7, 2004-2023
+- Malú Tansey: SOM Neurology; 13 papers, senior author on 6, 2014-2026
+- Manning Sabatier: SOM Cell Biology; 6 papers, senior author on 0, 2008-2021
+- Mar M. Sanchez: SOM Psychiatry; 59 papers, senior author on 19, 2005-2026
+- Megan Massa: ECAS Neuroscience & Behavioral Biology; 3 papers, senior author on 1, 2023-2026
+- Meleah Hickman: ECAS Biology; 10 papers, senior author on 8, 2017-2022
+- Michael Heaven: ECAS Chemistry; 40 papers, senior author on 25, 2006-2026
+- Michal Arbilly: ECAS Biology; 3 papers, senior author on 1, 2017-2018
+- Milo B. Fasken: ECAS Biology; 21 papers, senior author on 3, 2016-2025
+- Minsu Kim: ECAS Physics (Biophysics); 25 papers, senior author on 16, 2015-2026
+- Mollie Bloomsmith: EPC Animal Resources; 30 papers, senior author on 15, 2005-2025
+- Nathan Jui: ECAS Chemistry; 22 papers, senior author on 14, 2016-2023
+- Nazir M. Khan: SOM Orthopaedics; 20 papers, senior author on 2, 2020-2026
+- Nick Willett: SOM Orthopaedics; 30 papers, senior author on 13, 2010-2025
+- Nicole Vega: ECAS Biology; 5 papers, senior author on 1, 2018-2023
+- Patrick Cafferty: ECAS Biology; 3 papers, senior author on 2, 2024-2025
+- Paul E Holtzheimer: SOM Psychiatry; 21 papers, senior author on 2, 2005-2024
+- Paula Frew: SOM Medicine; 68 papers, senior author on 14, 2003-2026
+- Philippe Rochat: ECAS Psychology; 33 papers, senior author on 25, 2000-2025
+- Phillip Wolff: ECAS Psychology; 18 papers, senior author on 8, 2007-2026
+- R. Brian Dyer: ECAS Chemistry; 42 papers, senior author on 29, 2009-2026
+- Raphael F. Ribeiro: ECAS Chemistry; 12 papers, senior author on 9, 2022-2026
+- Richard Compans: SOM Microbiology & Immunology; 52 papers, senior author on 7, 2009-2026
+- Richard Cummings: SOM Biochemistry; 47 papers, senior author on 20, 2009-2026
+- Robert Hoover: SOM Medicine; 18 papers, senior author on 7, 2011-2022
+- Robert M Cohen: SOM Psychiatry; 11 papers, senior author on 3, 2013-2024
+- Robyn Fivush: ECAS Psychology; 38 papers, senior author on 18, 2003-2026
+- Ronald Calabrese: ECAS Biology; 32 papers, senior author on 20, 2003-2026
+- Roy L. Sutliff: SOM Medicine; 35 papers, senior author on 6, 2002-2024
+- Samuel J Sober: ECAS Biology; 28 papers, senior author on 13, 2012-2026
+- Scott O. Lilienfeld: ECAS Psychology; 117 papers, senior author on 56, 2002-2024
+- Scott Villa: ECAS Biology; 5 papers, senior author on 1, 2021-2023
+- Sergei Urazhdin: ECAS Physics (Biophysics); 12 papers, senior author on 4, 2016-2026
+- Seth Davin Norrholm: SOM Psychiatry; 54 papers, senior author on 7, 2006-2021
+- Sherryl H. Goodman: ECAS Psychology; 61 papers, senior author on 15, 2007-2026
+- Shriprasad Deshpande: SOM Pediatrics; 35 papers, senior author on 8, 2011-2021
+- Sookyong Koh: SOM Pediatrics; 28 papers, senior author on 14, 2016-2026
+- Stefan Boettcher: ECAS Physics (Biophysics); 17 papers, senior author on 9, 2004-2026
+- Stefan Lutz: ECAS Chemistry; 20 papers, senior author on 10, 2003-2025
+- Stephen Nowicki: ECAS Psychology; 25 papers, senior author on 14, 2004-2026
+- Stephen Warren: SOM Human Genetics; 35 papers, senior author on 10, 2007-2023
+- Subhabrata Sanyal: SOM Cell Biology; 6 papers, senior author on 2, 2009-2021
+- Thaddeus Pace: SOM Psychiatry; 12 papers, senior author on 1, 2006-2021
+- Todd Sulchek: SOM Biomedical Engineering; 11 papers, senior author on 4, 2014-2026
+- William Hu: SOM Neurology; 51 papers, senior author on 16, 2011-2025
+- Wladimir Benalcazar: ECAS Physics (Biophysics); 5 papers, senior author on 1, 2022-2025
+
+## Mentors checked and not added
+
+- Abigail A. Sewell: fewer than 3 Emory-affiliated papers
+- Adam Glynn: fewer than 3 Emory-affiliated papers
+- Adriana Lori: never the senior (last) author: likely a trainee, not a lab head
+- Alejandro Sanchez-Becerra: fewer than 3 Emory-affiliated papers
+- Alena Esposito: no Emory paper since 2019 and last mentored 2019: likely no longer at Emory
+- Alessandro Veneziani: fewer than 3 papers from Biomedical Engineering once other departments are set aside
+- Alexander Avramov: never the senior (last) author: likely a trainee, not a lab head
+- Alicia N Lyle: no Emory paper since 2019 and last mentored 2016: likely no longer at Emory
+- Amanda Evelyn Lewis: fewer than 3 Emory-affiliated papers
+- Amanda Williams-Newkirk: never the senior (last) author: likely a trainee, not a lab head
+- Andreas Züfle: department not one of the atlas units: computer science
+- Andrew Francis: no Emory paper since 2013 and last mentored 2014: likely no longer at Emory
+- Andrew Francis-Tan: fewer than 3 Emory-affiliated papers
+- Andrew M. Kazama: never the senior (last) author: likely a trainee, not a lab head
+- Ann Abramowitz: fewer than 3 Emory-affiliated papers
+- Annette Neuman: fewer than 3 Emory-affiliated papers
+- Anthony J. Martin: never the senior (last) author: likely a trainee, not a lab head
+- Antonio Brathwaite: never the senior (last) author: likely a trainee, not a lab head
+- Aubrey Graham: fewer than 3 Emory-affiliated papers
+- Aubrey Reed: fewer than 3 Emory-affiliated papers
+- Austin Scharf: fewer than 3 Emory-affiliated papers
+- Barbara (Bobbi) Patterson: never the senior (last) author: likely a trainee, not a lab head
+- Barry Yedvobnick: no Emory paper since 2018 and last mentored 2015: likely no longer at Emory
+- Benjamin Fontaine: never the senior (last) author: likely a trainee, not a lab head
+- Benjamin Reiss: fewer than 3 Emory-affiliated papers
+- Beth Reingold: fewer than 3 Emory-affiliated papers
+- Bin Xu: fewer than 3 Emory-affiliated papers
+- Bobbi (Barbara) Patterson: never the senior (last) author: likely a trainee, not a lab head
+- Brian Berman: never the senior (last) author: likely a trainee, not a lab head
+- Brian Olson: never the senior (last) author: likely a trainee, not a lab head
+- Bruce Knauft: fewer than 3 Emory-affiliated papers
+- C Monica Capra: fewer than 3 Emory-affiliated papers
+- Carl Yang: department not one of the atlas units: computer science
+- Carol Worthman: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Cathryn Johnson: never the senior (last) author: likely a trainee, not a lab head
+- Chaela Nutor: never the senior (last) author: likely a trainee, not a lab head
+- Chang-Soo Seong: never the senior (last) author: likely a trainee, not a lab head
+- Charles Bou-Nader: fewer than 3 Emory-affiliated papers
+- Christina Gross: no Emory paper since 2017 and last mentored 2014: likely no longer at Emory
+- Chunhai Hao: fewer than 3 Emory-affiliated papers
+- Corey Keyes: advised theses only in Sociology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Cory A Labrecque: fewer than 3 Emory-affiliated papers
+- Cynthia Winham: fewer than 3 Emory-affiliated papers
+- Cyrus Gudeman: fewer than 3 Emory-affiliated papers
+- Daniel Coppeto: fewer than 3 Emory-affiliated papers
+- Daniel Ludwinski: department not one of the atlas units: economics
+- Danilo Freire: fewer than 3 Emory-affiliated papers
+- Darryl B Neill: fewer than 3 Emory-affiliated papers
+- David Frisvold: fewer than 3 Emory-affiliated papers
+- David McMillon: fewer than 3 Emory-affiliated papers
+- David Zureick-Brown: fewer than 3 Emory-affiliated papers
+- Deepika Bahri: fewer than 3 Emory-affiliated papers
+- Dietrich Stout: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Dominique Musselman: never the senior (last) author: likely a trainee, not a lab head
+- Donald Phillip Verene: fewer than 3 Emory-affiliated papers
+- Dwight A Duffus: fewer than 3 Emory-affiliated papers
+- Eilaf Egap: fewer than 3 Emory-affiliated papers
+- Eleanor Donnelly: never the senior (last) author: likely a trainee, not a lab head
+- Elena Conis: fewer than 3 Emory-affiliated papers
+- Elena Sergeeva: no Emory paper since 2020 and last mentored 2017: likely no longer at Emory
+- Elise Bezold: never the senior (last) author: likely a trainee, not a lab head
+- Elizabeth Buffalo: no Emory paper since 2017 and last mentored 2012: likely no longer at Emory
+- Elizabeth Goodstein: fewer than 3 Emory-affiliated papers
+- Elizabeth Lonsdorf: never the senior (last) author: likely a trainee, not a lab head
+- Elizabeth Newman: fewer than 3 Emory-affiliated papers
+- Emily E Weinert: no Emory paper since 2018 and last mentored 2018: likely no longer at Emory
+- Emily Laskey: fewer than 3 Emory-affiliated papers
+- Emily Wall: fewer than 3 Emory-affiliated papers
+- Eric J. Battaglioli: fewer than 3 Emory-affiliated papers
+- Eric Lonsdorf: fewer than 3 Emory-affiliated papers
+- Erika Diaz-Almeyda: fewer than 3 Emory-affiliated papers
+- Erika Hall: department not one of the atlas units: management organization
+- Erin Bonning: fewer than 3 Emory-affiliated papers
+- Eugene Agichtein: department not one of the atlas units: computer science
+- Eugene Emory: never the senior (last) author: likely a trainee, not a lab head
+- Evan A. Saltzman: fewer than 3 Emory-affiliated papers
+- Farnaz Shoja-Taheri: never the senior (last) author: likely a trainee, not a lab head
+- Feng Zhai: fewer than 3 Emory-affiliated papers
+- Fereydoon Family: fewer than 3 Emory-affiliated papers
+- Fitra Rianto: never the senior (last) author: likely a trainee, not a lab head
+- George Armelagos: no Emory paper since 2014 and last mentored 2013: likely no longer at Emory
+- George Yancy: fewer than 3 Emory-affiliated papers
+- Gillian E. Hue: department not one of the atlas units: none named
+- Gordon L Streeb: fewer than 3 Emory-affiliated papers
+- Grace Sanghee Lee: never the senior (last) author: likely a trainee, not a lab head
+- Gray Crouse: no Emory paper since 2016 and last mentored 2011: likely no longer at Emory
+- Gregg Orloff: fewer than 3 Emory-affiliated papers
+- Guey Chuen Perng: no Emory paper since 2014 and last mentored 2010: likely no longer at Emory
+- Gurleen Kaur: no Emory paper since 2020 and last mentored 2019: likely no longer at Emory
+- Hannah Ford: fewer than 3 Emory-affiliated papers
+- Hannah Song: never the senior (last) author: likely a trainee, not a lab head
+- Hilary King: fewer than 3 Emory-affiliated papers
+- Hugo M Mialon: advised theses only in Economics: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Iliana Yamileth Rodriguez: fewer than 3 Emory-affiliated papers
+- Irene Browne: fewer than 3 Emory-affiliated papers
+- Ivan Rasnik: never the senior (last) author: likely a trainee, not a lab head
+- Jack F Eichler: fewer than 3 Emory-affiliated papers
+- Jacques Galipeau: no Emory paper since 2017 and last mentored 2013: likely no longer at Emory
+- James G. Nagy: department not one of the atlas units: mathematics, computer mathematics science
+- James P Snyder: no Emory paper since 2019 and last mentored 2012: likely no longer at Emory
+- James Taylor: no Emory paper since 2015 and last mentored 2013: likely no longer at Emory
+- Jasmine Williams: fewer than 3 Emory-affiliated papers
+- Jean Ndong: fewer than 3 Emory-affiliated papers
+- Jed Brody: fewer than 3 Emory-affiliated papers
+- Jeffrey Lesser: advised theses only in History, Spanish and Portuguese: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Jeffrey Scott Stehouwer: no Emory paper since 2020 and last mentored 2013: likely no longer at Emory
+- Jennifer Sarrett: department not one of the atlas units: none named
+- Jenny Foster: fewer than 3 Emory-affiliated papers
+- Jeong Ho (John) Kim: never the senior (last) author: likely a trainee, not a lab head
+- Jessica Barber: fewer than 3 Emory-affiliated papers
+- Jessica Shartouny: never the senior (last) author: likely a trainee, not a lab head
+- Jessica Thompson: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Jia Xiao: fewer than 3 Emory-affiliated papers
+- Jia-Chen Fu: fewer than 3 Emory-affiliated papers
+- Jian Xu: never the senior (last) author: likely a trainee, not a lab head
+- Jing Wang: advised theses only in Film and Media Studies, East Asian Studies: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Joanna Wardwell-Ozgo: never the senior (last) author: likely a trainee, not a lab head
+- John D Dunne: fewer than 3 Emory-affiliated papers
+- John Duncan: fewer than 3 Emory-affiliated papers
+- John Lindo: department not one of the atlas units: anthropology
+- John Lucchesi: no Emory paper since 2018 and last mentored 2013: likely no longer at Emory
+- John Lysaker: advised theses only in Philosophy: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Joyce C. Ho: department not one of the atlas units: computer science, computer informatics science, atlanta computer ga science usa
+- Judy Garber: fewer than 3 Emory-affiliated papers
+- Julianne Chung: fewer than 3 Emory-affiliated papers
+- Justin Gallivan: no Emory paper since 2015 and last mentored 2011: likely no longer at Emory
+- Justin Pargeter: never the senior (last) author: likely a trainee, not a lab head
+- Kai Shu: department not one of the atlas units: computer science
+- Karthik Papisetty: never the senior (last) author: likely a trainee, not a lab head
+- Kate Nelson: never the senior (last) author: likely a trainee, not a lab head
+- Katherine Young: never the senior (last) author: likely a trainee, not a lab head
+- Kathy Taylor: fewer than 3 Emory-affiliated papers
+- Katie Rudd: fewer than 3 Emory-affiliated papers
+- Kaveeta Kaw: fewer than 3 Emory-affiliated papers
+- Keira Davis: fewer than 3 Emory-affiliated papers
+- Keith E Tansey: no Emory paper since 2019 and last mentored 2012: likely no longer at Emory
+- Keith Easterling: fewer than 3 Emory-affiliated papers
+- Ken Ono: no Emory paper since 2019 and last mentored 2017: likely no longer at Emory
+- Kenneth Stein: fewer than 3 Emory-affiliated papers
+- Kevin Corrigan: fewer than 3 Emory-affiliated papers
+- Ki Sueng Choi: never the senior (last) author: likely a trainee, not a lab head
+- Krishnankutty Sathian: no paper from Rehabilitation Medicine since 2018 and last mentored 2018: likely no longer at Emory
+- Krzysztof (Chris) Karbownik: advised theses only in Economics, Economics and Mathematics: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Lars Ruthotto: department not one of the atlas units: mathematics, computer science, computer mathematics science
+- Laura Avila: fewer than 3 Emory-affiliated papers
+- Laura Emmery: never the senior (last) author: likely a trainee, not a lab head
+- Laura Jones: never the senior (last) author: likely a trainee, not a lab head
+- Laura Namy: no Emory paper since 2019 and last mentored 2014: likely no longer at Emory
+- Laura Otis: fewer than 3 Emory-affiliated papers
+- Lauren F. Klein: fewer than 3 Emory-affiliated papers
+- Lawrence Barsalou: no Emory paper since 2016 and last mentored 2014: likely no longer at Emory
+- Leah Roesch: department not one of the atlas units: none named
+- Lee Cooper: no paper from Biomedical Informatics since 2020 and last mentored 2019: likely no longer at Emory
+- Leslie Real: no Emory paper since 2017 and last mentored 2010: likely no longer at Emory
+- Lili Wang: fewer than 3 papers from Chemistry once other departments are set aside
+- Lindee Morgan: never the senior (last) author: likely a trainee, not a lab head
+- Liv Nilsson-Stutz: fewer than 3 Emory-affiliated papers
+- Liza Vertinsky: fewer than 3 Emory-affiliated papers
+- Maggie Jones: fewer than 3 Emory-affiliated papers
+- Mandy Bekhbat: fewer than 3 Emory-affiliated papers
+- Mara Mandradjieff: fewer than 3 Emory-affiliated papers
+- Marcela Benitez: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Mark Maust: never the senior (last) author: likely a trainee, not a lab head
+- Mark Risjord: advised theses only in Interdisciplinary Studies in Society and Culture, Philosophy, International Studies, American Studies: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Marshall P Duke: fewer than 3 Emory-affiliated papers
+- Matthias Chung: fewer than 3 Emory-affiliated papers
+- Megan Mucioki: fewer than 3 Emory-affiliated papers
+- Megan Sutter: never the senior (last) author: likely a trainee, not a lab head
+- Melissa Hage: fewer than 3 Emory-affiliated papers
+- Melvin J. Konner: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Michael A Elliott: fewer than 3 Emory-affiliated papers
+- Michael Berger: fewer than 3 Emory-affiliated papers
+- Michael James Harris: fewer than 3 Emory-affiliated papers
+- Michael Page: fewer than 3 Emory-affiliated papers
+- Michele Benzi: fewer than 3 Emory-affiliated papers
+- Michelle Wright: never the senior (last) author: likely a trainee, not a lab head
+- Milivoje Lukic: fewer than 3 Emory-affiliated papers
+- Monisha Mistry: fewer than 3 Emory-affiliated papers
+- My Nga Helms: no Emory paper since 2015 and last mentored 2013: likely no longer at Emory
+- Nancy G. Bliwise: fewer than 3 Emory-affiliated papers
+- Natalia Bayona Vasquez: fewer than 3 Emory-affiliated papers
+- Natália Bueno: fewer than 3 Emory-affiliated papers
+- Neal N. Iwakoshi: never the senior (last) author: likely a trainee, not a lab head
+- Noelle C. McAfee: fewer than 3 Emory-affiliated papers
+- Omar Villanueva: fewer than 3 Emory-affiliated papers
+- Patrick Stillson: never the senior (last) author: likely a trainee, not a lab head
+- Paul Doetsch: no Emory paper since 2019 and last mentored 2013: likely no longer at Emory
+- Paul H Rubin: no Emory paper since 2018 and last mentored 2015: likely no longer at Emory
+- Peggy Barlett: fewer than 3 Emory-affiliated papers
+- Peng Zhao: never the senior (last) author: likely a trainee, not a lab head
+- Pengfei Wu: fewer than 3 Emory-affiliated papers
+- Peter J. Brown: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Philip Tedbury: never the senior (last) author: likely a trainee, not a lab head
+- Philip Wolff: fewer than 3 Emory-affiliated papers
+- Qiang Yao: fewer than 3 Emory-affiliated papers
+- Radhika Sharma: never the senior (last) author: likely a trainee, not a lab head
+- Raghavan Chinnadurai: never the senior (last) author: likely a trainee, not a lab head
+- Richard Patterson: never the senior (last) author: likely a trainee, not a lab head
+- Rickta Mallick: never the senior (last) author: likely a trainee, not a lab head
+- Robert McCauley: fewer than 3 Emory-affiliated papers
+- Robert Paul: advised theses only in Anthropology: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Robert S Agnew: fewer than 3 Emory-affiliated papers
+- Robert Wyttenbach: department not one of the atlas units: none named
+- Robin Schmidt: never the senior (last) author: likely a trainee, not a lab head
+- Ronald Schuchard: fewer than 3 Emory-affiliated papers
+- Rosemarie Garland-Thomson: advised theses only in English and Creative Writing: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Saeyoon Kim: fewer than 3 Emory-affiliated papers
+- Sally A Radell: never the senior (last) author: likely a trainee, not a lab head
+- Samantha Lanjewar: never the senior (last) author: likely a trainee, not a lab head
+- Sameena Mulla: fewer than 3 Emory-affiliated papers
+- Sander L Gilman: advised theses only in Interdisciplinary Studies in Society and Culture: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Sanjay Chandrasekaran: never the senior (last) author: likely a trainee, not a lab head
+- Sara Markowitz: advised theses only in Economics, Economics and Mathematics: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Sarah Brosnan: never the senior (last) author: likely a trainee, not a lab head
+- Sarah Gouzoules: fewer than 3 Emory-affiliated papers
+- Sarah Higinbotham: fewer than 3 Emory-affiliated papers
+- Savita Sharma: never the senior (last) author: likely a trainee, not a lab head
+- Scott A Jenks: never the senior (last) author: likely a trainee, not a lab head
+- Seunghwa Rho: fewer than 3 Emory-affiliated papers
+- Shan Chen: never the senior (last) author: likely a trainee, not a lab head
+- Sharon Strocchia: fewer than 3 Emory-affiliated papers
+- Shaunna Donaher: fewer than 3 Emory-affiliated papers
+- Shengpu Tang: never the senior (last) author: likely a trainee, not a lab head
+- Shuming Nie: no Emory paper since 2019 and last mentored 2014: likely no longer at Emory
+- Simbarashe Nkomo: never the senior (last) author: likely a trainee, not a lab head
+- Skip Garibaldi: fewer than 3 Emory-affiliated papers
+- Spandan Chennamadhavuni: fewer than 3 Emory-affiliated papers
+- Stephen O'Connell: fewer than 3 Emory-affiliated papers
+- Stephen O’Connell: fewer than 3 Emory-affiliated papers
+- Steven Narum: never the senior (last) author: likely a trainee, not a lab head
+- Stuart J Knechtle: no Emory paper since 2019 and last mentored 2012: likely no longer at Emory
+- Sudipta Dubey: fewer than 3 Emory-affiliated papers
+- Suraj Pothineni: never the senior (last) author: likely a trainee, not a lab head
+- Susan L Tamasi: department not one of the atlas units: anthropology
+- Susan M Bredlau: fewer than 3 Emory-affiliated papers
+- Susanna L. Widicus Weaver: fewer than 3 Emory-affiliated papers
+- Talea Mayo: never the senior (last) author: likely a trainee, not a lab head
+- Tatiana Chirkova: never the senior (last) author: likely a trainee, not a lab head
+- Thomas Rogers: never the senior (last) author: likely a trainee, not a lab head
+- Tiffany Thai: never the senior (last) author: likely a trainee, not a lab head
+- Todd Schlenke: no Emory paper since 2017 and last mentored 2009: likely no longer at Emory
+- Tom Clark: fewer than 3 Emory-affiliated papers
+- Tracy L. Scott: fewer than 3 Emory-affiliated papers
+- Vincent Bruyere: fewer than 3 Emory-affiliated papers
+- Vivian Zhanwei Yue: fewer than 3 Emory-affiliated papers
+- Vladimir Oliker: fewer than 3 Emory-affiliated papers
+- Wen Wei Loh: department not one of the atlas units: methods quantitative theory, methodology statistics, analysis data
+- Wilfried O Rossoll: no Emory paper since 2018 and last mentored 2016: likely no longer at Emory
+- Will Tracy: never the senior (last) author: likely a trainee, not a lab head
+- Xiaodong Cheng: no Emory paper since 2018 and last mentored 2016: likely no longer at Emory
+- Xiaotong Chen: fewer than 3 Emory-affiliated papers
+- Xin Lu: never the senior (last) author: likely a trainee, not a lab head
+- Xinxin Chen: fewer than 3 Emory-affiliated papers
+- Xiuyan Feng: never the senior (last) author: likely a trainee, not a lab head
+- Ymir Vigfusson: department not one of the atlas units: computer science
+- Youngmin Han: fewer than 3 Emory-affiliated papers
+- Yu Li: fewer than 3 Emory-affiliated papers
+- Yuanzhe Xi: fewer than 3 Emory-affiliated papers
+- Yuk Fai Cheong: advised theses only in Educational Studies: not a lab field in the atlas; PubMed papers under this name are likely a namesake
+- Yun J. Kim: never the senior (last) author: likely a trainee, not a lab head
+- Yun Tao: no Emory paper since 2015 and last mentored 2014: likely no longer at Emory
+- Yushi Bai: fewer than 3 Emory-affiliated papers
+- Zachary Lynch: fewer than 3 Emory-affiliated papers
+- Zhanwei (Vivian) Yue: fewer than 3 Emory-affiliated papers
+- Zsofia Kovacs-Balint: never the senior (last) author: likely a trainee, not a lab head
+- Zunlong Ke: never the senior (last) author: likely a trainee, not a lab head
+
+## Same-name cases settled by middle initial
+
+- Amit Shah: papers under J / S, nothing on file to tell them apart: no new papers added
+- Amy Dunn: papers under R / L, nothing on file to tell them apart: no new papers added
+- Andrew Smith: papers under M / L / P, nothing on file to tell them apart: no new papers added
+- Bruce Miller: kept middle initial L (matches the papers on file); 5 papers under other initials left out
+- Carol Hogue: papers under J,JR / R, nothing on file to tell them apart: no new papers added
+- Casey Hall: kept middle initial D,DX (matches the papers on file); 0 papers under other initials left out
+- Daniel Smith: kept middle initial R (matches the papers on file); 13 papers under other initials left out
+- Elizabeth Rogawski Mcquade: kept middle initial R (matches the papers on file); 13 papers under other initials left out
+- Elizabeth Wilson: papers under A / C, nothing on file to tell them apart: no new papers added
+- Emily Cartwright: kept middle initial J (matches the papers on file); 11 papers under other initials left out
+- Felipe Maegawa: papers under B / AB, nothing on file to tell them apart: no new papers added
+- Ghazala O'Keefe: kept middle initial A,AD (matches the papers on file); 0 papers under other initials left out
+- Hyun Kyung Kim: papers under S / B, nothing on file to tell them apart: no new papers added
+- James Bailey: kept middle initial L (matches the papers on file); 3 papers under other initials left out
+- Katherine M. Davis: kept middle initial M (the atlas name has it); 4 papers under other initials left out
+- Kimberly Jacob Arriola: kept middle initial J (matches the papers on file); 14 papers under other initials left out
+- Laura Johnson: kept middle initial M (matches the papers on file); 12 papers under other initials left out
+- Manish Patel: kept middle initial M (matches the papers on file); 8 papers under other initials left out
+- Marianne McPherson Yee: papers under E,EM / M, nothing on file to tell them apart: no new papers added
+- Mary Lynch: kept middle initial E (matches the papers on file); 10 papers under other initials left out
+- Matthew Brown: kept middle initial T (matches the papers on file); 2 papers under other initials left out
+- Michael E Davis: kept middle initial E (the atlas name has it); 24 papers under other initials left out
+- Milton Brown: kept middle initial E (matches the papers on file); 11 papers under other initials left out
+- Sean Evans: kept middle initial T (matches the papers on file); 5 papers under other initials left out
+- Susan Smith: kept middle initial A (matches the papers on file); 4 papers under other initials left out
+- Terrah Paul Olson: kept middle initial P (matches the papers on file); 3 papers under other initials left out
+- Vikram M. Narayan: kept middle initial M (the atlas name has it); 22 papers under other initials left out
+- Wayne Harris: kept middle initial B (matches the papers on file); 5 papers under other initials left out
+- Wissam S. Jaber: kept middle initial S (the atlas name has it); 115 papers under other initials left out
+- Zachary Johnson: kept middle initial V (matches the papers on file); 11 papers under other initials left out

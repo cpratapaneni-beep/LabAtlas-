@@ -1,0 +1,4283 @@
+{
+ "generated": "2026-09-22",
+ "source": "https://biomed.emory.edu",
+ "programs": {
+  "BCDB": "Biochemistry, Cell and Developmental Biology",
+  "IMP": "Immunology and Molecular Pathogenesis",
+  "GMB": "Genetics and Molecular Biology",
+  "NS": "Neuroscience",
+  "CB": "Cancer Biology",
+  "MSP": "Molecular and Systems Pharmacology",
+  "MMG": "Microbiology and Molecular Genetics",
+  "PBEE": "Population Biology, Ecology and Evolution"
+ },
+ "people": {
+  "Fikri Avci": {
+   "p": [
+    "BCDB",
+    "IMP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "favci@emory.edu"
+  },
+  "Gary J. Bassell": {
+   "p": [
+    "BCDB",
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "gary.bassell@emory.edu"
+  },
+  "Guy M. Benian": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "pathgb@emory.edu"
+  },
+  "Larry Boise": {
+   "p": [
+    "BCDB",
+    "CB",
+    "IMP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "CB": "full",
+    "IMP": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "lboise@emory.edu"
+  },
+  "Charles Bou-Nader": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "cbounad@emory.edu"
+  },
+  "Joshua D. Chandler": {
+   "p": [
+    "BCDB",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "joshua.chandler@emory.edu"
+  },
+  "Charles J. Cho": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "charles.j.cho@emory.edu"
+  },
+  "Graeme Conn": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "gconn@emory.edu"
+  },
+  "Anita Corbett": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "acorbe2@emory.edu"
+  },
+  "Biplab Dasgupta": {
+   "p": [
+    "BCDB",
+    "CB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "biplab.dasgupta@emory.edu"
+  },
+  "Paul A. Dawson": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "paul.dawson@emory.edu"
+  },
+  "Robert Dick": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "robert.dick@emory.edu"
+  },
+  "Christine M. Dunham": {
+   "p": [
+    "BCDB",
+    "MMG",
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full",
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "cmdunha@emory.edu"
+  },
+  "Victor Faundez": {
+   "p": [
+    "BCDB",
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "vfaunde@emory.edu"
+  },
+  "Yue Feng": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "yfeng@emory.edu"
+  },
+  "Judith L. Fridovich-Keil": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "affiliate",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "jfridov@emory.edu"
+  },
+  "Homa Ghalei": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "homa.ghalei@emory.edu"
+  },
+  "David Gordon": {
+   "p": [
+    "BCDB",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "david.ezra.gordon@emory.edu"
+  },
+  "Dave Gorkin": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "david.gorkin@emory.edu"
+  },
+  "Marcin Grabowicz": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "marcin.grabowicz@emory.edu"
+  },
+  "Daniel T. Hass": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "dthass@emory.edu"
+  },
+  "Xin Hu": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "xin.hu2@emory.edu"
+  },
+  "Young Jang": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "young.jang@emory.edu"
+  },
+  "Sohail Khoshnevis": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "sohail.khoshnevis@emory.edu"
+  },
+  "Michael Koval": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "mhkoval@emory.edu"
+  },
+  "Jennifer Kwong": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "jennifer.kwong@emory.edu"
+  },
+  "Steven W. L'Hernault": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "affiliate",
+    "GMB": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "bioslh@emory.edu"
+  },
+  "Dorothy Lerit": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "dlerit@emory.edu"
+  },
+  "Bo Liang": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "bo.liang@emory.edu"
+  },
+  "Hin Ling": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "hin.ling@emory.edu"
+  },
+  "Xu Liu": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "xu.liu@emory.edu"
+  },
+  "Dave Lynn": {
+   "p": [
+    "BCDB",
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "dlynn2@emory.edu"
+  },
+  "Cheryl L. Maier": {
+   "p": [
+    "BCDB",
+    "IMP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "cheryl.maier@emory.edu"
+  },
+  "Adam Marcus": {
+   "p": [
+    "BCDB",
+    "CB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "aimarcu@emory.edu"
+  },
+  "Nael A. McCarty": {
+   "p": [
+    "BCDB",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "namccar@emory.edu"
+  },
+  "Wendy M. McKimpson": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "wendy.m.mckimpson@emory.edu"
+  },
+  "Gregory B. Melikian": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "gmeliki@emory.edu"
+  },
+  "Lefteris Michailidis": {
+   "p": [
+    "BCDB",
+    "MMG",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "emicha7@emory.edu"
+  },
+  "Ken Moberg": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "kmoberg@emory.edu"
+  },
+  "Chris Neufeldt": {
+   "p": [
+    "BCDB",
+    "MMG"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "c.neufeldt@emory.edu"
+  },
+  "Shoichiro Ono": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "sono@emory.edu"
+  },
+  "Eric Ortlund": {
+   "p": [
+    "BCDB",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "eortlun@emory.edu"
+  },
+  "Anupam Patgiri": {
+   "p": [
+    "BCDB",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "anupam.patgiri@emory.edu"
+  },
+  "Maureen A. Powers": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "mpowers@emory.edu"
+  },
+  "Daniel Reines": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "dreines@emory.edu"
+  },
+  "Blaine Roberts": {
+   "p": [
+    "BCDB",
+    "NS"
+   ],
+   "m": {
+    "BCDB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "blaine.roberts@emory.edu"
+  },
+  "Stefan Sarafianos": {
+   "p": [
+    "BCDB",
+    "MMG",
+    "MSP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "MMG": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "ssarafi@emory.edu"
+  },
+  "Nicholas T. Seyfried": {
+   "p": [
+    "BCDB",
+    "NS"
+   ],
+   "m": {
+    "BCDB": "affiliate",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "nseyfri@emory.edu"
+  },
+  "Shashank Shekhar": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "shekhar@emory.edu"
+  },
+  "Iain T. Shepherd": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "affiliate",
+    "GMB": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "ishephe@emory.edu"
+  },
+  "Eric J. Sundberg": {
+   "p": [
+    "BCDB",
+    "IMP"
+   ],
+   "m": {
+    "BCDB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "eric.sundberg@emory.edu"
+  },
+  "Jitendra Thakur": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "jthakur@emory.edu"
+  },
+  "Jinhu Wang": {
+   "p": [
+    "BCDB",
+    "GMB"
+   ],
+   "m": {
+    "BCDB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "jinhu.wang@emory.edu"
+  },
+  "Ding Xu": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "ding.xu@emory.edu"
+  },
+  "Shirley L. Zhang": {
+   "p": [
+    "BCDB"
+   ],
+   "m": {
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "shirley.zhang2@emory.edu"
+  },
+  "James Q. Zheng": {
+   "p": [
+    "BCDB",
+    "NS"
+   ],
+   "m": {
+    "BCDB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/BCDB/about-us/faculty-search.html",
+   "em": "james.zheng@emory.edu"
+  },
+  "Mohamed Abdel Hakeem": {
+   "p": [
+    "CB",
+    "IMP"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "m.hakeem@emory.edu"
+  },
+  "Ben Barwick": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "bbarwic@emory.edu"
+  },
+  "George Richard Beck Jr.": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "george.beck@emory.edu"
+  },
+  "Jake Berchuck": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jberchuck@emory.edu"
+  },
+  "Tyler S. Beyett": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "tbeyett@emory.edu"
+  },
+  "Manoj Bhasin": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "manoj.bhasin@emory.edu"
+  },
+  "Shruti Bhatt": {
+   "p": [
+    "CB",
+    "IMP"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "shruti.bhatt@emory.edu"
+  },
+  "Ramireddy Bommireddy": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "ramireddy.bommireddy@emory.edu"
+  },
+  "Zachary Buchwald": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "zachary.scott.buchwald@emory.edu"
+  },
+  "Kevin Bunting": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "kevin.bunting@emory.edu"
+  },
+  "Andres Chang": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "andres.chang@emory.edu"
+  },
+  "Inyeong Choi": {
+   "p": [
+    "CB",
+    "NS"
+   ],
+   "m": {
+    "CB": "affiliate",
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "ichoi@emory.edu"
+  },
+  "Xingming Deng": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "xdeng4@emory.edu"
+  },
+  "David A. Frank": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "david.alan.frank@emory.edu"
+  },
+  "Haian Fu": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "hfu@emory.edu"
+  },
+  "Tim Gershon": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "timothy.gershon@emory.edu"
+  },
+  "Melissa M. Gilbert-Ross": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "mmgilbe@emory.edu"
+  },
+  "Kelly C. Goldsmith": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "kgoldsm@emory.edu"
+  },
+  "Vikas Gupta": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "vikas.gupta@emory.edu"
+  },
+  "Jesse Handler": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jesse.stone.handler@emory.edu"
+  },
+  "Karmella Haynes": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "kahayne@emory.edu"
+  },
+  "Andy Hong": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "andrew.hong2@emory.edu"
+  },
+  "Andrey A. Ivanov": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "andrey.ivanov@emory.edu"
+  },
+  "Chrystian Junqueira Alves": {
+   "p": [
+    "CB",
+    "NS"
+   ],
+   "m": {
+    "CB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "cjunque@emory.edu"
+  },
+  "Sumin Kang": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "smkang@emory.edu"
+  },
+  "Aparna H. Kesarwala": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "aparna.kesarwala@emory.edu"
+  },
+  "Haydn Thomas Kissick": {
+   "p": [
+    "CB",
+    "IMP"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "haydn.kissick@emory.edu"
+  },
+  "Jessica Konen": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jtepe@emory.edu"
+  },
+  "Greg Lesinski": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "gregory.b.lesinski@emory.edu"
+  },
+  "Steven Liang": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "steven.liang@emory.edu"
+  },
+  "Anant Madabhushi": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "anantm@emory.edu"
+  },
+  "Kyle M. Miller": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "kyle.m.miller@emory.edu"
+  },
+  "Xiulei Mo": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "xiu-lei.mo@emory.edu"
+  },
+  "Andrea B. Moffitt": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "andrea.barrett.moffitt@emory.edu"
+  },
+  "Carlos S. Moreno": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "cmoreno@emory.edu"
+  },
+  "Una O'Doherty": {
+   "p": [
+    "CB",
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "adjunct",
+    "MMG": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "una.odoherty@emory.edu"
+  },
+  "Chrystal Paulos": {
+   "p": [
+    "CB",
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "adjunct",
+    "MMG": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "chrystal.mary.paulos@emory.edu"
+  },
+  "Chris Porter": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "chris.porter@emory.edu"
+  },
+  "Ck Qu": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "cqu6@emory.edu"
+  },
+  "Sarwish Rafiq": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "sarwish.rafiq@emory.edu"
+  },
+  "Sunil S. Raikar": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "sraikar@emory.edu"
+  },
+  "Nikki Schmitt": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "nicole.cherie.schmitt@emory.edu"
+  },
+  "Periasamy Selvaraj": {
+   "p": [
+    "CB",
+    "IMP"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "pselvar@emory.edu"
+  },
+  "Mala Shanmugam": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "mala.shan@emory.edu"
+  },
+  "Jenny Shim": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jenny.shim@emory.edu"
+  },
+  "Jennifer Spangle": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jennifer.spangle@emory.edu"
+  },
+  "Lisa Sudmeier": {
+   "p": [
+    "CB",
+    "NS"
+   ],
+   "m": {
+    "CB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "lsudmei@emory.edu"
+  },
+  "Shi-Yong Sun": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "ssun@emory.edu"
+  },
+  "Yong Teng": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "yong.teng@emory.edu"
+  },
+  "Ned Waller": {
+   "p": [
+    "CB",
+    "IMP"
+   ],
+   "m": {
+    "CB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "ewaller@emory.edu"
+  },
+  "Yong Wan": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "yong.wan@emory.edu"
+  },
+  "Janghee Woo": {
+   "p": [
+    "CB",
+    "GMB",
+    "BCDB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full",
+    "BCDB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "janghee.woo@emory.edu"
+  },
+  "Jianhua Xiong": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jianhua.xiong@emory.edu"
+  },
+  "Lily Yang": {
+   "p": [
+    "CB",
+    "MSP"
+   ],
+   "m": {
+    "CB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "lyang02@emory.edu"
+  },
+  "David Sung-Wen Yu": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "david.sungwen.yu@emory.edu"
+  },
+  "Jindan Yu": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jindan.yu@emory.edu"
+  },
+  "Chris Yun": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "ccyun@emory.edu"
+  },
+  "Jason Yustein": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "jason.yustein@emory.edu"
+  },
+  "Meng Zhang": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "meng.zhang2@emory.edu"
+  },
+  "Jonathan Zhao": {
+   "p": [
+    "CB",
+    "GMB"
+   ],
+   "m": {
+    "CB": "full",
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "czhao40@emory.edu"
+  },
+  "Wei Zhou": {
+   "p": [
+    "CB"
+   ],
+   "m": {
+    "CB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/CB/about-us/faculty-search.html",
+   "em": "wzhou2@emory.edu"
+  },
+  "Jimena Andersen": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jimena.andersen@emory.edu"
+  },
+  "Fikri Birey": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "fikri.birey@emory.edu"
+  },
+  "Jeremy M. Boss": {
+   "p": [
+    "GMB",
+    "IMP"
+   ],
+   "m": {
+    "GMB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jmboss@emory.edu"
+  },
+  "Yana Bromberg": {
+   "p": [
+    "GMB",
+    "PBEE"
+   ],
+   "m": {
+    "GMB": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "yana.bromberg@emory.edu"
+  },
+  "Tamara Caspary": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "tcaspar@emory.edu"
+  },
+  "Karen N. Conneely": {
+   "p": [
+    "GMB",
+    "PBEE"
+   ],
+   "m": {
+    "GMB": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "kconnee@emory.edu"
+  },
+  "Sulagna Das": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "sulagna.das@emory.edu"
+  },
+  "Sayantan Datta": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "sayantan.datta@emory.edu"
+  },
+  "Roger Deal": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "roger.deal@emory.edu"
+  },
+  "Mike Deans": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "michael.deans@emory.edu"
+  },
+  "Anita V. Devineni": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "anita.devineni@emory.edu"
+  },
+  "Hicham Drissi": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "hicham.drissi@emory.edu"
+  },
+  "Mike Epstein": {
+   "p": [
+    "GMB",
+    "PBEE"
+   ],
+   "m": {
+    "GMB": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "mpepste@emory.edu"
+  },
+  "Andrew P. Escayg": {
+   "p": [
+    "GMB",
+    "NS",
+    "MSP"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "aescayg@emory.edu"
+  },
+  "Todd Everson": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "todd.m.everson@emory.edu"
+  },
+  "Hananeh Fonoudi": {
+   "p": [
+    "GMB",
+    "MSP"
+   ],
+   "m": {
+    "GMB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "hananeh.fonoudi@emory.edu"
+  },
+  "Katrin Henke": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "katrin.henke@emory.edu"
+  },
+  "Jian Hu": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jian.hu@emory.edu"
+  },
+  "Anke Huels": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "anke.huels@emory.edu"
+  },
+  "Jie Jiang": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jjian31@emory.edu"
+  },
+  "Peng Jin": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "peng.jin@emory.edu"
+  },
+  "Erik C.b. Johnson": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "erik.johnson@emory.edu"
+  },
+  "David Katz": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "david.katz@emory.edu"
+  },
+  "Elizabeth J. Leslie-Clarkson": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "ejlesli@emory.edu"
+  },
+  "Chaoran Li": {
+   "p": [
+    "GMB",
+    "IMP"
+   ],
+   "m": {
+    "GMB": "full",
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "chaoran.li@emory.edu"
+  },
+  "Shonna McBride": {
+   "p": [
+    "GMB",
+    "MMG"
+   ],
+   "m": {
+    "GMB": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "shonna.mcbride@emory.edu"
+  },
+  "Paula Sofia Ramos": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "paula.sofia.ramos@emory.edu"
+  },
+  "Leila Elizabeth Rieder": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "leila.rieder@emory.edu"
+  },
+  "Phil Santangelo": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html"
+  },
+  "Hailing Shi": {
+   "p": [
+    "GMB",
+    "MSP"
+   ],
+   "m": {
+    "GMB": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "hailing.shi@emory.edu"
+  },
+  "Alicia Smith": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "alicia.smith@emory.edu"
+  },
+  "Xiaobo Sun": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "xsun28@emory.edu"
+  },
+  "Francesca Vinchi": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "francesca.vinchi@emory.edu"
+  },
+  "Jill Ward": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jill.ward@emory.edu"
+  },
+  "Josh Weinstock": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "josh.weinstock@emory.edu"
+  },
+  "Jingjing Yang": {
+   "p": [
+    "GMB",
+    "PBEE"
+   ],
+   "m": {
+    "GMB": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jingjing.yang@emory.edu"
+  },
+  "Bing Yao": {
+   "p": [
+    "GMB"
+   ],
+   "m": {
+    "GMB": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "bing.yao@emory.edu"
+  },
+  "Jian Zhou": {
+   "p": [
+    "GMB",
+    "NS"
+   ],
+   "m": {
+    "GMB": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/GMB/about-us/faculty-search.html",
+   "em": "jzhou51@emory.edu"
+  },
+  "Rafi Ahmed": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "rahmed@emory.edu"
+  },
+  "John D. Altman": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "jaltman@emory.edu"
+  },
+  "Rama Amara": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ramara@emory.edu"
+  },
+  "Rustom Antia": {
+   "p": [
+    "IMP",
+    "PBEE"
+   ],
+   "m": {
+    "IMP": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "rantia@emory.edu"
+  },
+  "Dave Archer": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "darcher@emory.edu"
+  },
+  "Byron Au-Yeung": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "byron.au-yeung@emory.edu"
+  },
+  "Steven E. Bosinger": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "steven.bosinger@emory.edu"
+  },
+  "Luisa Cervantes-Barragan": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "lcervantes@emory.edu"
+  },
+  "Ann Chahroudi": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ann.m.chahroudi@emory.edu"
+  },
+  "Satheesh Chonat": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "satheesh.chonat@emory.edu"
+  },
+  "Max Dale Cooper": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "mdcoope@emory.edu"
+  },
+  "Craig Michael Coopersmith": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "cmcoop3@emory.edu"
+  },
+  "Cheryl L. Day": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "cheryl.day@emory.edu"
+  },
+  "Mandy Ford": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "mandy.ford@emory.edu"
+  },
+  "Matthew R. Gardner": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "matthew.r.gardner@emory.edu"
+  },
+  "Eliver Ghosn": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "eghosn@emory.edu"
+  },
+  "Arash Grakoui": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "arash.grakoui@emory.edu"
+  },
+  "Ed Horwitz": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ehorwi2@emory.edu"
+  },
+  "Eric Hunter": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ehunte4@emory.edu"
+  },
+  "Joshy Jacob": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "jjacob3@emory.edu"
+  },
+  "Rheinallt M. Jones": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "rjones5@emory.edu"
+  },
+  "Murali-Krishna Kaja": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "murali.kaja@emory.edu"
+  },
+  "Daniel Kalman": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "dkalman@emory.edu"
+  },
+  "Rachel Kinsella": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "rachel.l.kinsella@emory.edu"
+  },
+  "Jake Kohlmeier": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "jkohlmeier@emory.edu"
+  },
+  "Rui Kong": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "rui.kong@emory.edu"
+  },
+  "Deanna A. Kulpa": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "deanna.kulpa@emory.edu"
+  },
+  "Christopher Larock": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "christopher.larock@emory.edu"
+  },
+  "Chris Larsen": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "clarsen@emory.edu"
+  },
+  "Eun Lee": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "f.e.lee@emory.edu"
+  },
+  "Anice Lowen": {
+   "p": [
+    "IMP",
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "anice.lowen@emory.edu"
+  },
+  "Alberto Moreno": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "alberto.moreno@emory.edu"
+  },
+  "Andrew S. Neish": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "aneish@emory.edu"
+  },
+  "Mirko Paiardini": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "mirko.paiardini@emory.edu"
+  },
+  "Jyothi Rengarajan": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "jrengar@emory.edu"
+  },
+  "Ignacio Sanz": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ignacio.sanz@emory.edu"
+  },
+  "Chris Scharer": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "cdschar@emory.edu"
+  },
+  "Erin Scherer": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "emscher@emory.edu"
+  },
+  "Rafick Sekaly": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "rafick.sekaly@emory.edu"
+  },
+  "Boyoung Shin": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "boyoung.shin@emory.edu"
+  },
+  "Guido Silvestri": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "gsilves@emory.edu"
+  },
+  "Abbie Smith": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ssmit40@emory.edu"
+  },
+  "David A. Steinhauer": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "dsteinh@emory.edu"
+  },
+  "David Stephens": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "affiliate",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "dstep01@emory.edu"
+  },
+  "Mehul Suthar": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "mehul.s.suthar@emory.edu"
+  },
+  "Alison Swaims-Kohlmeier": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "askohlm@emory.edu"
+  },
+  "Rabindra M. Tirouvanziam": {
+   "p": [
+    "IMP",
+    "MSP"
+   ],
+   "m": {
+    "IMP": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "tirouvanziam@emory.edu"
+  },
+  "Jeff Tomalka": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "jeffrey.alan.tomalka@emory.edu"
+  },
+  "Bill Tyor": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "wtyor@emory.edu"
+  },
+  "David S. Weiss": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "dweiss8@emory.edu"
+  },
+  "Matthew Woodruff": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "mcwoodr@emory.edu"
+  },
+  "Jens Peter Wrammert": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "jwramme@emory.edu"
+  },
+  "Souheil-Antoine Younes": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "souheil.younes@emory.edu"
+  },
+  "Muhammad Ammar Zafar": {
+   "p": [
+    "IMP",
+    "MMG"
+   ],
+   "m": {
+    "IMP": "full",
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "ammar.zafar@emory.edu"
+  },
+  "Veronika Zarnitsyna": {
+   "p": [
+    "IMP"
+   ],
+   "m": {
+    "IMP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/IMP/about-us/faculty-search.html",
+   "em": "veronika.i.zarnitsyna@emory.edu"
+  },
+  "Jessica A. Belser": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html"
+  },
+  "Christina Gavegnano": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "cgavegn@emory.edu"
+  },
+  "Joanna B. Goldberg": {
+   "p": [
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "joanna.goldberg@emory.edu"
+  },
+  "Baek Kim": {
+   "p": [
+    "MMG",
+    "MSP"
+   ],
+   "m": {
+    "MMG": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "baek.kim@emory.edu"
+  },
+  "Minsu Kim": {
+   "p": [
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "minsu.kim@emory.edu"
+  },
+  "Katia Koelle": {
+   "p": [
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "katia.koelle@emory.edu"
+  },
+  "Seema Lakdawala": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "seema.s.lakdawala@emory.edu"
+  },
+  "Bruce R. Levin": {
+   "p": [
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "MMG": "affiliate",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "blevin@emory.edu"
+  },
+  "Latania Logan": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "lklogan@emory.edu"
+  },
+  "Bernardo Mainou": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html"
+  },
+  "Rafael A. Medina": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "rafael.medina@emory.edu"
+  },
+  "Vineet Menachery": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "vineet.d.menachery@emory.edu"
+  },
+  "Cassandra L. Quave": {
+   "p": [
+    "MMG",
+    "MSP"
+   ],
+   "m": {
+    "MMG": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "cquave@emory.edu"
+  },
+  "Phil Rather": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "prather@emory.edu"
+  },
+  "Timothy D. Read": {
+   "p": [
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "tread@emory.edu"
+  },
+  "Bill Shafer": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "wshafer@emory.edu"
+  },
+  "Yih-Ling Tzeng": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "ytzeng@emory.edu"
+  },
+  "Nic Vega": {
+   "p": [
+    "MMG",
+    "PBEE"
+   ],
+   "m": {
+    "MMG": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "nic.vega@emory.edu"
+  },
+  "Marvin Whiteley": {
+   "p": [
+    "MMG"
+   ],
+   "m": {
+    "MMG": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html"
+  },
+  "Bill Wuest": {
+   "p": [
+    "MMG",
+    "MSP"
+   ],
+   "m": {
+    "MMG": "full",
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MMG/about-us/faculty-search.html",
+   "em": "william.wuest@emory.edu"
+  },
+  "Lou Ann Brown": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "lbrow03@emory.edu"
+  },
+  "John W. Calvert": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "jcalver@emory.edu"
+  },
+  "Jae Won Chang": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "jae.won.chang@emory.edu"
+  },
+  "Huw Davies": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "hmdavie@emory.edu"
+  },
+  "Mike Davis": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "medavis@emory.edu"
+  },
+  "Chris Doering": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "cdoerin@emory.edu"
+  },
+  "Thota Ganesh": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "tganesh@emory.edu"
+  },
+  "Todd Golde": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "todd.golde@emory.edu"
+  },
+  "Shannon Gourley": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "shannon.l.gourley@emory.edu"
+  },
+  "Kathy K. Griendling": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "kgriend@emory.edu"
+  },
+  "Randy A. Hall": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "rhall3@emory.edu"
+  },
+  "Laura Hansen": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "laura.hansen2@emory.edu"
+  },
+  "John R. Hepler": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "affiliate",
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "jhepler@emory.edu"
+  },
+  "Ilanit Ronen Itzhaki": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "ironeni@emory.edu"
+  },
+  "Zachery Ryan Jarrell": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "zachery.ryan.jarrell@emory.edu"
+  },
+  "Hanjoong Jo": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "hjo@emory.edu"
+  },
+  "Dean P. Jones": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "dpjones@emory.edu"
+  },
+  "Tom Kukar": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "thomas.kukar@emory.edu"
+  },
+  "Sang-Ho Lee": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "sangho.lee@emory.edu"
+  },
+  "Rebecca D. Levit": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "rlevit@emory.edu"
+  },
+  "Yona Levites": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "yona.levites@emory.edu"
+  },
+  "Lian Li": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "lli5@emory.edu"
+  },
+  "Zhiyong Lin": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "zhiyong.lin@emory.edu"
+  },
+  "Dennis Liotta": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "dliotta@emory.edu"
+  },
+  "Zixu Mao": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "zmao@emory.edu"
+  },
+  "Eric J. Miller": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "ejmill2@emory.edu"
+  },
+  "Mike Owens": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "mowens@emory.edu"
+  },
+  "Renee D. Read": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "renee.read@emory.edu"
+  },
+  "Amir Rezvan": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "arezva2@emory.edu"
+  },
+  "Vivien Sheehan": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "vivien.sheehan@emory.edu"
+  },
+  "Yoland Smith": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "ysmit01@emory.edu"
+  },
+  "Marina Sorrentino Hernandes": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "marina.sorrentino.hernandes@emory.edu"
+  },
+  "Sijia Tao": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "sijia.tao@emory.edu"
+  },
+  "Bob Taylor": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "wtaylor@emory.edu"
+  },
+  "Stephen F. Traynelis": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "strayne@emory.edu"
+  },
+  "Nick Varvel": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "nicholas.h.varvel@emory.edu"
+  },
+  "Richard D. Wainford": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "rwainfo@emory.edu"
+  },
+  "David Weinshenker": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "dweinsh@emory.edu"
+  },
+  "Dionna W. Williams": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "dwwill4@emory.edu"
+  },
+  "Chunhui Xu": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "chunhui.xu@emory.edu"
+  },
+  "Sam Yeligar": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "samantha.yeligar@emory.edu"
+  },
+  "Young-Sup Yoon": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "yyoon5@emory.edu"
+  },
+  "Hongjie Yuan": {
+   "p": [
+    "MSP",
+    "NS"
+   ],
+   "m": {
+    "MSP": "full",
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "hyuan@emory.edu"
+  },
+  "Qiang Zhang": {
+   "p": [
+    "MSP"
+   ],
+   "m": {
+    "MSP": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/MSP/about-us/faculty-search.html",
+   "em": "qiang.zhang@emory.edu"
+  },
+  "Scott Albert": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "scott.tyler.albert@emory.edu"
+  },
+  "Francisco J. Alvarez": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "francisco.j.alvarez@emory.edu"
+  },
+  "Nicholas Au Yong": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "nicholas.au.yong@emory.edu"
+  },
+  "Paul Beach": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "pabeach@emory.edu"
+  },
+  "Mandy Bekhbat": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "mbekhba@emory.edu"
+  },
+  "Gordon J. Berman": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "gordon.berman@emory.edu"
+  },
+  "Gregory S. Berns": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "gberns@emory.edu"
+  },
+  "Ranjita Sandeep Betarbet": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "rbetarb@emory.edu"
+  },
+  "Jeffrey H. Boatright": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jeffboatright@emory.edu"
+  },
+  "Nick Boulis": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "nboulis@emory.edu"
+  },
+  "Doug Bremner": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jdbremn@emory.edu"
+  },
+  "Cathrin M. Buetefisch": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "cathrin.buetefisch@emory.edu"
+  },
+  "Vince D. Calhoun": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "vince.calhoun@emory.edu"
+  },
+  "Mike Caudle": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "william.m.caudle@emory.edu"
+  },
+  "Lih-Shen Chin": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "lchin@emory.edu"
+  },
+  "Gari Clifford": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "gari@dbmi.emory.edu"
+  },
+  "Jessica A. Cooper": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "j.cooper@emory.edu"
+  },
+  "Vinny Costa": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "vincent.d.costa@emory.edu"
+  },
+  "Zachary Danziger": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "zachary.danziger@emory.edu"
+  },
+  "Daniel Drane": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "ddrane@emory.edu"
+  },
+  "Alan Emanuel": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "alan.emanuel@emory.edu"
+  },
+  "Arthur W. English": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "medae@emory.edu"
+  },
+  "Jennifer C. Felger": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jfelger@emory.edu"
+  },
+  "Andrew Feola": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "afeola2@emory.edu"
+  },
+  "Candace C. Fleischer": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "candace.fleischer@emory.edu"
+  },
+  "Candace Floyd": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "candace.lorraine.floyd@emory.edu"
+  },
+  "Ming-Fai Fong": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html"
+  },
+  "Adriana Galvan": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "agalvan@emory.edu"
+  },
+  "Sandra Garraway": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "smgarraway@emory.edu"
+  },
+  "Eldon E. Geisert Jr.": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "eldon.e.geisert@emory.edu"
+  },
+  "Jonathan D. Glass": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jglas03@emory.edu"
+  },
+  "Zeke Gleichgerrcht": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "eze.gleich@emory.edu"
+  },
+  "David R. Goldsmith": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "drgolds@emory.edu"
+  },
+  "Jim Greene": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jggreen@emory.edu"
+  },
+  "Ying Guo": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "yguo2@emory.edu"
+  },
+  "Claire-Anne N. Gutekunst": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "cguteku@emory.edu"
+  },
+  "Madeleine Eve Hackney": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "mehackn@emory.edu"
+  },
+  "Bilal Haider": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html"
+  },
+  "Chad Hales": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "cmhales@emory.edu"
+  },
+  "Daniel Harper": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "daniel.harper@emory.edu"
+  },
+  "Jing He": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jing.he@emory.edu"
+  },
+  "Ellen J. Hess": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "ellen.hess@emory.edu"
+  },
+  "Shawn Hochman": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "shochm2@emory.edu"
+  },
+  "Chuan Huang": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "chuan.huang@emory.edu"
+  },
+  "Dieter Jaeger": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "djaeger@emory.edu"
+  },
+  "Buz Jinnah": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "hjinnah@emory.edu"
+  },
+  "Zachary Vernon Johnson": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "zachary.vernon.johnson@emory.edu"
+  },
+  "Warren Jones": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "warren.r.jones@emory.edu"
+  },
+  "Seong Su Kang": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "seong.kang@emory.edu"
+  },
+  "Shella D. Keilholz": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html"
+  },
+  "Trisha Kesar": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "tkesar@emory.edu"
+  },
+  "Sasha Key": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "apkey@emory.edu"
+  },
+  "Phil Kragel": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "pkragel@emory.edu"
+  },
+  "Michelle C. Laplaca": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html"
+  },
+  "Neal Laxpati": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "nlaxpat@emory.edu"
+  },
+  "Allan Levey": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "alevey@emory.edu"
+  },
+  "Robert Liu": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "robert.liu@emory.edu"
+  },
+  "Deborah Luessen": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "dluesse@emory.edu"
+  },
+  "Donna L. Maney": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "dmaney@emory.edu"
+  },
+  "Joseph R. Manns": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jmanns@emory.edu"
+  },
+  "Jeff Markowitz": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "jeffrey.markowitz@emory.edu"
+  },
+  "Katharine E. McCann": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "katharine.e.mccann@emory.edu"
+  },
+  "Zachary T. McEachin": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "zmceach@emory.edu"
+  },
+  "Vas Michopoulos": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "vmichop@emory.edu"
+  },
+  "Andrew H. Miller": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "amill02@emory.edu"
+  },
+  "Svjetlana Miocinovic": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "svjetlana.miocinovic@emory.edu"
+  },
+  "Malu Murugan": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "mmurug5@emory.edu"
+  },
+  "Kenneth R. Myers": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "kennethmyers@emory.edu"
+  },
+  "Farzaneh Najafi": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "adjunct"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html"
+  },
+  "Samaneh Nasiri": {
+   "p": [
+    "NS"
+   ],
+   "m": {
+    "NS": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/NS/about-us/faculty-search.html",
+   "em": "snasiri@emory.edu"
+  },
+  "Michal Arbilly": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "michal.arbilly@emory.edu"
+  },
+  "Yegor Bazykin": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "gbazyki@emory.edu"
+  },
+  "Chris Beck": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "affiliate"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "cbeck@emory.edu"
+  },
+  "Dave Civitello": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "dcivite@emory.edu"
+  },
+  "Jacobus C. de Roode": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "jderood@emory.edu"
+  },
+  "Nicole Marie Gerardo": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "ngerard@emory.edu"
+  },
+  "Thomas R. Gillespie": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "thomas.gillespie@emory.edu"
+  },
+  "Uriel Dan Kitron": {
+   "p": [],
+   "m": {},
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "ukitron@emory.edu"
+  },
+  "Subra Kugathasan": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "skugath@emory.edu"
+  },
+  "Max Lau": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "msy.lau@emory.edu"
+  },
+  "Levi Morran": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "levi.morran@emory.edu"
+  },
+  "Maya Nadimpalli": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "mnadimp@emory.edu"
+  },
+  "Ilya M. Nemenman": {
+   "p": [
+    "NS",
+    "PBEE"
+   ],
+   "m": {
+    "NS": "full",
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "ilya.nemenman@emory.edu"
+  },
+  "Anne Piantadosi": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "anne.piantadosi@emory.edu"
+  },
+  "Steve Qin": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "zhaohui.qin@emory.edu"
+  },
+  "Gonzalo M. Vazquez-Prokopec": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "gmvazqu@emory.edu"
+  },
+  "Lance Waller": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "lwaller@emory.edu"
+  },
+  "Daniel B. Weissman": {
+   "p": [
+    "PBEE"
+   ],
+   "m": {
+    "PBEE": "full"
+   },
+   "a": false,
+   "u": "https://biomed.emory.edu/PROGRAM_SITES/PBEE/about-us/faculty-search.html",
+   "em": "daniel.weissman@emory.edu"
+  }
+ }
+}

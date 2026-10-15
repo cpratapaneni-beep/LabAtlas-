@@ -1,0 +1,58 @@
+index,name,split,old_label,new_label,titles,bench_share,dry_method_share,reason
+4147,Tristram Parslow,train,D,D,6,0.33,0.5,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+564,Mark Borodovsky,train,D,D,25,0.44,0.28,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+1569,Andrew Fischer,test,D,D,10,0.3,0.2,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+3096,Benjamin Lee,test,D,D,9,0.33,0.11,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+5598,Kristine Vanijcharoenkarn,test,D,D,11,0.36,0.09,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+5054,Juliete Silva,test,W,H,6,0.5,0.5,T-cell alloresponse experiments alongside transplant-cohort biomarker trials
+3799,Jonathan Murrow,train,D,D,10,0.5,0.1,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2691,Peter Kasson,train,W,H,85,0.75,0.33,single-virus fusion experiments alongside molecular dynamics and modelling software of their own
+1292,Hai Dong,train,D,D,14,0.43,0.29,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2054,Lance T. Hall,train,D,D,14,0.43,0.07,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6357,Peng Qiu,test,D,D,38,0.5,0.37,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+5204,Gautam Sreeram,train,D,D,4,0.5,0.25,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+3819,Andre Nahmias,train,D,D,15,0.33,0.07,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6405,Daniel D. Dilks,test,D,D,29,0.52,0.03,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+574,Nicholas Boulis,test,W,H,71,0.32,0.3,"gene-delivery and tumour-model lab alongside clinical outcomes, case series and machine learning"
+2507,David Jaye,test,D,H,86,0.59,0.21,myeloma and tuberculosis bench studies alongside lymphoma cohorts and machine-learning diagnosis
+4852,Rebecca Schneider,test,D,D,14,0.57,0.36,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2348,Jian HuB,test,D,D,5,0.8,0.4,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6372,Katia Koelle,test,D,D,66,0.68,0.08,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+1784,Timothy Gershon,train,W,H,8,0.5,0.5,preclinical brain-tumour lab alongside the clinical trials it feeds
+1202,Mahlon DeLong,test,D,D,17,0.65,0.24,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+5229,Arlene Stecenko,train,D,D,28,0.5,0.29,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+573,Jeanne Boudreaux,test,D,D,30,0.37,0.03,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4890,Beth Seelig,train,D,D,5,0.4,0.0,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+3633,Andrew H. Miller,train,D,D,103,0.38,0.13,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4707,Ruth Sacks,test,D,D,6,0.5,0.17,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6453,Steven Bosinger,test,W,H,54,0.78,0.24,primate infection experiments alongside multi-omics profiling and systems vaccinology
+3195,Shiyong Li,test,D,D,29,0.34,0.0,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+1382,Srilatha Edupuganti,train,D,D,76,0.57,0.41,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2945,Alyssa M. Krasinskas,train,D,D,5,0.4,0.2,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4337,Christopher C. Porter,train,D,D,28,0.36,0.29,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+1618,Aiden Ford,train,D,D,6,0.33,0.33,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4684,Stephen Russell,train,D,D,5,0.4,0.4,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+724,Hui Cai,train,W,W,9,0.56,0.22,ion-channel mouse lab; the two dry-method titles are consortium co-authorships
+1961,Ria Gripaldo,train,D,D,5,0.6,0.0,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2243,Lenora Higginbotham,train,D,D,23,0.65,0.3,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4236,Nigel Pedersen,train,D,D,99,0.51,0.19,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+912,Samir Chihab,train,W,W,11,0.73,0.36,cartilage regeneration in rats and iPSCs; the clinical titles are a minority of arthroplasty papers
+4510,David Reiter,train,D,D,73,0.34,0.14,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2476,Jaishree Jagirdar,train,D,D,4,0.5,0.75,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4321,Yesim Gokmen-Polar,train,W,H,152,0.5,0.27,breast and thymic cancer lab models alongside AI prognostic models and spatial-omics cohorts
+3762,Mario Mosunjac,train,D,D,19,0.53,0.11,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2741,Melissa Lambeth Kemp,train,W,H,29,0.83,0.31,stem-cell and metabolic experiments alongside genome-scale metabolic modelling and machine learning
+3669,Cassie S. Mitchell,train,D,D,40,0.35,0.42,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2987,Sandeep Kumar,train,D,D,124,0.82,0.27,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+4527,Sarah Rezapourdamanab,train,W,W,10,0.5,0.3,"bioprinting lab; ""modeling"" in these titles means built tissue models, not computation"
+2536,Yulin Jin,train,W,W,35,0.71,0.31,Drosophila and methylation bench work; the GWAS titles are earlier aquaculture genetics
+1307,Teresa Douglas,train,D,D,17,0.35,0.12,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+198,Arunkanth Ankala,train,D,D,36,0.47,0.08,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6552,Madelyn Houser,train,D,D,48,0.58,0.06,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6301,Chang Liu,train,D,D,7,0.43,0.29,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+7073,Qiang Zhang,train,D,D,4,1.0,0.25,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2702,Jonathan Kaufman,train,D,D,64,0.41,0.17,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+2595,Nisha Joseph,train,D,D,6,0.5,0.17,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+6388,Benjamin Wilson,train,D,D,8,0.38,0.25,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+1008,Erin Connolly,train,D,D,6,0.33,0.0,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"
+1588,Candace C. Fleischer,train,D,D,28,0.39,0.11,"the bench-like titles are namesakes, co-authored collaborations, reviews or computational work the title model misreads as bench"

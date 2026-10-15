@@ -1,0 +1,27 @@
+code,index,name,claude_label,claude_note,Labeller 1_label,Labeller 1_note,model_call,p_wet,model_confidence
+H004,5341,John Sweeney,U,surgeon profile only,D,No pubs but Im guessing based off of his position and MD degree and the fact he works in surgery its more dry case reports,unclassified,0.044,
+H009,368,Reneeta Basu,U,family medicine profile only,D,"No records, but its rare to see a DO only degree pursue wet bench basic science based research",unclassified,0.055,
+H018,3710,Hassan Monfared,U,physiatrist profile only,D,Nothing on record but his department and MD signify mosy likely dry work,unclassified,0.180,
+H019,6361,Phillip Zhe Sun,H,CEST MRI physics plus rodent stroke models,D,All his publications signal dry work,leans dry,0.127,0.950
+H022,2810,Lindsay Kibuyaga,U,paediatric EM profile only,D,no records but MPH makes me believe dry,unclassified,0.003,
+H026,1998,Jidong Guo,W,rodent social and fear circuit neuroscience,D,"seems to lean dry, but there are a few wet ttiles involving oxytoxic signaling",wet,0.884,0.960
+H037,2474,Geetha Jagannathan,D,surgical pathology,U,titles seem like a mix of wet/dry,dry,0.033,0.990
+H039,3096,Benjamin Lee,D,paediatric anaesthesia and palliative care; several namesake lab titles set aside,W,Titles seem focused on molecular biology and wet,leans dry,0.248,0.880
+H049,3407,Dawn Manning-Williams,U,obstetric anaesthesia profile only,D,Dept + degree,unclassified,0.054,
+H057,3647,Lauren Millett,U,OB/GYN profile only,D,,unclassified,0.025,
+H062,765,Mary Carlton,U,optometrist profile only,D,,unclassified,0.078,
+H063,3290,Chrissy Lopez,W,two papers both bench: mucosal signatures and liver injury mechanism,D,,wet,0.608,0.770
+H066,554,Robert Bonsall,W,neuroendocrine assays and primate behavioural endocrinology,D,,wet,0.659,0.810
+H072,373,Glaivy Batsuli,H,haemophilia B-cell immunology lab plus clinical,D,,hybrid,0.367,0.540
+H080,552,Kevin Bonney,U,education administrator profile only,D,,unclassified,0.073,
+H090,3195,Shiyong Li,D,haematopathology practice with a few lab papers,W,,leans dry,0.266,0.870
+H094,3719,Sean Mooney,U,otolaryngologist; tau papers look like namesakes,D,,dry,0.237,0.890
+H099,5217,Bashar Staitieh,H,alveolar macrophage HIV/alcohol lab work plus ICU education,D,,wet,0.699,0.840
+H109,3644,Stephen Miller,U,sports medicine clinical profile only,D,,unclassified,0.095,
+H110,6372,Katia Koelle,D,computational viral evolution and epidemiology,W,,wet,0.518,0.680
+H115,2421,Ghulam Ilyas,W,mouse liver autophagy; recent cytopathology,D,,wet,0.910,0.970
+H121,259,Fahim Atif,W,progesterone neuroprotection in stroke and glioma models,D,,leans wet,0.924,0.970
+H122,6303,Carmen Marsit,H,molecular epidemiology: placental methylation and omics lab work within birth cohorts,D,,hybrid,0.415,0.540
+H128,4653,Nanda Kishore Routhu,W,primate vaccine virology,D,,wet,0.972,0.990
+H131,309,James Bailey,U,nephrologist; papers are economics namesakes,D,,leans dry,0.057,0.980
+H146,4350,Forrest Powers,U,profile text is a patient review; no research output,D,,unclassified,0.360,

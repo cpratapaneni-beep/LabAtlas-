@@ -1,0 +1,52 @@
+# Keeps the shared Google Drive folder and this repository in step (scripts/drive_sync.py).
+#  - every push that adds or changes an atlas version publishes it to the folder;
+#  - every 3 hours (and on demand) any new atlas file in the folder is merged in
+#    as the next version, published back, and committed with its merge report.
+# Needs repository secrets GDRIVE_CLIENT_ID, GDRIVE_CLIENT_SECRET, GDRIVE_REFRESH_TOKEN
+# and GDRIVE_FOLDER_ID (see scripts/README.md, "Google Drive sync").
+# Scheduled runs use the copy of this file on the default branch; set the repository
+# variable ATLAS_BRANCH to the branch the atlas lives on if that is not the default.
+name: Drive sync
+on:
+  push:
+    paths: ['Emory_Lab_Atlas_v*.html']
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: drive-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+      GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+      GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+      GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.ref || vars.ATLAS_BRANCH || github.ref }}
+          fetch-depth: 0            # earlier versions are the merge bases
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Publish this version
+        if: github.event_name == 'push'
+        run: |
+          f=$(ls Emory_Lab_Atlas_v*.html | sort -V | tail -1)
+          python3 scripts/drive_sync.py push "$f" --note "commit ${GITHUB_SHA::7}"
+      - name: Merge new versions from the folder
+        if: github.event_name != 'push'
+        run: python3 scripts/drive_sync.py sync --repo .
+      - name: Commit merged versions
+        if: github.event_name != 'push'
+        run: |
+          git add -A Emory_Lab_Atlas_v*.html docs/merges
+          if git diff --cached --quiet; then echo "nothing new in the folder"; exit 0; fi
+          git -c user.name="Lab Atlas Drive sync" -c user.email="actions@users.noreply.github.com" \
+              commit -m "Merge new atlas versions from the shared Drive folder" -m "Reports: docs/merges/"
+          git push
